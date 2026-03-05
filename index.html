@@ -13,7 +13,7 @@
     .section { margin-bottom: 36px; }
     .section-title {
       font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
-      color: #94A3B3; margin-bottom: 14px; padding-left: 4px;
+      color: #94A3B3; margin-bottom: 14px;
       border-left: 3px solid #FFA631; padding-left: 10px;
     }
     .grid {
@@ -22,81 +22,60 @@
       gap: 14px;
     }
     .card {
-      background: white;
-      border-radius: 12px;
-      overflow: hidden;
-      text-decoration: none;
-      color: #1B2C43;
-      border: 1px solid #eee;
+      background: white; border-radius: 12px; overflow: hidden;
+      text-decoration: none; color: #1B2C43; border: 1px solid #eee;
       transition: box-shadow 0.2s, transform 0.15s;
-      display: flex;
-      flex-direction: column;
+      display: flex; flex-direction: column;
     }
     .card:hover { box-shadow: 0 6px 20px rgba(0,0,0,0.1); transform: translateY(-2px); }
     .card-preview {
-      width: 100%;
-      aspect-ratio: 393 / 852;
-      overflow: hidden;
-      position: relative;
-      background: #f9f9f9;
+      width: 100%; aspect-ratio: 393 / 852; overflow: hidden;
+      position: relative; background: #f9f9f9;
     }
     .card-preview iframe {
-      width: 393px;
-      height: 852px;
-      border: none;
-      transform-origin: top left;
-      pointer-events: none;
+      width: 393px; height: 852px; border: none;
+      transform-origin: top left; pointer-events: none;
     }
     .card-label {
-      padding: 8px 10px;
-      font-size: 11px;
-      font-weight: 600;
-      text-align: center;
-      border-top: 1px solid #f0f0f0;
+      padding: 8px 10px; font-size: 11px; font-weight: 600;
+      text-align: center; border-top: 1px solid #f0f0f0;
     }
   </style>
 </head>
 <body>
   <h1>remoryo Screens</h1>
-  <p class="subtitle">46 Screens · 8 Kategorien · Stand März 2026</p>
+  <p class="subtitle">51 Screens · 8 Kategorien · Stand März 2026</p>
 
   <div class="section">
     <div class="section-title">Auth & Registration (5)</div>
     <div class="grid" id="grid-auth"></div>
   </div>
-
   <div class="section">
     <div class="section-title">Onboarding (2)</div>
     <div class="grid" id="grid-onboarding"></div>
   </div>
-
   <div class="section">
     <div class="section-title">Home / Fotos (5)</div>
     <div class="grid" id="grid-home"></div>
   </div>
-
   <div class="section">
     <div class="section-title">Magazin-Editor (4)</div>
     <div class="grid" id="grid-magazine"></div>
   </div>
-
   <div class="section">
     <div class="section-title">Settings (4)</div>
     <div class="grid" id="grid-settings"></div>
   </div>
-
   <div class="section">
     <div class="section-title">Settings Detail (9)</div>
     <div class="grid" id="grid-settings-detail"></div>
   </div>
-
   <div class="section">
-    <div class="section-title">Utility & Flows (7)</div>
+    <div class="section-title">Utility & Flows (10)</div>
     <div class="grid" id="grid-utility"></div>
   </div>
-
   <div class="section">
-    <div class="section-title">Zusätzliche Screens (10)</div>
+    <div class="section-title">Zusätzliche Screens (12)</div>
     <div class="grid" id="grid-additional"></div>
   </div>
 
@@ -106,10 +85,10 @@ const screens = {
   'grid-onboarding': { file: 'onboarding-preview.html', screens: ["So funktioniert's", 'Familie einladen'] },
   'grid-home': { file: 'app-home-preview.html', screens: ['Fotos Tab', 'Empty State', 'Magazine Tab', 'Magazine Empty', 'Foto-Kommentare'] },
   'grid-magazine': { file: 'app-magazine-preview.html', screens: ['Magazin-Übersicht', 'Seitenübersicht', 'Foto auswählen', 'Magazin-Vorschau'] },
-  'grid-settings': { file: 'app-settings-preview.html', screens: ['Einstellungen', 'Nutzerprofil', 'Abonnement', 'Abo-Auswahl'] },
+  'grid-settings': { file: 'app-settings-preview.html', screens: ['Einstellungen', 'Nutzerprofil', 'Abonnement (aktiv)', 'Abo-Auswahl'] },
   'grid-settings-detail': { file: 'app-settings-detail-preview.html', screens: ['Lieferadresse', 'Zahlung (Verwalter)', 'Zahlung (Mitglied)', 'Gruppenmitglieder', 'Passwort ändern', 'Account löschen', 'Profil bearbeiten', 'Versandstatus', 'Benachrichtigungen'] },
-  'grid-utility': { file: 'app-utility-preview.html', screens: ['PW vergessen', 'PW Erfolg', 'Netzwerk-Fehler', 'Gruppen wechseln', 'Einladung annehmen', 'Erstes Magazin', 'Mitglied einladen'] },
-  'grid-additional': { file: 'app-additional-preview.html', screens: ['Foto-Vollansicht', 'Kommentar schreiben', 'Upload-Bestätigung', 'Push Permission', 'Empfänger verwalten', 'Abo auswählen', 'Checkout: Plan', 'Checkout: Empfänger', 'Checkout: Zahlung', 'Checkout: Bestätigung'] }
+  'grid-utility': { file: 'app-utility-preview.html', screens: ['PW vergessen', 'PW Erfolg', 'Netzwerk-Fehler', 'Gruppen wechseln', 'Einladung annehmen', 'Erstes Magazin', 'Mitglied einladen', 'Abo kündigen', 'Logout', 'Hilfe & Support'] },
+  'grid-additional': { file: 'app-additional-preview.html', screens: ['Foto-Vollansicht', 'Kommentar schreiben', 'Upload-Bestätigung', 'Push Permission', 'Empfänger verwalten', 'Abo auswählen', 'Push Notifications', 'In-App Messages', 'Checkout: Plan', 'Checkout: Empfänger', 'Checkout: Zahlung', 'Checkout: Bestätigung'] }
 };
 
 Object.entries(screens).forEach(([gridId, data]) => {
