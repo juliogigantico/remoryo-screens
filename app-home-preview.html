@@ -1,0 +1,1349 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remoryo Home — Visual Preview</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue: #82B7D8;
+      --blue-light: #EAF3F9;
+      --blue-soft: #D4E8F2;
+      --turquoise: #B8E0E0;
+      --turquoise-light: #E2F3F3;
+      --navy: #1B2C43;
+      --orange: #FFA631;
+      --white: #FFFFFF;
+      --dark-gray: #5A6B7A;
+      --mid-gray: #94A3B3;
+      --light-gray: #F5F6F8;
+      --border: #E2E6EB;
+      --btn-radius: 14px;
+      --input-radius: 12px;
+      --red: #E74C3C;
+      --beige: #E8DDD1;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #F0F2F5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 20px;
+      gap: 20px;
+    }
+
+    h1 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--mid-gray);
+    }
+
+    .preview-row {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .screen-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--mid-gray);
+      text-align: center;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ── Phone Frame ── */
+    .phone {
+      width: 393px;
+      height: 852px;
+      background: var(--white);
+      border-radius: 48px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.05),
+        0 8px 30px rgba(0,0,0,0.08),
+        0 30px 70px rgba(0,0,0,0.12);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Dynamic Island */
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 126px;
+      height: 36px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 10;
+    }
+
+    /* ── Status Bar Area ── */
+    .status-bar {
+      height: 59px;
+      flex-shrink: 0;
+    }
+
+    /* ── App Header ── */
+    .app-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 20px 12px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .app-header-logo {
+      height: 26px;
+      width: auto;
+    }
+
+    .header-wordmark {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--navy);
+      letter-spacing: -0.3px;
+    }
+
+    .header-settings {
+      width: 44px;
+      height: 44px;
+      border-radius: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .header-settings svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* ── Group Indicator Pill ── */
+    .group-pill-wrap {
+      padding: 12px 16px 0;
+      display: flex;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .group-indicator {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 14px;
+      background: var(--blue-light);
+      border-radius: 20px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--navy);
+      cursor: pointer;
+    }
+
+    /* ── Scrollable Content ── */
+    .scroll-area {
+      flex: 1;
+      overflow-y: auto;
+      background: var(--light-gray);
+    }
+
+    /* ── Magazine Deadline Banner ── */
+    .deadline-banner {
+      background: var(--blue-light);
+      padding: 12px 20px;
+      border-radius: 12px;
+      margin: 12px 16px;
+    }
+
+    .deadline-banner-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+
+    .deadline-progress-track {
+      width: 100%;
+      height: 6px;
+      background: var(--blue-soft);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+
+    .deadline-progress-fill {
+      width: 83%;
+      height: 100%;
+      background: var(--orange);
+      border-radius: 3px;
+    }
+
+    /* ── Caption Reminder Banner ── */
+    .caption-reminder {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: #FFF8F0;
+      border: 1.5px solid rgba(255, 166, 49, 0.15);
+      padding: 14px 16px;
+      border-radius: 12px;
+      margin: 8px 16px 4px;
+    }
+
+    .caption-reminder-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 10px;
+      background: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .caption-reminder-text {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .caption-reminder-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+
+    .caption-reminder-sub {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--dark-gray);
+      line-height: 1.4;
+      margin-top: 2px;
+    }
+
+    .caption-reminder-btn {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--orange);
+      background: none;
+      border: none;
+      cursor: pointer;
+      white-space: nowrap;
+      padding: 4px 0;
+    }
+
+    /* ── Caption placeholder on cards without comments ── */
+    .card-caption-placeholder {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--mid-gray);
+      padding: 4px 16px 0;
+      cursor: pointer;
+      font-style: italic;
+    }
+
+    /* ── Timeline Card ── */
+    .timeline-card {
+      background: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+    }
+
+    .card-user {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar-placeholder {
+      width: 42px;
+      height: 42px;
+      border-radius: 21px;
+      background: linear-gradient(135deg, var(--blue-soft), var(--blue));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .card-username {
+      font-weight: 600;
+      font-size: 15px;
+      color: var(--navy);
+    }
+
+    .card-more {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border-radius: 22px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .card-photo {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+    }
+
+    .card-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 20px 8px;
+    }
+
+    .card-actions-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .action-btn {
+      position: relative;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      min-height: 44px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .action-btn svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .badge {
+      position: absolute;
+      top: 0;
+      right: -2px;
+      background: var(--orange);
+      color: white;
+      font-size: 10px;
+      font-weight: 700;
+      min-width: 18px;
+      height: 18px;
+      border-radius: 9px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 2px solid white;
+      padding: 0 4px;
+    }
+
+    .action-edit {
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      min-height: 44px;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .action-edit svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .card-caption {
+      padding: 4px 20px 4px;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--navy);
+    }
+
+    .card-date {
+      padding: 2px 20px 14px;
+      font-size: 13px;
+      color: var(--mid-gray);
+    }
+
+    .card-used-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 11px;
+      color: var(--blue);
+      font-weight: 600;
+    }
+
+    /* ── Empty State ── */
+    .empty-state {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 40px 32px;
+      text-align: center;
+      background: var(--white);
+    }
+
+    .empty-illustration {
+      width: 240px;
+      height: 240px;
+      border-radius: 120px;
+      background: linear-gradient(135deg, var(--blue-light) 0%, var(--blue-soft) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 28px;
+    }
+
+    .empty-title {
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--navy);
+      margin-bottom: 10px;
+    }
+
+    .empty-text {
+      font-size: 15px;
+      color: var(--dark-gray);
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+
+    .empty-subtitle {
+      font-size: 13px;
+      color: var(--mid-gray);
+      font-weight: 500;
+      margin-bottom: 28px;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--btn-radius);
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    /* ── Bottom Tab Bar (2-tab + central FAB) ── */
+    .tab-bar {
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      height: 68px;
+      background: var(--white);
+      flex-shrink: 0;
+      padding-bottom: 6px;
+      position: relative;
+      box-shadow: 0 -1px 12px rgba(27, 44, 67, 0.06);
+    }
+
+    .tab-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+      cursor: pointer;
+      position: relative;
+      flex: 1;
+      padding-top: 10px;
+    }
+
+    .tab-icon {
+      width: 56px;
+      height: 30px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .tab-icon svg {
+      width: 26px;
+      height: 26px;
+    }
+
+    .tab-item.active .tab-icon {
+      background: rgba(130, 183, 216, 0.18);
+    }
+
+    .tab-label {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--mid-gray);
+      letter-spacing: -0.2px;
+    }
+
+    .tab-item.active .tab-label {
+      color: var(--navy);
+      font-weight: 700;
+    }
+
+    /* Central FAB button */
+    .tab-fab-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 0 0 auto;
+      padding: 0 16px;
+      position: relative;
+      top: -18px;
+    }
+
+    .tab-fab {
+      width: 62px;
+      height: 62px;
+      border-radius: 50%;
+      background: linear-gradient(145deg, #FFB84D 0%, var(--orange) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(255, 166, 49, 0.45), 0 2px 6px rgba(0,0,0,0.08);
+      border: 3px solid var(--white);
+    }
+
+    .tab-fab svg {
+      width: 28px;
+      height: 28px;
+    }
+
+    .tab-fab-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--orange);
+      margin-top: 3px;
+      letter-spacing: -0.2px;
+    }
+
+    /* ── Magazine Cards (reused from magazine preview) ── */
+    .mag-card {
+      margin: 16px 20px;
+      border-radius: 16px;
+      overflow: hidden;
+      position: relative;
+      background: var(--white);
+      box-shadow: 0 4px 20px rgba(27,44,67,0.1);
+    }
+
+    .mag-card-inner {
+      position: relative;
+      padding: 20px;
+      background: linear-gradient(145deg, #FFF8F0 0%, #FFF 50%, #F0F8FF 100%);
+      border: 1px solid rgba(0,0,0,0.06);
+      border-radius: 16px;
+    }
+
+    .mag-accent-orange {
+      position: absolute;
+      top: -10px;
+      right: -10px;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      background: rgba(255,166,49,0.15);
+    }
+
+    .mag-accent-turquoise {
+      position: absolute;
+      bottom: -15px;
+      left: -15px;
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      background: rgba(184,224,224,0.2);
+    }
+
+    .mag-logo {
+      width: 100px;
+      height: 20px;
+      margin-bottom: 12px;
+      background: var(--blue-light);
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 9px;
+      font-weight: 700;
+      color: var(--blue);
+      letter-spacing: 1px;
+    }
+
+    .mag-cover {
+      width: 100%;
+      aspect-ratio: 16/10;
+      border-radius: 10px;
+      object-fit: cover;
+      margin-bottom: 14px;
+    }
+
+    .mag-group-name {
+      font-weight: 600;
+      font-size: 12px;
+      color: var(--dark-gray);
+      letter-spacing: 0.3px;
+      text-transform: uppercase;
+      margin-bottom: 2px;
+    }
+
+    .mag-title {
+      font-weight: 700;
+      font-size: 18px;
+      color: var(--navy);
+      margin-bottom: 4px;
+      line-height: 1.3;
+    }
+
+    .mag-date-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .mag-month {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--dark-gray);
+    }
+
+    .mag-year {
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--mid-gray);
+    }
+
+    .mag-status {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 100px;
+      font-size: 11px;
+      font-weight: 700;
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      z-index: 2;
+    }
+
+    .mag-status--editing {
+      background: #FFF3DC;
+      color: #D48B00;
+    }
+
+    .mag-status--sent {
+      background: #E6F7EE;
+      color: #1D8348;
+    }
+
+    .mag-deadline {
+      position: absolute;
+      top: 38px;
+      right: 12px;
+      z-index: 2;
+      font-size: 12px;
+      color: var(--dark-gray);
+    }
+
+    .mag-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+
+    .mag-action-btn {
+      flex: 1;
+      min-width: 100px;
+      min-height: 48px;
+      padding: 10px 14px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+
+    .mag-action-btn--primary {
+      background: var(--orange);
+      color: white;
+    }
+
+    .mag-action-btn--outline {
+      background: white;
+      color: var(--navy);
+      border: 1.5px solid var(--border);
+    }
+
+    .mag-action-btn--danger {
+      background: #FFF0EE;
+      color: #E74C3C;
+    }
+
+    /* ── Comments Screen ── */
+    .comments-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 16px 12px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .back-arrow {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .back-arrow svg {
+      width: 24px;
+      height: 24px;
+      color: var(--navy);
+    }
+
+    .comments-title {
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--navy);
+    }
+
+    .comment-photo-preview {
+      width: 100%;
+      height: 80px;
+      position: relative;
+      flex-shrink: 0;
+      overflow: hidden;
+    }
+
+    .comment-photo-preview img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .comment-photo-preview::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(27, 44, 67, 0.15);
+    }
+
+    .comment-item {
+      display: flex;
+      gap: 12px;
+      padding: 14px 20px;
+    }
+
+    .comment-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 18px;
+      flex-shrink: 0;
+    }
+
+    .comment-body {
+      flex: 1;
+    }
+
+    .comment-author {
+      font-weight: 700;
+      font-size: 13px;
+      color: var(--navy);
+    }
+
+    .comment-text {
+      font-size: 14px;
+      color: var(--dark-gray);
+      line-height: 1.5;
+      margin-top: 2px;
+    }
+
+    .comment-time {
+      font-size: 11px;
+      color: var(--mid-gray);
+      margin-top: 4px;
+    }
+
+    .comment-input-bar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      border-top: 1px solid var(--border);
+      background: var(--white);
+      flex-shrink: 0;
+    }
+
+    .comment-input {
+      flex: 1;
+      padding: 10px 16px;
+      border-radius: 20px;
+      border: 1.5px solid var(--border);
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      min-height: 44px;
+    }
+
+    .comment-send {
+      width: 44px;
+      height: 44px;
+      border-radius: 22px;
+      background: var(--orange);
+      border: none;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ── Safe Area ── */
+    .safe-bottom {
+      height: 20px;
+      background: var(--white);
+      flex-shrink: 0;
+    }
+
+    .footer-note {
+      font-size: 11px;
+      color: #A0A0A0;
+      font-weight: 500;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Remoryo Home — Visual Preview</h1>
+
+  <div class="preview-row">
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 1 — Fotos Tab Active (with photos)     -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Fotos Tab — mit Fotos</div>
+      <div class="phone">
+
+        <div class="status-bar"></div>
+
+        <!-- App Header -->
+        <div class="app-header">
+          <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
+          <span class="header-wordmark">remoryo</span>
+          <div class="header-settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </div>
+        </div>
+
+        <!-- Group Pill -->
+        <div class="group-pill-wrap" style="background: var(--white);">
+          <div class="group-indicator">
+            <span style="display: flex; align-items: center; gap: 4px;">Familie Blümel <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+          </div>
+        </div>
+
+        <!-- Timeline Feed -->
+        <div class="scroll-area">
+
+          <!-- Deadline Banner -->
+          <div class="deadline-banner">
+            <div class="deadline-banner-top">
+              <svg viewBox="0 0 24 24" fill="none" width="18" height="18" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+              <span>Noch 5 Tage bis dein Heft gedruckt wird</span>
+            </div>
+            <div class="deadline-progress-track">
+              <div class="deadline-progress-fill"></div>
+            </div>
+            <div style="font-size: 12px; color: var(--dark-gray); margin-top: 6px; font-weight: 500;">Änderbar bis 31. März 2026</div>
+          </div>
+
+          <!-- Caption Reminder Banner (shown after bulk upload when photos lack comments) -->
+          <div class="caption-reminder">
+            <div class="caption-reminder-icon">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M8 10h8M8 14h4" stroke="white" stroke-width="2" stroke-linecap="round"/></svg>
+            </div>
+            <div class="caption-reminder-text">
+              <div class="caption-reminder-title">3 Fotos ohne Kommentar</div>
+              <div class="caption-reminder-sub">Kommentare helfen deinen Großeltern, die Bilder zu verstehen.</div>
+            </div>
+            <button class="caption-reminder-btn">Ergänzen</button>
+          </div>
+
+          <!-- Card 1 (with caption) -->
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-user">
+                <div class="avatar-placeholder">J</div>
+                <span class="card-username">Julius Blümel</span>
+              </div>
+              <div class="card-more"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/></svg></div>
+            </div>
+            <img class="card-photo" src="flyer/foto.jpg" alt="Oma liest Fotoheft">
+            <div class="card-actions">
+              <div class="card-actions-left">
+                <div class="action-btn">
+                  <svg viewBox="0 0 24 24" fill="var(--red)"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+                  <div class="badge">3</div>
+                </div>
+                <div class="action-btn">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  <div class="badge">2</div>
+                </div>
+                <div class="card-used-badge">
+                  <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M22 11.08V12a10 10 0 11-5.93-9.14" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M22 4L12 14.01l-3-3" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Im Heft
+                </div>
+              </div>
+              <div class="action-edit">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+            <div class="card-caption">Oma hat sich so gefreut über das Heft!</div>
+            <div class="card-date">vor 3 Tagen</div>
+          </div>
+
+          <!-- Card 2 (WITHOUT caption — shows placeholder to encourage adding one) -->
+          <div class="timeline-card">
+            <div class="card-header">
+              <div class="card-user">
+                <div class="avatar-placeholder" style="background: linear-gradient(135deg, #B8E0E0, #82B7D8);">M</div>
+                <span class="card-username">Maria Blümel</span>
+              </div>
+              <div class="card-more"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/></svg></div>
+            </div>
+            <img class="card-photo" src="app-repo/assets/images/happy-family-fake-image.png" alt="Familie beim Essen">
+            <div class="card-actions">
+              <div class="card-actions-left">
+                <div class="action-btn">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="action-btn">
+                  <svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+              </div>
+              <div class="action-edit">
+                <svg viewBox="0 0 24 24" fill="none"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </div>
+            </div>
+            <div class="card-caption-placeholder">Kommentar hinzufügen...</div>
+            <div class="card-date">vor 5 Tagen</div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Tab Bar (2 tabs + central FAB) -->
+        <div class="tab-bar">
+          <div class="tab-item active">
+            <div class="tab-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            </div>
+            <span class="tab-label">Fotos</span>
+
+          </div>
+          <div class="tab-fab-wrapper">
+            <div class="tab-fab">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>
+            </div>
+            <span class="tab-fab-label">Foto</span>
+          </div>
+          <div class="tab-item">
+            <div class="tab-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+            </div>
+            <span class="tab-label">Heft</span>
+          </div>
+        </div>
+
+        <div class="safe-bottom"></div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 2 — Fotos Tab Empty State              -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Fotos Tab — Empty State</div>
+      <div class="phone">
+
+        <div class="status-bar"></div>
+
+        <!-- App Header -->
+        <div class="app-header">
+          <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
+          <span class="header-wordmark">remoryo</span>
+          <div class="header-settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </div>
+        </div>
+
+        <!-- Group Pill -->
+        <div class="group-pill-wrap" style="background: var(--white);">
+          <div class="group-indicator">
+            <span style="display: flex; align-items: center; gap: 4px;">Familie Blümel <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+          </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state">
+          <div class="empty-illustration">
+            <svg viewBox="0 0 24 24" fill="none" width="80" height="80" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.5;">
+              <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
+              <circle cx="12" cy="13" r="4"/>
+            </svg>
+          </div>
+          <div class="empty-title">Noch keine Fotos</div>
+          <div class="empty-text">Lade dein erstes Foto hoch und starte das Fotoheft für deine Liebsten</div>
+          <div class="empty-subtitle">Starte jetzt — 5 Fotos reichen für dein erstes Heft!</div>
+          <button class="btn btn-primary">
+            <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="13" r="4" stroke="white" stroke-width="2"/></svg>
+            Foto hochladen
+          </button>
+        </div>
+
+        <!-- Bottom Tab Bar (2 tabs + central FAB) -->
+        <div class="tab-bar">
+          <div class="tab-item active">
+            <div class="tab-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            </div>
+            <span class="tab-label">Fotos</span>
+
+          </div>
+          <div class="tab-fab-wrapper">
+            <div class="tab-fab">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>
+            </div>
+            <span class="tab-fab-label">Foto</span>
+          </div>
+          <div class="tab-item">
+            <div class="tab-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+            </div>
+            <span class="tab-label">Heft</span>
+          </div>
+        </div>
+
+        <div class="safe-bottom"></div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 3 — Magazine Tab Active                -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Magazine Tab</div>
+      <div class="phone">
+
+        <div class="status-bar"></div>
+
+        <!-- App Header -->
+        <div class="app-header">
+          <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
+          <span class="header-wordmark">remoryo</span>
+          <div class="header-settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </div>
+        </div>
+
+        <!-- Group Pill -->
+        <div class="group-pill-wrap" style="background: var(--white);">
+          <div class="group-indicator">
+            <span style="display: flex; align-items: center; gap: 4px;">Familie Blümel <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+          </div>
+        </div>
+
+        <!-- Magazine Cards -->
+        <div class="scroll-area" style="background: var(--white);">
+
+          <!-- Card 1: In Bearbeitung -->
+          <div class="mag-card">
+            <div class="mag-card-inner">
+              <div class="mag-accent-orange"></div>
+              <div class="mag-accent-turquoise"></div>
+              <div class="mag-status mag-status--editing">
+                <svg viewBox="0 0 24 24" fill="none" width="12" height="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                In Bearbeitung
+              </div>
+              <div class="mag-deadline">Änderbar bis 31. März</div>
+              <div class="mag-logo">REMORYO</div>
+              <img class="mag-cover" src="flyer/foto.jpg" alt="Cover März 2026">
+              <div class="mag-group-name">Familie Blümel</div>
+              <div class="mag-title">Frühlingsgefühle</div>
+              <div class="mag-date-row">
+                <span class="mag-month">März</span>
+                <span class="mag-year">2026</span>
+              </div>
+              <div class="mag-actions">
+                <button class="mag-action-btn mag-action-btn--primary">Bearbeiten</button>
+                <button class="mag-action-btn mag-action-btn--outline">
+                  <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  PDF
+                </button>
+                <button class="mag-action-btn mag-action-btn--danger">
+                  <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  Löschen
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card 2: Gedruckt & Versendet -->
+          <div class="mag-card">
+            <div class="mag-card-inner">
+              <div class="mag-accent-orange"></div>
+              <div class="mag-accent-turquoise"></div>
+              <div class="mag-status mag-status--sent">
+                <svg viewBox="0 0 24 24" fill="none" width="12" height="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                Gedruckt &amp; Versendet
+              </div>
+              <div class="mag-logo">REMORYO</div>
+              <img class="mag-cover" src="app-repo/assets/images/happy-family-fake-image.png" alt="Cover Feb 2026">
+              <div class="mag-group-name">Familie Blümel</div>
+              <div class="mag-title">Winterzauber</div>
+              <div class="mag-date-row">
+                <span class="mag-month">Februar</span>
+                <span class="mag-year">2026</span>
+              </div>
+              <div class="mag-actions">
+                <button class="mag-action-btn mag-action-btn--outline" style="flex: 1;">
+                  <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  PDF herunterladen
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Tab Bar (2 tabs + central FAB) -->
+        <div class="tab-bar">
+          <div class="tab-item">
+            <div class="tab-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            </div>
+            <span class="tab-label">Fotos</span>
+          </div>
+          <div class="tab-fab-wrapper">
+            <div class="tab-fab">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>
+            </div>
+            <span class="tab-fab-label">Erstellen</span>
+          </div>
+          <div class="tab-item active">
+            <div class="tab-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+            </div>
+            <span class="tab-label">Heft</span>
+
+          </div>
+        </div>
+
+        <div class="safe-bottom"></div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 3b — Magazine Tab Empty State           -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Magazine Tab — Empty State</div>
+      <div class="phone">
+
+        <div class="status-bar"></div>
+
+        <!-- App Header -->
+        <div class="app-header">
+          <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
+          <span class="header-wordmark">remoryo</span>
+          <div class="header-settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </div>
+        </div>
+
+        <!-- Group Pill -->
+        <div class="group-pill-wrap" style="background: var(--white);">
+          <div class="group-indicator">
+            <span style="display: flex; align-items: center; gap: 4px;">Familie Blümel <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+          </div>
+        </div>
+
+        <!-- Empty State for Magazine Tab -->
+        <div class="empty-state">
+          <div class="empty-illustration">
+            <svg viewBox="0 0 24 24" fill="none" width="80" height="80" stroke="var(--navy)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.5;">
+              <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
+              <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+            </svg>
+          </div>
+          <div class="empty-title">Noch kein Fotoheft</div>
+          <div class="empty-text">Erstelle dein erstes Fotoheft — ab 5 Fotos kann es losgehen!</div>
+          <div class="empty-subtitle">Lade Fotos hoch, wähle deine Lieblingsbilder und wir erstellen daraus ein gedrucktes Heft.</div>
+          <button class="btn btn-primary" style="max-width: 280px;">
+            <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
+            Erstes Fotoheft erstellen
+          </button>
+        </div>
+
+        <!-- Bottom Tab Bar (2 tabs + central FAB) -->
+        <div class="tab-bar">
+          <div class="tab-item">
+            <div class="tab-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+            </div>
+            <span class="tab-label">Fotos</span>
+          </div>
+          <div class="tab-fab-wrapper">
+            <div class="tab-fab">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>
+            </div>
+            <span class="tab-fab-label">Erstellen</span>
+          </div>
+          <div class="tab-item active">
+            <div class="tab-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
+            </div>
+            <span class="tab-label">Heft</span>
+
+          </div>
+        </div>
+
+        <div class="safe-bottom"></div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 4 — Foto-Kommentare (Detail View)      -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Foto-Kommentare</div>
+      <div class="phone">
+
+        <div class="status-bar"></div>
+
+        <!-- Comments Header -->
+        <div class="comments-header">
+          <div class="back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="comments-title">Kommentare</span>
+        </div>
+
+        <!-- Photo thumbnail preview -->
+        <div class="comment-photo-preview">
+          <img src="flyer/foto.jpg" alt="Foto-Vorschau">
+        </div>
+
+        <!-- Comments List -->
+        <div class="scroll-area" style="background: var(--white);">
+
+          <div class="comment-item">
+            <div class="avatar-placeholder comment-avatar" style="font-size: 13px;">M</div>
+            <div class="comment-body">
+              <span class="comment-author">Maria Blümel</span>
+              <div class="comment-text">So ein schönes Bild! Oma wird sich riesig freuen</div>
+              <div class="comment-time">vor 2 Stunden</div>
+            </div>
+          </div>
+
+          <div class="comment-item">
+            <div class="avatar-placeholder comment-avatar" style="font-size: 13px; background: linear-gradient(135deg, #FFD89B, #FFA631);">P</div>
+            <div class="comment-body">
+              <span class="comment-author">Papa Blümel</span>
+              <div class="comment-text">Das muss unbedingt ins nächste Heft!</div>
+              <div class="comment-time">vor 5 Stunden</div>
+            </div>
+          </div>
+
+          <div class="comment-item">
+            <div class="avatar-placeholder comment-avatar" style="font-size: 13px;">J</div>
+            <div class="comment-body">
+              <span class="comment-author">Julius Blümel</span>
+              <div class="comment-text">Hab ich direkt fürs März-Heft eingeplant</div>
+              <div class="comment-time">vor 4 Stunden</div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Comment Input -->
+        <div class="comment-input-bar">
+          <input class="comment-input" type="text" placeholder="Kommentar schreiben...">
+          <button class="comment-send">
+            <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+
+        <!-- NO tab bar (push detail view) -->
+
+        <div class="safe-bottom"></div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <p class="footer-note">Preview nutzt Inter als Stand-in für Helvetica Now Display.</p>
+
+</body>
+</html>

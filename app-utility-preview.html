@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remoryo Utility / Flow Pages — Visual Preview</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue: #82B7D8;
+      --blue-light: #EAF3F9;
+      --blue-soft: #D4E8F2;
+      --turquoise: #B8E0E0;
+      --turquoise-light: #E2F3F3;
+      --navy: #1B2C43;
+      --orange: #FFA631;
+      --white: #FFFFFF;
+      --dark-gray: #5A6B7A;
+      --mid-gray: #94A3B3;
+      --light-gray: #F5F6F8;
+      --border: #E2E6EB;
+      --beige: #E8DDD1;
+      --btn-radius: 14px;
+      --input-radius: 12px;
+      --red: #E74C3C;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #F0F2F5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 20px;
+      gap: 20px;
+    }
+
+    h1 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--mid-gray);
+    }
+
+    .preview-row {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .screen-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--mid-gray);
+      text-align: center;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ── Phone Frame ── */
+    .phone {
+      width: 393px;
+      height: 852px;
+      background: var(--white);
+      border-radius: 48px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.05),
+        0 8px 30px rgba(0,0,0,0.08),
+        0 30px 70px rgba(0,0,0,0.12);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Dynamic Island */
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 126px;
+      height: 36px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 10;
+    }
+
+    /* ── Status Bar Area ── */
+    .status-bar {
+      height: 59px;
+      flex-shrink: 0;
+    }
+
+    /* ── Buttons ── */
+    .btn {
+      width: 100%;
+      padding: 16px;
+      border-radius: var(--btn-radius);
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      font-family: inherit;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+    }
+
+    .btn-outline {
+      background: var(--white);
+      color: var(--navy);
+      border: 1.5px solid var(--navy);
+    }
+
+    .btn-text {
+      background: none;
+      border: none;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--navy);
+      cursor: pointer;
+      padding: 12px;
+      text-align: center;
+      width: 100%;
+      font-family: inherit;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-text-gray {
+      background: none;
+      border: none;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--mid-gray);
+      cursor: pointer;
+      padding: 12px;
+      text-align: center;
+      width: 100%;
+      font-family: inherit;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Input ── */
+    .input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: var(--input-radius);
+      border: 1.5px solid var(--border);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--navy);
+      background: var(--white);
+      outline: none;
+      font-family: inherit;
+      height: 48px;
+    }
+
+    .input::placeholder {
+      color: var(--mid-gray);
+      font-weight: 400;
+    }
+
+    /* ── Link ── */
+    .link {
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--blue);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .footer-note {
+      font-size: 11px;
+      color: #A0A0A0;
+      font-weight: 500;
+      text-align: center;
+    }
+
+    /* ── Section Divider ── */
+    .section-divider {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 12px 0 4px;
+    }
+
+    .section-divider-line {
+      flex: 1;
+      height: 1px;
+      background: #D0D5DB;
+    }
+
+    .dot.done {
+      background: var(--navy);
+      opacity: 0.4;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Remoryo Utility / Flow Pages Preview</h1>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- ROW 1 — Password Reset + Error State              -->
+  <!-- ══════════════════════════════════════════════════ -->
+
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <h1 style="white-space: nowrap;">Passwort vergessen + Fehlerzustand</h1>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="preview-row">
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 1 — Passwort vergessen (Eingabe)       -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">1 &middot; Passwort vergessen (Eingabe)</div>
+      <div class="phone" style="background: var(--beige);">
+
+        <div class="status-bar"></div>
+
+        <!-- Content -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding: 0 20px;">
+
+          <!-- Logo -->
+          <div style="margin-top: 40px; margin-bottom: 32px;">
+            <img src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="width: 56px; height: auto;">
+          </div>
+
+          <!-- Headline -->
+          <div style="text-align: center; margin-bottom: 12px;">
+            <div style="font-weight: 800; font-size: 26px; color: var(--navy); line-height: 1.3;">Passwort vergessen?</div>
+          </div>
+
+          <!-- Description -->
+          <div style="text-align: center; font-size: 15px; color: var(--dark-gray); line-height: 1.55; font-weight: 500; margin-bottom: 32px; max-width: 300px;">
+            Kein Problem! Gib deine E-Mail-Adresse ein und wir senden dir einen Link zum Zur&uuml;cksetzen.
+          </div>
+
+          <!-- Email input -->
+          <input class="input" type="email" placeholder="E-Mail-Adresse" style="margin-bottom: 16px;">
+
+          <!-- CTA -->
+          <button class="btn btn-primary">Link senden</button>
+
+          <div style="flex: 1;"></div>
+
+          <!-- Back link -->
+          <a class="btn-text" style="gap: 6px; margin-bottom: 20px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            Zur&uuml;ck zum Login
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 2 — Passwort vergessen (Erfolg)        -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">2 &middot; Passwort vergessen (Erfolg)</div>
+      <div class="phone" style="background: var(--beige);">
+
+        <div class="status-bar"></div>
+
+        <!-- Content -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding: 0 20px;">
+
+          <!-- Envelope icon -->
+          <div style="margin-top: 60px; margin-bottom: 24px;">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <rect x="6" y="14" width="52" height="36" rx="4" stroke="var(--navy)" stroke-width="2.5" fill="none"/>
+              <polyline points="6,14 32,36 58,14" fill="none" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="6" y1="50" x2="24" y2="34" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="58" y1="50" x2="40" y2="34" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <!-- Headline -->
+          <div style="text-align: center; margin-bottom: 12px;">
+            <div style="font-weight: 800; font-size: 26px; color: var(--navy); line-height: 1.3;">E-Mail gesendet!</div>
+          </div>
+
+          <!-- Description -->
+          <div style="text-align: center; font-size: 15px; color: var(--dark-gray); line-height: 1.55; font-weight: 500; margin-bottom: 8px; max-width: 300px;">
+            Pr&uuml;fe dein Postfach (j***s@remoryo.de) und klicke den Link zum Zur&uuml;cksetzen.
+          </div>
+
+          <!-- Subtext -->
+          <div style="text-align: center; font-size: 13px; color: var(--mid-gray); font-weight: 500; margin-bottom: 20px;">
+            Keine E-Mail erhalten?
+          </div>
+
+          <!-- Resend button (outline) -->
+          <button class="btn btn-outline" style="max-width: 240px;">Erneut senden</button>
+
+          <div style="flex: 1;"></div>
+
+          <!-- Back link -->
+          <a class="btn-text" style="gap: 6px; margin-bottom: 20px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            Zur&uuml;ck zum Login
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 3 — Netzwerk-Fehler                    -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">3 &middot; Netzwerk-Fehler</div>
+      <div class="phone" style="background: var(--white);">
+
+        <!-- No header, no status bar — overlay state -->
+
+        <!-- Centered content -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 20px;">
+
+          <!-- WiFi / Signal icon -->
+          <div style="margin-bottom: 24px;">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <!-- WiFi arcs -->
+              <path d="M8 26c7-8 16.5-12 24-12s17 4 24 12" stroke="var(--mid-gray)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M16 34c5-6 10.5-9 16-9s11 3 16 9" stroke="var(--mid-gray)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M24 42c2.5-3 5.5-5 8-5s5.5 2 8 5" stroke="var(--mid-gray)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <!-- Center dot -->
+              <circle cx="32" cy="48" r="2.5" fill="var(--mid-gray)"/>
+              <!-- Slash across -->
+              <line x1="12" y1="52" x2="52" y2="20" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <!-- Headline -->
+          <div style="font-weight: 700; font-size: 20px; color: var(--navy); text-align: center; margin-bottom: 10px;">
+            Keine Verbindung
+          </div>
+
+          <!-- Body text -->
+          <div style="font-size: 15px; color: var(--dark-gray); text-align: center; line-height: 1.55; font-weight: 500; margin-bottom: 32px; max-width: 280px;">
+            Pr&uuml;fe deine Internetverbindung und versuche es erneut.
+          </div>
+
+          <!-- Retry CTA -->
+          <button class="btn btn-primary" style="max-width: 320px;">Erneut versuchen</button>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- ROW 2 — Gruppen + Einladung + Erfolg              -->
+  <!-- ══════════════════════════════════════════════════ -->
+
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <h1 style="white-space: nowrap;">Gruppen, Einladung &amp; Erfolg</h1>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="preview-row">
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 4 — Gruppen wechseln (Bottom Sheet)    -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">4 &middot; Gruppen wechseln (Bottom Sheet)</div>
+      <div class="phone" style="background: var(--light-gray);">
+
+        <div class="status-bar"></div>
+
+        <!-- Dimmed app background (fake content behind) -->
+        <div style="flex: 1; position: relative;">
+
+          <!-- Fake dimmed header -->
+          <div style="padding: 8px 20px 16px; display: flex; align-items: center; justify-content: space-between; opacity: 0.4;">
+            <div style="display: flex; align-items: center; gap: 10px;">
+              <div style="width: 36px; height: 36px; border-radius: 18px; background: var(--orange); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 13px;">FB</div>
+              <div>
+                <div style="font-weight: 700; font-size: 15px; color: var(--navy);">Familie Bl&uuml;mel</div>
+                <div style="font-size: 12px; color: var(--mid-gray);">3 Mitglieder</div>
+              </div>
+            </div>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
+          </div>
+
+          <!-- Fake dimmed content blocks -->
+          <div style="padding: 0 20px; opacity: 0.3;">
+            <div style="width: 100%; height: 160px; background: var(--border); border-radius: 16px; margin-bottom: 12px;"></div>
+            <div style="width: 70%; height: 14px; background: var(--border); border-radius: 7px; margin-bottom: 8px;"></div>
+            <div style="width: 50%; height: 14px; background: var(--border); border-radius: 7px; margin-bottom: 24px;"></div>
+            <div style="width: 100%; height: 80px; background: var(--border); border-radius: 16px;"></div>
+          </div>
+
+          <!-- Dark overlay -->
+          <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); z-index: 5;"></div>
+
+          <!-- Bottom Sheet -->
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; background: var(--white); border-radius: 24px 24px 0 0; padding: 24px 24px 20px; z-index: 6;">
+
+            <!-- Handle bar -->
+            <div style="width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 20px;"></div>
+
+            <!-- Sheet header -->
+            <div style="font-weight: 700; font-size: 18px; color: var(--navy); margin-bottom: 20px;">Gruppe wechseln</div>
+
+            <!-- Group list -->
+            <div style="display: flex; flex-direction: column; gap: 4px;">
+
+              <!-- Group 1 — Active -->
+              <div style="display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 14px; background: var(--light-gray); min-height: 56px;">
+                <!-- Avatar -->
+                <div style="width: 42px; height: 42px; border-radius: 21px; background: var(--orange); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px; flex-shrink: 0;">FB</div>
+                <!-- Info -->
+                <div style="flex: 1;">
+                  <div style="font-weight: 600; font-size: 15px; color: var(--navy);">Familie Bl&uuml;mel</div>
+                  <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px;">
+                    <span style="font-size: 12px; font-weight: 600; color: var(--orange); background: rgba(255,166,49,0.12); padding: 2px 8px; border-radius: 6px;">Verwalter</span>
+                  </div>
+                </div>
+                <!-- Checkmark -->
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+
+              <!-- Group 2 -->
+              <div style="display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 14px; min-height: 56px; cursor: pointer;">
+                <!-- Avatar -->
+                <div style="width: 42px; height: 42px; border-radius: 21px; background: var(--turquoise); display: flex; align-items: center; justify-content: center; color: var(--navy); font-weight: 700; font-size: 14px; flex-shrink: 0;">SW</div>
+                <!-- Info -->
+                <div style="flex: 1;">
+                  <div style="font-weight: 600; font-size: 15px; color: var(--navy);">Seniorenheim Waldblick</div>
+                  <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px;">
+                    <span style="font-size: 12px; font-weight: 600; color: var(--dark-gray); background: var(--light-gray); padding: 2px 8px; border-radius: 6px;">Mitglied</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            <!-- New group link -->
+            <div style="margin-top: 20px; padding-top: 16px; border-top: 1.5px solid var(--border); text-align: center;">
+              <a class="link" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 14px; min-height: 44px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round">
+                  <line x1="12" y1="5" x2="12" y2="19"/>
+                  <line x1="5" y1="12" x2="19" y2="12"/>
+                </svg>
+                Neue Gruppe erstellen
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 5 — Einladung annehmen (In-App)        -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">5 &middot; Einladung annehmen (In-App)</div>
+      <div class="phone" style="background: var(--white);">
+
+        <!-- Turquoise gradient header -->
+        <div style="background: linear-gradient(180deg, var(--turquoise) 0%, var(--turquoise-light) 70%, var(--white) 100%); padding: 59px 24px 0; display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
+
+          <!-- Envelope icon with badge -->
+          <div style="margin-top: 20px; margin-bottom: 8px; position: relative;">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <rect x="4" y="10" width="40" height="28" rx="4" stroke="var(--navy)" stroke-width="2" fill="none"/>
+              <polyline points="4,10 24,28 44,10" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+
+          <div style="font-size: 12px; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 28px;">Einladung</div>
+
+        </div>
+
+        <!-- Content -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding: 16px 20px 0;">
+
+          <!-- Headline -->
+          <div style="font-weight: 800; font-size: 24px; color: var(--navy); text-align: center; line-height: 1.3; margin-bottom: 12px;">
+            Julius hat dich<br>eingeladen!
+          </div>
+
+          <!-- Description -->
+          <div style="font-size: 15px; color: var(--dark-gray); text-align: center; line-height: 1.55; font-weight: 500; margin-bottom: 28px; max-width: 300px;">
+            Tritt der Gruppe &laquo;Familie Bl&uuml;mel&raquo; bei und teile deine sch&ouml;nsten Fotos.
+          </div>
+
+          <!-- Group info card -->
+          <div style="width: 100%; background: var(--light-gray); border-radius: 16px; padding: 18px 20px; display: flex; align-items: center; gap: 14px; margin-bottom: 32px;">
+            <!-- Avatar -->
+            <div style="width: 46px; height: 46px; border-radius: 23px; background: var(--orange); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 15px; flex-shrink: 0;">FB</div>
+            <!-- Info -->
+            <div>
+              <div style="font-weight: 700; font-size: 16px; color: var(--navy);">Familie Bl&uuml;mel</div>
+              <div style="font-size: 13px; color: var(--mid-gray); font-weight: 500; margin-top: 2px;">2 Mitglieder</div>
+            </div>
+          </div>
+
+          <div style="flex: 1;"></div>
+
+          <!-- CTA -->
+          <div style="width: 100%; margin-bottom: 8px;">
+            <button class="btn btn-primary">Einladung annehmen</button>
+          </div>
+
+          <!-- Decline link -->
+          <a class="btn-text-gray" style="margin-bottom: 20px;">Ablehnen</a>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 6 — Erstes Magazin erstellt (Erfolg)   -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">6 &middot; Erstes Magazin erstellt (Erfolg)</div>
+      <div class="phone" style="background: var(--white);">
+
+        <div class="status-bar"></div>
+
+        <!-- Content centered -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 20px;">
+
+          <!-- Party / Confetti icon -->
+          <div style="margin-bottom: 24px;">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <!-- Confetti pieces -->
+              <rect x="14" y="6" width="4" height="8" rx="2" fill="var(--orange)" transform="rotate(-15 16 10)"/>
+              <rect x="46" y="8" width="4" height="8" rx="2" fill="var(--blue)" transform="rotate(20 48 12)"/>
+              <rect x="30" y="2" width="4" height="8" rx="2" fill="var(--turquoise)" transform="rotate(5 32 6)"/>
+              <circle cx="10" cy="20" r="3" fill="var(--turquoise)"/>
+              <circle cx="54" cy="22" r="3" fill="var(--orange)"/>
+              <circle cx="22" cy="4" r="2.5" fill="var(--blue)"/>
+              <circle cx="42" cy="3" r="2.5" fill="var(--orange)"/>
+              <!-- Star burst -->
+              <path d="M32 16l2.5 7.5H42l-6 4.5 2.5 7.5-6-4.5-6 4.5 2.5-7.5-6-4.5h7.5z" fill="var(--orange)"/>
+              <!-- Popper cone -->
+              <path d="M18 58L10 46l30-18" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <path d="M10 46l8 12 4-2-6-12z" fill="var(--navy)" opacity="0.15"/>
+              <line x1="28" y1="36" x2="48" y2="18" stroke="var(--orange)" stroke-width="2" stroke-linecap="round"/>
+              <line x1="24" y1="42" x2="38" y2="24" stroke="var(--blue)" stroke-width="2" stroke-linecap="round"/>
+              <line x1="20" y1="48" x2="44" y2="28" stroke="var(--turquoise)" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <!-- Headline -->
+          <div style="font-weight: 800; font-size: 24px; color: var(--navy); text-align: center; margin-bottom: 8px;">
+            Geschafft!
+          </div>
+
+          <!-- Subheadline -->
+          <div style="font-weight: 600; font-size: 17px; color: var(--navy); text-align: center; margin-bottom: 16px;">
+            Dein erstes Fotoheft ist fertig!
+          </div>
+
+          <!-- Info text -->
+          <div style="font-size: 15px; color: var(--dark-gray); text-align: center; line-height: 1.55; font-weight: 500; max-width: 300px;">
+            Du kannst es bis zum Monatsende noch bearbeiten. Danach wird es automatisch gedruckt und verschickt.
+          </div>
+
+        </div>
+
+        <!-- Bottom actions -->
+        <div style="padding: 0 20px 40px; display: flex; flex-direction: column; align-items: center;">
+
+          <!-- Primary CTA -->
+          <button class="btn btn-primary" style="margin-bottom: 8px;">Zur Startseite</button>
+
+          <!-- Secondary invite prompt -->
+          <a class="btn-text" style="font-weight: 600; font-size: 14px; gap: 4px;">
+            Jetzt Familie einladen
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <p class="footer-note">Preview nutzt Inter als Stand-in f&uuml;r Helvetica Now Display.</p>
+
+</body>
+</html>

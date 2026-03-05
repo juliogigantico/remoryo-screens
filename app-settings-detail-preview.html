@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remoryo Settings Detail — Visual Preview</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue: #82B7D8;
+      --blue-light: #EAF3F9;
+      --blue-soft: #D4E8F2;
+      --turquoise: #B8E0E0;
+      --navy: #1B2C43;
+      --orange: #FFA631;
+      --white: #FFFFFF;
+      --dark-gray: #5A6B7A;
+      --mid-gray: #94A3B3;
+      --light-gray: #F5F6F8;
+      --border: #E2E6EB;
+      --btn-radius: 14px;
+      --input-radius: 12px;
+      --red: #E74C3C;
+      --beige: #E8DDD1;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #F0F2F5;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 32px 20px; gap: 20px;
+    }
+
+    h1 { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--mid-gray); }
+    .preview-row { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; }
+    .screen-label {
+      font-size: 11px; font-weight: 700; color: var(--mid-gray);
+      text-align: center; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;
+    }
+
+    /* ── Phone Frame ── */
+    .phone {
+      width: 393px; height: 852px; background: var(--white);
+      border-radius: 48px; overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 8px 30px rgba(0,0,0,0.08), 0 30px 70px rgba(0,0,0,0.12);
+      position: relative; display: flex; flex-direction: column;
+    }
+    .phone::before {
+      content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+      width: 126px; height: 36px; background: #000; border-radius: 20px; z-index: 10;
+    }
+
+    .status-bar { height: 59px; flex-shrink: 0; }
+    .scroll-area { flex: 1; overflow-y: auto; background: var(--white); }
+    .safe-bottom { height: 20px; background: var(--white); flex-shrink: 0; }
+
+    /* ── Section Header with Back Arrow ── */
+    .section-back {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 16px 10px; flex-shrink: 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-back-arrow {
+      width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0;
+    }
+    .section-back-arrow svg {
+      width: 24px; height: 24px; color: var(--navy);
+    }
+    .section-back-title { font-weight: 700; font-size: 17px; color: var(--navy); }
+
+    /* ── Form Elements ── */
+    .form-section { padding: 0 20px 20px; }
+    .form-label {
+      font-size: 12px; font-weight: 700; color: var(--mid-gray);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 8px; margin-top: 20px;
+    }
+    .form-input {
+      width: 100%; padding: 14px 16px; border-radius: var(--input-radius);
+      border: 1.5px solid var(--border); font-size: 15px;
+      font-weight: 500; color: var(--navy); font-family: inherit;
+      background: var(--white); outline: none; height: 48px;
+    }
+    .form-input:focus { border-color: var(--blue); }
+    .form-input::placeholder { color: var(--mid-gray); font-weight: 400; }
+
+    .form-row {
+      display: flex; gap: 12px;
+    }
+    .form-row .form-group { flex: 1; }
+    .form-row .form-group--small { flex: 0 0 120px; }
+
+    .form-hint {
+      font-size: 12px; color: var(--mid-gray); margin-top: 6px;
+    }
+    .form-note {
+      font-size: 13px; color: var(--dark-gray); line-height: 1.5;
+      padding: 16px 20px 0;
+    }
+
+    /* ── Primary button (orange CTA) ── */
+    .btn-primary {
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--btn-radius);
+      background: var(--orange);
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      min-height: 48px;
+    }
+
+    /* ── Outline button (white with navy border) ── */
+    .btn-outline {
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--btn-radius);
+      background: var(--white);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 15px;
+      border: 1.5px solid var(--navy);
+      cursor: pointer;
+      font-family: inherit;
+      text-align: center;
+      min-height: 48px;
+    }
+
+    /* ── Danger button (red destructive) ── */
+    .btn-danger {
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--btn-radius);
+      background: var(--red);
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      min-height: 48px;
+    }
+    .btn-danger:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* ── Text button (link style) ── */
+    .btn-text {
+      font-size: 14px; color: var(--dark-gray); text-align: center;
+      cursor: pointer; padding: 12px; font-family: inherit;
+      background: none; border: none; font-weight: 500;
+      min-height: 48px;
+    }
+
+    /* ── Payment Card ── */
+    .payment-card {
+      margin: 20px 20px 16px;
+      padding: 20px;
+      border-radius: 16px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      display: flex; align-items: center; gap: 16px;
+    }
+    .payment-card-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: #1A1F71; display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0;
+    }
+    .payment-card-info { flex: 1; }
+    .payment-card-number {
+      font-weight: 600; font-size: 15px; color: var(--navy); margin-bottom: 2px;
+    }
+    .payment-card-expiry {
+      font-size: 12px; color: var(--mid-gray);
+    }
+    .payment-badge {
+      font-size: 11px; font-weight: 700; color: var(--blue);
+      background: var(--blue-light); padding: 4px 10px;
+      border-radius: 8px; flex-shrink: 0;
+    }
+
+    /* ── Non-owner message ── */
+    .non-owner-message {
+      margin: 40px 20px;
+      padding: 24px;
+      border-radius: 16px;
+      background: var(--light-gray);
+      text-align: center;
+    }
+    .non-owner-message-icon {
+      margin-bottom: 12px;
+      display: flex; justify-content: center;
+    }
+    .non-owner-message-icon svg {
+      width: 32px; height: 32px;
+    }
+    .non-owner-message-text {
+      font-size: 14px; color: var(--dark-gray); line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .non-owner-message-owner {
+      font-size: 14px; font-weight: 600; color: var(--navy);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .non-owner-message-owner-avatar {
+      width: 28px; height: 28px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--blue-soft), var(--blue));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 12px; color: white;
+    }
+
+    /* ── Group Members ── */
+    .group-header {
+      padding: 20px 20px 16px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .group-avatar {
+      width: 48px; height: 48px; border-radius: 50%;
+      background: var(--orange); display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0;
+    }
+    .group-avatar span {
+      color: white; font-weight: 700; font-size: 18px;
+    }
+    .group-name {
+      font-weight: 700; font-size: 18px; color: var(--navy);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .group-name-edit {
+      width: 28px; height: 28px; border-radius: 8px;
+      background: var(--light-gray); display: flex; align-items: center;
+      justify-content: center; cursor: pointer; flex-shrink: 0;
+    }
+    .group-name-edit:hover { background: var(--border); }
+    .group-count {
+      font-size: 13px; color: var(--mid-gray); margin-top: 2px;
+    }
+
+    .member-list { padding: 0 20px; }
+    .member-item {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+    }
+    .member-item:last-child { border-bottom: none; }
+    .member-avatar {
+      width: 40px; height: 40px; border-radius: 20px;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 16px; color: white; flex-shrink: 0;
+    }
+    .member-info { flex: 1; }
+    .member-name {
+      font-weight: 600; font-size: 15px; color: var(--navy);
+    }
+    .member-badge {
+      font-size: 11px; font-weight: 700; padding: 3px 10px;
+      border-radius: 8px; margin-top: 3px; display: inline-block;
+    }
+    .member-badge--owner {
+      color: var(--orange); background: #FFF3DC;
+    }
+    .member-badge--member {
+      color: var(--blue); background: var(--blue-light);
+    }
+    .member-menu {
+      width: 44px; height: 44px; display: flex; align-items: center;
+      justify-content: center; cursor: pointer; flex-shrink: 0;
+    }
+    .member-hint {
+      font-size: 12px; color: var(--mid-gray); text-align: center;
+      padding: 8px 20px 0;
+    }
+
+    /* ── Password Input with Eye Icon ── */
+    .input-wrapper {
+      position: relative;
+    }
+    .input-wrapper .form-input {
+      padding-right: 48px;
+    }
+    .input-eye {
+      position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; display: flex; align-items: center;
+      justify-content: center; cursor: pointer; color: var(--mid-gray);
+    }
+    .input-eye svg { width: 20px; height: 20px; }
+
+    /* ── Password Strength Indicator ── */
+    .password-strength {
+      display: flex; gap: 4px; margin-top: 8px;
+    }
+    .password-strength-bar {
+      flex: 1; height: 4px; border-radius: 2px; background: var(--border);
+    }
+    .password-strength-bar.active { background: var(--orange); }
+    .password-strength-label {
+      font-size: 11px; color: var(--orange); font-weight: 600;
+      margin-top: 4px;
+    }
+
+    /* ── Delete Account Warning ── */
+    .delete-warning-icon {
+      text-align: center; padding: 32px 0 16px;
+      display: flex; justify-content: center;
+    }
+    .delete-warning-icon svg {
+      width: 56px; height: 56px;
+    }
+    .delete-warning-text {
+      font-size: 16px; font-weight: 700; color: var(--red);
+      text-align: center; padding: 0 20px; margin-bottom: 20px;
+    }
+    .delete-consequence-list {
+      padding: 0 24px; margin-bottom: 24px;
+    }
+    .delete-consequence-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 10px 0; font-size: 14px; color: var(--dark-gray);
+      line-height: 1.4;
+    }
+    .delete-consequence-item::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 3px;
+      background: var(--red); flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .delete-confirm-section {
+      padding: 0 20px;
+    }
+    .delete-confirm-label {
+      font-size: 13px; color: var(--dark-gray); margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .delete-confirm-input {
+      width: 100%; padding: 14px 16px; border-radius: var(--input-radius);
+      border: 1.5px solid var(--red); font-size: 15px;
+      font-weight: 500; color: var(--navy); font-family: inherit;
+      background: #FFF8F7; outline: none; height: 48px;
+      opacity: 0.6;
+    }
+    .delete-confirm-input::placeholder {
+      color: var(--mid-gray); font-weight: 400;
+    }
+
+    .info-note {
+      margin: 16px 20px; padding: 16px;
+      border-radius: 12px; background: var(--blue-light);
+      font-size: 13px; color: var(--dark-gray); line-height: 1.5;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .info-note-icon {
+      flex-shrink: 0;
+      display: flex; align-items: center;
+    }
+    .info-note-icon svg {
+      width: 18px; height: 18px;
+    }
+
+    .footer-note {
+      font-size: 11px; color: #A0A0A0; font-weight: 500; text-align: center;
+    }
+
+    /* ── Profile Avatar Section ── */
+    .profile-avatar-section {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 28px 20px 8px;
+    }
+    .profile-avatar-wrapper {
+      position: relative; width: 80px; height: 80px;
+    }
+    .profile-avatar {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: linear-gradient(135deg, var(--blue-soft), var(--blue));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 32px; color: white;
+    }
+    .profile-avatar-camera {
+      position: absolute; bottom: 0; right: 0;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--navy); border: 2.5px solid var(--white);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .profile-avatar-camera svg {
+      width: 14px; height: 14px;
+    }
+
+    /* ── Locked Input ── */
+    .form-input--locked {
+      background: var(--light-gray);
+      color: var(--mid-gray);
+      cursor: not-allowed;
+      padding-right: 44px;
+    }
+    .input-lock {
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      color: var(--mid-gray); display: flex; align-items: center;
+    }
+    .input-lock svg { width: 16px; height: 16px; }
+  </style>
+</head>
+<body>
+
+  <h1>Remoryo Settings Detail &mdash; Visual Preview</h1>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- ROW 1                                              -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="preview-row">
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 1 — Lieferadresse                       -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Lieferadresse</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Lieferadresse</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <div class="form-note">Wohin soll das Fotoheft geliefert werden?</div>
+
+          <div class="form-section">
+            <div class="form-label">Vorname</div>
+            <input class="form-input" type="text" value="Oma" readonly>
+
+            <div class="form-label">Nachname</div>
+            <input class="form-input" type="text" value="Blümel" readonly>
+
+            <div style="margin-top: 20px;">
+              <div class="form-row">
+                <div class="form-group">
+                  <div class="form-label" style="margin-top: 0;">Straße</div>
+                  <input class="form-input" type="text" value="Bergstraße" readonly>
+                </div>
+                <div class="form-group--small">
+                  <div class="form-label" style="margin-top: 0;">Hausnr.</div>
+                  <input class="form-input" type="text" value="12" readonly>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+              <div class="form-row">
+                <div class="form-group--small">
+                  <div class="form-label" style="margin-top: 0;">PLZ</div>
+                  <input class="form-input" type="text" value="60311" readonly>
+                </div>
+                <div class="form-group">
+                  <div class="form-label" style="margin-top: 0;">Ort</div>
+                  <input class="form-input" type="text" value="Frankfurt" readonly>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-label">Adresszusatz <span style="font-weight: 400; text-transform: none;">(optional)</span></div>
+            <input class="form-input" type="text" placeholder="z.B. Bitte klingeln" readonly>
+
+            <div style="margin-top: 28px;">
+              <button class="btn-primary">Speichern</button>
+            </div>
+            <div class="form-hint" style="text-align: center; margin-top: 10px;">Das Fotoheft wird jeden Monat automatisch an diese Adresse geschickt.</div>
+          </div>
+
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 2 — Zahlungsmethode (Owner View)        -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Zahlungsmethode (Verwalter)</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Zahlungsmethode</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <!-- Current Payment Card -->
+          <div class="payment-card">
+            <div class="payment-card-icon">
+              <!-- Visa logo simplified -->
+              <svg viewBox="0 0 48 48" width="32" height="32">
+                <text x="50%" y="56%" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Inter, sans-serif" font-weight="800" font-size="14">VISA</text>
+              </svg>
+            </div>
+            <div class="payment-card-info">
+              <div class="payment-card-number">Visa &bull;&bull;&bull;&bull; 6411</div>
+              <div class="payment-card-expiry">Läuft ab 12/2028</div>
+            </div>
+            <div class="payment-badge">Standard</div>
+          </div>
+
+          <!-- Add new payment method -->
+          <div style="padding: 0 20px;">
+            <button class="btn-outline">Neue Zahlungsmethode hinzufügen</button>
+          </div>
+
+          <!-- Info note -->
+          <div class="info-note">
+            <span class="info-note-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+              </svg>
+            </span>
+            <span>Deine Zahlungsmethode wird für das aktive Abo der Gruppe verwendet.</span>
+          </div>
+
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 3 — Zahlungsmethode (Non-Owner View)    -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Zahlungsmethode (Mitglied)</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Zahlungsmethode</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <div class="non-owner-message">
+            <div class="non-owner-message-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <div class="non-owner-message-text">Nur Verwalter der Gruppe können Zahlungsmethoden verwalten.</div>
+            <div class="non-owner-message-owner">
+              <div class="non-owner-message-owner-avatar">J</div>
+              Verwalter: Julius Blümel
+            </div>
+          </div>
+
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- ROW 2                                              -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="preview-row">
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 4 — Gruppenmitglieder                   -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Gruppenmitglieder</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Gruppenmitglieder</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <!-- Group Header -->
+          <div class="group-header">
+            <div class="group-avatar">
+              <span>FB</span>
+            </div>
+            <div>
+              <div class="group-name">Familie Blümel <div class="group-name-edit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.83 2.83 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></div></div>
+              <div class="group-count">3 Mitglieder · Name antippen zum Ändern</div>
+            </div>
+          </div>
+
+          <!-- Member List -->
+          <div class="member-list">
+            <!-- Member 1: Owner -->
+            <div class="member-item">
+              <div class="member-avatar" style="background: linear-gradient(135deg, var(--blue-soft), var(--blue));">J</div>
+              <div class="member-info">
+                <div class="member-name">Julius Blümel</div>
+                <div class="member-badge member-badge--owner">Verwalter</div>
+              </div>
+            </div>
+
+            <!-- Member 2 -->
+            <div class="member-item">
+              <div class="member-avatar" style="background: linear-gradient(135deg, var(--blue-soft), var(--blue));">M</div>
+              <div class="member-info">
+                <div class="member-name">Maria Blümel</div>
+                <div class="member-badge member-badge--member">Mitglied</div>
+              </div>
+              <div class="member-menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/></svg></div>
+            </div>
+
+            <!-- Member 3 -->
+            <div class="member-item">
+              <div class="member-avatar" style="background: linear-gradient(135deg, var(--turquoise), #7CC8C8);">P</div>
+              <div class="member-info">
+                <div class="member-name">Papa Blümel</div>
+                <div class="member-badge member-badge--member">Mitglied</div>
+              </div>
+              <div class="member-menu"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/></svg></div>
+            </div>
+          </div>
+
+          <!-- Invite Button -->
+          <div style="padding: 24px 20px 0;">
+            <button class="btn-primary">Einladen</button>
+          </div>
+          <div class="member-hint">Je mehr mitmachen, desto bunter wird euer Fotoheft! Lade Familie und Freunde ein.</div>
+
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 5 — Passwort ändern                     -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Passwort ändern</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Passwort ändern</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <div class="form-section" style="padding-top: 4px;">
+            <div class="form-label">Aktuelles Passwort</div>
+            <div class="input-wrapper">
+              <input class="form-input" type="password" value="••••••••" readonly>
+              <div class="input-eye">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="form-label">Neues Passwort</div>
+            <div class="input-wrapper">
+              <input class="form-input" type="password" value="••••••••••" readonly>
+              <div class="input-eye">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </div>
+            </div>
+            <!-- Strength Indicator -->
+            <div class="password-strength">
+              <div class="password-strength-bar active"></div>
+              <div class="password-strength-bar active"></div>
+              <div class="password-strength-bar active"></div>
+              <div class="password-strength-bar"></div>
+            </div>
+            <div class="password-strength-label">Gut</div>
+
+            <div class="form-label">Neues Passwort bestätigen</div>
+            <div class="input-wrapper">
+              <input class="form-input" type="password" value="••••••••••" readonly>
+              <div class="input-eye">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </div>
+            </div>
+
+            <div style="margin-top: 28px;">
+              <button class="btn-primary">Passwort ändern</button>
+            </div>
+            <div class="form-hint" style="text-align: center; margin-top: 10px;">Mindestens 8 Zeichen</div>
+          </div>
+
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 6 — Account löschen                     -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Account löschen</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Account löschen</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <!-- Warning Icon -->
+          <div class="delete-warning-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+
+          <!-- Warning Text -->
+          <div class="delete-warning-text">Diese Aktion kann nicht rückgängig gemacht werden.</div>
+
+          <!-- Consequences List -->
+          <div class="delete-consequence-list">
+            <div class="delete-consequence-item">Dein Account wird unwiderruflich gelöscht</div>
+            <div class="delete-consequence-item">Alle deine Fotos werden entfernt</div>
+            <div class="delete-consequence-item">Deine Gruppenmitgliedschaften enden</div>
+            <div class="delete-consequence-item">Ein aktives Abo wird gekündigt</div>
+          </div>
+
+          <!-- Confirmation Input -->
+          <div class="delete-confirm-section">
+            <div class="delete-confirm-label">Gib <strong>LÖSCHEN</strong> ein um zu bestätigen</div>
+            <input class="delete-confirm-input" type="text" placeholder="LÖSCHEN" readonly>
+
+            <div style="margin-top: 24px;">
+              <button class="btn-danger" disabled>Account löschen</button>
+            </div>
+
+            <div style="text-align: center; margin-top: 8px;">
+              <button class="btn-text">Abbrechen</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 7 — Profil bearbeiten                   -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Profil bearbeiten</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Profil bearbeiten</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <!-- Profile Avatar -->
+          <div class="profile-avatar-section">
+            <div class="profile-avatar-wrapper">
+              <div class="profile-avatar">J</div>
+              <div class="profile-avatar-camera">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                  <circle cx="12" cy="13" r="4"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form Fields -->
+          <div class="form-section" style="padding-top: 4px;">
+            <div class="form-label">Vorname</div>
+            <input class="form-input" type="text" value="Julius" readonly>
+
+            <div class="form-label">Nachname</div>
+            <input class="form-input" type="text" value="Blümel" readonly>
+
+            <div class="form-label">E-Mail</div>
+            <div class="input-wrapper">
+              <input class="form-input form-input--locked" type="email" value="julius@remoryo.de" readonly>
+              <div class="input-lock">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="form-label">Anzeigename <span style="font-weight: 400; text-transform: none;">(optional)</span></div>
+            <input class="form-input" type="text" value="Julius" readonly style="color: var(--mid-gray); font-weight: 400;">
+
+            <div style="margin-top: 28px;">
+              <button class="btn-primary">Änderungen speichern</button>
+            </div>
+            <div style="text-align: center; margin-top: 4px;">
+              <button class="btn-text">Abbrechen</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="footer-note">Preview nutzt Inter als Stand-in für Helvetica Now Display.</p>
+
+</body>
+</html>

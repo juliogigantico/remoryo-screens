@@ -1,0 +1,691 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remoryo Settings — Visual Preview</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue: #82B7D8;
+      --blue-light: #EAF3F9;
+      --blue-soft: #D4E8F2;
+      --turquoise: #B8E0E0;
+      --navy: #1B2C43;
+      --orange: #FFA631;
+      --white: #FFFFFF;
+      --dark-gray: #5A6B7A;
+      --mid-gray: #94A3B3;
+      --light-gray: #F5F6F8;
+      --border: #E2E6EB;
+      --btn-radius: 14px;
+      --input-radius: 12px;
+      --red: #E74C3C;
+      --beige: #E8DDD1;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #F0F2F5;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 32px 20px; gap: 20px;
+    }
+
+    h1 { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--mid-gray); }
+    .preview-row { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; }
+    .screen-label {
+      font-size: 11px; font-weight: 700; color: var(--mid-gray);
+      text-align: center; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;
+    }
+
+    /* ── Phone Frame ── */
+    .phone {
+      width: 393px; height: 852px; background: var(--white);
+      border-radius: 48px; overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 8px 30px rgba(0,0,0,0.08), 0 30px 70px rgba(0,0,0,0.12);
+      position: relative; display: flex; flex-direction: column;
+    }
+    .phone::before {
+      content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+      width: 126px; height: 36px; background: #000; border-radius: 20px; z-index: 10;
+    }
+
+    .status-bar { height: 59px; flex-shrink: 0; }
+    .scroll-area { flex: 1; overflow-y: auto; background: var(--white); }
+    .safe-bottom { height: 20px; background: var(--white); flex-shrink: 0; }
+
+    /* ── Section Header ── */
+    .section-back {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 16px 10px; flex-shrink: 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-back-arrow {
+      width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0;
+    }
+    .section-back-arrow svg {
+      width: 24px; height: 24px; color: var(--navy);
+    }
+    .section-back-title { font-weight: 700; font-size: 17px; color: var(--navy); }
+
+    /* ── Settings Menu ── */
+    .settings-section {
+      padding: 20px 20px 8px;
+    }
+    .settings-section-title {
+      font-size: 11px; font-weight: 700; color: var(--mid-gray);
+      text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px;
+    }
+
+    .settings-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 0; border-bottom: 1px solid var(--border); cursor: pointer;
+    }
+    .settings-item:last-child { border-bottom: none; }
+
+    .settings-item-left {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .settings-item-icon {
+      width: 36px; height: 36px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px; flex-shrink: 0;
+    }
+    .settings-item-label {
+      font-weight: 600; font-size: 15px; color: var(--navy);
+    }
+    .settings-item-sub {
+      font-size: 12px; color: var(--mid-gray); margin-top: 2px;
+    }
+    .settings-chevron {
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+
+    /* ── Invite Banner ── */
+    .invite-banner {
+      margin: 16px 20px;
+      padding: 18px 20px;
+      background: linear-gradient(135deg, var(--blue-light) 0%, var(--blue-soft) 100%);
+      border-radius: 16px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .invite-banner-icon {
+      width: 44px; height: 44px; border-radius: 12px;
+      background: var(--blue); display: flex; align-items: center;
+      justify-content: center; font-size: 22px; flex-shrink: 0;
+    }
+    .invite-banner-text {
+      flex: 1;
+    }
+    .invite-banner-title {
+      font-weight: 700; font-size: 14px; color: var(--navy); margin-bottom: 2px;
+    }
+    .invite-banner-sub {
+      font-size: 12px; color: var(--dark-gray);
+    }
+
+    /* ── Profile Section ── */
+    .profile-header {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 24px 20px 20px;
+    }
+    .profile-avatar {
+      width: 80px; height: 80px; border-radius: 40px;
+      background: linear-gradient(135deg, var(--blue-soft), var(--blue));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 800; font-size: 28px; color: white;
+      margin-bottom: 12px; position: relative;
+    }
+    .profile-avatar-edit {
+      position: absolute; bottom: 0; right: -4px;
+      width: 28px; height: 28px; border-radius: 14px;
+      background: var(--white); border: 2px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; cursor: pointer;
+    }
+    .profile-name {
+      font-weight: 700; font-size: 20px; color: var(--navy); margin-bottom: 4px;
+    }
+    .profile-email {
+      font-size: 14px; color: var(--mid-gray);
+    }
+
+    /* ── Form Elements ── */
+    .form-section { padding: 0 20px 20px; }
+    .form-label {
+      font-size: 12px; font-weight: 700; color: var(--mid-gray);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 8px; margin-top: 20px;
+    }
+    .form-input {
+      width: 100%; height: 48px; padding: 14px 16px; border-radius: var(--input-radius);
+      border: 1.5px solid var(--border); font-size: 15px;
+      font-weight: 500; color: var(--navy); font-family: inherit;
+      background: var(--white); outline: none;
+    }
+    .form-input:focus { border-color: var(--blue); }
+    .form-input::placeholder { color: var(--mid-gray); font-weight: 400; }
+
+    /* ── Plan Card ── */
+    .plan-card {
+      margin: 16px 20px;
+      padding: 24px;
+      border-radius: 16px;
+      border: 2px solid var(--blue);
+      background: linear-gradient(145deg, var(--blue-light) 0%, var(--white) 100%);
+    }
+    .plan-name {
+      font-weight: 800; font-size: 18px; color: var(--navy); margin-bottom: 4px;
+    }
+    .plan-price {
+      font-weight: 700; font-size: 28px; color: var(--blue);
+    }
+    .plan-price-period {
+      font-weight: 500; font-size: 14px; color: var(--mid-gray);
+    }
+    .plan-features {
+      margin-top: 16px; display: flex; flex-direction: column; gap: 10px;
+    }
+    .plan-feature {
+      display: flex; align-items: center; gap: 10px;
+      font-size: 14px; color: var(--dark-gray);
+    }
+    .plan-feature-check {
+      width: 20px; height: 20px; border-radius: 10px;
+      background: var(--blue); display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0;
+    }
+    .plan-manage-btn {
+      margin-top: 20px; width: 100%; padding: 14px;
+      min-height: 48px; display: flex; align-items: center; justify-content: center;
+      border-radius: var(--btn-radius); background: var(--white);
+      color: var(--orange); font-weight: 700; font-size: 15px;
+      border: 1.5px solid var(--orange); cursor: pointer;
+    }
+
+    /* ── Bottom Tab Bar (shared design, not used on Settings screens) ── */
+    .tab-bar {
+      display: flex; align-items: flex-end; justify-content: center;
+      height: 68px; background: var(--white); flex-shrink: 0;
+      padding-bottom: 6px; position: relative;
+      box-shadow: 0 -1px 12px rgba(27, 44, 67, 0.06);
+    }
+    .tab-item {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 3px; cursor: pointer; position: relative; flex: 1; padding-top: 10px;
+    }
+    .tab-icon { width: 56px; height: 30px; border-radius: 15px; display: flex; align-items: center; justify-content: center; }
+    .tab-icon svg { width: 26px; height: 26px; }
+    .tab-item.active .tab-icon { background: rgba(130, 183, 216, 0.18); }
+    .tab-label { font-size: 11px; font-weight: 600; color: var(--mid-gray); letter-spacing: -0.2px; }
+    .tab-item.active .tab-label { color: var(--navy); font-weight: 700; }
+
+    /* ── Logout ── */
+    .logout-btn {
+      margin: 24px 20px 0; padding: 14px;
+      min-height: 48px; display: flex; align-items: center; justify-content: center;
+      border-radius: var(--btn-radius);
+      background: #FFF0EE; color: var(--red);
+      font-weight: 700; font-size: 15px;
+      border: none; cursor: pointer; text-align: center; width: calc(100% - 40px);
+    }
+
+    /* ── Logout hint ── */
+    .logout-hint {
+      font-size: 12px; color: var(--mid-gray); text-align: center;
+      padding: 6px 20px 0;
+    }
+
+    /* ── Account delete link ── */
+    .account-delete-link {
+      font-size: 13px; color: var(--red); text-align: center;
+      padding: 16px 20px 24px; cursor: pointer;
+      background: none; border: none; font-family: inherit;
+      text-decoration: none;
+    }
+    .account-delete-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ── Account delete hint ── */
+    .account-delete-hint {
+      font-size: 12px; color: var(--mid-gray); text-align: center;
+      margin-top: 4px; padding: 0 20px;
+    }
+
+    /* ── Static settings item (non-interactive) ── */
+    .settings-item--static {
+      cursor: default;
+      opacity: 0.9;
+    }
+    .settings-item--static:hover {
+      background: none;
+    }
+
+    /* ── Primary button (orange, full-width CTA) ── */
+    .btn-primary {
+      width: 100%;
+      padding: 14px;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--btn-radius);
+      background: var(--orange);
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    /* ── Danger button (destructive, soft red) ── */
+    .btn-danger {
+      width: 100%;
+      padding: 14px;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--btn-radius);
+      background: #FFF0EE;
+      color: var(--red);
+      font-weight: 700;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .footer-note {
+      font-size: 11px; color: #A0A0A0; font-weight: 500; text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Remoryo Settings Preview</h1>
+
+  <div class="preview-row">
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 1 — Settings Hauptmenü                 -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Einstellungen</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Einstellungen</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <!-- Invite/Recommendation Banner -->
+          <div class="invite-banner">
+            <div class="invite-banner-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 7v10a2 2 0 01-2 2H4a2 2 0 01-2-2V7"/><path d="M2 7l10 7 10-7"/><path d="M2 7a2 2 0 012-2h16a2 2 0 012 2"/></svg></div>
+            <div class="invite-banner-text">
+              <div class="invite-banner-title">Familie einladen</div>
+              <div class="invite-banner-sub">Lade deine Familie ein und gestaltet gemeinsam euer Fotoheft</div>
+            </div>
+            <span class="settings-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+          </div>
+
+          <!-- Group Section -->
+          <div class="settings-section">
+            <div class="settings-section-title">Gruppe</div>
+            <div class="settings-item" style="background: var(--blue-light); border-radius: 12px; padding: 16px; margin-bottom: 8px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--orange); display: flex; align-items: center; justify-content: center;">
+                  <span style="color: white; font-weight: 700; font-size: 14px;">FB</span>
+                </div>
+                <div>
+                  <div class="settings-item-label">Familie Blümel</div>
+                  <div class="settings-item-sub">Aktive Gruppe · 3 Mitglieder</div>
+                </div>
+              </div>
+              <span class="settings-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+            <div class="settings-item" style="border-radius: 12px; padding: 16px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--turquoise); display: flex; align-items: center; justify-content: center;">
+                  <span style="color: var(--navy); font-weight: 700; font-size: 14px;">SW</span>
+                </div>
+                <div>
+                  <div class="settings-item-label">Seniorenheim Waldblick</div>
+                  <div class="settings-item-sub">B2B · Hauszeitung</div>
+                </div>
+              </div>
+              <span class="settings-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </div>
+
+          <!-- Account Section -->
+          <div class="settings-section">
+            <div class="settings-section-title">Konto</div>
+
+            <div class="settings-item">
+              <div class="settings-item-left">
+                <div class="settings-item-icon" style="background: var(--blue-light);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div>
+                <div>
+                  <div class="settings-item-label">Mein Nutzerprofil</div>
+                  <div class="settings-item-sub">Name, E-Mail, Passwort</div>
+                </div>
+              </div>
+              <span class="settings-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+
+            <div class="settings-item">
+              <div class="settings-item-left">
+                <div class="settings-item-icon" style="background: #E2F3F3;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg></div>
+                <div>
+                  <div class="settings-item-label">Familiengruppe</div>
+                  <div class="settings-item-sub">Mitglieder verwalten</div>
+                </div>
+              </div>
+              <span class="settings-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+
+            <div class="settings-item">
+              <div class="settings-item-left">
+                <div class="settings-item-icon" style="background: #FFF3DC;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+                <div>
+                  <div class="settings-item-label">Fotoheft Einstellungen</div>
+                  <div class="settings-item-sub">Titel, Format, Vorlagen</div>
+                </div>
+              </div>
+              <span class="settings-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </div>
+
+          <!-- Delivery & Payment Section -->
+          <div class="settings-section">
+            <div class="settings-section-title">Versand & Zahlung</div>
+
+            <div class="settings-item">
+              <div class="settings-item-left">
+                <div class="settings-item-icon" style="background: #F0E6FF;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+                <div>
+                  <div class="settings-item-label">Lieferadresse</div>
+                  <div class="settings-item-sub">Wohin das Heft gesendet wird</div>
+                </div>
+              </div>
+              <span class="settings-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+
+            <div class="settings-item">
+              <div class="settings-item-left">
+                <div class="settings-item-icon" style="background: #E6F7EE;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <div>
+                  <div class="settings-item-label">Remoryo Abonnement</div>
+                  <div class="settings-item-sub">Familienpaket · Aktiv</div>
+                </div>
+              </div>
+              <span class="settings-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+
+            <div class="settings-item">
+              <div class="settings-item-left">
+                <div class="settings-item-icon" style="background: #FFF0EE;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+                <div>
+                  <div class="settings-item-label">Zahlungseinstellungen</div>
+                  <div class="settings-item-sub">Zahlungsmethode verwalten</div>
+                </div>
+              </div>
+              <span class="settings-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </div>
+
+          <!-- Support Section -->
+          <div class="settings-section">
+            <div class="settings-section-title">Hilfe</div>
+
+            <div class="settings-item">
+              <div class="settings-item-left">
+                <div class="settings-item-icon" style="background: var(--light-gray);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></div>
+                <div>
+                  <div class="settings-item-label">Fragen & Antworten</div>
+                </div>
+              </div>
+              <span class="settings-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+
+            <div class="settings-item">
+              <div class="settings-item-left">
+                <div class="settings-item-icon" style="background: var(--light-gray);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 01-.9 3.8 8.5 8.5 0 01-7.6 4.7 8.38 8.38 0 01-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 01-.9-3.8 8.5 8.5 0 014.7-7.6 8.38 8.38 0 013.8-.9h.5a8.48 8.48 0 018 8v.5z"/></svg></div>
+                <div>
+                  <div class="settings-item-label">Kontakt & Feedback</div>
+                </div>
+              </div>
+              <span class="settings-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </div>
+
+          <!-- Rechtliches Section -->
+          <div class="settings-section">
+            <div class="settings-section-title">Rechtliches</div>
+
+            <div class="settings-item">
+              <div class="settings-item-left">
+                <div class="settings-item-icon" style="background: var(--light-gray);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg></div>
+                <div>
+                  <div class="settings-item-label">AGB</div>
+                </div>
+              </div>
+              <span class="settings-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+
+            <div class="settings-item">
+              <div class="settings-item-left">
+                <div class="settings-item-icon" style="background: var(--light-gray);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+                <div>
+                  <div class="settings-item-label">Datenschutzerklärung</div>
+                </div>
+              </div>
+              <span class="settings-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+
+            <div class="settings-item">
+              <div class="settings-item-left">
+                <div class="settings-item-icon" style="background: var(--light-gray);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+                <div>
+                  <div class="settings-item-label">Impressum</div>
+                </div>
+              </div>
+              <span class="settings-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </div>
+
+          <button class="logout-btn">Abmelden</button>
+          <div class="logout-hint">Du wirst abgemeldet und musst dich erneut anmelden</div>
+          <div style="text-align: center;"><span class="account-delete-link">Account löschen</span></div>
+          <div class="account-delete-hint">Dein Account und alle Daten werden unwiderruflich gelöscht.</div>
+
+        </div>
+
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 2 — Profil bearbeiten                  -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Mein Nutzerprofil</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Mein Nutzerprofil</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <div class="profile-header">
+            <div class="profile-avatar">
+              J
+              <div class="profile-avatar-edit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
+            </div>
+            <div class="profile-name">Julius Blümel</div>
+            <div class="profile-email">julius@remoryo.de</div>
+          </div>
+
+          <div class="form-section">
+            <div class="form-label">Vorname</div>
+            <input class="form-input" type="text" value="Julius">
+
+            <div class="form-label">Nachname</div>
+            <input class="form-input" type="text" value="Blümel">
+
+            <div class="form-label">E-Mail</div>
+            <input class="form-input" type="email" value="julius@remoryo.de">
+
+            <div class="form-label">Geburtstag</div>
+            <input class="form-input" type="text" value="15.03.1992">
+
+            <div style="margin-top: 24px;">
+              <button class="btn-primary">Speichern</button>
+            </div>
+          </div>
+
+          <!-- Password change row -->
+          <div style="padding: 0 20px;">
+            <div class="settings-item" style="border-bottom: none;">
+              <div class="settings-item-left">
+                <div class="settings-item-icon" style="background: var(--light-gray);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></div>
+                <div>
+                  <div class="settings-item-label">Passwort ändern</div>
+                </div>
+              </div>
+              <span class="settings-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </div>
+
+          <!-- Account delete link -->
+          <div style="text-align: center; padding: 24px 20px 0;">
+            <span class="account-delete-link">Account löschen</span>
+          </div>
+          <div class="account-delete-hint" style="padding-bottom: 32px;">Dein Account und alle Daten werden unwiderruflich gelöscht.</div>
+
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 3 — Remoryo Abonnement                 -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Remoryo Abonnement</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Remoryo Abonnement</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <!-- Current Plan -->
+          <div class="plan-card">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
+              <div>
+                <div class="plan-name">Familienpaket</div>
+                <div style="font-size: 12px; color: var(--blue); font-weight: 600; margin-top: 4px; display: flex; align-items: center; gap: 4px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#27AE60" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Aktiv</div>
+              </div>
+              <div style="text-align: right;">
+                <div class="plan-price">14,99€</div>
+                <div class="plan-price-period">/ Monat</div>
+              </div>
+            </div>
+
+            <div class="plan-features">
+              <div class="plan-feature">
+                <div class="plan-feature-check">
+                  <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                1 gedrucktes Heft pro Monat
+              </div>
+              <div class="plan-feature">
+                <div class="plan-feature-check">
+                  <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                Die ganze Familie kann mitmachen
+              </div>
+              <div class="plan-feature">
+                <div class="plan-feature-check">
+                  <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                Unbegrenzte Fotos
+              </div>
+              <div class="plan-feature">
+                <div class="plan-feature-check">
+                  <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                Kostenloser Versand
+              </div>
+            </div>
+
+            <button class="plan-manage-btn">Im App Store verwalten</button>
+          </div>
+
+          <!-- Billing Info -->
+          <div class="settings-section">
+            <div class="settings-section-title">Abrechnung</div>
+            <div class="settings-item settings-item--static">
+              <div class="settings-item-left">
+                <div>
+                  <div class="settings-item-label">Nächste Abrechnung</div>
+                  <div class="settings-item-sub">01. April 2026 · 14,99€</div>
+                </div>
+              </div>
+            </div>
+            <div class="settings-item">
+              <div class="settings-item-left">
+                <div>
+                  <div class="settings-item-label">Zahlungsmethode</div>
+                  <div class="settings-item-sub">Visa •••• 6411</div>
+                </div>
+              </div>
+              <span class="settings-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </div>
+
+          <div style="padding: 0 20px 0;">
+            <button class="btn-danger">Abo kündigen</button>
+            <div style="font-size: 12px; color: var(--mid-gray); text-align: center; padding: 6px 0 20px;">Du kannst dein Abo jederzeit kündigen. Das aktuelle Heft wird noch gedruckt.</div>
+          </div>
+
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="footer-note">Preview nutzt Inter als Stand-in für Helvetica Now Display.</p>
+
+</body>
+</html>

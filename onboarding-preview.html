@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remoryo Onboarding — Visual Preview</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue: #82B7D8;
+      --blue-light: #EAF3F9;
+      --blue-soft: #D4E8F2;
+      --turquoise: #B8E0E0;
+      --turquoise-light: #E2F3F3;
+      --navy: #1B2C43;
+      --orange: #FFA631;
+      --white: #FFFFFF;
+      --dark-gray: #5A6B7A;
+      --mid-gray: #94A3B3;
+      --light-gray: #F5F6F8;
+      --border: #E2E6EB;
+      --beige: #E8DDD1;
+      --btn-radius: 14px;
+      --input-radius: 12px;
+      --red: #E74C3C;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #F0F2F5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 20px;
+      gap: 20px;
+    }
+
+    h1 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--mid-gray);
+    }
+
+    .preview-row {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .screen-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--mid-gray);
+      text-align: center;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ── Phone Frame ── */
+    .phone {
+      width: 393px;
+      height: 852px;
+      background: var(--white);
+      border-radius: 48px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.05),
+        0 8px 30px rgba(0,0,0,0.08),
+        0 30px 70px rgba(0,0,0,0.12);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Dynamic Island */
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 126px;
+      height: 36px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 10;
+    }
+
+    /* ── Top Section (colored background for photo) ── */
+    .top-section {
+      padding: 64px 24px 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: relative;
+      z-index: 2;
+      flex-shrink: 0;
+    }
+
+    .top-section--blue {
+      background: linear-gradient(180deg, var(--blue-soft) 0%, var(--blue-light) 75%, var(--white) 100%);
+    }
+
+    .top-section--turquoise {
+      background: linear-gradient(180deg, var(--turquoise) 0%, var(--turquoise-light) 75%, var(--white) 100%);
+    }
+
+    /* ── Logo ── */
+    .logo {
+      width: 36px;
+      height: auto;
+      margin-bottom: 14px;
+    }
+
+    /* ── Hero Photo (Screen 1) — overlaps into white area ── */
+    .hero-photo {
+      width: 300px;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 20px;
+      box-shadow:
+        0 20px 50px rgba(27, 44, 67, 0.24),
+        0 8px 20px rgba(27, 44, 67, 0.12);
+      border: 4px solid rgba(255,255,255,0.85);
+      margin-bottom: -48px;
+      position: relative;
+      z-index: 3;
+    }
+
+    /* ── Family Photo (Screen 2) — overlaps into white area ── */
+    .family-photo {
+      width: 290px;
+      height: 260px;
+      object-fit: cover;
+      object-position: center 30%;
+      border-radius: 20px;
+      box-shadow:
+        0 20px 50px rgba(27, 44, 67, 0.24),
+        0 8px 20px rgba(27, 44, 67, 0.12);
+      border: 4px solid rgba(255,255,255,0.85);
+      margin-bottom: -48px;
+      position: relative;
+      z-index: 3;
+    }
+
+    /* ── Bottom Content ── */
+    .bottom {
+      flex: 1;
+      padding: 56px 20px 8px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ── Back Arrow (Screen 2) ── */
+    .back-arrow {
+      position: absolute;
+      top: 54px;
+      left: 20px;
+      width: 44px;
+      height: 44px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 11;
+    }
+
+    /* ── Steps Row (in content area, with line connectors) ── */
+    .steps {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+
+    .step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 80px;
+    }
+
+    .step-icon {
+      margin-bottom: 8px;
+    }
+
+    .step-text {
+      font-weight: 700;
+      font-size: 12px;
+      color: var(--navy);
+      text-align: center;
+      letter-spacing: 0.2px;
+    }
+
+    .step-chevron {
+      margin-top: 12px;
+      flex-shrink: 0;
+    }
+
+    /* ── Text ── */
+    .bottom-text {
+      text-align: center;
+    }
+
+    .headline {
+      font-weight: 800;
+      font-size: 28px;
+      color: var(--navy);
+      text-align: center;
+      line-height: 1.3;
+      margin-bottom: 10px;
+    }
+
+    .sub {
+      font-weight: 500;
+      font-size: 15px;
+      color: var(--dark-gray);
+      text-align: center;
+      line-height: 1.55;
+    }
+
+    .benefit {
+      font-weight: 500;
+      font-size: 13px;
+      color: var(--mid-gray);
+      text-align: center;
+      line-height: 1.5;
+      margin-top: 8px;
+    }
+
+    /* ── Actions ── */
+    .bottom-actions {
+      margin-top: 24px;
+      width: 100%;
+    }
+
+    .btn {
+      width: 100%;
+      padding: 16px;
+      border-radius: var(--btn-radius);
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+    }
+
+    .btn-secondary {
+      background: var(--blue);
+      color: var(--white);
+    }
+
+    .btn-outline {
+      background: var(--white);
+      color: var(--navy);
+      border: 1.5px solid var(--navy);
+    }
+
+    .btn-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      width: 100%;
+    }
+
+    .skip {
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--mid-gray);
+      padding: 14px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+    }
+
+    .skip-later {
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--mid-gray);
+      padding: 14px;
+      background: none;
+      border: none;
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+    }
+
+    /* ── Page Dots ── */
+    .dots {
+      display: flex;
+      gap: 8px;
+      justify-content: center;
+      padding: 10px 0 28px;
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 4px;
+      background: #D8DDE3;
+    }
+
+    .dot.on {
+      width: 24px;
+      background: var(--orange);
+    }
+
+    .dot.done {
+      background: var(--navy);
+      opacity: 0.4;
+    }
+
+    .footer-note {
+      font-size: 11px;
+      color: #A0A0A0;
+      font-weight: 500;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Remoryo Onboarding Preview</h1>
+
+  <div class="preview-row">
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 1 — So funktioniert's                   -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Screen 1 — So funktioniert's</div>
+      <div class="phone">
+
+        <!-- Colored area: just logo + photo (photo overlaps into white) -->
+        <div class="top-section top-section--blue">
+          <img class="logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo">
+          <img class="hero-photo" src="flyer/foto.jpg" alt="Oma liest das remoryo Fotoheft">
+        </div>
+
+        <!-- White content area -->
+        <div class="bottom">
+
+          <!-- Steps: narrative bridge between photo and text -->
+          <div class="steps">
+            <div class="step">
+              <svg class="step-icon" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                <defs><linearGradient id="camBod" x1="6" y1="16" x2="6" y2="46"><stop offset="0" stop-color="#253A52"/><stop offset="1" stop-color="#1B2C43"/></linearGradient></defs>
+                <rect x="8" y="19" width="44" height="30" rx="5" fill="#1B2C43" opacity="0.2"/>
+                <rect x="6" y="16" width="44" height="30" rx="5" fill="url(#camBod)"/>
+                <rect x="18" y="10" width="20" height="8" rx="3" fill="#1B2C43"/>
+                <circle cx="28" cy="31" r="12" fill="#1A2940"/><circle cx="28" cy="31" r="11" fill="#82B7D8"/>
+                <circle cx="28" cy="31" r="8.5" fill="#1A2940" opacity="0.7"/>
+                <circle cx="28" cy="31" r="7" fill="#fff"/>
+                <circle cx="28" cy="31" r="5" fill="#82B7D8" opacity="0.3"/>
+                <circle cx="28" cy="31" r="3" fill="#82B7D8" opacity="0.5"/>
+                <circle cx="28" cy="31" r="1.5" fill="#1B2C43" opacity="0.6"/>
+                <circle cx="24" cy="27" r="2.5" fill="#fff" opacity="0.55"/>
+                <circle cx="41" cy="22" r="3" fill="#FFA631"/><circle cx="40.5" cy="21.5" r="1.2" fill="#fff" opacity="0.6"/>
+              </svg>
+              <div class="step-text">Hochladen</div>
+            </div>
+            <svg class="step-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4L13 10L7 16" stroke="#82B7D8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="step">
+              <svg class="step-icon" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                <defs><linearGradient id="magCov" x1="14" y1="4" x2="44" y2="46"><stop offset="0" stop-color="#253A52"/><stop offset="1" stop-color="#1B2C43"/></linearGradient></defs>
+                <rect x="8" y="7" width="30" height="42" rx="3" fill="#1B2C43" opacity="0.1"/>
+                <rect x="11" y="5.5" width="30" height="42" rx="3" fill="#1B2C43" opacity="0.18"/>
+                <rect x="14" y="4" width="30" height="42" rx="3" fill="url(#magCov)"/>
+                <rect x="18" y="9" width="22" height="16" rx="2" fill="#82B7D8"/>
+                <circle cx="34" cy="13" r="3" fill="#FFD98E" opacity="0.8"/>
+                <path d="M16 25L24 14L30 20L36 12L44 25H16Z" fill="#fff" opacity="0.25"/>
+                <rect x="18" y="29" width="19" height="3" rx="1.5" fill="#82B7D8" opacity="0.55"/>
+                <rect x="18" y="35" width="13" height="2.5" rx="1.25" fill="#82B7D8" opacity="0.3"/>
+                <path d="M38 4V16L40.5 13.5L43 16V4" fill="#FFA631"/>
+                <circle cx="38" cy="40" r="3" fill="#FFA631"/>
+              </svg>
+              <div class="step-text">Erstellen</div>
+            </div>
+            <svg class="step-chevron" width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M7 4L13 10L7 16" stroke="#82B7D8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div class="step">
+              <svg class="step-icon" width="56" height="56" viewBox="0 0 56 56" fill="none">
+                <defs><linearGradient id="envBod" x1="6" y1="14" x2="6" y2="44"><stop offset="0" stop-color="#253A52"/><stop offset="1" stop-color="#1B2C43"/></linearGradient></defs>
+                <rect x="14" y="3" width="28" height="18" rx="2.5" fill="#82B7D8"/>
+                <rect x="16" y="6" width="12" height="8" rx="1.5" fill="#fff" opacity="0.35"/>
+                <rect x="8" y="17" width="44" height="30" rx="4" fill="#1B2C43" opacity="0.15"/>
+                <rect x="6" y="14" width="44" height="30" rx="4" fill="url(#envBod)"/>
+                <path d="M6 18L28 33L50 18" stroke="#82B7D8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="37" y="18" width="9" height="7" rx="0.5" fill="#FFA631"/>
+                <path d="M41.5 19.8C42.2 19.2 43.3 19.3 43.8 20C44.3 20.7 43.9 21.6 43.2 22.2L41.5 23.5L39.8 22.2C39.1 21.6 38.7 20.7 39.2 20C39.7 19.3 40.8 19.2 41.5 19.8Z" fill="#fff" opacity="0.7"/>
+              </svg>
+              <div class="step-text">Versenden</div>
+            </div>
+          </div>
+
+          <!-- Text -->
+          <div class="bottom-text">
+            <div class="headline">Dein Fotoheft<br>für Oma & Opa</div>
+            <div class="sub">Jeden Monat ein gedrucktes Fotoheft —<br>direkt per Post zu deinen Liebsten</div>
+          </div>
+
+          <!-- Actions (pushed to bottom) -->
+          <div class="bottom-actions">
+            <button class="btn btn-primary">Weiter</button>
+            <button class="skip">Überspringen <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="vertical-align: middle; margin-left: 2px;"><path d="M1 7H13M13 7L8 2M13 7L8 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
+        </div>
+
+        <div class="dots">
+          <div class="dot on"></div>
+          <div class="dot"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 2 — Familie einladen                    -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Screen 2 — Familie einladen</div>
+      <div class="phone">
+
+        <!-- Colored area: just logo + photo (photo overlaps into white) -->
+        <div class="top-section top-section--turquoise">
+          <img class="logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo">
+          <img class="family-photo" src="app-repo/assets/images/happy-family-fake-image.png" alt="Familie">
+        </div>
+
+        <!-- Back arrow — positioned inside .phone, below Dynamic Island -->
+        <button class="back-arrow" aria-label="Zurück">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+            <path d="M15 18L9 12L15 6" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+
+        <!-- White content area — same layout as Screen 1: flex-end aligned -->
+        <div class="bottom">
+
+          <!-- Text -->
+          <div class="bottom-text">
+            <div class="headline">Lade deine<br>Familie ein</div>
+            <div class="sub">Lade deine Liebsten ein und sammelt<br>eure schönsten Momente</div>
+            <div class="benefit">Mehr Fotos von allen — für ein volleres Heft für Oma & Opa</div>
+          </div>
+
+          <!-- Actions -->
+          <div class="bottom-actions">
+            <div class="btn-stack">
+              <button class="btn btn-primary">Jetzt einladen</button>
+              <button class="skip-later">Später einladen <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="vertical-align: middle; margin-left: 2px;"><path d="M1 7H13M13 7L8 2M13 7L8 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            </div>
+          </div>
+        </div>
+
+        <div class="dots">
+          <div class="dot done"></div>
+          <div class="dot on"></div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <p class="footer-note">Preview nutzt Inter als Stand-in für Helvetica Now Display.</p>
+
+</body>
+</html>
