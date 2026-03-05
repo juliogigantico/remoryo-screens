@@ -836,6 +836,99 @@
       </div>
     </div>
 
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 4 — Magazin-Vorschau (Preview before Print) -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Magazin-Vorschau</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <!-- App Header -->
+        <div class="app-header">
+          <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
+          <span class="header-wordmark">remoryo</span>
+          <div class="header-settings">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </div>
+        </div>
+
+        <div class="scroll-area">
+
+          <!-- Title Section -->
+          <div style="padding: 20px 20px 0;">
+            <div style="font-size: 20px; font-weight: 800; color: var(--navy); line-height: 1.3;">Vorschau: März 2026</div>
+            <div style="font-size: 14px; color: var(--dark-gray); margin-top: 4px;">Prüfe dein Heft bevor es in den Druck geht.</div>
+          </div>
+
+          <!-- Magazine Spread Preview -->
+          <div style="padding: 20px 16px;">
+
+            <!-- Open book mock -->
+            <div style="background: var(--light-gray); border-radius: 12px; padding: 16px 12px; position: relative;">
+
+              <!-- Page spread (two pages side by side) -->
+              <div style="display: flex; gap: 4px; position: relative;">
+
+                <!-- Left Arrow -->
+                <div style="position: absolute; left: -6px; top: 50%; transform: translateY(-50%); z-index: 2; width: 32px; height: 32px; border-radius: 50%; background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                  <svg viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+                </div>
+
+                <!-- Right Arrow -->
+                <div style="position: absolute; right: -6px; top: 50%; transform: translateY(-50%); z-index: 2; width: 32px; height: 32px; border-radius: 50%; background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: center; cursor: pointer;">
+                  <svg viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
+                </div>
+
+                <!-- Left Page -->
+                <div style="flex: 1; background: var(--white); border-radius: 4px 0 0 4px; aspect-ratio: 210/297; display: flex; flex-direction: column; overflow: hidden; box-shadow: -2px 2px 8px rgba(0,0,0,0.06);">
+                  <div style="flex: 1; background: linear-gradient(135deg, var(--blue-light) 0%, var(--turquoise-light) 100%); margin: 10px 10px 6px; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+                    <svg viewBox="0 0 24 24" fill="none" width="28" height="28" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                  </div>
+                  <div style="text-align: center; padding: 0 10px 10px;">
+                    <div style="font-size: 11px; font-weight: 600; color: var(--mid-gray);">Seite 2</div>
+                  </div>
+                </div>
+
+                <!-- Spine line -->
+                <div style="width: 2px; background: var(--border); flex-shrink: 0;"></div>
+
+                <!-- Right Page -->
+                <div style="flex: 1; background: var(--white); border-radius: 0 4px 4px 0; aspect-ratio: 210/297; display: flex; flex-direction: column; overflow: hidden; box-shadow: 2px 2px 8px rgba(0,0,0,0.06);">
+                  <div style="flex: 1; background: linear-gradient(135deg, var(--turquoise-light) 0%, var(--blue-light) 100%); margin: 10px 10px 6px; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+                    <svg viewBox="0 0 24 24" fill="none" width="28" height="28" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+                  </div>
+                  <div style="text-align: center; padding: 0 10px 10px;">
+                    <div style="font-size: 11px; font-weight: 600; color: var(--mid-gray);">Seite 3</div>
+                  </div>
+                </div>
+
+              </div>
+
+              <!-- Page Indicator -->
+              <div style="text-align: center; margin-top: 12px; font-size: 12px; font-weight: 600; color: var(--dark-gray);">Seite 2–3 von 12</div>
+
+            </div>
+          </div>
+
+          <!-- Status Card -->
+          <div style="margin: 0 20px 16px; padding: 16px; background: var(--white); border: 1.5px solid var(--border); border-radius: 12px;">
+            <div style="font-size: 14px; font-weight: 600; color: var(--navy);">12 Fotos · 6 Doppelseiten</div>
+            <div style="font-size: 13px; font-weight: 700; color: var(--orange); margin-top: 4px;">Druckschluss: 5. März 2026</div>
+          </div>
+
+          <!-- Action Buttons -->
+          <div style="padding: 0 20px 24px; display: flex; flex-direction: column; gap: 10px;">
+            <button class="btn btn-primary" style="width: 100%;">Zum Druck freigeben</button>
+            <button class="btn btn-outline" style="width: 100%;">Weiter bearbeiten</button>
+          </div>
+
+        </div>
+
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
   </div>
 
   <p class="footer-note">Preview nutzt Inter als Stand-in für Helvetica Now Display.</p>

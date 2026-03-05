@@ -54,19 +54,11 @@
       text-align: center;
       border-top: 1px solid #f0f0f0;
     }
-    .back-link {
-      display: inline-block;
-      margin-bottom: 16px;
-      font-size: 13px;
-      color: #94A3B3;
-      text-decoration: none;
-    }
-    .back-link:hover { color: #1B2C43; }
   </style>
 </head>
 <body>
   <h1>remoryo Screens</h1>
-  <p class="subtitle">36 Screens · 8 Kategorien · Stand März 2026</p>
+  <p class="subtitle">41 Screens · 8 Kategorien · Stand März 2026</p>
 
   <div class="section">
     <div class="section-title">Auth & Registration (5)</div>
@@ -84,7 +76,7 @@
   </div>
 
   <div class="section">
-    <div class="section-title">Magazin-Editor (3)</div>
+    <div class="section-title">Magazin-Editor (4)</div>
     <div class="grid" id="grid-magazine"></div>
   </div>
 
@@ -94,7 +86,7 @@
   </div>
 
   <div class="section">
-    <div class="section-title">Settings Detail (7)</div>
+    <div class="section-title">Settings Detail (9)</div>
     <div class="grid" id="grid-settings-detail"></div>
   </div>
 
@@ -104,7 +96,7 @@
   </div>
 
   <div class="section">
-    <div class="section-title">Zusätzliche Screens (4)</div>
+    <div class="section-title">Zusätzliche Screens (6)</div>
     <div class="grid" id="grid-additional"></div>
   </div>
 
@@ -113,11 +105,11 @@ const screens = {
   'grid-auth': { file: 'auth-preview.html', screens: ['Login', 'Login Fehler', 'Registrierung', 'Web Landing', 'In-App Welcome'] },
   'grid-onboarding': { file: 'onboarding-preview.html', screens: ["So funktioniert's", 'Familie einladen'] },
   'grid-home': { file: 'app-home-preview.html', screens: ['Fotos Tab', 'Empty State', 'Magazine Tab', 'Magazine Empty', 'Foto-Kommentare'] },
-  'grid-magazine': { file: 'app-magazine-preview.html', screens: ['Magazin-Übersicht', 'Seitenübersicht', 'Foto auswählen'] },
+  'grid-magazine': { file: 'app-magazine-preview.html', screens: ['Magazin-Übersicht', 'Seitenübersicht', 'Foto auswählen', 'Magazin-Vorschau'] },
   'grid-settings': { file: 'app-settings-preview.html', screens: ['Einstellungen', 'Nutzerprofil', 'Abonnement'] },
-  'grid-settings-detail': { file: 'app-settings-detail-preview.html', screens: ['Lieferadresse', 'Zahlung (Verwalter)', 'Zahlung (Mitglied)', 'Gruppenmitglieder', 'Passwort ändern', 'Account löschen', 'Profil bearbeiten'] },
+  'grid-settings-detail': { file: 'app-settings-detail-preview.html', screens: ['Lieferadresse', 'Zahlung (Verwalter)', 'Zahlung (Mitglied)', 'Gruppenmitglieder', 'Passwort ändern', 'Account löschen', 'Profil bearbeiten', 'Versandstatus', 'Benachrichtigungen'] },
   'grid-utility': { file: 'app-utility-preview.html', screens: ['PW vergessen', 'PW Erfolg', 'Netzwerk-Fehler', 'Gruppen wechseln', 'Einladung annehmen', 'Erstes Magazin', 'Mitglied einladen'] },
-  'grid-additional': { file: 'app-additional-preview.html', screens: ['Foto-Vollansicht', 'Kommentar schreiben', 'Upload-Bestätigung', 'Push Permission'] }
+  'grid-additional': { file: 'app-additional-preview.html', screens: ['Foto-Vollansicht', 'Kommentar schreiben', 'Upload-Bestätigung', 'Push Permission', 'Empfänger verwalten', 'Abo auswählen'] }
 };
 
 Object.entries(screens).forEach(([gridId, data]) => {
@@ -135,7 +127,6 @@ Object.entries(screens).forEach(([gridId, data]) => {
   });
 });
 
-// Lazy-load iframes with IntersectionObserver
 const observer = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting) {

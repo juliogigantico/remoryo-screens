@@ -405,6 +405,156 @@
       color: var(--mid-gray); display: flex; align-items: center;
     }
     .input-lock svg { width: 16px; height: 16px; }
+
+    /* ── Shipping Timeline (Screen 8) ── */
+    .magazine-card {
+      margin: 16px 20px;
+      padding: 16px;
+      border-radius: 16px;
+      background: var(--light-gray);
+      display: flex; align-items: center; gap: 14px;
+    }
+    .magazine-card-icon {
+      width: 48px; height: 56px; border-radius: 8px;
+      background: var(--beige);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .magazine-card-info { flex: 1; }
+    .magazine-card-title {
+      font-weight: 700; font-size: 16px; color: var(--navy);
+    }
+    .magazine-card-status {
+      font-size: 13px; color: var(--orange); font-weight: 600; margin-top: 2px;
+    }
+
+    .timeline { padding: 8px 20px 20px; }
+    .timeline-step {
+      display: flex; gap: 16px;
+      position: relative;
+      padding-bottom: 28px;
+    }
+    .timeline-step:last-child { padding-bottom: 0; }
+    .timeline-step::before {
+      content: '';
+      position: absolute;
+      left: 15px; top: 32px;
+      width: 2px;
+      height: calc(100% - 32px);
+      background: var(--border);
+    }
+    .timeline-step:last-child::before { display: none; }
+    .timeline-step--completed::before { background: #34C759; }
+    .timeline-step--current::before { background: var(--border); }
+
+    .timeline-dot {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; position: relative; z-index: 1;
+    }
+    .timeline-dot--completed {
+      background: #34C759;
+    }
+    .timeline-dot--completed svg {
+      width: 16px; height: 16px; color: white;
+    }
+    .timeline-dot--current {
+      background: var(--orange);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    .timeline-dot--current::after {
+      content: '';
+      position: absolute;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--orange);
+      opacity: 0;
+      animation: pulse-ring 2s ease-in-out infinite;
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(1); opacity: 0.4; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.85; }
+    }
+    .timeline-dot--pending {
+      background: var(--white);
+      border: 2px solid var(--border);
+    }
+
+    .timeline-content { flex: 1; padding-top: 4px; }
+    .timeline-label {
+      font-weight: 600; font-size: 15px; color: var(--navy);
+    }
+    .timeline-step--pending .timeline-label {
+      color: var(--mid-gray); font-weight: 500;
+    }
+    .timeline-step--current .timeline-label {
+      font-weight: 700; color: var(--navy);
+    }
+    .timeline-date {
+      font-size: 12px; color: var(--mid-gray); margin-top: 2px;
+    }
+    .timeline-step--current .timeline-date {
+      color: var(--orange); font-weight: 500;
+    }
+
+    .delivery-estimate {
+      margin: 8px 20px 20px;
+      padding: 16px;
+      border-radius: 12px;
+      background: var(--blue-light);
+      font-size: 14px; color: var(--navy); font-weight: 600;
+      text-align: center;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .delivery-estimate svg {
+      width: 18px; height: 18px; color: var(--blue); flex-shrink: 0;
+    }
+
+    /* ── Activity Feed (Screen 9) ── */
+    .activity-section { padding: 0 20px; }
+    .activity-day-label {
+      font-size: 12px; font-weight: 700; color: var(--mid-gray);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      padding: 20px 0 8px;
+    }
+    .activity-day-label:first-child { padding-top: 16px; }
+
+    .activity-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .activity-item:last-child { border-bottom: none; }
+
+    .activity-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 16px; color: white; flex-shrink: 0;
+    }
+    .activity-system-icon {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .activity-system-icon svg {
+      width: 20px; height: 20px;
+    }
+
+    .activity-text-block { flex: 1; min-width: 0; }
+    .activity-text {
+      font-size: 14px; color: var(--navy); line-height: 1.4;
+    }
+    .activity-time {
+      font-size: 12px; color: var(--mid-gray); margin-top: 2px;
+    }
+
+    .activity-unread-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--blue); flex-shrink: 0;
+    }
   </style>
 </head>
 <body>
@@ -848,6 +998,212 @@
             <div style="text-align: center; margin-top: 4px;">
               <button class="btn-text">Abbrechen</button>
             </div>
+          </div>
+
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- ROW 3                                              -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="preview-row">
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 8 — Versandstatus                       -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Versandstatus</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Versandstatus</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <!-- Magazine Card -->
+          <div class="magazine-card">
+            <div class="magazine-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                <line x1="9" y1="7" x2="15" y2="7"/>
+                <line x1="9" y1="11" x2="13" y2="11"/>
+              </svg>
+            </div>
+            <div class="magazine-card-info">
+              <div class="magazine-card-title">März 2026</div>
+              <div class="magazine-card-status">In Druck</div>
+            </div>
+          </div>
+
+          <!-- Timeline / Stepper -->
+          <div class="timeline">
+
+            <!-- Step 1: Completed -->
+            <div class="timeline-step timeline-step--completed">
+              <div class="timeline-dot timeline-dot--completed">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-label">Fotos gesammelt</div>
+                <div class="timeline-date">28. Feb</div>
+              </div>
+            </div>
+
+            <!-- Step 2: Completed -->
+            <div class="timeline-step timeline-step--completed">
+              <div class="timeline-dot timeline-dot--completed">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-label">Heft erstellt</div>
+                <div class="timeline-date">1. März</div>
+              </div>
+            </div>
+
+            <!-- Step 3: Current -->
+            <div class="timeline-step timeline-step--current">
+              <div class="timeline-dot timeline-dot--current">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="white" stroke="none">
+                  <circle cx="12" cy="12" r="5"/>
+                </svg>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-label">In Druck</div>
+                <div class="timeline-date">Seit 3. März</div>
+              </div>
+            </div>
+
+            <!-- Step 4: Pending -->
+            <div class="timeline-step timeline-step--pending">
+              <div class="timeline-dot timeline-dot--pending"></div>
+              <div class="timeline-content">
+                <div class="timeline-label">Versendet</div>
+              </div>
+            </div>
+
+            <!-- Step 5: Pending -->
+            <div class="timeline-step timeline-step--pending">
+              <div class="timeline-dot timeline-dot--pending"></div>
+              <div class="timeline-content">
+                <div class="timeline-label">Zugestellt</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Delivery Estimate -->
+          <div class="delivery-estimate">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="3" width="15" height="13"/>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+              <circle cx="5.5" cy="18.5" r="2.5"/>
+              <circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+            Voraussichtliche Zustellung: 8.–10. März
+          </div>
+
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 9 — Benachrichtigungen                  -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Benachrichtigungen</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Aktivität</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <div class="activity-section">
+
+            <!-- Today -->
+            <div class="activity-day-label">Heute</div>
+
+            <div class="activity-item">
+              <div class="activity-avatar" style="background: var(--blue-soft); color: var(--navy);">L</div>
+              <div class="activity-text-block">
+                <div class="activity-text">Schwester Lisa hat 3 Fotos hochgeladen</div>
+                <div class="activity-time">vor 2 Std.</div>
+              </div>
+              <div class="activity-unread-dot"></div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-avatar" style="background: var(--turquoise); color: var(--navy);">M</div>
+              <div class="activity-text-block">
+                <div class="activity-text">Mama hat einen Kommentar geschrieben</div>
+                <div class="activity-time">vor 5 Std.</div>
+              </div>
+              <div class="activity-unread-dot"></div>
+            </div>
+
+            <!-- Yesterday -->
+            <div class="activity-day-label">Gestern</div>
+
+            <div class="activity-item">
+              <div class="activity-system-icon" style="background: #FFF3DC;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+              </div>
+              <div class="activity-text-block">
+                <div class="activity-text">Dein Märzheft ist in Druck!</div>
+                <div class="activity-time">Gestern, 14:30</div>
+              </div>
+            </div>
+
+            <!-- Last Week -->
+            <div class="activity-day-label">Letzte Woche</div>
+
+            <div class="activity-item">
+              <div class="activity-system-icon" style="background: #E0F5F5;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--turquoise)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <div class="activity-text-block">
+                <div class="activity-text">Februarheft wurde zugestellt</div>
+                <div class="activity-time">28. Feb</div>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-avatar" style="background: var(--blue-soft); color: var(--navy);">L</div>
+              <div class="activity-text-block">
+                <div class="activity-text">Schwester Lisa ist der Gruppe beigetreten</div>
+                <div class="activity-time">27. Feb</div>
+              </div>
+            </div>
+
           </div>
 
         </div>
