@@ -28,7 +28,7 @@
 
     body {
       font-family: 'Inter', -apple-system, sans-serif;
-      background: #F0F2F5;
+      background: linear-gradient(160deg, #F4F6F9 0%, #EEF0F4 40%, #F0EDE9 100%);
       color: var(--navy);
       display: flex;
       min-height: 100vh;
@@ -40,13 +40,14 @@
       top: 0; left: 0;
       width: var(--sidebar-w);
       height: 100vh;
-      background: var(--navy);
+      background: linear-gradient(180deg, #1B2C43 0%, #15243A 50%, #1A2940 100%);
       color: white;
       padding: 28px 0;
       overflow-y: auto;
       z-index: 100;
       display: flex;
       flex-direction: column;
+      box-shadow: 4px 0 24px rgba(27,44,67,0.15);
     }
 
     .sidebar-logo {
@@ -72,14 +73,14 @@
     .nav-item {
       display: flex; align-items: center; gap: 10px;
       padding: 10px 24px;
-      color: rgba(255,255,255,0.65);
+      color: rgba(255,255,255,0.6);
       text-decoration: none;
       font-size: 13px; font-weight: 500;
-      transition: all 0.15s;
+      transition: all 0.2s ease;
       border-left: 3px solid transparent;
     }
-    .nav-item:hover { background: rgba(255,255,255,0.06); color: white; }
-    .nav-item.active { background: rgba(255,166,49,0.1); color: var(--orange); border-left-color: var(--orange); }
+    .nav-item:hover { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.95); }
+    .nav-item.active { background: rgba(255,166,49,0.12); color: var(--orange); border-left-color: var(--orange); font-weight: 600; }
     .nav-icon { width: 20px; text-align: center; font-size: 14px; flex-shrink: 0; }
     .nav-badge { margin-left: auto; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; }
     .nav-item:hover .nav-badge, .nav-item.active .nav-badge { background: rgba(255,166,49,0.15); color: var(--orange); }
@@ -92,18 +93,18 @@
       max-width: 1200px;
     }
 
-    .page-header { margin-bottom: 40px; }
-    .page-header h2 { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; }
-    .page-header p { font-size: 14px; color: var(--dark-gray); font-weight: 500; line-height: 1.5; }
+    .page-header { margin-bottom: 44px; }
+    .page-header h2 { font-size: 32px; font-weight: 900; letter-spacing: -0.8px; margin-bottom: 10px; background: linear-gradient(135deg, var(--navy) 0%, #2D4A6A 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .page-header p { font-size: 14px; color: var(--dark-gray); font-weight: 500; line-height: 1.6; }
 
     /* ═══ FLOW BANNER ═══ */
     .flow-banner {
       background: white;
-      border-radius: 16px;
-      padding: 24px 28px;
-      margin-bottom: 36px;
-      border: 1px solid var(--border);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      border-radius: 20px;
+      padding: 28px 32px;
+      margin-bottom: 40px;
+      border: none;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.02);
     }
     .flow-banner h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mid-gray); margin-bottom: 16px; }
     .flow-steps { display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
@@ -114,9 +115,9 @@
 
     /* ═══ DESIGN SYSTEM ═══ */
     .design-system {
-      background: white; border-radius: 16px; padding: 28px;
-      margin-bottom: 36px; border: 1px solid var(--border);
-      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      background: white; border-radius: 20px; padding: 28px 32px;
+      margin-bottom: 40px; border: none;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.02);
     }
     .design-system h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mid-gray); margin-bottom: 20px; }
     .color-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
@@ -131,21 +132,26 @@
 
     /* ═══ SECTION ═══ */
     .section {
-      margin-bottom: 36px;
+      margin-bottom: 44px;
       scroll-margin-top: 20px;
+      background: white;
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.04), 0 0 0 1px rgba(0,0,0,0.02);
     }
 
     .section-header {
-      display: flex; align-items: center; gap: 12px;
-      margin-bottom: 12px; flex-wrap: wrap;
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 14px; flex-wrap: wrap;
     }
     .section-icon {
-      width: 40px; height: 40px; border-radius: 12px;
+      width: 44px; height: 44px; border-radius: 14px;
       display: flex; align-items: center; justify-content: center;
-      font-size: 20px; flex-shrink: 0;
+      font-size: 22px; flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
     }
-    .section-header h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
-    .section-badge { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; background: var(--light-gray); color: var(--dark-gray); }
+    .section-header h3 { font-size: 20px; font-weight: 800; letter-spacing: -0.4px; }
+    .section-badge { font-size: 11px; font-weight: 700; padding: 5px 12px; border-radius: 20px; background: var(--light-gray); color: var(--dark-gray); }
     .section-link {
       margin-left: auto; font-size: 12px; font-weight: 600; color: var(--blue);
       text-decoration: none; display: flex; align-items: center; gap: 4px;
@@ -199,36 +205,36 @@
     }
 
     .phone-card {
-      width: 140px;
+      width: 155px;
       text-decoration: none;
       color: inherit;
-      transition: transform 0.2s, box-shadow 0.2s;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
     }
-    .phone-card:hover { transform: translateY(-4px); }
-    .phone-card:hover .phone-body { box-shadow: 0 8px 24px rgba(27,44,67,0.12); }
+    .phone-card:hover { transform: translateY(-6px) scale(1.02); }
+    .phone-card:hover .phone-body { box-shadow: 0 12px 32px rgba(27,44,67,0.16), 0 4px 12px rgba(27,44,67,0.08); }
 
     .phone-body {
-      width: 140px;
-      height: 280px;
+      width: 155px;
+      height: 310px;
       background: white;
-      border-radius: 20px;
-      border: 2.5px solid var(--navy);
+      border-radius: 24px;
+      border: 2px solid rgba(27,44,67,0.15);
       position: relative;
       overflow: hidden;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-      transition: box-shadow 0.2s;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.03);
+      transition: box-shadow 0.25s ease;
     }
 
     /* Dynamic Island */
     .phone-body::before {
       content: '';
       position: absolute;
-      top: 8px;
+      top: 10px;
       left: 50%;
       transform: translateX(-50%);
-      width: 44px;
-      height: 12px;
-      background: var(--navy);
+      width: 48px;
+      height: 14px;
+      background: #1a1a1a;
       border-radius: 10px;
       z-index: 5;
     }
@@ -240,17 +246,18 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      padding: 32px 10px 10px;
+      padding: 36px 12px 12px;
       text-align: center;
     }
 
     .phone-screen-icon {
-      font-size: 28px;
+      font-size: 32px;
       margin-bottom: 8px;
+      filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
     }
 
     .phone-screen-title {
-      font-size: 10px;
+      font-size: 11px;
       font-weight: 700;
       color: var(--navy);
       line-height: 1.3;
@@ -258,7 +265,7 @@
     }
 
     .phone-screen-sub {
-      font-size: 8px;
+      font-size: 9px;
       font-weight: 500;
       color: var(--mid-gray);
       line-height: 1.3;
@@ -267,9 +274,10 @@
     /* Gradient overlays for screen type */
     .phone-gradient {
       position: absolute;
-      inset: 0;
-      opacity: 0.08;
-      border-radius: 17px;
+      top: 0; left: 0; right: 0;
+      height: 50%;
+      opacity: 0.12;
+      border-radius: 22px 22px 0 0;
     }
 
     /* Status indicator dots */
@@ -305,13 +313,13 @@
     .phone--beige .phone-gradient { background: linear-gradient(135deg, var(--beige), #D4C4B0); }
     .phone--red .phone-gradient { background: linear-gradient(135deg, var(--red), #C0392B); }
 
-    .phone--turquoise .phone-body { border-color: #7BC8C8; }
-    .phone--blue .phone-body { border-color: var(--blue); }
-    .phone--orange .phone-body { border-color: var(--orange); }
-    .phone--purple .phone-body { border-color: #9B6DD7; }
-    .phone--gray .phone-body { border-color: var(--dark-gray); }
-    .phone--beige .phone-body { border-color: #C4B5A5; }
-    .phone--red .phone-body { border-color: var(--red); }
+    .phone--turquoise .phone-body { border-color: rgba(123,200,200,0.4); }
+    .phone--blue .phone-body { border-color: rgba(130,183,216,0.4); }
+    .phone--orange .phone-body { border-color: rgba(255,166,49,0.35); }
+    .phone--purple .phone-body { border-color: rgba(155,109,215,0.35); }
+    .phone--gray .phone-body { border-color: rgba(90,107,122,0.25); }
+    .phone--beige .phone-body { border-color: rgba(196,181,165,0.4); }
+    .phone--red .phone-body { border-color: rgba(231,76,60,0.3); }
 
     /* Section icon colors */
     .icon-onboarding { background: linear-gradient(135deg, var(--turquoise), #7BC8C8); }
@@ -371,7 +379,7 @@
       <span>Screen Overview</span>
     </div>
     <div class="sidebar-stats">
-      <div class="stat"><div class="stat-num">31</div><div class="stat-label">Screens</div></div>
+      <div class="stat"><div class="stat-num">30</div><div class="stat-label">Screens</div></div>
       <div class="stat"><div class="stat-num">7</div><div class="stat-label">Dateien</div></div>
       <div class="stat"><div class="stat-num">3</div><div class="stat-label">Reviews</div></div>
     </div>
@@ -382,7 +390,7 @@
       <a href="#design-system" class="nav-item"><span class="nav-icon">&#x1f3a8;</span>Design System</a>
       <div class="nav-section">Screens</div>
       <a href="#onboarding" class="nav-item"><span class="nav-icon">&#x1f680;</span>Onboarding<span class="nav-badge">2</span></a>
-      <a href="#auth" class="nav-item"><span class="nav-icon">&#x1f510;</span>Authentifizierung<span class="nav-badge">6</span></a>
+      <a href="#auth" class="nav-item"><span class="nav-icon">&#x1f510;</span>Authentifizierung<span class="nav-badge">5</span></a>
       <a href="#home" class="nav-item"><span class="nav-icon">&#x1f4f7;</span>Home / Fotos<span class="nav-badge">5</span></a>
       <a href="#magazine" class="nav-item"><span class="nav-icon">&#x1f4d6;</span>Magazin<span class="nav-badge">3</span></a>
       <a href="#settings" class="nav-item"><span class="nav-icon">&#x2699;&#xfe0f;</span>Einstellungen<span class="nav-badge">3</span></a>
@@ -395,7 +403,7 @@
   <main class="main">
     <div class="page-header">
       <h2>remoryo App &mdash; UI Preview</h2>
-      <p>31 Screens &middot; 7 Dateien &middot; 3&times; UX-reviewed &middot; Stand M&auml;rz 2026<br>Klicke auf einen Screen oder &laquo;Vollansicht&raquo; um die interaktive Preview zu &ouml;ffnen.</p>
+      <p>30 Screens &middot; 7 Kategorien &middot; 3&times; UX-reviewed &middot; Stand M&auml;rz 2026<br>Komplette UI/UX-&Uuml;bersicht der remoryo App &mdash; N&auml;he, die ankommt.</p>
     </div>
 
     <!-- ═══ FUNNEL ═══ -->
@@ -478,7 +486,7 @@
             </div>
           </div>
           <div class="phone-label">So funktioniert&rsquo;s</div>
-        </a>
+        </div>
 
         <div class="phone-card phone--turquoise">
           <div class="phone-body">
@@ -497,7 +505,7 @@
             </div>
           </div>
           <div class="phone-label">Familie einladen</div>
-        </a>
+        </div>
 
       </div>
     </div>
@@ -507,8 +515,8 @@
       <div class="section-header">
         <div class="section-icon icon-auth">&#x1f510;</div>
         <h3>Authentifizierung</h3>
-        <span class="section-badge">6 Screens</span>
-        
+        <span class="section-badge">5 Screens</span>
+
       </div>
       <p class="section-desc">Login (blauer Gradient = bestehender User) und Registration (t&uuml;rkis = neuer User). Invite-Flow: Web Landing &rarr; App Download &rarr; In-App Welcome.</p>
       
@@ -522,7 +530,7 @@
             <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--blue"></div></div>
           </div></div>
           <div class="phone-label">Login</div>
-        </a>
+        </div>
 
         <div class="phone-card phone--red">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -531,26 +539,16 @@
             <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-bar wire-bar--accent" style="height:5px;border-radius:3px"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
           </div></div>
           <div class="phone-label">Login &mdash; Fehler</div>
-        </a>
+        </div>
 
         <div class="phone-card phone--turquoise">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
             <div class="phone-screen-icon">&#x1f4dd;</div>
-            <div class="phone-screen-title">Registrierung 1/2</div>
-            <div class="wire"><div class="wire-spacer"></div><div class="wire-btn wire-btn--blue"></div><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+            <div class="phone-screen-title">Registrierung</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-btn wire-btn--blue"></div><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div><div style="width:16px;height:9px;border-radius:5px;background:var(--border)"></div></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
           </div></div>
-          <div class="phone-label">Registrierung 1/2</div>
-        </a>
-
-        <div class="phone-card phone--turquoise">
-          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x2705;</div>
-            <div class="phone-screen-title">Registrierung 2/2</div>
-            <div class="phone-screen-sub">Consents &amp; Toggles</div>
-            <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div><div style="width:18px;height:10px;border-radius:5px;background:var(--border)"></div></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div><div style="width:18px;height:10px;border-radius:5px;background:var(--border)"></div></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
-          </div></div>
-          <div class="phone-label">Registrierung 2/2</div>
-        </a>
+          <div class="phone-label">Registrierung</div>
+        </div>
 
         <div class="phone-card phone--beige">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -560,7 +558,7 @@
             <div class="wire"><div class="wire-spacer"></div><div class="wire-avatar"></div><div class="wire-bar wire-bar--short" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
           </div></div>
           <div class="phone-label">Web Landing<br><span style="color:var(--mid-gray);font-size:9px">Invite-Link</span></div>
-        </a>
+        </div>
 
         <div class="phone-card phone--turquoise">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -570,7 +568,7 @@
             <div class="wire"><div class="wire-spacer"></div><div class="wire-avatar"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
           </div></div>
           <div class="phone-label">In-App Welcome<br><span style="color:var(--mid-gray);font-size:9px">Nach Download</span></div>
-        </a>
+        </div>
 
       </div>
     </div>
@@ -597,7 +595,7 @@
             <div class="wire-tabs"><div class="wire-tab wire-tab--active">Fotos</div><div class="wire-tab">Heft</div></div>
           </div></div>
           <div class="phone-label">Fotos (mit Fotos)</div>
-        </a>
+        </div>
 
         <div class="phone-card phone--orange">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -608,7 +606,7 @@
             <div class="wire-tabs"><div class="wire-tab wire-tab--active">Fotos</div><div class="wire-tab">Heft</div></div>
           </div></div>
           <div class="phone-label">Fotos (Empty)</div>
-        </a>
+        </div>
 
         <div class="phone-card phone--orange">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -619,7 +617,7 @@
             <div class="wire-tabs"><div class="wire-tab">Fotos</div><div class="wire-tab wire-tab--active">Heft</div></div>
           </div></div>
           <div class="phone-label">Heft Tab</div>
-        </a>
+        </div>
 
         <div class="phone-card phone--orange">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -630,7 +628,7 @@
             <div class="wire-tabs"><div class="wire-tab">Fotos</div><div class="wire-tab wire-tab--active">Heft</div></div>
           </div></div>
           <div class="phone-label">Heft (Empty)</div>
-        </a>
+        </div>
 
         <div class="phone-card phone--blue">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -639,7 +637,7 @@
             <div class="wire"><div class="wire-spacer"></div><div class="wire-img" style="height:50px"></div><div class="wire-spacer"></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-spacer"></div><div class="wire-rect" style="width:100%"></div></div>
           </div></div>
           <div class="phone-label">Kommentare</div>
-        </a>
+        </div>
 
       </div>
     </div>
@@ -664,7 +662,7 @@
             <div class="wire"><div class="wire-spacer"></div><div class="wire-rect wire-rect--tall"></div><div class="wire-spacer"></div><div class="wire-rect wire-rect--tall" style="opacity:0.5"></div></div>
           </div></div>
           <div class="phone-label">Magazin-&Uuml;bersicht</div>
-        </a>
+        </div>
 
         <div class="phone-card phone--purple">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -685,7 +683,7 @@
             </div>
           </div></div>
           <div class="phone-label">Seiten&uuml;bersicht</div>
-        </a>
+        </div>
 
         <div class="phone-card phone--purple">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -704,7 +702,7 @@
             </div>
           </div></div>
           <div class="phone-label">Foto ausw&auml;hlen</div>
-        </a>
+        </div>
 
       </div>
     </div>
@@ -729,7 +727,7 @@
             <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div class="wire-avatar"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-spacer"></div><div class="wire-row"><div style="font-size:8px">&#x25b6;</div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="font-size:8px">&#x25b6;</div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="font-size:8px">&#x25b6;</div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="font-size:8px">&#x25b6;</div><div class="wire-bar" style="flex:1"></div></div></div>
           </div></div>
           <div class="phone-label">Einstellungen</div>
-        </a>
+        </div>
 
         <div class="phone-card phone--gray">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -738,7 +736,7 @@
             <div class="wire"><div class="wire-spacer"></div><div class="wire-avatar" style="width:28px;height:28px"></div><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
           </div></div>
           <div class="phone-label">Mein Profil</div>
-        </a>
+        </div>
 
         <div class="phone-card phone--orange">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -748,7 +746,7 @@
             <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--accent" style="height:6px;border-radius:3px;width:40%;margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div></div></div>
           </div></div>
           <div class="phone-label">Abonnement</div>
-        </a>
+        </div>
 
       </div>
     </div>
@@ -773,7 +771,7 @@
             <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
           </div></div>
           <div class="phone-label">Lieferadresse</div>
-        </a>
+        </div>
 
         <div class="phone-card phone--orange">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -783,7 +781,7 @@
             <div class="wire"><div class="wire-spacer"></div><div class="wire-rect wire-rect--tall"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
           </div></div>
           <div class="phone-label">Zahlung<br><span style="color:var(--mid-gray);font-size:9px">Verwalter</span></div>
-        </a>
+        </div>
 
         <div class="phone-card phone--gray">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -793,7 +791,7 @@
             <div class="wire"><div class="wire-spacer"></div><div style="font-size:24px;text-align:center">&#x1f512;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-row" style="justify-content:center"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar wire-bar--short"></div></div></div>
           </div></div>
           <div class="phone-label">Zahlung<br><span style="color:var(--mid-gray);font-size:9px">Mitglied</span></div>
-        </a>
+        </div>
 
         <div class="phone-card phone--blue">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -802,7 +800,7 @@
             <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
           </div></div>
           <div class="phone-label">Gruppenmitglieder</div>
-        </a>
+        </div>
 
         <div class="phone-card phone--gray">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -811,7 +809,7 @@
             <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
           </div></div>
           <div class="phone-label">Passwort &auml;ndern</div>
-        </a>
+        </div>
 
         <div class="phone-card phone--red">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -820,7 +818,7 @@
             <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn" style="background:rgba(231,76,60,0.2)"></div></div>
           </div></div>
           <div class="phone-label">Account l&ouml;schen</div>
-        </a>
+        </div>
 
       </div>
     </div>
@@ -846,7 +844,7 @@
             <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
           </div></div>
           <div class="phone-label">PW vergessen<br><span style="color:var(--mid-gray);font-size:9px">Eingabe</span></div>
-        </a>
+        </div>
 
         <div class="phone-card phone--turquoise">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -856,7 +854,7 @@
             <div class="wire"><div class="wire-spacer"></div><div style="font-size:24px;text-align:center">&#x2705;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
           </div></div>
           <div class="phone-label">PW vergessen<br><span style="color:var(--mid-gray);font-size:9px">Erfolg</span></div>
-        </a>
+        </div>
 
         <div class="phone-card phone--red">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -865,7 +863,7 @@
             <div class="wire"><div class="wire-spacer"></div><div style="font-size:24px;text-align:center">&#x26a0;&#xfe0f;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
           </div></div>
           <div class="phone-label">Netzwerk-Fehler</div>
-        </a>
+        </div>
 
         <div class="phone-card phone--blue">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -875,7 +873,7 @@
             <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px;background:var(--orange)"></div><div class="wire-bar" style="flex:1"></div><div style="font-size:8px">&#x2714;</div></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px;background:var(--turquoise)"></div><div class="wire-bar" style="flex:1"></div></div></div>
           </div></div>
           <div class="phone-label">Gruppen wechseln<br><span style="color:var(--mid-gray);font-size:9px">Bottom Sheet</span></div>
-        </a>
+        </div>
 
         <div class="phone-card phone--turquoise">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -884,7 +882,7 @@
             <div class="wire"><div class="wire-spacer"></div><div class="wire-avatar"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
           </div></div>
           <div class="phone-label">Einladung<br><span style="color:var(--mid-gray);font-size:9px">Annehmen</span></div>
-        </a>
+        </div>
 
         <div class="phone-card phone--orange">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
@@ -893,13 +891,13 @@
             <div class="wire"><div class="wire-spacer"></div><div style="font-size:20px;text-align:center">&#x1f38a;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
           </div></div>
           <div class="phone-label">Erstes Magazin<br><span style="color:var(--mid-gray);font-size:9px">Erfolg</span></div>
-        </a>
+        </div>
 
       </div>
     </div>
 
     <div class="page-footer">
-      &hearts; remoryo &middot; N&auml;he, die ankommt. &middot; Stand 4. M&auml;rz 2026
+      &hearts; remoryo &middot; N&auml;he, die ankommt. &middot; Stand 5. M&auml;rz 2026
     </div>
 
   </main>
