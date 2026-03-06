@@ -1187,6 +1187,91 @@
       </div>
     </div>
 
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 11 — Foto löschen (Bottom Sheet)       -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">11 &middot; Foto l&ouml;schen (Bottom Sheet)</div>
+      <div class="phone" style="background: var(--white);">
+
+        <div class="status-bar"></div>
+
+        <!-- Dimmed photo fullscreen background -->
+        <div style="flex: 1; position: relative;">
+
+          <!-- Fake fullscreen photo view (placeholder image area) -->
+          <div style="position: absolute; inset: 0; background: #1B2C43; display: flex; align-items: center; justify-content: center;">
+            <!-- Placeholder photo -->
+            <div style="width: 340px; height: 460px; background: linear-gradient(135deg, #5A6B7A 0%, #94A3B3 100%); border-radius: 4px; display: flex; align-items: center; justify-content: center; opacity: 0.6;">
+              <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.5)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                <circle cx="8.5" cy="8.5" r="1.5"/>
+                <polyline points="21 15 16 10 5 21"/>
+              </svg>
+            </div>
+          </div>
+
+          <!-- Dark overlay -->
+          <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); z-index: 5;"></div>
+
+          <!-- Bottom Sheet -->
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; background: var(--white); border-radius: 24px 24px 0 0; padding: 24px 24px 20px; z-index: 6; box-shadow: 0 -8px 30px rgba(0,0,0,0.12);">
+
+            <!-- Handle bar -->
+            <div style="width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 24px;"></div>
+
+            <!-- Warning icon -->
+            <div style="display: flex; justify-content: center; margin-bottom: 16px;">
+              <div style="width: 48px; height: 48px; border-radius: 50%; background: #FFF0EE; display: flex; align-items: center; justify-content: center;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="3 6 5 6 21 6"/>
+                  <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                  <line x1="10" y1="11" x2="10" y2="17"/>
+                  <line x1="14" y1="11" x2="14" y2="17"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Title -->
+            <div style="font-weight: 700; font-size: 20px; color: var(--navy); text-align: center; margin-bottom: 8px;">Foto l&ouml;schen?</div>
+
+            <!-- Description -->
+            <div style="font-size: 14px; color: var(--dark-gray); text-align: center; line-height: 1.55; font-weight: 500; margin-bottom: 16px;">
+              Dieses Foto wird f&uuml;r alle Familienmitglieder entfernt und kann nicht wiederhergestellt werden.
+            </div>
+
+            <!-- Info banner (photo used in magazine) -->
+            <div style="background: #FFF8EB; border-radius: 12px; padding: 12px 14px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 10px;">
+              <div style="flex-shrink: 0; margin-top: 1px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8920B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <circle cx="12" cy="12" r="10"/>
+                  <line x1="12" y1="8" x2="12" y2="12"/>
+                  <line x1="12" y1="16" x2="12.01" y2="16"/>
+                </svg>
+              </div>
+              <div style="font-size: 13px; font-weight: 600; color: #8B6914; line-height: 1.45;">
+                Dieses Foto wird in 1 Magazin verwendet. Es wird dort ebenfalls entfernt.
+              </div>
+            </div>
+
+            <!-- Buttons -->
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <!-- Red destructive button -->
+              <button class="btn" style="background: var(--red); color: var(--white);">Foto l&ouml;schen</button>
+              <!-- Outline cancel button -->
+              <button class="btn btn-outline">Abbrechen</button>
+            </div>
+
+            <!-- Bottom safe area -->
+            <div style="height: 14px;"></div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
   </div>
 
   <p class="footer-note">Preview nutzt Inter als Stand-in f&uuml;r Helvetica Now Display.</p>

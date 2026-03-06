@@ -556,6 +556,130 @@
       width: 10px; height: 10px; border-radius: 50%;
       background: var(--blue); flex-shrink: 0;
     }
+
+    /* ── Group Create Avatar (Screen 10) ── */
+    .group-create-avatar {
+      width: 80px; height: 80px; border-radius: 50%;
+      background: var(--turquoise-light);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+    }
+    .group-create-avatar-camera {
+      position: absolute; bottom: 0; right: 0;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--navy); border: 2.5px solid var(--white);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .group-create-avatar-camera svg {
+      width: 14px; height: 14px;
+    }
+
+    /* ── Group Manage Card (Screen 11) ── */
+    .group-manage-card {
+      margin: 16px 20px;
+      padding: 20px;
+      border-radius: 16px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      display: flex; align-items: center; gap: 14px;
+    }
+    .group-manage-avatar {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: var(--turquoise);
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 22px; color: white; flex-shrink: 0;
+    }
+    .group-manage-info { flex: 1; }
+    .group-manage-name {
+      font-weight: 700; font-size: 17px; color: var(--navy);
+      display: flex; align-items: center; gap: 8px;
+    }
+    .role-pill {
+      font-size: 11px; font-weight: 700; padding: 3px 10px;
+      border-radius: 8px; display: inline-block; white-space: nowrap;
+    }
+    .role-pill--admin {
+      color: white; background: var(--orange);
+    }
+    .role-pill--member {
+      color: var(--blue); background: var(--blue-light);
+    }
+    .group-manage-meta {
+      font-size: 12px; color: var(--mid-gray); margin-top: 4px;
+    }
+
+    /* ── Settings Row (used in group manage) ── */
+    .manage-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 20px; border-bottom: 1px solid var(--border); cursor: pointer;
+    }
+    .manage-item:last-child { border-bottom: none; }
+    .manage-item-label {
+      font-weight: 600; font-size: 15px; color: var(--navy);
+    }
+    .manage-item-label--accent {
+      color: var(--blue);
+    }
+    .manage-item-chevron {
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+
+    /* ── Member Action Button ── */
+    .member-action {
+      width: 44px; height: 44px; display: flex; align-items: center;
+      justify-content: center; cursor: pointer; flex-shrink: 0;
+      border-radius: 10px;
+    }
+    .member-action:hover { background: #FFF0EE; }
+    .member-action svg { width: 18px; height: 18px; }
+
+    /* ── Section Title (uppercase label) ── */
+    .section-title {
+      font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 1px; padding: 20px 20px 8px;
+    }
+    .section-title--gray { color: var(--mid-gray); }
+    .section-title--red { color: var(--red); }
+
+    /* ── Soft Destructive Button ── */
+    .btn-danger-soft {
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--btn-radius);
+      background: #FFF0EE;
+      color: var(--red);
+      font-weight: 700;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      min-height: 48px;
+    }
+
+    /* ── Warning Banner (Screen 12) ── */
+    .warning-banner {
+      margin: 20px 0;
+      padding: 14px 16px;
+      border-radius: 12px;
+      background: #FFF0EE;
+      font-size: 14px; font-weight: 700; color: var(--red);
+      text-align: center;
+    }
+
+    /* ── Bullet List with Red Dots ── */
+    .consequence-list { padding: 0; margin: 16px 0; }
+    .consequence-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 8px 0; font-size: 14px; font-weight: 500;
+      color: var(--dark-gray); line-height: 1.4;
+    }
+    .consequence-item::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 3px;
+      background: var(--red); flex-shrink: 0;
+      margin-top: 6px;
+    }
   </style>
 </head>
 <body>
@@ -1268,6 +1392,274 @@
               </div>
             </div>
 
+          </div>
+
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- ROW 4                                              -->
+  <!-- ══════════════════════════════════════════════════ -->
+  <div class="preview-row">
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 10 — Gruppe erstellen                    -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Gruppe erstellen</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Neue Gruppe erstellen</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <!-- Group Avatar -->
+          <div style="display: flex; flex-direction: column; align-items: center; padding: 28px 20px 0;">
+            <div class="group-create-avatar">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--turquoise)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+                <circle cx="9" cy="7" r="4"/>
+                <path d="M23 21v-2a4 4 0 00-3-3.87"/>
+                <path d="M16 3.13a4 4 0 010 7.75"/>
+              </svg>
+              <div class="group-create-avatar-camera">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                  <circle cx="12" cy="13" r="4"/>
+                </svg>
+              </div>
+            </div>
+            <div style="font-size: 12px; color: var(--mid-gray); margin-top: 8px; text-align: center;">Gruppenfoto (optional)</div>
+          </div>
+
+          <!-- Form Fields -->
+          <div class="form-section" style="padding-top: 0;">
+            <div class="form-label" style="margin-top: 24px;">Gruppenname</div>
+            <input class="form-input" type="text" value="Familie Müller" readonly>
+
+            <div class="form-label">Beschreibung <span style="font-weight: 400; text-transform: none;">(optional)</span></div>
+            <input class="form-input" type="text" placeholder="z.B. Für Oma Helga" readonly>
+          </div>
+
+          <!-- Info Box -->
+          <div style="margin: 8px 20px 20px; padding: 14px 16px; border-radius: 12px; background: var(--turquoise-light); display: flex; align-items: flex-start; gap: 10px;">
+            <span style="flex-shrink: 0; display: flex; align-items: center;">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+              </svg>
+            </span>
+            <span style="font-size: 14px; color: var(--navy); line-height: 1.5;">Du wirst automatisch als Admin dieser Gruppe eingetragen.</span>
+          </div>
+
+        </div>
+
+        <!-- Bottom Action Bar -->
+        <div style="padding: 12px 20px; border-top: 1px solid var(--border); background: var(--white); flex-shrink: 0;">
+          <button class="btn-primary">Gruppe erstellen</button>
+          <div style="text-align: center; margin-top: 4px;">
+            <button class="btn-text">Abbrechen</button>
+          </div>
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 11 — Gruppe verwalten                    -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Gruppe verwalten</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Gruppe verwalten</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <!-- Group Info Card -->
+          <div class="group-manage-card">
+            <div class="group-manage-avatar">F</div>
+            <div class="group-manage-info">
+              <div class="group-manage-name">
+                Familie Blümel
+                <span class="role-pill role-pill--admin">Admin</span>
+              </div>
+              <div class="group-manage-meta">Erstellt am 15. November 2024 · 4 Mitglieder</div>
+            </div>
+          </div>
+
+          <!-- Settings Items -->
+          <div style="padding: 0 0 8px; border-bottom: 1px solid var(--border);">
+            <div class="manage-item">
+              <span class="manage-item-label">Gruppenname ändern</span>
+              <span class="manage-item-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+            <div class="manage-item">
+              <span class="manage-item-label">Gruppenfoto ändern</span>
+              <span class="manage-item-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+            <div class="manage-item" style="border-bottom: none;">
+              <span class="manage-item-label manage-item-label--accent">Mitglieder einladen</span>
+              <span class="manage-item-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+            </div>
+          </div>
+
+          <!-- Members Section -->
+          <div class="section-title section-title--gray">Mitglieder</div>
+          <div class="member-list">
+            <!-- Member 1: Admin (self) -->
+            <div class="member-item">
+              <div class="member-avatar" style="background: linear-gradient(135deg, var(--blue-soft), var(--blue));">J</div>
+              <div class="member-info">
+                <div class="member-name">Julius Blümel</div>
+                <span class="role-pill role-pill--admin">Admin</span>
+              </div>
+            </div>
+
+            <!-- Member 2 -->
+            <div class="member-item">
+              <div class="member-avatar" style="background: linear-gradient(135deg, var(--turquoise-light), var(--turquoise));">M</div>
+              <div class="member-info">
+                <div class="member-name">Mama</div>
+                <span class="role-pill role-pill--member">Mitglied</span>
+              </div>
+              <div class="member-action">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="3 6 5 6 21 6"/>
+                  <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Member 3 -->
+            <div class="member-item">
+              <div class="member-avatar" style="background: linear-gradient(135deg, #FFF3DC, var(--orange));">P</div>
+              <div class="member-info">
+                <div class="member-name">Papa</div>
+                <span class="role-pill role-pill--member">Mitglied</span>
+              </div>
+              <div class="member-action">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="3 6 5 6 21 6"/>
+                  <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Member 4 -->
+            <div class="member-item">
+              <div class="member-avatar" style="background: linear-gradient(135deg, var(--blue-soft), var(--blue));">L</div>
+              <div class="member-info">
+                <div class="member-name">Lisa Blümel</div>
+                <span class="role-pill role-pill--member">Mitglied</span>
+              </div>
+              <div class="member-action">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="3 6 5 6 21 6"/>
+                  <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                </svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Danger Zone -->
+          <div style="margin-top: 24px;">
+            <div class="section-title section-title--red">Gefahrenzone</div>
+            <div style="padding: 0 20px;">
+              <button class="btn-danger-soft">Gruppe löschen</button>
+              <div style="font-size: 12px; color: var(--mid-gray); text-align: center; margin-top: 8px;">Alle Daten dieser Gruppe werden unwiderruflich gelöscht.</div>
+            </div>
+          </div>
+
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 12 — Gruppe löschen                      -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Gruppe löschen</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Gruppe löschen</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <div style="padding: 24px;">
+            <!-- Warning Icon -->
+            <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+              <div style="width: 64px; height: 64px; border-radius: 50%; background: #FFF0EE; display: flex; align-items: center; justify-content: center;">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+                  <line x1="12" y1="9" x2="12" y2="13"/>
+                  <line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- Title -->
+            <div style="font-size: 22px; font-weight: 800; color: var(--navy); text-align: center; margin-bottom: 16px;">Gruppe endgültig löschen?</div>
+
+            <!-- Description -->
+            <div style="font-size: 15px; font-weight: 500; color: var(--dark-gray); text-align: center; line-height: 1.5; margin-bottom: 4px;">
+              Wenn du die Gruppe <strong style="color: var(--navy);">Familie Blümel</strong> löschst, werden alle zugehörigen Daten unwiderruflich entfernt:
+            </div>
+
+            <!-- Consequence List -->
+            <div class="consequence-list">
+              <div class="consequence-item">Alle hochgeladenen Fotos</div>
+              <div class="consequence-item">Alle erstellten Magazine</div>
+              <div class="consequence-item">Alle Mitgliedschaften</div>
+              <div class="consequence-item">Versandhistorie &amp; Einstellungen</div>
+            </div>
+
+            <!-- Warning Banner -->
+            <div class="warning-banner">Diese Aktion kann nicht rückgängig gemacht werden.</div>
+
+            <!-- Confirmation Input -->
+            <div style="margin-top: 20px;">
+              <div class="form-label">Tippe LÖSCHEN zum Bestätigen</div>
+              <input class="form-input" type="text" placeholder="LÖSCHEN" readonly style="border-color: var(--border);">
+            </div>
+
+            <!-- Buttons -->
+            <div style="margin-top: 20px;">
+              <button class="btn-danger" disabled style="opacity: 0.45;">Gruppe löschen</button>
+            </div>
+            <div style="margin-top: 8px;">
+              <button class="btn-outline">Abbrechen</button>
+            </div>
           </div>
 
         </div>

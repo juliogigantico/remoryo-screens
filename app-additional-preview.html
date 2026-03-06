@@ -2108,6 +2108,319 @@
 
   </div>
 
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- SCREENS 13–15 — Permissions, Form, Success       -->
+  <!-- ══════════════════════════════════════════════════ -->
+
+  <div style="width: 100%; display: flex; align-items: center; gap: 16px; margin: 12px 0 4px;">
+    <div style="flex: 1; height: 1px; background: #D0D5DB;"></div>
+    <h1 style="white-space: nowrap;">Weitere Screens</h1>
+    <div style="flex: 1; height: 1px; background: #D0D5DB;"></div>
+  </div>
+
+  <style>
+    /* ── Screen 14: Empfänger hinzufügen — Form ── */
+    .form-screen {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--white);
+    }
+
+    .form-nav {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 8px 20px 12px;
+      border-bottom: 1px solid var(--border);
+      background: var(--white);
+      flex-shrink: 0;
+    }
+
+    .form-nav-title {
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--navy);
+    }
+
+    .form-scroll {
+      flex: 1;
+      overflow-y: auto;
+      padding: 20px 20px 0;
+    }
+
+    .form-group {
+      margin-bottom: 16px;
+    }
+
+    .form-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--mid-gray);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 4px;
+    }
+
+    .form-label-optional {
+      font-weight: 400;
+      text-transform: none;
+      letter-spacing: 0;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 10px;
+      border: 1.5px solid var(--border);
+      font-size: 14px;
+      color: var(--mid-gray);
+      font-weight: 500;
+      font-family: inherit;
+      background: var(--white);
+      outline: none;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 10px;
+    }
+
+    .form-bottom-bar {
+      padding: 12px 20px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    /* ── Screen 15: Abo aktiviert — Summary rows ── */
+    .summary-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .summary-row-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--mid-gray);
+    }
+
+    .summary-row-value {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      text-align: right;
+    }
+  </style>
+
+  <div class="preview-row">
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 13 — Foto-Zugriff (Pre-Permission)    -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Foto-Zugriff (Pre-Permission)</div>
+      <div class="phone">
+
+        <div class="status-bar"></div>
+
+        <div class="push-screen">
+
+          <!-- Blue Gradient Top -->
+          <div class="push-top">
+            <div class="push-logo">
+              <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="1.5"/><path d="M8 12l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+
+            <!-- Camera/Photo Icon -->
+            <div class="push-bell">
+              <svg viewBox="0 0 24 24" fill="none" width="36" height="36" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
+                <circle cx="12" cy="13" r="4"/>
+              </svg>
+            </div>
+
+            <div class="push-title">Zugriff auf deine Fotos</div>
+            <div class="push-subtitle">Um Fotos f&uuml;r dein Heft auszuw&auml;hlen, ben&ouml;tigt remoryo Zugriff auf deine Fotobibliothek.</div>
+          </div>
+
+          <!-- Body -->
+          <div class="push-body">
+            <div class="push-benefits">
+              <div class="push-benefit">
+                <div class="push-benefit-icon">&#128247;</div>
+                <div class="push-benefit-text">Fotos direkt aus deiner Bibliothek ausw&auml;hlen</div>
+              </div>
+              <div class="push-benefit">
+                <div class="push-benefit-icon">&#128274;</div>
+                <div class="push-benefit-text">Deine Fotos bleiben privat und sicher</div>
+              </div>
+              <div class="push-benefit">
+                <div class="push-benefit-icon">&#9889;</div>
+                <div class="push-benefit-text">Schneller Upload f&uuml;r dein Fotoheft</div>
+              </div>
+            </div>
+
+            <div class="push-buttons">
+              <button class="btn btn-primary">Zugriff erlauben</button>
+              <button class="btn btn-text" style="font-size: 14px; font-weight: 600;">Sp&auml;ter entscheiden</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 14 — Empfänger hinzufügen             -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Empf&auml;nger hinzuf&uuml;gen</div>
+      <div class="phone">
+
+        <div class="status-bar"></div>
+
+        <div class="form-screen">
+
+          <!-- Nav Bar -->
+          <div class="form-nav">
+            <div class="back-arrow">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </div>
+            <span class="form-nav-title">Empf&auml;nger hinzuf&uuml;gen</span>
+          </div>
+
+          <!-- Form Scroll Area -->
+          <div class="form-scroll">
+
+            <!-- Vorname -->
+            <div class="form-group">
+              <div class="form-label">Vorname</div>
+              <input class="form-input" type="text" placeholder="z.B. Helga">
+            </div>
+
+            <!-- Nachname -->
+            <div class="form-group">
+              <div class="form-label">Nachname</div>
+              <input class="form-input" type="text" placeholder="z.B. Bl&uuml;mel">
+            </div>
+
+            <!-- Straße & Hausnummer -->
+            <div class="form-group">
+              <div class="form-label">Stra&szlig;e &amp; Hausnummer</div>
+              <input class="form-input" type="text" placeholder="z.B. Musterstr. 12">
+            </div>
+
+            <!-- Adresszusatz -->
+            <div class="form-group">
+              <div class="form-label">Adresszusatz <span class="form-label-optional">(optional)</span></div>
+              <input class="form-input" type="text" placeholder="z.B. 3. OG links">
+            </div>
+
+            <!-- PLZ + Ort -->
+            <div class="form-group">
+              <div class="form-row">
+                <div style="width: 40%;">
+                  <div class="form-label">PLZ</div>
+                  <input class="form-input" type="text" placeholder="z.B. 10245">
+                </div>
+                <div style="width: 55%;">
+                  <div class="form-label">Ort</div>
+                  <input class="form-input" type="text" placeholder="z.B. Berlin">
+                </div>
+              </div>
+            </div>
+
+            <!-- Info Banner -->
+            <div style="background: var(--blue-light); border-radius: 10px; padding: 10px 14px; display: flex; align-items: flex-start; gap: 8px; margin-bottom: 16px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 1px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+              <span style="font-size: 14px; color: var(--navy); line-height: 1.5;">Zus&auml;tzliche Empf&auml;nger kosten +8,00&thinsp;&euro;/Monat.</span>
+            </div>
+
+          </div>
+
+          <!-- Bottom Action Bar -->
+          <div class="form-bottom-bar">
+            <button class="btn btn-primary">Speichern</button>
+            <button class="btn btn-text" style="font-size: 14px; font-weight: 600;">Abbrechen</button>
+          </div>
+
+          <div class="safe-bottom"></div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 15 — Abo aktiviert!                    -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">Abo aktiviert!</div>
+      <div class="phone">
+
+        <div class="status-bar"></div>
+
+        <div class="success-screen">
+
+          <!-- Orange Gradient Top -->
+          <div class="success-top">
+            <div class="success-checkmark">
+              <div class="success-checkmark-inner">
+                <span style="font-size: 36px;">&#127881;</span>
+              </div>
+            </div>
+            <div class="success-title">Willkommen bei remoryo!</div>
+            <div class="success-subtitle">Dein Abo ist jetzt aktiv. Lade Fotos hoch und erstelle dein erstes Fotoheft!</div>
+          </div>
+
+          <!-- White Card Body -->
+          <div class="success-body">
+
+            <div class="summary-rows" style="width: 100%;">
+              <div class="summary-row">
+                <span class="summary-row-label">Plan</span>
+                <span class="summary-row-value">Monatlich &middot; 14,99&thinsp;&euro;/Mo</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-row-label">Empf&auml;nger</span>
+                <span class="summary-row-value">Helga Bl&uuml;mel, Berlin</span>
+              </div>
+              <div class="summary-row">
+                <span class="summary-row-label">N&auml;chstes Heft</span>
+                <span class="summary-row-value">31. M&auml;rz 2026</span>
+              </div>
+            </div>
+
+            <div style="width: 100%; height: 1px; background: var(--border); margin-bottom: 20px;"></div>
+
+            <div class="success-buttons">
+              <button class="btn btn-primary">Jetzt Fotos hochladen</button>
+              <button class="btn btn-text" style="font-size: 14px; font-weight: 600;">Zur Startseite</button>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div class="safe-bottom"></div>
+
+      </div>
+    </div>
+
+  </div>
+
   <p class="footer-note">Preview nutzt Inter als Stand-in f&uuml;r Helvetica Now Display.</p>
 
 </body>
