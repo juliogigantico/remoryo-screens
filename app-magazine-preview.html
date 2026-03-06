@@ -13,6 +13,7 @@
       --blue: #82B7D8;
       --blue-light: #EAF3F9;
       --blue-soft: #D4E8F2;
+      --turquoise: #B8E0E0;
       --turquoise-light: #E2F3F3;
       --navy: #1B2C43;
       --orange: #FFA631;
@@ -505,6 +506,24 @@
       color: var(--navy);
       cursor: pointer;
     }
+    /* ── Text Button (link-style) ── */
+    .btn-text {
+      background: none;
+      border: none;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--navy);
+      cursor: pointer;
+      padding: 12px;
+      text-align: center;
+      width: 100%;
+      font-family: inherit;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
     .footer-note {
       font-size: 11px; color: #A0A0A0; font-weight: 500; text-align: center;
     }
@@ -902,6 +921,76 @@
         </div>
 
         <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 5 — Erstes Magazin erstellt (Erfolg)   -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">5 &middot; Erstes Magazin erstellt (Erfolg)</div>
+      <div class="phone" style="background: var(--white);">
+
+        <div class="status-bar"></div>
+
+        <!-- Content centered -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 20px;">
+
+          <!-- Party / Confetti icon -->
+          <div style="margin-bottom: 24px;">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <!-- Confetti pieces -->
+              <rect x="14" y="6" width="4" height="8" rx="2" fill="var(--orange)" transform="rotate(-15 16 10)"/>
+              <rect x="46" y="8" width="4" height="8" rx="2" fill="var(--blue)" transform="rotate(20 48 12)"/>
+              <rect x="30" y="2" width="4" height="8" rx="2" fill="var(--turquoise)" transform="rotate(5 32 6)"/>
+              <circle cx="10" cy="20" r="3" fill="var(--turquoise)"/>
+              <circle cx="54" cy="22" r="3" fill="var(--orange)"/>
+              <circle cx="22" cy="4" r="2.5" fill="var(--blue)"/>
+              <circle cx="42" cy="3" r="2.5" fill="var(--orange)"/>
+              <!-- Star burst -->
+              <path d="M32 16l2.5 7.5H42l-6 4.5 2.5 7.5-6-4.5-6 4.5 2.5-7.5-6-4.5h7.5z" fill="var(--orange)"/>
+              <!-- Popper cone -->
+              <path d="M18 58L10 46l30-18" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+              <path d="M10 46l8 12 4-2-6-12z" fill="var(--navy)" opacity="0.15"/>
+              <line x1="28" y1="36" x2="48" y2="18" stroke="var(--orange)" stroke-width="2" stroke-linecap="round"/>
+              <line x1="24" y1="42" x2="38" y2="24" stroke="var(--blue)" stroke-width="2" stroke-linecap="round"/>
+              <line x1="20" y1="48" x2="44" y2="28" stroke="var(--turquoise)" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <!-- Headline -->
+          <div style="font-weight: 800; font-size: 24px; color: var(--navy); text-align: center; margin-bottom: 8px;">
+            Geschafft!
+          </div>
+
+          <!-- Subheadline -->
+          <div style="font-weight: 600; font-size: 17px; color: var(--navy); text-align: center; margin-bottom: 16px;">
+            Dein erstes Fotoheft ist fertig!
+          </div>
+
+          <!-- Info text -->
+          <div style="font-size: 15px; color: var(--dark-gray); text-align: center; line-height: 1.55; font-weight: 500; max-width: 300px;">
+            Du kannst es bis zum Monatsende noch bearbeiten. Danach wird es automatisch gedruckt und verschickt.
+          </div>
+
+        </div>
+
+        <!-- Bottom actions -->
+        <div style="padding: 0 20px 40px; display: flex; flex-direction: column; align-items: center;">
+
+          <!-- Primary CTA -->
+          <button class="btn btn-primary" style="margin-bottom: 8px;">Zur Startseite</button>
+
+          <!-- Secondary invite prompt -->
+          <a class="btn-text" style="font-weight: 600; font-size: 14px; gap: 4px;">
+            Jetzt Familie einladen
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="9 18 15 12 9 6"/>
+            </svg>
+          </a>
+
+        </div>
+
       </div>
     </div>
 

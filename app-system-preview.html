@@ -1,0 +1,1538 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remoryo System &amp; Support — Visual Preview</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue: #82B7D8;
+      --blue-light: #EAF3F9;
+      --blue-soft: #D4E8F2;
+      --turquoise: #B8E0E0;
+      --turquoise-light: #E2F3F3;
+      --navy: #1B2C43;
+      --orange: #FFA631;
+      --white: #FFFFFF;
+      --dark-gray: #5A6B7A;
+      --mid-gray: #94A3B3;
+      --light-gray: #F5F6F8;
+      --border: #E2E6EB;
+      --beige: #E8DDD1;
+      --btn-radius: 14px;
+      --input-radius: 12px;
+      --red: #E74C3C;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #F0F2F5;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 20px;
+      gap: 20px;
+    }
+
+    h1 {
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--mid-gray);
+    }
+
+    .preview-row {
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+
+    .screen-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--mid-gray);
+      text-align: center;
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    /* ── Phone Frame ── */
+    .phone {
+      width: 393px;
+      height: 852px;
+      background: var(--white);
+      border-radius: 48px;
+      overflow: hidden;
+      box-shadow:
+        0 0 0 1px rgba(0,0,0,0.05),
+        0 8px 30px rgba(0,0,0,0.08),
+        0 30px 70px rgba(0,0,0,0.12);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Dynamic Island */
+    .phone::before {
+      content: '';
+      position: absolute;
+      top: 12px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 126px;
+      height: 36px;
+      background: #000;
+      border-radius: 20px;
+      z-index: 10;
+    }
+
+    /* ── Status Bar Area ── */
+    .status-bar {
+      height: 59px;
+      flex-shrink: 0;
+    }
+
+    .scroll-area {
+      flex: 1;
+      overflow-y: auto;
+      background: var(--white);
+    }
+
+    .safe-bottom {
+      height: 20px;
+      background: var(--white);
+      flex-shrink: 0;
+    }
+
+    /* ── Section Header with Back Arrow ── */
+    .section-back {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 16px 10px; flex-shrink: 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-back-arrow {
+      width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
+      cursor: pointer; flex-shrink: 0;
+    }
+    .section-back-arrow svg {
+      width: 24px; height: 24px; color: var(--navy);
+    }
+    .section-back-title { font-weight: 700; font-size: 17px; color: var(--navy); }
+
+    /* ── Buttons ── */
+    .btn {
+      width: 100%;
+      padding: 14px 24px;
+      border-radius: var(--btn-radius);
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      font-family: inherit;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-primary {
+      background: var(--orange);
+      color: var(--white);
+    }
+
+    .btn-outline {
+      background: var(--white);
+      color: var(--navy);
+      border: 1.5px solid var(--navy);
+    }
+
+    .btn-text {
+      background: none;
+      border: none;
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--navy);
+      cursor: pointer;
+      padding: 12px;
+      text-align: center;
+      width: 100%;
+      font-family: inherit;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-text-gray {
+      background: none;
+      border: none;
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--mid-gray);
+      cursor: pointer;
+      padding: 12px;
+      text-align: center;
+      width: 100%;
+      font-family: inherit;
+      min-height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ── Input ── */
+    .input {
+      width: 100%;
+      padding: 14px 18px;
+      border-radius: var(--input-radius);
+      border: 1.5px solid var(--border);
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--navy);
+      background: var(--white);
+      outline: none;
+      font-family: inherit;
+      height: 48px;
+    }
+
+    .input::placeholder {
+      color: var(--mid-gray);
+      font-weight: 400;
+    }
+
+    /* ── Link ── */
+    .link {
+      font-weight: 500;
+      font-size: 14px;
+      color: var(--blue);
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    /* ── Section Divider ── */
+    .section-divider {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 12px 0 4px;
+    }
+
+    .section-divider-line {
+      flex: 1;
+      height: 1px;
+      background: #D0D5DB;
+    }
+
+    /* ── Password Input with Icon ── */
+    .input-with-icon {
+      position: relative;
+    }
+
+    .input-icon {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--mid-gray);
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    /* ── Password Strength Indicator ── */
+    .pw-strength {
+      display: flex;
+      gap: 4px;
+      margin-top: -6px;
+      align-items: center;
+    }
+
+    .pw-bar {
+      flex: 1;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border);
+    }
+
+    .pw-bar.active {
+      background: var(--orange);
+    }
+
+    .pw-strength-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--mid-gray);
+      margin-left: 8px;
+      white-space: nowrap;
+    }
+
+    /* ── Push Notifications Lock Screen ── */
+    .lockscreen {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: linear-gradient(170deg, #0a1628 0%, #050a14 100%);
+      padding: 0 24px 30px;
+      overflow-y: auto;
+    }
+
+    .lockscreen-time {
+      text-align: center;
+      margin-top: 20px;
+      margin-bottom: 4px;
+    }
+    .lockscreen-time-digits {
+      font-size: 72px;
+      font-weight: 700;
+      color: #fff;
+      letter-spacing: -1px;
+      line-height: 1;
+    }
+    .lockscreen-date {
+      font-size: 17px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      margin-bottom: 32px;
+    }
+
+    .notif-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .notif-card {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-radius: 16px;
+      padding: 12px 14px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+    }
+
+    .notif-card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 4px;
+    }
+
+    .notif-app-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 6px;
+      background: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: 800;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .notif-app-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #555;
+      flex: 1;
+    }
+
+    .notif-timestamp {
+      font-size: 12px;
+      color: #888;
+      white-space: nowrap;
+    }
+
+    .notif-text {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--navy);
+      line-height: 1.35;
+      padding-left: 30px;
+    }
+
+    /* ── In-App Messages Screen ── */
+    .inappmsg-screen {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .inappmsg-nav {
+      display: flex;
+      align-items: center;
+      padding: 8px 16px 12px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .inappmsg-nav-title {
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--navy);
+      flex: 1;
+      text-align: center;
+      margin-right: 44px;
+    }
+
+    .inappmsg-bg {
+      flex: 1;
+      background: var(--light-gray);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      padding: 16px;
+    }
+
+    /* Dimmed overlay for modal */
+    .inappmsg-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.25);
+      z-index: 1;
+      border-radius: 0;
+    }
+
+    .inappmsg-placeholder-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 3px;
+      opacity: 0.35;
+    }
+    .inappmsg-placeholder-tile {
+      aspect-ratio: 1;
+      background: var(--border);
+      border-radius: 4px;
+    }
+
+    .inappmsg-messages-layer {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      padding: 14px 16px;
+      gap: 12px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .msg-type-tag {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: #888;
+      background: rgba(255,255,255,0.85);
+      border-radius: 4px;
+      padding: 2px 6px;
+      margin-bottom: 2px;
+    }
+
+    .msg-toast-success {
+      background: #fff;
+      border-left: 4px solid #2ecc71;
+      border-radius: 10px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      box-shadow: 0 3px 16px rgba(0,0,0,0.1);
+    }
+    .msg-toast-success-icon {
+      width: 26px;
+      height: 26px;
+      background: #e8f8ef;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .msg-toast-success-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+
+    .msg-error-banner {
+      background: #fdecea;
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .msg-error-icon {
+      width: 26px;
+      height: 26px;
+      background: rgba(231,76,60,0.15);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .msg-error-body {
+      flex: 1;
+    }
+    .msg-error-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: #c0392b;
+      line-height: 1.3;
+    }
+    .msg-error-action {
+      font-size: 13px;
+      font-weight: 700;
+      color: #e74c3c;
+      margin-top: 4px;
+      text-decoration: underline;
+    }
+
+    .msg-warning-banner {
+      background: #fef6e8;
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+    }
+    .msg-warning-icon {
+      width: 26px;
+      height: 26px;
+      background: rgba(255,166,49,0.18);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .msg-warning-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: #b37400;
+      line-height: 1.3;
+      flex: 1;
+    }
+
+    .msg-info-modal {
+      background: #fff;
+      border-radius: 20px;
+      padding: 28px 24px 22px;
+      text-align: center;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.18);
+      margin: auto 8px;
+    }
+    .msg-info-modal-emoji {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+    .msg-info-modal-headline {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 6px;
+    }
+    .msg-info-modal-subtext {
+      font-size: 14px;
+      color: var(--dark-gray);
+      line-height: 1.4;
+      margin-bottom: 18px;
+    }
+    .msg-info-modal-btn {
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--btn-radius);
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      background: var(--orange);
+      color: #fff;
+    }
+
+    /* ── Push Permission Screen ── */
+    .push-screen {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--white);
+    }
+
+    .push-top {
+      background: linear-gradient(145deg, #A1D0E8 0%, var(--blue) 100%);
+      padding: 24px 32px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .push-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--white);
+      letter-spacing: 0.5px;
+    }
+
+    .push-bell {
+      width: 80px;
+      height: 80px;
+      border-radius: 40px;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      margin-bottom: 20px;
+    }
+
+    .push-bell-badge {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      width: 22px;
+      height: 22px;
+      border-radius: 11px;
+      background: var(--orange);
+      border: 3px solid rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: white;
+    }
+
+    .push-title {
+      font-weight: 800;
+      font-size: 24px;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .push-subtitle {
+      font-size: 14px;
+      color: rgba(255,255,255,0.85);
+      line-height: 1.5;
+    }
+
+    .push-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 28px 24px;
+    }
+
+    .push-benefits {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .push-benefit {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      padding: 14px 16px;
+      background: var(--light-gray);
+      border-radius: 14px;
+    }
+
+    .push-benefit-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      background: var(--blue-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+
+    .push-benefit-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.3;
+    }
+
+    .push-buttons {
+      margin-top: auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .push-skip {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--mid-gray);
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 8px;
+    }
+
+    /* ── Back Arrow ── */
+    .back-arrow {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+    .back-arrow svg {
+      width: 24px;
+      height: 24px;
+      color: var(--navy);
+    }
+
+    /* ── Activity Feed ── */
+    .activity-section { padding: 0 20px; }
+    .activity-day-label {
+      font-size: 12px; font-weight: 700; color: var(--mid-gray);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      padding: 20px 0 8px;
+    }
+    .activity-day-label:first-child { padding-top: 16px; }
+
+    .activity-item {
+      display: flex; align-items: center; gap: 12px;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .activity-item:last-child { border-bottom: none; }
+
+    .activity-avatar {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 16px; color: white; flex-shrink: 0;
+    }
+    .activity-system-icon {
+      width: 40px; height: 40px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .activity-system-icon svg {
+      width: 20px; height: 20px;
+    }
+
+    .activity-text-block { flex: 1; min-width: 0; }
+    .activity-text {
+      font-size: 14px; color: var(--navy); line-height: 1.4;
+    }
+    .activity-time {
+      font-size: 12px; color: var(--mid-gray); margin-top: 2px;
+    }
+
+    .activity-unread-dot {
+      width: 10px; height: 10px; border-radius: 50%;
+      background: var(--blue); flex-shrink: 0;
+    }
+
+    .footer-note {
+      font-size: 11px;
+      color: #A0A0A0;
+      font-weight: 500;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Remoryo System &amp; Support &mdash; Visual Preview</h1>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- ROW 1: Passwort-Reset (Screens 1-3)               -->
+  <!-- ══════════════════════════════════════════════════ -->
+
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <h1 style="white-space: nowrap;">Passwort-Reset</h1>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="preview-row">
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 1 — Passwort vergessen (Eingabe)       -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">1 &middot; Passwort vergessen (Eingabe)</div>
+      <div class="phone" style="background: var(--beige);">
+
+        <div class="status-bar"></div>
+
+        <!-- Content -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding: 0 20px;">
+
+          <!-- Logo -->
+          <div style="margin-top: 40px; margin-bottom: 32px;">
+            <img src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="width: 56px; height: auto;">
+          </div>
+
+          <!-- Headline -->
+          <div style="text-align: center; margin-bottom: 12px;">
+            <div style="font-weight: 800; font-size: 26px; color: var(--navy); line-height: 1.3;">Passwort vergessen?</div>
+          </div>
+
+          <!-- Description -->
+          <div style="text-align: center; font-size: 15px; color: var(--dark-gray); line-height: 1.55; font-weight: 500; margin-bottom: 32px; max-width: 300px;">
+            Kein Problem! Gib deine E-Mail-Adresse ein und wir senden dir einen Link zum Zur&uuml;cksetzen.
+          </div>
+
+          <!-- Email input -->
+          <input class="input" type="email" placeholder="E-Mail-Adresse" style="margin-bottom: 16px;">
+
+          <!-- CTA -->
+          <button class="btn btn-primary">Link senden</button>
+
+          <div style="flex: 1;"></div>
+
+          <!-- Back link -->
+          <a class="btn-text" style="gap: 6px; margin-bottom: 20px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            Zur&uuml;ck zum Login
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 2 — Neues Passwort setzen              -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">2 &middot; Neues Passwort setzen</div>
+      <div class="phone" style="background: var(--beige);">
+
+        <div class="status-bar"></div>
+
+        <!-- Content -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding: 0 20px;">
+
+          <!-- Logo -->
+          <div style="margin-top: 40px; margin-bottom: 32px;">
+            <img src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="width: 56px; height: auto;">
+          </div>
+
+          <!-- Headline -->
+          <div style="text-align: center; margin-bottom: 12px;">
+            <div style="font-weight: 800; font-size: 26px; color: var(--navy); line-height: 1.3;">Neues Passwort setzen</div>
+          </div>
+
+          <!-- Description -->
+          <div style="text-align: center; font-size: 15px; color: var(--dark-gray); line-height: 1.55; font-weight: 500; margin-bottom: 32px; max-width: 300px;">
+            W&auml;hle ein sicheres Passwort f&uuml;r deinen Account.
+          </div>
+
+          <!-- Password fields -->
+          <div style="width: 100%; display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px;">
+            <div class="input-with-icon">
+              <input class="input" type="password" placeholder="Neues Passwort" style="padding-right: 48px;">
+              <span class="input-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </span>
+            </div>
+            <div class="input-with-icon">
+              <input class="input" type="password" placeholder="Passwort best&auml;tigen" style="padding-right: 48px;">
+              <span class="input-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <!-- Password strength indicator -->
+          <div class="pw-strength" style="width: 100%; margin-bottom: 24px;">
+            <div class="pw-bar active"></div>
+            <div class="pw-bar active"></div>
+            <div class="pw-bar active"></div>
+            <div class="pw-bar"></div>
+            <span class="pw-strength-label">Stark</span>
+          </div>
+
+          <!-- CTA -->
+          <button class="btn btn-primary">Passwort speichern</button>
+
+          <div style="flex: 1;"></div>
+
+          <!-- Back link -->
+          <a class="btn-text" style="gap: 6px; margin-bottom: 20px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            Zur&uuml;ck zum Login
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 3 — Passwort vergessen (Erfolg)        -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">3 &middot; Passwort vergessen (Erfolg)</div>
+      <div class="phone" style="background: var(--beige);">
+
+        <div class="status-bar"></div>
+
+        <!-- Content -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding: 0 20px;">
+
+          <!-- Envelope icon -->
+          <div style="margin-top: 60px; margin-bottom: 24px;">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <rect x="6" y="14" width="52" height="36" rx="4" stroke="var(--navy)" stroke-width="2.5" fill="none"/>
+              <polyline points="6,14 32,36 58,14" fill="none" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+              <line x1="6" y1="50" x2="24" y2="34" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round"/>
+              <line x1="58" y1="50" x2="40" y2="34" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <!-- Headline -->
+          <div style="text-align: center; margin-bottom: 12px;">
+            <div style="font-weight: 800; font-size: 26px; color: var(--navy); line-height: 1.3;">E-Mail gesendet!</div>
+          </div>
+
+          <!-- Description -->
+          <div style="text-align: center; font-size: 15px; color: var(--dark-gray); line-height: 1.55; font-weight: 500; margin-bottom: 8px; max-width: 300px;">
+            Pr&uuml;fe dein Postfach (j***s@remoryo.de) und klicke den Link zum Zur&uuml;cksetzen.
+          </div>
+
+          <!-- Subtext -->
+          <div style="text-align: center; font-size: 13px; color: var(--mid-gray); font-weight: 500; margin-bottom: 20px;">
+            Keine E-Mail erhalten?
+          </div>
+
+          <!-- Resend button (outline) -->
+          <button class="btn btn-outline" style="max-width: 240px;">Erneut senden</button>
+
+          <div style="flex: 1;"></div>
+
+          <!-- Back link -->
+          <a class="btn-text" style="gap: 6px; margin-bottom: 20px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            Zur&uuml;ck zum Login
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- ROW 2: Fehler & System (Screens 4-6)              -->
+  <!-- ══════════════════════════════════════════════════ -->
+
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <h1 style="white-space: nowrap;">Fehler &amp; System</h1>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="preview-row">
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 4 — Netzwerk-Fehler                    -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">4 &middot; Netzwerk-Fehler</div>
+      <div class="phone" style="background: var(--white);">
+
+        <!-- No header, no status bar — overlay state -->
+
+        <!-- Centered content -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 20px;">
+
+          <!-- WiFi / Signal icon -->
+          <div style="margin-bottom: 24px;">
+            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
+              <!-- WiFi arcs -->
+              <path d="M8 26c7-8 16.5-12 24-12s17 4 24 12" stroke="var(--mid-gray)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M16 34c5-6 10.5-9 16-9s11 3 16 9" stroke="var(--mid-gray)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <path d="M24 42c2.5-3 5.5-5 8-5s5.5 2 8 5" stroke="var(--mid-gray)" stroke-width="2.5" stroke-linecap="round" fill="none"/>
+              <!-- Center dot -->
+              <circle cx="32" cy="48" r="2.5" fill="var(--mid-gray)"/>
+              <!-- Slash across -->
+              <line x1="12" y1="52" x2="52" y2="20" stroke="var(--red)" stroke-width="2.5" stroke-linecap="round"/>
+            </svg>
+          </div>
+
+          <!-- Headline -->
+          <div style="font-weight: 700; font-size: 20px; color: var(--navy); text-align: center; margin-bottom: 10px;">
+            Keine Verbindung
+          </div>
+
+          <!-- Body text -->
+          <div style="font-size: 15px; color: var(--dark-gray); text-align: center; line-height: 1.55; font-weight: 500; margin-bottom: 32px; max-width: 280px;">
+            Pr&uuml;fe deine Internetverbindung und versuche es erneut.
+          </div>
+
+          <!-- Retry CTA -->
+          <button class="btn btn-primary" style="max-width: 320px;">Erneut versuchen</button>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 5 — Logout Bestätigung (Bottom Sheet)  -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">5 &middot; Logout Best&auml;tigung</div>
+      <div class="phone" style="background: var(--light-gray);">
+
+        <div class="status-bar"></div>
+
+        <!-- Dimmed settings background -->
+        <div style="flex: 1; position: relative;">
+
+          <!-- Fake settings list (gray rectangles) -->
+          <div style="padding: 8px 20px 16px;">
+            <!-- Fake nav bar -->
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 20px; opacity: 0.4;">
+              <div style="width: 24px; height: 3px; background: var(--navy); border-radius: 2px;"></div>
+              <div style="width: 100px; height: 14px; background: var(--navy); border-radius: 7px;"></div>
+            </div>
+            <!-- Fake setting rows -->
+            <div style="opacity: 0.3; display: flex; flex-direction: column; gap: 8px;">
+              <div style="width: 100%; height: 52px; background: var(--border); border-radius: 14px;"></div>
+              <div style="width: 100%; height: 52px; background: var(--border); border-radius: 14px;"></div>
+              <div style="width: 100%; height: 52px; background: var(--border); border-radius: 14px;"></div>
+              <div style="width: 100%; height: 52px; background: var(--border); border-radius: 14px;"></div>
+              <div style="width: 100%; height: 52px; background: var(--border); border-radius: 14px;"></div>
+              <div style="width: 100%; height: 52px; background: var(--border); border-radius: 14px;"></div>
+            </div>
+          </div>
+
+          <!-- Dark overlay -->
+          <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); z-index: 5;"></div>
+
+          <!-- Bottom Sheet -->
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; background: var(--white); border-radius: 24px 24px 0 0; padding: 24px 24px 20px; z-index: 6; box-shadow: 0 -8px 30px rgba(0,0,0,0.12);">
+
+            <!-- Handle bar -->
+            <div style="width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 24px;"></div>
+
+            <!-- Headline -->
+            <div style="font-weight: 700; font-size: 20px; color: var(--navy); text-align: center; margin-bottom: 8px;">Abmelden?</div>
+
+            <!-- Subtext -->
+            <div style="font-size: 15px; color: var(--dark-gray); text-align: center; line-height: 1.55; font-weight: 500; margin-bottom: 24px;">
+              Du kannst dich jederzeit wieder anmelden.
+            </div>
+
+            <!-- Buttons -->
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <!-- Red outline button -->
+              <button class="btn btn-outline" style="color: var(--red); border-color: var(--red);">Abmelden</button>
+              <!-- Gray text button -->
+              <a class="btn-text-gray">Abbrechen</a>
+            </div>
+
+            <!-- Bottom safe area -->
+            <div style="height: 14px;"></div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 6 — Hilfe & Support                    -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">6 &middot; Hilfe &amp; Support</div>
+      <div class="phone" style="background: var(--white);">
+
+        <div class="status-bar"></div>
+
+        <!-- Nav Bar -->
+        <div style="display: flex; align-items: center; padding: 8px 16px 12px; gap: 12px;">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="15 18 9 12 15 6"/>
+          </svg>
+          <div style="flex: 1; font-weight: 700; font-size: 17px; color: var(--navy);">Hilfe &amp; Support</div>
+        </div>
+
+        <!-- Content -->
+        <div style="flex: 1; display: flex; flex-direction: column; padding: 0 20px; overflow-y: auto;">
+
+          <!-- Search bar -->
+          <div style="position: relative; margin-bottom: 20px;">
+            <div style="position: absolute; left: 14px; top: 50%; transform: translateY(-50%);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="11" cy="11" r="8"/>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+              </svg>
+            </div>
+            <input class="input" type="text" placeholder="Frage eingeben..." style="padding-left: 42px; background: var(--light-gray); border-color: transparent;">
+          </div>
+
+          <!-- FAQ Accordion -->
+          <div style="display: flex; flex-direction: column; gap: 4px; margin-bottom: 20px;">
+
+            <!-- FAQ 1 — Expanded -->
+            <div style="background: var(--white); border: 1.5px solid var(--border); border-left: 3px solid var(--orange); border-radius: 14px; overflow: hidden;">
+              <!-- Question row -->
+              <div style="display: flex; align-items: center; padding: 14px 16px; cursor: pointer; gap: 12px;">
+                <div style="flex: 1; font-size: 15px; font-weight: 600; color: var(--navy);">Wie funktioniert remoryo?</div>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"/>
+                </svg>
+              </div>
+              <!-- Answer -->
+              <div style="padding: 0 16px 14px; font-size: 14px; color: var(--dark-gray); line-height: 1.6; font-weight: 400;">
+                Lade Fotos in der App hoch, gestalte dein Heft und wir drucken und verschicken es jeden Monat an deine Liebsten.
+              </div>
+            </div>
+
+            <!-- FAQ 2 — Collapsed -->
+            <div style="background: var(--white); border: 1.5px solid var(--border); border-radius: 14px;">
+              <div style="display: flex; align-items: center; padding: 14px 16px; cursor: pointer; gap: 12px;">
+                <div style="flex: 1; font-size: 15px; font-weight: 600; color: var(--navy);">Kann ich mein Abo pausieren?</div>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"/>
+                </svg>
+              </div>
+            </div>
+
+            <!-- FAQ 3 — Collapsed -->
+            <div style="background: var(--white); border: 1.5px solid var(--border); border-radius: 14px;">
+              <div style="display: flex; align-items: center; padding: 14px 16px; cursor: pointer; gap: 12px;">
+                <div style="flex: 1; font-size: 15px; font-weight: 600; color: var(--navy);">Wie lade ich Familienmitglieder ein?</div>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="9 18 15 12 9 6"/>
+                </svg>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Section divider -->
+          <div style="height: 1px; background: var(--border); margin-bottom: 20px;"></div>
+
+          <!-- Contact section -->
+          <div style="font-weight: 700; font-size: 18px; color: var(--navy); margin-bottom: 14px;">Noch Fragen?</div>
+
+          <!-- Contact cards (side by side) -->
+          <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+
+            <!-- E-Mail card -->
+            <div style="flex: 1; background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 18px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer;">
+              <div style="width: 42px; height: 42px; border-radius: 12px; background: var(--orange); display: flex; align-items: center; justify-content: center;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/>
+                  <polyline points="22,4 12,13 2,4"/>
+                </svg>
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 2px;">E-Mail</div>
+                <div style="font-size: 11px; color: var(--mid-gray); font-weight: 500;">support@remoryo.com</div>
+              </div>
+            </div>
+
+            <!-- Chat card -->
+            <div style="flex: 1; background: var(--white); border: 1.5px solid var(--border); border-radius: 14px; padding: 18px 14px; display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer;">
+              <div style="width: 42px; height: 42px; border-radius: 12px; background: var(--blue); display: flex; align-items: center; justify-content: center;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+                </svg>
+              </div>
+              <div style="text-align: center;">
+                <div style="font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 2px;">Chat</div>
+                <div style="font-size: 11px; color: var(--mid-gray); font-weight: 500;">Live-Chat starten</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+
+        <div style="height: 34px; flex-shrink: 0;"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- ROW 3: Notifications (Screens 7-10)               -->
+  <!-- ══════════════════════════════════════════════════ -->
+
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <h1 style="white-space: nowrap;">Notifications</h1>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="preview-row">
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 7 — Push Notifications (Lock Screen)   -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">7 &middot; Push Notifications</div>
+      <div class="phone" style="background: #050a14;">
+
+        <div class="status-bar" style="background: transparent;">
+          <!-- Lock screen status icons -->
+          <div style="display: flex; justify-content: space-between; align-items: center; padding: 14px 24px 0; position: relative; z-index: 1;">
+            <span style="font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.9);">09:41</span>
+            <div style="display: flex; gap: 5px; align-items: center;">
+              <svg width="16" height="12" viewBox="0 0 16 12" fill="rgba(255,255,255,0.9)"><rect x="0" y="6" width="3" height="6" rx="0.5"/><rect x="4.5" y="4" width="3" height="8" rx="0.5"/><rect x="9" y="1.5" width="3" height="10.5" rx="0.5"/><rect x="13" y="0" width="3" height="12" rx="0.5"/></svg>
+              <svg width="16" height="12" viewBox="0 0 16 12" fill="none" stroke="rgba(255,255,255,0.9)" stroke-width="1.2"><path d="M1.5 8.5C3.5 6.5 6.5 5 8 5s4.5 1.5 6.5 3.5"/><path d="M4 10.5C5.2 9.3 6.5 8 8 8s2.8 1.3 4 2.5"/></svg>
+              <svg width="24" height="12" viewBox="0 0 24 12" fill="none"><rect x="0.5" y="0.5" width="20" height="11" rx="2" stroke="rgba(255,255,255,0.9)" stroke-width="1"/><rect x="2" y="2" width="14" height="8" rx="1" fill="rgba(255,255,255,0.9)"/><rect x="22" y="3.5" width="2" height="5" rx="0.5" fill="rgba(255,255,255,0.5)"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="lockscreen">
+
+          <div class="lockscreen-time">
+            <div class="lockscreen-time-digits">09:41</div>
+          </div>
+          <div class="lockscreen-date">Donnerstag, 5. M&auml;rz</div>
+
+          <div class="notif-stack">
+
+            <!-- Notification 1 (newest) -->
+            <div class="notif-card">
+              <div class="notif-card-header">
+                <div class="notif-app-icon">r</div>
+                <span class="notif-app-name">remoryo</span>
+                <span class="notif-timestamp">vor 2 Min.</span>
+              </div>
+              <div class="notif-text">Erinnerung: Noch 3 Tage bis Druckschluss &#128197;</div>
+            </div>
+
+            <!-- Notification 2 -->
+            <div class="notif-card">
+              <div class="notif-card-header">
+                <div class="notif-app-icon">r</div>
+                <span class="notif-app-name">remoryo</span>
+                <span class="notif-timestamp">vor 1 Std.</span>
+              </div>
+              <div class="notif-text">Lisa hat 3 Fotos hochgeladen &#128248;</div>
+            </div>
+
+            <!-- Notification 3 -->
+            <div class="notif-card">
+              <div class="notif-card-header">
+                <div class="notif-app-icon">r</div>
+                <span class="notif-app-name">remoryo</span>
+                <span class="notif-timestamp">vor 3 Std.</span>
+              </div>
+              <div class="notif-text">Dein M&auml;rzheft wurde versendet! &#128236;</div>
+            </div>
+
+            <!-- Notification 4 (oldest) -->
+            <div class="notif-card">
+              <div class="notif-card-header">
+                <div class="notif-app-icon">r</div>
+                <span class="notif-app-name">remoryo</span>
+                <span class="notif-timestamp">Gestern</span>
+              </div>
+              <div class="notif-text">Mama hat dich zu ihrer Gruppe eingeladen &#128104;&#8205;&#128105;&#8205;&#128103;</div>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 8 — In-App Messages                    -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">8 &middot; In-App Messages</div>
+      <div class="phone">
+
+        <div class="status-bar"></div>
+
+        <div class="inappmsg-screen">
+
+          <!-- Nav Bar -->
+          <div class="inappmsg-nav">
+            <div class="back-arrow">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+            </div>
+            <span class="inappmsg-nav-title">Fotos</span>
+          </div>
+
+          <!-- Background: faded photo grid -->
+          <div class="inappmsg-bg">
+            <div class="inappmsg-placeholder-grid">
+              <div class="inappmsg-placeholder-tile"></div>
+              <div class="inappmsg-placeholder-tile"></div>
+              <div class="inappmsg-placeholder-tile"></div>
+              <div class="inappmsg-placeholder-tile"></div>
+              <div class="inappmsg-placeholder-tile"></div>
+              <div class="inappmsg-placeholder-tile"></div>
+              <div class="inappmsg-placeholder-tile"></div>
+              <div class="inappmsg-placeholder-tile"></div>
+              <div class="inappmsg-placeholder-tile"></div>
+              <div class="inappmsg-placeholder-tile"></div>
+              <div class="inappmsg-placeholder-tile"></div>
+              <div class="inappmsg-placeholder-tile"></div>
+            </div>
+
+            <!-- Message overlays -->
+            <div class="inappmsg-messages-layer">
+
+              <!-- Success Toast -->
+              <div>
+                <span class="msg-type-tag">Success</span>
+                <div class="msg-toast-success">
+                  <div class="msg-toast-success-icon">
+                    <svg viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="#2ecc71" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+                  </div>
+                  <span class="msg-toast-success-text">Foto erfolgreich hochgeladen</span>
+                </div>
+              </div>
+
+              <!-- Error Banner -->
+              <div>
+                <span class="msg-type-tag">Error</span>
+                <div class="msg-error-banner">
+                  <div class="msg-error-icon">
+                    <svg viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="#e74c3c" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+                  </div>
+                  <div class="msg-error-body">
+                    <div class="msg-error-text">Upload fehlgeschlagen &mdash; Bitte erneut versuchen</div>
+                    <div class="msg-error-action">Erneut</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Warning Banner -->
+              <div>
+                <span class="msg-type-tag">Warning</span>
+                <div class="msg-warning-banner">
+                  <div class="msg-warning-icon">
+                    <svg viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="#e67e22" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+                  </div>
+                  <span class="msg-warning-text">Druckschluss in 2 Tagen &mdash; Jetzt Heft fertigstellen</span>
+                </div>
+              </div>
+
+              <!-- Info Modal -->
+              <div>
+                <span class="msg-type-tag" style="margin-left: 8px;">Modal</span>
+                <div class="msg-info-modal">
+                  <div class="msg-info-modal-emoji">&#127881;</div>
+                  <div class="msg-info-modal-headline">Abo aktiviert!</div>
+                  <div class="msg-info-modal-subtext">Dein erstes Heft wird Ende des Monats gedruckt.</div>
+                  <button class="msg-info-modal-btn">Los geht&rsquo;s</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 9 — Push Permission                    -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">9 &middot; Push Permission</div>
+      <div class="phone">
+
+        <div class="status-bar"></div>
+
+        <div class="push-screen">
+
+          <!-- Blue Gradient Top -->
+          <div class="push-top">
+            <div class="push-logo">
+              <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><circle cx="12" cy="12" r="10" stroke="white" stroke-width="1.5"/><path d="M8 12l3 3 5-5" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </div>
+
+            <div class="push-bell">
+              <span style="font-size: 36px;">&#128276;</span>
+              <div class="push-bell-badge">3</div>
+            </div>
+
+            <div class="push-title">Verpasse nichts</div>
+            <div class="push-subtitle">Erfahre sofort, wenn Familienmitglieder Fotos hochladen oder dein Fotoheft verschickt wird.</div>
+          </div>
+
+          <!-- Body -->
+          <div class="push-body">
+            <div class="push-benefits">
+              <div class="push-benefit">
+                <div class="push-benefit-icon">&#128248;</div>
+                <div class="push-benefit-text">Neue Fotos von deiner Familie</div>
+              </div>
+              <div class="push-benefit">
+                <div class="push-benefit-icon">&#128230;</div>
+                <div class="push-benefit-text">Heft wurde verschickt</div>
+              </div>
+              <div class="push-benefit">
+                <div class="push-benefit-icon">&#9200;</div>
+                <div class="push-benefit-text">Erinnerung an die Deadline</div>
+              </div>
+            </div>
+
+            <div class="push-buttons">
+              <button class="btn btn-primary">Benachrichtigungen aktivieren</button>
+              <button class="push-skip">Vielleicht sp&auml;ter</button>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 10 — Benachrichtigungen (Activity)     -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">10 &middot; Benachrichtigungen</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Aktivität</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <div class="activity-section">
+
+            <!-- Today -->
+            <div class="activity-day-label">Heute</div>
+
+            <div class="activity-item">
+              <div class="activity-avatar" style="background: var(--blue-soft); color: var(--navy);">L</div>
+              <div class="activity-text-block">
+                <div class="activity-text">Schwester Lisa hat 3 Fotos hochgeladen</div>
+                <div class="activity-time">vor 2 Std.</div>
+              </div>
+              <div class="activity-unread-dot"></div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-avatar" style="background: var(--turquoise); color: var(--navy);">M</div>
+              <div class="activity-text-block">
+                <div class="activity-text">Mama hat einen Kommentar geschrieben</div>
+                <div class="activity-time">vor 5 Std.</div>
+              </div>
+              <div class="activity-unread-dot"></div>
+            </div>
+
+            <!-- Yesterday -->
+            <div class="activity-day-label">Gestern</div>
+
+            <div class="activity-item">
+              <div class="activity-system-icon" style="background: #FFF3DC;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                  <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                </svg>
+              </div>
+              <div class="activity-text-block">
+                <div class="activity-text">Dein Märzheft ist in Druck!</div>
+                <div class="activity-time">Gestern, 14:30</div>
+              </div>
+            </div>
+
+            <!-- Last Week -->
+            <div class="activity-day-label">Letzte Woche</div>
+
+            <div class="activity-item">
+              <div class="activity-system-icon" style="background: #E0F5F5;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--turquoise)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <div class="activity-text-block">
+                <div class="activity-text">Februarheft wurde zugestellt</div>
+                <div class="activity-time">28. Feb</div>
+              </div>
+            </div>
+
+            <div class="activity-item">
+              <div class="activity-avatar" style="background: var(--blue-soft); color: var(--navy);">L</div>
+              <div class="activity-text-block">
+                <div class="activity-text">Schwester Lisa ist der Gruppe beigetreten</div>
+                <div class="activity-time">27. Feb</div>
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <p class="footer-note">Preview nutzt Inter als Stand-in f&uuml;r Helvetica Now Display.</p>
+
+</body>
+</html>

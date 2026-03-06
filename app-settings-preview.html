@@ -23,7 +23,9 @@
       --light-gray: #F5F6F8;
       --border: #E2E6EB;
       --btn-radius: 14px;
+      --input-radius: 12px;
       --red: #E74C3C;
+      --beige: #E8DDD1;
     }
 
     body {
@@ -147,35 +149,6 @@
       font-size: 14px; color: var(--mid-gray);
     }
 
-    /* ── Plan Card ── */
-    .plan-card {
-      margin: 16px 20px;
-      padding: 24px;
-      border-radius: 16px;
-      border: 2px solid var(--blue);
-      background: linear-gradient(145deg, var(--blue-light) 0%, var(--white) 100%);
-    }
-    .plan-name {
-      font-weight: 800; font-size: 18px; color: var(--navy); margin-bottom: 4px;
-    }
-    .plan-price {
-      font-weight: 700; font-size: 28px; color: var(--blue);
-    }
-    .plan-price-period {
-      font-weight: 500; font-size: 14px; color: var(--mid-gray);
-    }
-    .plan-features {
-      margin-top: 16px; display: flex; flex-direction: column; gap: 10px;
-    }
-    .plan-feature {
-      display: flex; align-items: center; gap: 10px;
-      font-size: 14px; color: var(--dark-gray);
-    }
-    .plan-feature-check {
-      width: 20px; height: 20px; border-radius: 10px;
-      background: var(--blue); display: flex; align-items: center;
-      justify-content: center; flex-shrink: 0;
-    }
     /* ── Logout ── */
     .logout-btn {
       margin: 24px 20px 0; padding: 14px;
@@ -268,6 +241,376 @@
       font-size: 15px; font-weight: 500; color: var(--navy);
     }
 
+    /* ── Form Elements (from settings-detail) ── */
+    .form-section { padding: 0 20px 20px; }
+    .form-label {
+      font-size: 12px; font-weight: 700; color: var(--mid-gray);
+      text-transform: uppercase; letter-spacing: 0.5px;
+      margin-bottom: 8px; margin-top: 20px;
+    }
+    .form-input {
+      width: 100%; padding: 14px 16px; border-radius: var(--input-radius);
+      border: 1.5px solid var(--border); font-size: 15px;
+      font-weight: 500; color: var(--navy); font-family: inherit;
+      background: var(--white); outline: none; height: 48px;
+    }
+    .form-input:focus { border-color: var(--blue); }
+    .form-input::placeholder { color: var(--mid-gray); font-weight: 400; }
+
+    .form-row {
+      display: flex; gap: 12px;
+    }
+    .form-row .form-group { flex: 1; }
+    .form-row .form-group--small { flex: 0 0 120px; }
+
+    .form-hint {
+      font-size: 12px; color: var(--mid-gray); margin-top: 6px;
+    }
+    .form-note {
+      font-size: 13px; color: var(--dark-gray); line-height: 1.5;
+      padding: 16px 20px 0;
+    }
+
+    /* ── Outline button ── */
+    .btn-outline {
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--btn-radius);
+      background: var(--white);
+      color: var(--navy);
+      font-weight: 700;
+      font-size: 15px;
+      border: 1.5px solid var(--navy);
+      cursor: pointer;
+      font-family: inherit;
+      text-align: center;
+      min-height: 48px;
+    }
+
+    /* ── Danger button (red destructive) ── */
+    .btn-danger {
+      width: 100%;
+      padding: 14px;
+      border-radius: var(--btn-radius);
+      background: var(--red);
+      color: white;
+      font-weight: 700;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      min-height: 48px;
+    }
+    .btn-danger:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+
+    /* ── Text button ── */
+    .btn-text {
+      font-size: 14px; color: var(--navy); text-align: center;
+      cursor: pointer; padding: 12px; font-family: inherit;
+      background: none; border: none; font-weight: 500;
+      min-height: 48px;
+    }
+
+    /* ── Password Input with Eye Icon ── */
+    .input-wrapper {
+      position: relative;
+    }
+    .input-wrapper .form-input {
+      padding-right: 48px;
+    }
+    .input-eye {
+      position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px; display: flex; align-items: center;
+      justify-content: center; cursor: pointer; color: var(--mid-gray);
+    }
+    .input-eye svg { width: 20px; height: 20px; }
+
+    /* ── Password Strength Indicator ── */
+    .password-strength {
+      display: flex; gap: 4px; margin-top: 8px;
+    }
+    .password-strength-bar {
+      flex: 1; height: 4px; border-radius: 2px; background: var(--border);
+    }
+    .password-strength-bar.active { background: var(--orange); }
+    .password-strength-label {
+      font-size: 11px; color: var(--orange); font-weight: 600;
+      margin-top: 4px;
+    }
+
+    /* ── Payment Card ── */
+    .payment-card {
+      margin: 20px 20px 16px;
+      padding: 20px;
+      border-radius: 16px;
+      border: 1.5px solid var(--border);
+      background: var(--white);
+      display: flex; align-items: center; gap: 16px;
+    }
+    .payment-card-icon {
+      width: 48px; height: 48px; border-radius: 12px;
+      background: #1A1F71; display: flex; align-items: center;
+      justify-content: center; flex-shrink: 0;
+    }
+    .payment-card-info { flex: 1; }
+    .payment-card-number {
+      font-weight: 600; font-size: 15px; color: var(--navy); margin-bottom: 2px;
+    }
+    .payment-card-expiry {
+      font-size: 12px; color: var(--mid-gray);
+    }
+    .payment-badge {
+      font-size: 11px; font-weight: 700; color: var(--blue);
+      background: var(--blue-light); padding: 4px 10px;
+      border-radius: 8px; flex-shrink: 0;
+    }
+
+    /* ── Non-owner message ── */
+    .non-owner-message {
+      margin: 40px 20px;
+      padding: 24px;
+      border-radius: 16px;
+      background: var(--light-gray);
+      text-align: center;
+    }
+    .non-owner-message-icon {
+      margin-bottom: 12px;
+      display: flex; justify-content: center;
+    }
+    .non-owner-message-icon svg {
+      width: 32px; height: 32px;
+    }
+    .non-owner-message-text {
+      font-size: 14px; color: var(--dark-gray); line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .non-owner-message-owner {
+      font-size: 14px; font-weight: 600; color: var(--navy);
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .non-owner-message-owner-avatar {
+      width: 28px; height: 28px; border-radius: 14px;
+      background: linear-gradient(135deg, var(--blue-soft), var(--blue));
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 12px; color: white;
+    }
+
+    /* ── Info Note ── */
+    .info-note {
+      margin: 16px 20px; padding: 16px;
+      border-radius: 12px; background: var(--blue-light);
+      font-size: 13px; color: var(--dark-gray); line-height: 1.5;
+      display: flex; align-items: flex-start; gap: 10px;
+    }
+    .info-note-icon {
+      flex-shrink: 0;
+      display: flex; align-items: center;
+    }
+    .info-note-icon svg {
+      width: 18px; height: 18px;
+    }
+
+    /* ── Delete Account Warning ── */
+    .delete-warning-icon {
+      text-align: center; padding: 32px 0 16px;
+      display: flex; justify-content: center;
+    }
+    .delete-warning-icon svg {
+      width: 56px; height: 56px;
+    }
+    .delete-warning-text {
+      font-size: 16px; font-weight: 700; color: var(--red);
+      text-align: center; padding: 0 20px; margin-bottom: 20px;
+    }
+    .delete-consequence-list {
+      padding: 0 24px; margin-bottom: 24px;
+    }
+    .delete-consequence-item {
+      display: flex; align-items: flex-start; gap: 12px;
+      padding: 10px 0; font-size: 14px; color: var(--dark-gray);
+      line-height: 1.4;
+    }
+    .delete-consequence-item::before {
+      content: '';
+      width: 6px; height: 6px; border-radius: 3px;
+      background: var(--red); flex-shrink: 0;
+      margin-top: 6px;
+    }
+
+    .delete-confirm-section {
+      padding: 0 20px;
+    }
+    .delete-confirm-label {
+      font-size: 13px; color: var(--dark-gray); margin-bottom: 8px;
+      font-weight: 500;
+    }
+    .delete-confirm-input {
+      width: 100%; padding: 14px 16px; border-radius: var(--input-radius);
+      border: 1.5px solid var(--red); font-size: 15px;
+      font-weight: 500; color: var(--navy); font-family: inherit;
+      background: #FFF8F7; outline: none; height: 48px;
+      opacity: 0.6;
+    }
+    .delete-confirm-input::placeholder {
+      color: var(--mid-gray); font-weight: 400;
+    }
+
+    /* ── Profile Avatar Section ── */
+    .profile-avatar-section {
+      display: flex; flex-direction: column; align-items: center;
+      padding: 28px 20px 8px;
+    }
+    .profile-avatar-wrapper {
+      position: relative; width: 80px; height: 80px;
+    }
+    .profile-avatar-camera {
+      position: absolute; bottom: 0; right: 0;
+      width: 28px; height: 28px; border-radius: 50%;
+      background: var(--navy); border: 2.5px solid var(--white);
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+    }
+    .profile-avatar-camera svg {
+      width: 14px; height: 14px;
+    }
+
+    /* ── Locked Input ── */
+    .form-input--locked {
+      background: var(--light-gray);
+      color: var(--mid-gray);
+      cursor: not-allowed;
+      padding-right: 44px;
+    }
+    .input-lock {
+      position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
+      color: var(--mid-gray); display: flex; align-items: center;
+    }
+    .input-lock svg { width: 16px; height: 16px; }
+
+    /* ── Shipping Timeline ── */
+    .magazine-card {
+      margin: 16px 20px;
+      padding: 16px;
+      border-radius: 16px;
+      background: var(--light-gray);
+      display: flex; align-items: center; gap: 14px;
+    }
+    .magazine-card-icon {
+      width: 48px; height: 56px; border-radius: 8px;
+      background: var(--beige);
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .magazine-card-info { flex: 1; }
+    .magazine-card-title {
+      font-weight: 700; font-size: 16px; color: var(--navy);
+    }
+    .magazine-card-status {
+      font-size: 13px; color: var(--orange); font-weight: 600; margin-top: 2px;
+    }
+
+    .timeline { padding: 8px 20px 20px; }
+    .timeline-step {
+      display: flex; gap: 16px;
+      position: relative;
+      padding-bottom: 28px;
+    }
+    .timeline-step:last-child { padding-bottom: 0; }
+    .timeline-step::before {
+      content: '';
+      position: absolute;
+      left: 15px; top: 32px;
+      width: 2px;
+      height: calc(100% - 32px);
+      background: var(--border);
+    }
+    .timeline-step:last-child::before { display: none; }
+    .timeline-step--completed::before { background: #34C759; }
+    .timeline-step--current::before { background: var(--border); }
+
+    .timeline-dot {
+      width: 32px; height: 32px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; position: relative; z-index: 1;
+    }
+    .timeline-dot--completed {
+      background: #34C759;
+    }
+    .timeline-dot--completed svg {
+      width: 16px; height: 16px; color: white;
+    }
+    .timeline-dot--current {
+      background: var(--orange);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+    .timeline-dot--current::after {
+      content: '';
+      position: absolute;
+      width: 32px; height: 32px; border-radius: 50%;
+      background: var(--orange);
+      opacity: 0;
+      animation: pulse-ring 2s ease-in-out infinite;
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(1); opacity: 0.4; }
+      100% { transform: scale(1.6); opacity: 0; }
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.85; }
+    }
+    .timeline-dot--pending {
+      background: var(--white);
+      border: 2px solid var(--border);
+    }
+
+    .timeline-content { flex: 1; padding-top: 4px; }
+    .timeline-label {
+      font-weight: 600; font-size: 15px; color: var(--navy);
+    }
+    .timeline-step--pending .timeline-label {
+      color: var(--mid-gray); font-weight: 500;
+    }
+    .timeline-step--current .timeline-label {
+      font-weight: 700; color: var(--navy);
+    }
+    .timeline-date {
+      font-size: 12px; color: var(--mid-gray); margin-top: 2px;
+    }
+    .timeline-step--current .timeline-date {
+      color: var(--orange); font-weight: 500;
+    }
+
+    .delivery-estimate {
+      margin: 8px 20px 20px;
+      padding: 16px;
+      border-radius: 12px;
+      background: var(--blue-light);
+      font-size: 14px; color: var(--navy); font-weight: 600;
+      text-align: center;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
+    }
+    .delivery-estimate svg {
+      width: 18px; height: 18px; color: var(--blue); flex-shrink: 0;
+    }
+
+    /* ── Section Divider ── */
+    .section-divider {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 12px 0 4px;
+    }
+    .section-divider-line {
+      flex: 1;
+      height: 1px;
+      background: #D0D5DB;
+    }
+
     .footer-note {
       font-size: 11px; color: #A0A0A0; font-weight: 500; text-align: center;
     }
@@ -277,13 +620,23 @@
 
   <h1>Remoryo Settings Preview</h1>
 
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- ROW 1: Einstellungen & Profil (Screens 1-3)       -->
+  <!-- ══════════════════════════════════════════════════ -->
+
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <h1 style="white-space: nowrap;">Einstellungen &amp; Profil</h1>
+    <div class="section-divider-line"></div>
+  </div>
+
   <div class="preview-row">
 
     <!-- ══════════════════════════════════════════════ -->
     <!-- SCREEN 1 — Settings Hauptmenü                 -->
     <!-- ══════════════════════════════════════════════ -->
     <div>
-      <div class="screen-label">Einstellungen</div>
+      <div class="screen-label">1 &middot; Einstellungen</div>
       <div class="phone">
         <div class="status-bar"></div>
 
@@ -479,7 +832,7 @@
     <!-- SCREEN 2 — Profil Übersicht (read-only)       -->
     <!-- ══════════════════════════════════════════════ -->
     <div>
-      <div class="screen-label">Mein Nutzerprofil</div>
+      <div class="screen-label">2 &middot; Mein Nutzerprofil</div>
       <div class="phone">
         <div class="status-bar"></div>
 
@@ -548,10 +901,10 @@
     </div>
 
     <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 3 — Remoryo Abonnement                 -->
+    <!-- SCREEN 3 — Profil bearbeiten                   -->
     <!-- ══════════════════════════════════════════════ -->
     <div>
-      <div class="screen-label">Remoryo Abonnement</div>
+      <div class="screen-label">3 &middot; Profil bearbeiten</div>
       <div class="phone">
         <div class="status-bar"></div>
 
@@ -561,78 +914,69 @@
               <path d="M15 18l-6-6 6-6"/>
             </svg>
           </div>
-          <span class="section-back-title">Remoryo Abonnement</span>
+          <span class="section-back-title">Profil bearbeiten</span>
         </div>
 
         <div class="scroll-area">
 
-          <!-- Current Plan -->
-          <div class="plan-card">
-            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px;">
-              <div>
-                <div class="plan-name">Familienpaket</div>
-                <div style="font-size: 12px; color: var(--blue); font-weight: 600; margin-top: 4px; display: flex; align-items: center; gap: 4px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#27AE60" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg> Aktiv</div>
+          <!-- Profile Avatar -->
+          <div class="profile-avatar-section">
+            <div class="profile-avatar-wrapper">
+              <div class="profile-avatar">J</div>
+              <div class="profile-avatar-camera">
+                <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                  <circle cx="12" cy="13" r="4"/>
+                </svg>
               </div>
-              <div style="text-align: right;">
-                <div class="plan-price">14,99€</div>
-                <div class="plan-price-period">/ Monat</div>
-              </div>
-            </div>
-
-            <div class="plan-features">
-              <div class="plan-feature">
-                <div class="plan-feature-check">
-                  <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </div>
-                1 gedrucktes Heft pro Monat
-              </div>
-              <div class="plan-feature">
-                <div class="plan-feature-check">
-                  <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </div>
-                Die ganze Familie kann mitmachen
-              </div>
-              <div class="plan-feature">
-                <div class="plan-feature-check">
-                  <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </div>
-                Unbegrenzte Fotos
-              </div>
-              <div class="plan-feature">
-                <div class="plan-feature-check">
-                  <svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </div>
-                Kostenloser Versand
-              </div>
-            </div>
-
-            <button class="btn-danger-soft" style="margin-top: 16px;">Abo k&uuml;ndigen</button>
-            <div style="font-size: 11px; color: var(--mid-gray); text-align: center; margin-top: 6px;">Das aktuelle Heft wird noch gedruckt.</div>
-          </div>
-
-          <!-- Billing Info -->
-          <div class="settings-section">
-            <div class="settings-section-title">Abrechnung</div>
-            <div class="settings-item settings-item--static">
-              <div class="settings-item-left">
-                <div>
-                  <div class="settings-item-label">Nächste Abrechnung</div>
-                  <div class="settings-item-sub">01. April 2026 · 14,99€</div>
-                </div>
-              </div>
-            </div>
-            <div class="settings-item">
-              <div class="settings-item-left">
-                <div>
-                  <div class="settings-item-label">Zahlungsmethode</div>
-                  <div class="settings-item-sub">Visa •••• 6411</div>
-                </div>
-              </div>
-              <span class="settings-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
             </div>
           </div>
 
-          <div style="height: 20px;"></div>
+          <!-- Form Fields -->
+          <div class="form-section" style="padding-top: 4px;">
+            <div class="form-label">Vorname</div>
+            <input class="form-input" type="text" value="Julius" readonly>
+
+            <div class="form-label">Nachname</div>
+            <input class="form-input" type="text" value="Blümel" readonly>
+
+            <div class="form-label">E-Mail</div>
+            <div class="input-wrapper">
+              <input class="form-input form-input--locked" type="email" value="julius@remoryo.de" readonly>
+              <div class="input-lock">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+              </div>
+            </div>
+
+            <div class="form-label">Geburtstag</div>
+            <input class="form-input" type="text" value="15.03.1992" readonly>
+
+            <div class="form-label">Anzeigename <span style="font-weight: 400; text-transform: none;">(optional)</span></div>
+            <input class="form-input" type="text" value="Julius" readonly style="color: var(--mid-gray); font-weight: 400;">
+
+            <!-- Passwort ändern link -->
+            <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border);">
+              <div class="settings-item" style="border-bottom: none; padding: 12px 0;">
+                <div class="settings-item-left">
+                  <div class="settings-item-icon" style="background: var(--light-gray);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></div>
+                  <div>
+                    <div class="settings-item-label">Passwort ändern</div>
+                  </div>
+                </div>
+                <span class="settings-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
+              </div>
+            </div>
+
+            <div style="margin-top: 16px;">
+              <button class="btn-primary">Speichern</button>
+            </div>
+            <div style="text-align: center; margin-top: 4px;">
+              <button class="btn-text">Abbrechen</button>
+            </div>
+          </div>
 
         </div>
         <div class="safe-bottom"></div>
@@ -642,17 +986,22 @@
   </div>
 
   <!-- ══════════════════════════════════════════════════ -->
-  <!-- SCREEN 4 — Abo noch nicht aktiv                    -->
+  <!-- ROW 2: Sicherheit & Adresse (Screens 4-5)        -->
   <!-- ══════════════════════════════════════════════════ -->
-  <div style="width: 100%; display: flex; align-items: center; gap: 16px; margin: 12px 0 4px;">
-    <div style="flex: 1; height: 1px; background: #D0D5DB;"></div>
-    <h1 style="white-space: nowrap;">Abo-Auswahl (kein aktives Abo)</h1>
-    <div style="flex: 1; height: 1px; background: #D0D5DB;"></div>
+
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <h1 style="white-space: nowrap;">Sicherheit &amp; Adresse</h1>
+    <div class="section-divider-line"></div>
   </div>
 
   <div class="preview-row">
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 4 — Passwort ändern                     -->
+    <!-- ══════════════════════════════════════════════ -->
     <div>
-      <div class="screen-label">Remoryo Abonnement — Kein Abo</div>
+      <div class="screen-label">4 &middot; Passwort ändern</div>
       <div class="phone">
         <div class="status-bar"></div>
 
@@ -662,119 +1011,470 @@
               <path d="M15 18l-6-6 6-6"/>
             </svg>
           </div>
-          <span class="section-back-title">Abonnement</span>
+          <span class="section-back-title">Passwort ändern</span>
         </div>
 
         <div class="scroll-area">
 
-          <!-- Hero / Value Prop -->
-          <div style="text-align: center; padding: 16px 20px 20px;">
-            <div style="width: 64px; height: 64px; margin: 0 auto 12px; background: linear-gradient(135deg, var(--turquoise) 0%, var(--blue) 100%); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/>
-              </svg>
-            </div>
-            <div style="font-weight: 800; font-size: 20px; color: var(--navy); margin-bottom: 6px;">Starte dein Abo</div>
-            <div style="font-size: 13px; color: var(--dark-gray); line-height: 1.5;">Jeden Monat ein gedrucktes Fotoheft<br>direkt in den Briefkasten deiner Liebsten.</div>
-          </div>
-
-          <!-- Plan Cards -->
-          <div style="padding: 0 20px;">
-
-            <!-- Monthly Plan -->
-            <div style="background: white; border: 1.5px solid var(--border); border-radius: 16px; padding: 16px; margin-bottom: 12px; cursor: pointer;">
-              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <div>
-                  <div style="font-weight: 700; font-size: 16px; color: var(--navy);">Monatlich</div>
-                  <div style="font-size: 12px; color: var(--dark-gray); margin-top: 2px;">Monatlich k&uuml;ndbar</div>
-                </div>
-                <div style="text-align: right;">
-                  <div style="font-weight: 800; font-size: 20px; color: var(--navy);">14,99&thinsp;&euro;</div>
-                  <div style="font-size: 11px; color: var(--mid-gray);">pro Monat</div>
-                </div>
-              </div>
-              <div style="margin-top: 10px; background: rgba(255, 166, 49, 0.08); border-radius: 8px; padding: 6px 10px; display: inline-flex; align-items: center; gap: 4px;">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/></svg>
-                <span style="font-size: 12px; font-weight: 700; color: var(--orange);">Erster Monat kostenlos</span>
+          <div class="form-section" style="padding-top: 4px;">
+            <div class="form-label">Aktuelles Passwort</div>
+            <div class="input-wrapper">
+              <input class="form-input" type="password" value="••••••••" readonly>
+              <div class="input-eye">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
               </div>
             </div>
 
-            <!-- Yearly Plan (Recommended) -->
-            <div style="background: white; border: 2px solid var(--orange); border-radius: 16px; padding: 16px; margin-bottom: 16px; cursor: pointer; position: relative; box-shadow: 0 2px 12px rgba(255, 166, 49, 0.15);">
-              <!-- Badge -->
-              <div style="position: absolute; top: -10px; right: 16px; background: var(--orange); color: white; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 20px; text-transform: uppercase; letter-spacing: 0.5px;">Beliebteste</div>
-              <div style="display: flex; justify-content: space-between; align-items: flex-start;">
-                <div>
-                  <div style="font-weight: 700; font-size: 16px; color: var(--navy);">J&auml;hrlich</div>
-                  <div style="font-size: 12px; color: var(--dark-gray); margin-top: 2px;">J&auml;hrliche Abrechnung</div>
-                </div>
-                <div style="text-align: right;">
-                  <div style="font-weight: 800; font-size: 20px; color: var(--navy);">149,99&thinsp;&euro;</div>
-                  <div style="font-size: 11px; color: var(--mid-gray);">pro Jahr &middot; 12,50&thinsp;&euro;/Monat</div>
-                </div>
-              </div>
-              <div style="margin-top: 10px; display: flex; gap: 8px;">
-                <div style="background: rgba(52, 199, 89, 0.08); border-radius: 8px; padding: 6px 10px; display: inline-flex; align-items: center; gap: 4px;">
-                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#34C759" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-                  <span style="font-size: 12px; font-weight: 700; color: #34C759;">2 Monate geschenkt</span>
-                </div>
+            <div class="form-label">Neues Passwort</div>
+            <div class="input-wrapper">
+              <input class="form-input" type="password" value="••••••••••" readonly>
+              <div class="input-eye">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
               </div>
             </div>
-          </div>
+            <!-- Strength Indicator -->
+            <div class="password-strength">
+              <div class="password-strength-bar active"></div>
+              <div class="password-strength-bar active"></div>
+              <div class="password-strength-bar active"></div>
+              <div class="password-strength-bar"></div>
+            </div>
+            <div class="password-strength-label">Gut</div>
 
-          <!-- Features -->
-          <div style="padding: 0 20px 16px;">
-            <div style="font-size: 11px; font-weight: 700; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">In jedem Abo enthalten</div>
-
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-              <div style="width: 24px; height: 24px; border-radius: 50%; background: var(--turquoise-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5A9E9E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+            <div class="form-label">Neues Passwort bestätigen</div>
+            <div class="input-wrapper">
+              <input class="form-input" type="password" value="••••••••••" readonly>
+              <div class="input-eye">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
               </div>
-              <span style="font-size: 13px; color: var(--navy); font-weight: 500;">1 gedrucktes Heft pro Monat (12 Seiten)</span>
             </div>
 
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-              <div style="width: 24px; height: 24px; border-radius: 50%; background: var(--turquoise-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5A9E9E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-              </div>
-              <span style="font-size: 13px; color: var(--navy); font-weight: 500;">Versand an 1 Adresse inklusive</span>
+            <div style="margin-top: 28px;">
+              <button class="btn-primary">Passwort ändern</button>
             </div>
-
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-              <div style="width: 24px; height: 24px; border-radius: 50%; background: var(--turquoise-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5A9E9E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-              </div>
-              <span style="font-size: 13px; color: var(--navy); font-weight: 500;">Unbegrenzt Familienmitglieder</span>
-            </div>
-
-            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 8px;">
-              <div style="width: 24px; height: 24px; border-radius: 50%; background: var(--turquoise-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5A9E9E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-              </div>
-              <span style="font-size: 13px; color: var(--navy); font-weight: 500;">PDF-Download jeder Ausgabe</span>
-            </div>
-
-            <div style="display: flex; align-items: center; gap: 10px;">
-              <div style="width: 24px; height: 24px; border-radius: 50%; background: var(--turquoise-light); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#5A9E9E" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
-              </div>
-              <span style="font-size: 13px; color: var(--navy); font-weight: 500;">Weitere Adressen ab +8&thinsp;&euro;/Monat</span>
-            </div>
-          </div>
-
-          <!-- CTA -->
-          <div style="padding: 0 20px 8px;">
-            <button class="btn-primary" style="width: 100%; padding: 16px; border: none; border-radius: var(--btn-radius); background: var(--orange); color: white; font-size: 16px; font-weight: 700; cursor: pointer;">Abo aktivieren</button>
-          </div>
-
-          <div style="padding: 4px 20px 20px; text-align: center;">
-            <div style="font-size: 11px; color: var(--mid-gray); line-height: 1.5;">Jederzeit k&uuml;ndbar</div>
+            <div class="form-hint" style="text-align: center; margin-top: 10px;">Mindestens 8 Zeichen</div>
           </div>
 
         </div>
         <div class="safe-bottom"></div>
       </div>
     </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 5 — Lieferadresse                       -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">5 &middot; Lieferadresse</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Lieferadresse</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <div class="form-note">Wohin soll das Fotoheft geliefert werden?</div>
+
+          <div class="form-section">
+            <div class="form-label">Vorname</div>
+            <input class="form-input" type="text" value="Oma" readonly>
+
+            <div class="form-label">Nachname</div>
+            <input class="form-input" type="text" value="Blümel" readonly>
+
+            <div style="margin-top: 20px;">
+              <div class="form-row">
+                <div class="form-group">
+                  <div class="form-label" style="margin-top: 0;">Straße</div>
+                  <input class="form-input" type="text" value="Bergstraße" readonly>
+                </div>
+                <div class="form-group--small">
+                  <div class="form-label" style="margin-top: 0;">Hausnr.</div>
+                  <input class="form-input" type="text" value="12" readonly>
+                </div>
+              </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+              <div class="form-row">
+                <div class="form-group--small">
+                  <div class="form-label" style="margin-top: 0;">PLZ</div>
+                  <input class="form-input" type="text" value="60311" readonly>
+                </div>
+                <div class="form-group">
+                  <div class="form-label" style="margin-top: 0;">Ort</div>
+                  <input class="form-input" type="text" value="Frankfurt" readonly>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-label">Adresszusatz <span style="font-weight: 400; text-transform: none;">(optional)</span></div>
+            <input class="form-input" type="text" placeholder="z.B. Bitte klingeln" readonly>
+
+            <div style="margin-top: 28px;">
+              <button class="btn-primary">Speichern</button>
+            </div>
+            <div class="form-hint" style="text-align: center; margin-top: 10px;">Das Fotoheft wird jeden Monat automatisch an diese Adresse geschickt.</div>
+          </div>
+
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- ROW 3: Zahlung & Account (Screens 6-8)            -->
+  <!-- ══════════════════════════════════════════════════ -->
+
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <h1 style="white-space: nowrap;">Zahlung &amp; Account</h1>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="preview-row">
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 6 — Zahlungsmethode (Verwalter)        -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">6 &middot; Zahlungsmethode (Verwalter)</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Zahlungsmethode</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <!-- Current Payment Card -->
+          <div class="payment-card">
+            <div class="payment-card-icon">
+              <svg viewBox="0 0 48 48" width="32" height="32">
+                <text x="50%" y="56%" text-anchor="middle" dominant-baseline="middle" fill="white" font-family="Inter, sans-serif" font-weight="800" font-size="14">VISA</text>
+              </svg>
+            </div>
+            <div class="payment-card-info">
+              <div class="payment-card-number">Visa &bull;&bull;&bull;&bull; 6411</div>
+              <div class="payment-card-expiry">L&auml;uft ab 12/2028</div>
+            </div>
+            <div class="payment-badge">Standard</div>
+          </div>
+
+          <!-- Other payment options -->
+          <div style="padding: 0 20px;">
+            <div style="font-size: 11px; font-weight: 700; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Zahlungsmethode &auml;ndern</div>
+
+            <!-- PayPal -->
+            <div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: white; border: 1.5px solid var(--border); border-radius: 12px; margin-bottom: 8px; cursor: pointer;">
+              <div style="width: 40px; height: 28px; background: #003087; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" font-family="Inter, sans-serif" font-weight="800" font-size="7">PP</text></svg>
+              </div>
+              <div style="flex: 1; font-size: 14px; font-weight: 600; color: var(--navy);">PayPal</div>
+              <div style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border);"></div>
+            </div>
+
+            <!-- Apple Pay -->
+            <div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: white; border: 1.5px solid var(--border); border-radius: 12px; margin-bottom: 8px; cursor: pointer;">
+              <div style="width: 40px; height: 28px; background: #000; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+                <svg width="16" height="20" viewBox="0 0 20 24" fill="white"><path d="M16.5 12.5c0-2.7 2.2-4 2.3-4.1-1.3-1.8-3.2-2.1-3.9-2.1-1.6-.2-3.2 1-4 1s-2.1-1-3.5-1c-1.8 0-3.4 1-4.3 2.6-1.9 3.2-.5 8 1.3 10.6.9 1.3 2 2.7 3.4 2.6 1.4-.1 1.9-.9 3.5-.9s2.1.9 3.5.8c1.5 0 2.3-1.3 3.2-2.6 1-1.5 1.4-2.9 1.4-3-.1 0-2.9-1.1-2.9-4.3zm-2.7-7.9c.7-.9 1.2-2.2 1.1-3.4-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.2 1.2.1 2.3-.6 3-1.4z"/></svg>
+              </div>
+              <div style="flex: 1; font-size: 14px; font-weight: 600; color: var(--navy);">Apple Pay</div>
+              <div style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border);"></div>
+            </div>
+
+            <!-- Google Pay -->
+            <div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: white; border: 1.5px solid var(--border); border-radius: 12px; margin-bottom: 8px; cursor: pointer;">
+              <div style="width: 40px; height: 28px; background: white; border: 1px solid #ddd; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+                <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+              </div>
+              <div style="flex: 1; font-size: 14px; font-weight: 600; color: var(--navy);">Google Pay</div>
+              <div style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border);"></div>
+            </div>
+
+            <!-- Kreditkarte -->
+            <div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: white; border: 1.5px solid var(--border); border-radius: 12px; margin-bottom: 8px; cursor: pointer;">
+              <div style="width: 40px; height: 28px; background: var(--navy); border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+                <svg width="20" height="16" viewBox="0 0 24 18" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <rect x="1" y="1" width="22" height="16" rx="2"/>
+                  <line x1="1" y1="7" x2="23" y2="7"/>
+                </svg>
+              </div>
+              <div style="flex: 1; font-size: 14px; font-weight: 600; color: var(--navy);">Andere Kreditkarte</div>
+              <div style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border);"></div>
+            </div>
+
+            <!-- EC-Karte / Lastschrift -->
+            <div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: white; border: 1.5px solid var(--border); border-radius: 12px; cursor: pointer;">
+              <div style="width: 40px; height: 28px; background: #0066B3; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
+                <span style="color: white; font-weight: 800; font-size: 7px; font-family: Inter, sans-serif;">EC</span>
+              </div>
+              <div style="flex: 1; font-size: 14px; font-weight: 600; color: var(--navy);">EC-Karte / Lastschrift</div>
+              <div style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border);"></div>
+            </div>
+          </div>
+
+          <!-- Info note -->
+          <div class="info-note">
+            <span class="info-note-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <line x1="12" y1="16" x2="12" y2="12"/>
+                <line x1="12" y1="8" x2="12.01" y2="8"/>
+              </svg>
+            </span>
+            <span>Deine Zahlungsmethode wird f&uuml;r das aktive Abo der Gruppe verwendet.</span>
+          </div>
+
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 7 — Zahlungsmethode (Mitglied)         -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">7 &middot; Zahlungsmethode (Mitglied)</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Zahlungsmethode</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <div class="non-owner-message">
+            <div class="non-owner-message-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+            </div>
+            <div class="non-owner-message-text">Nur Verwalter der Gruppe können Zahlungsmethoden verwalten.</div>
+            <div class="non-owner-message-owner">
+              <div class="non-owner-message-owner-avatar">J</div>
+              Verwalter: Julius Blümel
+            </div>
+          </div>
+
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 8 — Account löschen                     -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">8 &middot; Account löschen</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Account löschen</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <!-- Warning Icon -->
+          <div class="delete-warning-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
+              <line x1="12" y1="9" x2="12" y2="13"/>
+              <line x1="12" y1="17" x2="12.01" y2="17"/>
+            </svg>
+          </div>
+
+          <!-- Warning Text -->
+          <div class="delete-warning-text">Diese Aktion kann nicht rückgängig gemacht werden.</div>
+
+          <!-- Consequences List -->
+          <div class="delete-consequence-list">
+            <div class="delete-consequence-item">Dein Account wird unwiderruflich gelöscht</div>
+            <div class="delete-consequence-item">Alle deine Fotos werden entfernt</div>
+            <div class="delete-consequence-item">Deine Gruppenmitgliedschaften enden</div>
+            <div class="delete-consequence-item">Ein aktives Abo wird gekündigt</div>
+          </div>
+
+          <!-- Confirmation Input -->
+          <div class="delete-confirm-section">
+            <div class="delete-confirm-label">Gib <strong>LÖSCHEN</strong> ein um zu bestätigen</div>
+            <input class="delete-confirm-input" type="text" placeholder="LÖSCHEN" readonly>
+
+            <div style="margin-top: 24px;">
+              <button class="btn-danger" disabled>Account löschen</button>
+            </div>
+
+            <div style="text-align: center; margin-top: 8px;">
+              <button class="btn-text">Abbrechen</button>
+            </div>
+          </div>
+
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- ROW 4: Versand (Screen 9)                         -->
+  <!-- ══════════════════════════════════════════════════ -->
+
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <h1 style="white-space: nowrap;">Versand</h1>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="preview-row">
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 9 — Versandstatus                       -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">9 &middot; Versandstatus</div>
+      <div class="phone">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M15 18l-6-6 6-6"/>
+            </svg>
+          </div>
+          <span class="section-back-title">Versandstatus</span>
+        </div>
+
+        <div class="scroll-area">
+
+          <!-- Magazine Card -->
+          <div class="magazine-card">
+            <div class="magazine-card-icon">
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/>
+                <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/>
+                <line x1="9" y1="7" x2="15" y2="7"/>
+                <line x1="9" y1="11" x2="13" y2="11"/>
+              </svg>
+            </div>
+            <div class="magazine-card-info">
+              <div class="magazine-card-title">März 2026</div>
+              <div class="magazine-card-status">In Druck</div>
+            </div>
+          </div>
+
+          <!-- Timeline / Stepper -->
+          <div class="timeline">
+
+            <!-- Step 1: Completed -->
+            <div class="timeline-step timeline-step--completed">
+              <div class="timeline-dot timeline-dot--completed">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-label">Fotos gesammelt</div>
+                <div class="timeline-date">28. Feb</div>
+              </div>
+            </div>
+
+            <!-- Step 2: Completed -->
+            <div class="timeline-step timeline-step--completed">
+              <div class="timeline-dot timeline-dot--completed">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-label">Heft erstellt</div>
+                <div class="timeline-date">1. März</div>
+              </div>
+            </div>
+
+            <!-- Step 3: Current -->
+            <div class="timeline-step timeline-step--current">
+              <div class="timeline-dot timeline-dot--current">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="white" stroke="none">
+                  <circle cx="12" cy="12" r="5"/>
+                </svg>
+              </div>
+              <div class="timeline-content">
+                <div class="timeline-label">In Druck</div>
+                <div class="timeline-date">Seit 3. März</div>
+              </div>
+            </div>
+
+            <!-- Step 4: Pending -->
+            <div class="timeline-step timeline-step--pending">
+              <div class="timeline-dot timeline-dot--pending"></div>
+              <div class="timeline-content">
+                <div class="timeline-label">Versendet</div>
+              </div>
+            </div>
+
+            <!-- Step 5: Pending -->
+            <div class="timeline-step timeline-step--pending">
+              <div class="timeline-dot timeline-dot--pending"></div>
+              <div class="timeline-content">
+                <div class="timeline-label">Zugestellt</div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- Delivery Estimate -->
+          <div class="delivery-estimate">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="1" y="3" width="15" height="13"/>
+              <polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/>
+              <circle cx="5.5" cy="18.5" r="2.5"/>
+              <circle cx="18.5" cy="18.5" r="2.5"/>
+            </svg>
+            Voraussichtliche Zustellung: 8.–10. März
+          </div>
+
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
   </div>
 
   <p class="footer-note">Preview nutzt Inter als Stand-in für Helvetica Now Display.</p>
