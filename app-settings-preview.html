@@ -304,6 +304,20 @@
       font-family: inherit;
     }
 
+    /* ── Profile Info Rows (read-only) ── */
+    .profile-info-row {
+      display: flex; flex-direction: column; gap: 2px;
+      padding: 14px 0; border-bottom: 1px solid var(--border);
+    }
+    .profile-info-row:last-child { border-bottom: none; }
+    .profile-info-label {
+      font-size: 12px; font-weight: 600; color: var(--mid-gray);
+      text-transform: uppercase; letter-spacing: 0.5px;
+    }
+    .profile-info-value {
+      font-size: 15px; font-weight: 500; color: var(--navy);
+    }
+
     .footer-note {
       font-size: 11px; color: #A0A0A0; font-weight: 500; text-align: center;
     }
@@ -512,7 +526,7 @@
     </div>
 
     <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 2 — Profil bearbeiten                  -->
+    <!-- SCREEN 2 — Profil Übersicht (read-only)       -->
     <!-- ══════════════════════════════════════════════ -->
     <div>
       <div class="screen-label">Mein Nutzerprofil</div>
@@ -533,32 +547,34 @@
           <div class="profile-header">
             <div class="profile-avatar">
               J
-              <div class="profile-avatar-edit"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg></div>
             </div>
             <div class="profile-name">Julius Blümel</div>
             <div class="profile-email">julius@remoryo.de</div>
           </div>
 
-          <div class="form-section">
-            <div class="form-label">Vorname</div>
-            <input class="form-input" type="text" value="Julius">
-
-            <div class="form-label">Nachname</div>
-            <input class="form-input" type="text" value="Blümel">
-
-            <div class="form-label">E-Mail</div>
-            <input class="form-input" type="email" value="julius@remoryo.de">
-
-            <div class="form-label">Geburtstag</div>
-            <input class="form-input" type="text" value="15.03.1992">
-
-            <div style="margin-top: 24px;">
-              <button class="btn-primary">Speichern</button>
+          <!-- Read-only profile info -->
+          <div style="padding: 0 20px 8px;">
+            <div class="profile-info-row">
+              <div class="profile-info-label">Name</div>
+              <div class="profile-info-value">Julius Blümel</div>
+            </div>
+            <div class="profile-info-row">
+              <div class="profile-info-label">E-Mail</div>
+              <div class="profile-info-value">julius@remoryo.de</div>
+            </div>
+            <div class="profile-info-row" style="border-bottom: none;">
+              <div class="profile-info-label">Geburtstag</div>
+              <div class="profile-info-value">15. März 1992</div>
             </div>
           </div>
 
+          <!-- Profil bearbeiten button -->
+          <div style="padding: 8px 20px 0;">
+            <button class="btn-primary">Profil bearbeiten</button>
+          </div>
+
           <!-- Password change row -->
-          <div style="padding: 0 20px;">
+          <div style="padding: 8px 20px 0;">
             <div class="settings-item" style="border-bottom: none;">
               <div class="settings-item-left">
                 <div class="settings-item-icon" style="background: var(--light-gray);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></div>
@@ -571,7 +587,7 @@
           </div>
 
           <!-- Account delete link -->
-          <div style="text-align: center; padding: 24px 20px 0;">
+          <div style="text-align: center; padding: 16px 20px 0;">
             <span class="account-delete-link">Account löschen</span>
           </div>
           <div class="account-delete-hint" style="padding-bottom: 32px;">Dein Account und alle Daten werden unwiderruflich gelöscht.</div>
