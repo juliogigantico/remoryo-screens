@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>remoryo — Screen Overview</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --navy: #1B2C43;
+      --orange: #FFA631;
+      --blue: #82B7D8;
+      --blue-soft: #D4E8F2;
+      --turquoise: #B8E0E0;
+      --beige: #E8DDD1;
+      --dark-gray: #5A6B7A;
+      --mid-gray: #94A3B3;
+      --light-gray: #F5F6F8;
+      --border: #E2E6EB;
+      --red: #E74C3C;
+      --sidebar-w: 260px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #F0F2F5;
+      color: var(--navy);
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* ═══ SIDEBAR ═══ */
+    .sidebar {
+      position: fixed;
+      top: 0; left: 0;
+      width: var(--sidebar-w);
+      height: 100vh;
+      background: var(--navy);
+      color: white;
+      padding: 28px 0;
+      overflow-y: auto;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sidebar-logo {
+      padding: 0 24px 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 8px;
+    }
+    .sidebar-logo h1 { font-size: 20px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 4px; }
+    .sidebar-logo span { font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 1.5px; color: var(--orange); }
+
+    .sidebar-stats {
+      padding: 16px 24px;
+      display: flex;
+      gap: 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 8px;
+    }
+    .stat-num { font-size: 22px; font-weight: 800; color: var(--orange); }
+    .stat-label { font-size: 10px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.5); margin-top: 2px; }
+
+    .nav-section { padding: 6px 24px 4px; font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: rgba(255,255,255,0.3); margin-top: 8px; }
+
+    .nav-item {
+      display: flex; align-items: center; gap: 10px;
+      padding: 10px 24px;
+      color: rgba(255,255,255,0.65);
+      text-decoration: none;
+      font-size: 13px; font-weight: 500;
+      transition: all 0.15s;
+      border-left: 3px solid transparent;
+    }
+    .nav-item:hover { background: rgba(255,255,255,0.06); color: white; }
+    .nav-item.active { background: rgba(255,166,49,0.1); color: var(--orange); border-left-color: var(--orange); }
+    .nav-icon { width: 20px; text-align: center; font-size: 14px; flex-shrink: 0; }
+    .nav-badge { margin-left: auto; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.5); font-size: 10px; font-weight: 700; padding: 2px 7px; border-radius: 10px; }
+    .nav-item:hover .nav-badge, .nav-item.active .nav-badge { background: rgba(255,166,49,0.15); color: var(--orange); }
+
+    /* ═══ MAIN ═══ */
+    .main {
+      margin-left: var(--sidebar-w);
+      flex: 1;
+      padding: 32px 40px 80px;
+      max-width: 1200px;
+    }
+
+    .page-header { margin-bottom: 40px; }
+    .page-header h2 { font-size: 28px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; }
+    .page-header p { font-size: 14px; color: var(--dark-gray); font-weight: 500; line-height: 1.5; }
+
+    /* ═══ FLOW BANNER ═══ */
+    .flow-banner {
+      background: white;
+      border-radius: 16px;
+      padding: 24px 28px;
+      margin-bottom: 36px;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .flow-banner h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mid-gray); margin-bottom: 16px; }
+    .flow-steps { display: flex; align-items: center; gap: 0; flex-wrap: wrap; }
+    .flow-step { display: flex; align-items: center; gap: 8px; padding: 8px 14px; background: var(--light-gray); border-radius: 10px; font-size: 13px; font-weight: 600; color: var(--navy); white-space: nowrap; }
+    .flow-step .step-icon { font-size: 16px; }
+    .flow-arrow { color: var(--mid-gray); font-size: 18px; padding: 0 6px; flex-shrink: 0; }
+    .flow-step--active { background: var(--orange); color: white; }
+
+    /* ═══ DESIGN SYSTEM ═══ */
+    .design-system {
+      background: white; border-radius: 16px; padding: 28px;
+      margin-bottom: 36px; border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    }
+    .design-system h3 { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; color: var(--mid-gray); margin-bottom: 20px; }
+    .color-grid { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 20px; }
+    .color-swatch { display: flex; align-items: center; gap: 10px; padding: 8px 14px 8px 8px; background: var(--light-gray); border-radius: 10px; }
+    .swatch-circle { width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0; border: 1px solid rgba(0,0,0,0.06); }
+    .swatch-name { font-size: 12px; font-weight: 700; color: var(--navy); }
+    .swatch-hex { font-size: 11px; font-weight: 500; color: var(--mid-gray); font-family: 'SF Mono', 'Fira Code', monospace; }
+    .design-rules { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 12px; }
+    .design-rule { padding: 12px 14px; background: var(--light-gray); border-radius: 10px; font-size: 12px; }
+    .design-rule strong { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--mid-gray); margin-bottom: 4px; }
+    .design-rule span { font-weight: 600; color: var(--navy); }
+
+    /* ═══ SECTION ═══ */
+    .section {
+      margin-bottom: 36px;
+      scroll-margin-top: 20px;
+    }
+
+    .section-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 12px; flex-wrap: wrap;
+    }
+    .section-icon {
+      width: 40px; height: 40px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; flex-shrink: 0;
+    }
+    .section-header h3 { font-size: 18px; font-weight: 700; letter-spacing: -0.3px; }
+    .section-badge { font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 20px; background: var(--light-gray); color: var(--dark-gray); }
+    .section-link {
+      margin-left: auto; font-size: 12px; font-weight: 600; color: var(--blue);
+      text-decoration: none; display: flex; align-items: center; gap: 4px;
+      padding: 6px 12px; border-radius: 8px; transition: all 0.15s;
+    }
+    .section-link:hover { background: var(--blue-soft); color: var(--navy); }
+
+    .section-desc { font-size: 13px; color: var(--dark-gray); font-weight: 500; margin-bottom: 14px; line-height: 1.5; max-width: 700px; }
+
+    /* ═══ LIVE PREVIEW TOGGLE ═══ */
+    .preview-toggle {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: 8px;
+      font-size: 12px; font-weight: 600;
+      border: 1.5px solid var(--border);
+      background: white; color: var(--dark-gray);
+      cursor: pointer; transition: all 0.15s;
+      margin-bottom: 14px;
+    }
+    .preview-toggle:hover { border-color: var(--blue); color: var(--navy); background: var(--blue-soft); }
+    .preview-toggle.active { border-color: var(--orange); color: var(--orange); background: rgba(255,166,49,0.06); }
+
+    .live-preview {
+      display: none;
+      background: white;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      padding: 16px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      position: relative;
+    }
+    .live-preview.visible { display: block; }
+
+    .live-preview .iframe-wrap {
+      overflow: hidden;
+      border-radius: 8px;
+    }
+    .live-preview iframe {
+      border: none;
+      transform-origin: top left;
+      display: block;
+    }
+
+    /* ═══ PHONE CARDS ═══ */
+    .phones-grid {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .phone-card {
+      width: 140px;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .phone-card:hover { transform: translateY(-4px); }
+    .phone-card:hover .phone-body { box-shadow: 0 8px 24px rgba(27,44,67,0.12); }
+
+    .phone-body {
+      width: 140px;
+      height: 280px;
+      background: white;
+      border-radius: 20px;
+      border: 2.5px solid var(--navy);
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+      transition: box-shadow 0.2s;
+    }
+
+    /* Dynamic Island */
+    .phone-body::before {
+      content: '';
+      position: absolute;
+      top: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 44px;
+      height: 12px;
+      background: var(--navy);
+      border-radius: 10px;
+      z-index: 5;
+    }
+
+    .phone-screen {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 10px 10px;
+      text-align: center;
+    }
+
+    .phone-screen-icon {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .phone-screen-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--navy);
+      line-height: 1.3;
+      margin-bottom: 4px;
+    }
+
+    .phone-screen-sub {
+      font-size: 8px;
+      font-weight: 500;
+      color: var(--mid-gray);
+      line-height: 1.3;
+    }
+
+    /* Gradient overlays for screen type */
+    .phone-gradient {
+      position: absolute;
+      inset: 0;
+      opacity: 0.08;
+      border-radius: 17px;
+    }
+
+    /* Status indicator dots */
+    .phone-status {
+      position: absolute;
+      bottom: 8px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 3px;
+    }
+    .phone-status-dot {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--border);
+    }
+    .phone-status-dot--active { background: var(--orange); }
+
+    .phone-label {
+      margin-top: 8px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--dark-gray);
+      text-align: center;
+      line-height: 1.3;
+    }
+
+    /* Color variants */
+    .phone--turquoise .phone-gradient { background: linear-gradient(135deg, var(--turquoise), #7BC8C8); }
+    .phone--blue .phone-gradient { background: linear-gradient(135deg, var(--blue-soft), var(--blue)); }
+    .phone--orange .phone-gradient { background: linear-gradient(135deg, var(--orange), #FF8C00); }
+    .phone--purple .phone-gradient { background: linear-gradient(135deg, #C4A0E8, #9B6DD7); }
+    .phone--gray .phone-gradient { background: linear-gradient(135deg, var(--mid-gray), var(--dark-gray)); }
+    .phone--beige .phone-gradient { background: linear-gradient(135deg, var(--beige), #D4C4B0); }
+    .phone--red .phone-gradient { background: linear-gradient(135deg, var(--red), #C0392B); }
+
+    .phone--turquoise .phone-body { border-color: #7BC8C8; }
+    .phone--blue .phone-body { border-color: var(--blue); }
+    .phone--orange .phone-body { border-color: var(--orange); }
+    .phone--purple .phone-body { border-color: #9B6DD7; }
+    .phone--gray .phone-body { border-color: var(--dark-gray); }
+    .phone--beige .phone-body { border-color: #C4B5A5; }
+    .phone--red .phone-body { border-color: var(--red); }
+
+    /* Section icon colors */
+    .icon-onboarding { background: linear-gradient(135deg, var(--turquoise), #7BC8C8); }
+    .icon-auth { background: linear-gradient(135deg, var(--blue-soft), var(--blue)); }
+    .icon-home { background: linear-gradient(135deg, var(--orange), #FF8C00); }
+    .icon-magazine { background: linear-gradient(135deg, #C4A0E8, #9B6DD7); }
+    .icon-settings { background: linear-gradient(135deg, var(--mid-gray), var(--dark-gray)); color: white; }
+    .icon-settings-detail { background: linear-gradient(135deg, var(--dark-gray), var(--navy)); color: white; }
+    .icon-utility { background: linear-gradient(135deg, var(--beige), #D4C4B0); }
+
+    /* ═══ MINI WIREFRAME ELEMENTS ═══ */
+    .wire { display: flex; flex-direction: column; gap: 4px; width: 100%; padding: 0 4px; }
+    .wire-bar { height: 3px; border-radius: 2px; background: var(--border); }
+    .wire-bar--short { width: 60%; }
+    .wire-bar--medium { width: 80%; }
+    .wire-bar--accent { background: var(--orange); opacity: 0.4; }
+    .wire-rect { width: 80%; height: 28px; border-radius: 4px; background: var(--light-gray); margin: 0 auto; border: 1px solid var(--border); }
+    .wire-rect--tall { height: 48px; }
+    .wire-btn { width: 80%; height: 14px; border-radius: 7px; margin: 0 auto; }
+    .wire-btn--orange { background: rgba(255,166,49,0.25); }
+    .wire-btn--blue { background: rgba(130,183,216,0.25); }
+    .wire-btn--outline { background: transparent; border: 1.5px solid var(--border); }
+    .wire-avatar { width: 18px; height: 18px; border-radius: 50%; background: var(--blue-soft); margin: 0 auto; }
+    .wire-row { display: flex; gap: 4px; align-items: center; width: 100%; padding: 0 4px; }
+    .wire-img { width: 100%; height: 40px; border-radius: 4px; background: linear-gradient(135deg, var(--light-gray), var(--border)); }
+    .wire-tabs { display: flex; justify-content: center; gap: 8px; padding-top: 2px; }
+    .wire-tab { font-size: 7px; font-weight: 700; color: var(--mid-gray); padding: 2px 6px; border-radius: 4px; }
+    .wire-tab--active { background: rgba(255,166,49,0.15); color: var(--orange); }
+    .wire-spacer { height: 6px; }
+
+    /* ═══ FOOTER ═══ */
+    .page-footer {
+      text-align: center; font-size: 12px; color: var(--mid-gray);
+      font-weight: 500; padding-top: 20px; border-top: 1px solid var(--border);
+    }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 1100px) {
+      .sidebar { width: 220px; }
+      :root { --sidebar-w: 220px; }
+      .main { padding: 24px 20px 60px; }
+    }
+    @media (max-width: 800px) {
+      .sidebar { position: static; width: 100%; height: auto; padding: 16px 0; }
+      :root { --sidebar-w: 0px; }
+      .sidebar-nav { display: none; }
+      .main { margin-left: 0; max-width: 100vw; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ SIDEBAR ═══ -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">
+      <h1>&hearts; remoryo</h1>
+      <span>Screen Overview</span>
+    </div>
+    <div class="sidebar-stats">
+      <div class="stat"><div class="stat-num">51</div><div class="stat-label">Screens</div></div>
+      <div class="stat"><div class="stat-num">8</div><div class="stat-label">Dateien</div></div>
+      <div class="stat"><div class="stat-num">4</div><div class="stat-label">Reviews</div></div>
+    </div>
+    <nav>
+      <div class="nav-section">User Flow</div>
+      <a href="#flow" class="nav-item"><span class="nav-icon">&rarr;</span>Conversion Funnel</a>
+      <div class="nav-section">Design</div>
+      <a href="#design-system" class="nav-item"><span class="nav-icon">&#x1f3a8;</span>Design System</a>
+      <div class="nav-section">Screens</div>
+      <a href="#onboarding" class="nav-item"><span class="nav-icon">&#x1f680;</span>Onboarding<span class="nav-badge">2</span></a>
+      <a href="#auth" class="nav-item"><span class="nav-icon">&#x1f510;</span>Authentifizierung<span class="nav-badge">5</span></a>
+      <a href="#home" class="nav-item"><span class="nav-icon">&#x1f4f7;</span>Home / Fotos<span class="nav-badge">5</span></a>
+      <a href="#magazine" class="nav-item"><span class="nav-icon">&#x1f4d6;</span>Magazin<span class="nav-badge">4</span></a>
+      <a href="#settings" class="nav-item"><span class="nav-icon">&#x2699;&#xfe0f;</span>Einstellungen<span class="nav-badge">4</span></a>
+      <a href="#settings-detail" class="nav-item"><span class="nav-icon">&#x1f527;</span>Settings Detail<span class="nav-badge">9</span></a>
+      <a href="#utility" class="nav-item"><span class="nav-icon">&#x1f6e0;&#xfe0f;</span>Utility / Flows<span class="nav-badge">10</span></a>
+      <a href="#additional" class="nav-item"><span class="nav-icon">&#x1f4f1;</span>Zus&auml;tzliche Screens<span class="nav-badge">12</span></a>
+    </nav>
+  </aside>
+
+  <!-- ═══ MAIN ═══ -->
+  <main class="main">
+    <div class="page-header">
+      <h2>remoryo App &mdash; UI Preview</h2>
+      <p>51 Screens &middot; 8 Dateien &middot; 4&times; UX-reviewed &middot; Stand M&auml;rz 2026<br>Klicke auf einen Screen oder &laquo;Vollansicht&raquo; um die interaktive Preview zu &ouml;ffnen.</p>
+    </div>
+
+    <!-- ═══ FUNNEL ═══ -->
+    <div class="flow-banner" id="flow">
+      <h3>B2C Conversion Funnel</h3>
+      <div class="flow-steps">
+        <div class="flow-step"><span class="step-icon">&#x1f510;</span> Registration</div>
+        <span class="flow-arrow">&rarr;</span>
+        <div class="flow-step"><span class="step-icon">&#x1f680;</span> Onboarding</div>
+        <span class="flow-arrow">&rarr;</span>
+        <div class="flow-step"><span class="step-icon">&#x1f4f7;</span> Fotos hochladen</div>
+        <span class="flow-arrow">&rarr;</span>
+        <div class="flow-step flow-step--active"><span class="step-icon">&#x1f4d6;</span> Magazin erstellen</div>
+        <span class="flow-arrow">&rarr;</span>
+        <div class="flow-step"><span class="step-icon">&#x1f440;</span> Preview (Pflicht)</div>
+        <span class="flow-arrow">&rarr;</span>
+        <div class="flow-step"><span class="step-icon">&#x1f4b3;</span> Abo starten</div>
+        <span class="flow-arrow">&rarr;</span>
+        <div class="flow-step"><span class="step-icon">&#x1f4ec;</span> Heft kommt an</div>
+      </div>
+    </div>
+
+    <!-- ═══ DESIGN SYSTEM ═══ -->
+    <div class="design-system" id="design-system">
+      <h3>Design System</h3>
+      <div class="color-grid">
+        <div class="color-swatch"><div class="swatch-circle" style="background:#1B2C43"></div><div class="swatch-info"><div class="swatch-name">Navy</div><div class="swatch-hex">#1B2C43</div></div></div>
+        <div class="color-swatch"><div class="swatch-circle" style="background:#FFA631"></div><div class="swatch-info"><div class="swatch-name">Orange (Primary CTA)</div><div class="swatch-hex">#FFA631</div></div></div>
+        <div class="color-swatch"><div class="swatch-circle" style="background:#82B7D8"></div><div class="swatch-info"><div class="swatch-name">Blue</div><div class="swatch-hex">#82B7D8</div></div></div>
+        <div class="color-swatch"><div class="swatch-circle" style="background:#D4E8F2"></div><div class="swatch-info"><div class="swatch-name">Blue Soft</div><div class="swatch-hex">#D4E8F2</div></div></div>
+        <div class="color-swatch"><div class="swatch-circle" style="background:#B8E0E0"></div><div class="swatch-info"><div class="swatch-name">Turquoise</div><div class="swatch-hex">#B8E0E0</div></div></div>
+        <div class="color-swatch"><div class="swatch-circle" style="background:#E8DDD1"></div><div class="swatch-info"><div class="swatch-name">Beige</div><div class="swatch-hex">#E8DDD1</div></div></div>
+        <div class="color-swatch"><div class="swatch-circle" style="background:#E74C3C"></div><div class="swatch-info"><div class="swatch-name">Red (Destructive)</div><div class="swatch-hex">#E74C3C</div></div></div>
+      </div>
+      <div class="design-rules">
+        <div class="design-rule"><strong>Font</strong><span>Helvetica Now Display (Inter als Platzhalter)</span></div>
+        <div class="design-rule"><strong>Buttons</strong><span>min-height 48px, radius 14px</span></div>
+        <div class="design-rule"><strong>Inputs</strong><span>height 48px, radius 12px</span></div>
+        <div class="design-rule"><strong>Touch Targets</strong><span>Minimum 44&times;44px</span></div>
+        <div class="design-rule"><strong>Login Gradient</strong><span>Blau (bestehender User)</span></div>
+        <div class="design-rule"><strong>Register Gradient</strong><span>T&uuml;rkis (neuer User)</span></div>
+        <div class="design-rule"><strong>Tab Bar</strong><span>2 Tabs + zentraler &ldquo;+&rdquo;</span></div>
+        <div class="design-rule"><strong>Settings</strong><span>Zahnrad im Header (kein Tab)</span></div>
+      </div>
+    </div>
+
+    <!-- ═══════ 1. ONBOARDING ═══════ -->
+    <div class="section" id="onboarding">
+      <div class="section-header">
+        <div class="section-icon icon-onboarding">&#x1f680;</div>
+        <h3>Onboarding</h3>
+        <span class="section-badge">2 Screens</span>
+        <a href="onboarding-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
+      </div>
+      <p class="section-desc">Action-first: User soll sofort den Wert erleben. Maximal 2 Screens statt 4.</p>
+      <button class="preview-toggle" onclick="togglePreview(this, 'onboarding-preview.html', 950, 960, 0.45)">&#x1f50d; Live Preview laden</button>
+      <div class="live-preview"></div>
+      <div class="phones-grid">
+
+        <a href="onboarding-preview.html" target="_blank" class="phone-card phone--turquoise">
+          <div class="phone-body">
+            <div class="phone-gradient"></div>
+            <div class="phone-screen">
+              <div class="phone-screen-icon">&#x1f4f1;</div>
+              <div class="phone-screen-title">So funktioniert&rsquo;s</div>
+              <div class="wire"><div class="wire-spacer"></div>
+                <div class="wire-bar wire-bar--short" style="margin:0 auto"></div>
+                <div class="wire-bar wire-bar--medium" style="margin:0 auto"></div>
+                <div class="wire-spacer"></div>
+                <div class="wire-row" style="justify-content:center;gap:12px">
+                  <div style="text-align:center"><div style="font-size:16px">&#x1f4f7;</div><div style="font-size:6px;color:var(--mid-gray)">Hochladen</div></div>
+                  <div style="font-size:10px;color:var(--mid-gray)">&rarr;</div>
+                  <div style="text-align:center"><div style="font-size:16px">&#x1f4d6;</div><div style="font-size:6px;color:var(--mid-gray)">Erstellen</div></div>
+                  <div style="font-size:10px;color:var(--mid-gray)">&rarr;</div>
+                  <div style="text-align:center"><div style="font-size:16px">&#x1f4ec;</div><div style="font-size:6px;color:var(--mid-gray)">Versenden</div></div>
+                </div>
+                <div class="wire-spacer"></div>
+                <div class="wire-btn wire-btn--orange"></div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-label">So funktioniert&rsquo;s</div>
+        </a>
+
+        <a href="onboarding-preview.html" target="_blank" class="phone-card phone--turquoise">
+          <div class="phone-body">
+            <div class="phone-gradient"></div>
+            <div class="phone-screen">
+              <div class="phone-screen-icon">&#x1f46a;</div>
+              <div class="phone-screen-title">Familie einladen</div>
+              <div class="wire"><div class="wire-spacer"></div>
+                <div class="wire-bar" style="margin:0 auto"></div>
+                <div class="wire-bar wire-bar--medium" style="margin:0 auto"></div>
+                <div class="wire-spacer"></div>
+                <div class="wire-btn wire-btn--orange"></div>
+                <div class="wire-spacer"></div>
+                <div class="wire-btn wire-btn--outline"></div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-label">Familie einladen</div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- ═══════ 2. AUTH ═══════ -->
+    <div class="section" id="auth">
+      <div class="section-header">
+        <div class="section-icon icon-auth">&#x1f510;</div>
+        <h3>Authentifizierung</h3>
+        <span class="section-badge">5 Screens</span>
+        <a href="auth-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
+      </div>
+      <p class="section-desc">Login (blauer Gradient = bestehender User) und Registration (t&uuml;rkis = neuer User). Invite-Flow: Web Landing &rarr; App Download &rarr; In-App Welcome.</p>
+      <button class="preview-toggle" onclick="togglePreview(this, 'auth-preview.html', 2100, 2080, 0.38)">&#x1f50d; Live Preview laden</button>
+      <div class="live-preview"></div>
+      <div class="phones-grid">
+
+        <a href="auth-preview.html" target="_blank" class="phone-card phone--blue">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f513;</div>
+            <div class="phone-screen-title">Login</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--blue"></div></div>
+          </div></div>
+          <div class="phone-label">Login</div>
+        </a>
+
+        <a href="auth-preview.html" target="_blank" class="phone-card phone--red">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x26a0;&#xfe0f;</div>
+            <div class="phone-screen-title">Login &mdash; Fehler</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-bar wire-bar--accent" style="height:5px;border-radius:3px"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Login &mdash; Fehler</div>
+        </a>
+
+        <a href="auth-preview.html" target="_blank" class="phone-card phone--turquoise">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4dd;</div>
+            <div class="phone-screen-title">Registrierung 1/2</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-btn wire-btn--blue"></div><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Registrierung 1/2</div>
+        </a>
+
+        <a href="auth-preview.html" target="_blank" class="phone-card phone--turquoise">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x2705;</div>
+            <div class="phone-screen-title">Registrierung 2/2</div>
+            <div class="phone-screen-sub">Consents &amp; Toggles</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div><div style="width:18px;height:10px;border-radius:5px;background:var(--border)"></div></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div><div style="width:18px;height:10px;border-radius:5px;background:var(--border)"></div></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Registrierung 2/2</div>
+        </a>
+
+        <a href="auth-preview.html" target="_blank" class="phone-card phone--beige">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f310;</div>
+            <div class="phone-screen-title">Web Landing</div>
+            <div class="phone-screen-sub">Invite-Link (Browser)</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-avatar"></div><div class="wire-bar wire-bar--short" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Web Landing<br><span style="color:var(--mid-gray);font-size:9px">Invite-Link</span></div>
+        </a>
+
+        <a href="auth-preview.html" target="_blank" class="phone-card phone--turquoise">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f44b;</div>
+            <div class="phone-screen-title">In-App Welcome</div>
+            <div class="phone-screen-sub">Nach Download</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-avatar"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">In-App Welcome<br><span style="color:var(--mid-gray);font-size:9px">Nach Download</span></div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- ═══════ 3. HOME ═══════ -->
+    <div class="section" id="home">
+      <div class="section-header">
+        <div class="section-icon icon-home">&#x1f4f7;</div>
+        <h3>Home / Fotos</h3>
+        <span class="section-badge">5 Screens</span>
+        <a href="app-home-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
+      </div>
+      <p class="section-desc">Zwei Tabs: Fotos-Feed + Heft-Tab mit Deadline-Banner. Empty States motivieren zum ersten Upload.</p>
+      <button class="preview-toggle" onclick="togglePreview(this, 'app-home-preview.html', 2480, 1140, 0.38)">&#x1f50d; Live Preview laden</button>
+      <div class="live-preview"></div>
+      <div class="phones-grid">
+
+        <a href="app-home-preview.html" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f5bc;&#xfe0f;</div>
+            <div class="phone-screen-title">Fotos Tab</div>
+            <div class="phone-screen-sub">mit Fotos</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-img"></div><div class="wire-spacer"></div><div class="wire-img" style="height:30px"></div></div>
+            <div class="wire-tabs"><div class="wire-tab wire-tab--active">Fotos</div><div class="wire-tab">Heft</div></div>
+          </div></div>
+          <div class="phone-label">Fotos (mit Fotos)</div>
+        </a>
+
+        <a href="app-home-preview.html" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4ad;</div>
+            <div class="phone-screen-title">Fotos Tab</div>
+            <div class="phone-screen-sub">Empty State</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--short" style="margin:0 auto"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+            <div class="wire-tabs"><div class="wire-tab wire-tab--active">Fotos</div><div class="wire-tab">Heft</div></div>
+          </div></div>
+          <div class="phone-label">Fotos (Empty)</div>
+        </a>
+
+        <a href="app-home-preview.html" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4d6;</div>
+            <div class="phone-screen-title">Heft Tab</div>
+            <div class="phone-screen-sub">Magazin-&Uuml;bersicht</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--accent" style="height:8px;border-radius:4px"></div><div class="wire-spacer"></div><div class="wire-rect wire-rect--tall"></div><div class="wire-spacer"></div><div class="wire-rect wire-rect--tall" style="opacity:0.5"></div></div>
+            <div class="wire-tabs"><div class="wire-tab">Fotos</div><div class="wire-tab wire-tab--active">Heft</div></div>
+          </div></div>
+          <div class="phone-label">Heft Tab</div>
+        </a>
+
+        <a href="app-home-preview.html" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4cb;</div>
+            <div class="phone-screen-title">Heft Tab</div>
+            <div class="phone-screen-sub">Empty State</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--short" style="margin:0 auto"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+            <div class="wire-tabs"><div class="wire-tab">Fotos</div><div class="wire-tab wire-tab--active">Heft</div></div>
+          </div></div>
+          <div class="phone-label">Heft (Empty)</div>
+        </a>
+
+        <a href="app-home-preview.html" target="_blank" class="phone-card phone--blue">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4ac;</div>
+            <div class="phone-screen-title">Foto-Kommentare</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-img" style="height:50px"></div><div class="wire-spacer"></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-spacer"></div><div class="wire-rect" style="width:100%"></div></div>
+          </div></div>
+          <div class="phone-label">Kommentare</div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- ═══════ 4. MAGAZIN ═══════ -->
+    <div class="section" id="magazine">
+      <div class="section-header">
+        <div class="section-icon icon-magazine">&#x1f4d6;</div>
+        <h3>Magazin-Erstellung</h3>
+        <span class="section-badge">4 Screens</span>
+        <a href="app-magazine-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
+      </div>
+      <p class="section-desc">&Uuml;bersicht aller Magazine, Seiten-Editor mit Layout-Wechsel, Foto-Auswahl mit Multi-Select (min. 5 Fotos), Magazin-Vorschau.</p>
+      <button class="preview-toggle" onclick="togglePreview(this, 'app-magazine-preview.html', 1510, 1140, 0.42)">&#x1f50d; Live Preview laden</button>
+      <div class="live-preview"></div>
+      <div class="phones-grid">
+
+        <a href="app-magazine-preview.html" target="_blank" class="phone-card phone--purple">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4da;</div>
+            <div class="phone-screen-title">Magazin-&Uuml;bersicht</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect wire-rect--tall"></div><div class="wire-spacer"></div><div class="wire-rect wire-rect--tall" style="opacity:0.5"></div></div>
+          </div></div>
+          <div class="phone-label">Magazin-&Uuml;bersicht</div>
+        </a>
+
+        <a href="app-magazine-preview.html" target="_blank" class="phone-card phone--purple">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4c4;</div>
+            <div class="phone-screen-title">Seiten&uuml;bersicht</div>
+            <div class="phone-screen-sub">Editor</div>
+            <div class="wire"><div class="wire-spacer"></div>
+              <div class="wire-row" style="gap:6px;justify-content:center">
+                <div style="width:28px;height:38px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border)"></div>
+                <div style="width:28px;height:38px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border)"></div>
+                <div style="width:28px;height:38px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border)"></div>
+              </div>
+              <div class="wire-row" style="gap:6px;justify-content:center;margin-top:6px">
+                <div style="width:28px;height:38px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border)"></div>
+                <div style="width:28px;height:38px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border)"></div>
+                <div style="width:28px;height:38px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border)"></div>
+              </div>
+            </div>
+          </div></div>
+          <div class="phone-label">Seiten&uuml;bersicht</div>
+        </a>
+
+        <a href="app-magazine-preview.html" target="_blank" class="phone-card phone--purple">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f5bc;&#xfe0f;</div>
+            <div class="phone-screen-title">Foto ausw&auml;hlen</div>
+            <div class="phone-screen-sub">Multi-Select</div>
+            <div class="wire"><div class="wire-spacer"></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;padding:0 4px">
+                <div style="height:24px;border-radius:3px;background:var(--light-gray);border:2px solid var(--orange)"></div>
+                <div style="height:24px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border)"></div>
+                <div style="height:24px;border-radius:3px;background:var(--light-gray);border:2px solid var(--orange)"></div>
+                <div style="height:24px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border)"></div>
+                <div style="height:24px;border-radius:3px;background:var(--light-gray);border:2px solid var(--orange)"></div>
+                <div style="height:24px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border)"></div>
+              </div>
+            </div>
+          </div></div>
+          <div class="phone-label">Foto ausw&auml;hlen</div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- ═══════ 5. SETTINGS ═══════ -->
+    <div class="section" id="settings">
+      <div class="section-header">
+        <div class="section-icon icon-settings">&#x2699;&#xfe0f;</div>
+        <h3>Einstellungen</h3>
+        <span class="section-badge">4 Screens</span>
+        <a href="app-settings-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
+      </div>
+      <p class="section-desc">Hauptmen&uuml; mit Multi-Entity (B2C + B2B), Profil-&Uuml;bersicht, Abo-Verwaltung (aktiv + kein Abo).</p>
+      <button class="preview-toggle" onclick="togglePreview(this, 'app-settings-preview.html', 1510, 1140, 0.42)">&#x1f50d; Live Preview laden</button>
+      <div class="live-preview"></div>
+      <div class="phones-grid">
+
+        <a href="app-settings-preview.html" target="_blank" class="phone-card phone--gray">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x2699;&#xfe0f;</div>
+            <div class="phone-screen-title">Einstellungen</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div class="wire-avatar"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-spacer"></div><div class="wire-row"><div style="font-size:8px">&#x25b6;</div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="font-size:8px">&#x25b6;</div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="font-size:8px">&#x25b6;</div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="font-size:8px">&#x25b6;</div><div class="wire-bar" style="flex:1"></div></div></div>
+          </div></div>
+          <div class="phone-label">Einstellungen</div>
+        </a>
+
+        <a href="app-settings-preview.html" target="_blank" class="phone-card phone--gray">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f464;</div>
+            <div class="phone-screen-title">Mein Profil</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-avatar" style="width:28px;height:28px"></div><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Mein Profil</div>
+        </a>
+
+        <a href="app-settings-preview.html" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4b3;</div>
+            <div class="phone-screen-title">Abonnement</div>
+            <div class="phone-screen-sub">14,99&euro; / Monat</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--accent" style="height:6px;border-radius:3px;width:40%;margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div></div></div>
+          </div></div>
+          <div class="phone-label">Abonnement</div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- ═══════ 6. SETTINGS DETAIL ═══════ -->
+    <div class="section" id="settings-detail">
+      <div class="section-header">
+        <div class="section-icon icon-settings-detail">&#x1f527;</div>
+        <h3>Einstellungen &mdash; Detail</h3>
+        <span class="section-badge">9 Screens</span>
+        <a href="app-settings-detail-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
+      </div>
+      <p class="section-desc">Lieferadresse, Zahlungsmethode (Owner vs. Mitglied), Gruppenmitglieder, Passwort, Account l&ouml;schen, Profil bearbeiten, Versandstatus, Benachrichtigungen.</p>
+      <button class="preview-toggle" onclick="togglePreview(this, 'app-settings-detail-preview.html', 1510, 2200, 0.42)">&#x1f50d; Live Preview laden</button>
+      <div class="live-preview"></div>
+      <div class="phones-grid">
+
+        <a href="app-settings-detail-preview.html" target="_blank" class="phone-card phone--gray">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4e6;</div>
+            <div class="phone-screen-title">Lieferadresse</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Lieferadresse</div>
+        </a>
+
+        <a href="app-settings-detail-preview.html" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4b3;</div>
+            <div class="phone-screen-title">Zahlungsmethode</div>
+            <div class="phone-screen-sub">Verwalter-View</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect wire-rect--tall"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Zahlung<br><span style="color:var(--mid-gray);font-size:9px">Verwalter</span></div>
+        </a>
+
+        <a href="app-settings-detail-preview.html" target="_blank" class="phone-card phone--gray">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f512;</div>
+            <div class="phone-screen-title">Zahlungsmethode</div>
+            <div class="phone-screen-sub">Mitglied-View</div>
+            <div class="wire"><div class="wire-spacer"></div><div style="font-size:24px;text-align:center">&#x1f512;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-row" style="justify-content:center"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar wire-bar--short"></div></div></div>
+          </div></div>
+          <div class="phone-label">Zahlung<br><span style="color:var(--mid-gray);font-size:9px">Mitglied</span></div>
+        </a>
+
+        <a href="app-settings-detail-preview.html" target="_blank" class="phone-card phone--blue">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f465;</div>
+            <div class="phone-screen-title">Gruppen&shy;mitglieder</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Gruppenmitglieder</div>
+        </a>
+
+        <a href="app-settings-detail-preview.html" target="_blank" class="phone-card phone--gray">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f511;</div>
+            <div class="phone-screen-title">Passwort &auml;ndern</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Passwort &auml;ndern</div>
+        </a>
+
+        <a href="app-settings-detail-preview.html" target="_blank" class="phone-card phone--red">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f5d1;&#xfe0f;</div>
+            <div class="phone-screen-title">Account l&ouml;schen</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn" style="background:rgba(231,76,60,0.2)"></div></div>
+          </div></div>
+          <div class="phone-label">Account l&ouml;schen</div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- ═══════ 7. UTILITY ═══════ -->
+    <div class="section" id="utility">
+      <div class="section-header">
+        <div class="section-icon icon-utility">&#x1f6e0;&#xfe0f;</div>
+        <h3>Utility / Flow Pages</h3>
+        <span class="section-badge">10 Screens</span>
+        <a href="app-utility-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
+      </div>
+      <p class="section-desc">Passwort-Reset, Netzwerk-Fehler, Gruppen-Wechsel, Einladung annehmen, Magazin erstellt, Mitglied einladen, Abo k&uuml;ndigen, Logout, Hilfe &amp; Support.</p>
+      <button class="preview-toggle" onclick="togglePreview(this, 'app-utility-preview.html', 1510, 2200, 0.42)">&#x1f50d; Live Preview laden</button>
+      <div class="live-preview"></div>
+      <div class="phones-grid">
+
+        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--beige">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4e7;</div>
+            <div class="phone-screen-title">PW vergessen</div>
+            <div class="phone-screen-sub">Eingabe</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">PW vergessen<br><span style="color:var(--mid-gray);font-size:9px">Eingabe</span></div>
+        </a>
+
+        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--turquoise">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x2709;&#xfe0f;</div>
+            <div class="phone-screen-title">PW vergessen</div>
+            <div class="phone-screen-sub">Erfolg</div>
+            <div class="wire"><div class="wire-spacer"></div><div style="font-size:24px;text-align:center">&#x2705;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">PW vergessen<br><span style="color:var(--mid-gray);font-size:9px">Erfolg</span></div>
+        </a>
+
+        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--red">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4e1;</div>
+            <div class="phone-screen-title">Netzwerk-Fehler</div>
+            <div class="wire"><div class="wire-spacer"></div><div style="font-size:24px;text-align:center">&#x26a0;&#xfe0f;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Netzwerk-Fehler</div>
+        </a>
+
+        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--blue">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f504;</div>
+            <div class="phone-screen-title">Gruppen wechseln</div>
+            <div class="phone-screen-sub">Bottom Sheet</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px;background:var(--orange)"></div><div class="wire-bar" style="flex:1"></div><div style="font-size:8px">&#x2714;</div></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px;background:var(--turquoise)"></div><div class="wire-bar" style="flex:1"></div></div></div>
+          </div></div>
+          <div class="phone-label">Gruppen wechseln<br><span style="color:var(--mid-gray);font-size:9px">Bottom Sheet</span></div>
+        </a>
+
+        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--turquoise">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f91d;</div>
+            <div class="phone-screen-title">Einladung annehmen</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-avatar"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Einladung<br><span style="color:var(--mid-gray);font-size:9px">Annehmen</span></div>
+        </a>
+
+        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f389;</div>
+            <div class="phone-screen-title">Erstes Magazin erstellt!</div>
+            <div class="wire"><div class="wire-spacer"></div><div style="font-size:20px;text-align:center">&#x1f38a;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Erstes Magazin<br><span style="color:var(--mid-gray);font-size:9px">Erfolg</span></div>
+        </a>
+
+        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--turquoise">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f517;</div>
+            <div class="phone-screen-title">Mitglied einladen</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Mitglied<br><span style="color:var(--mid-gray);font-size:9px">Einladen</span></div>
+        </a>
+
+        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--red">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x274c;</div>
+            <div class="phone-screen-title">Abo k&uuml;ndigen</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-row"><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid var(--border)"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid var(--border)"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-spacer"></div><div class="wire-btn" style="background:rgba(231,76,60,0.25)"></div></div>
+          </div></div>
+          <div class="phone-label">Abo k&uuml;ndigen<br><span style="color:var(--mid-gray);font-size:9px">Best&auml;tigung</span></div>
+        </a>
+
+        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--gray">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f6aa;</div>
+            <div class="phone-screen-title">Logout</div>
+            <div class="phone-screen-sub">Bottom Sheet</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn" style="background:rgba(231,76,60,0.25)"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Logout<br><span style="color:var(--mid-gray);font-size:9px">Best&auml;tigung</span></div>
+        </a>
+
+        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--beige">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x2753;</div>
+            <div class="phone-screen-title">Hilfe &amp; Support</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div><div style="font-size:8px">&#x25bc;</div></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div><div style="font-size:8px">&#x25b6;</div></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div><div style="font-size:8px">&#x25b6;</div></div></div>
+          </div></div>
+          <div class="phone-label">Hilfe &amp; Support<br><span style="color:var(--mid-gray);font-size:9px">FAQ + Kontakt</span></div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- ═══════ 8. ADDITIONAL ═══════ -->
+    <div class="section" id="additional">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg, var(--orange), #FF8C00); color:white">&#x1f4f1;</div>
+        <h3>Zus&auml;tzliche Screens</h3>
+        <span class="section-badge">12 Screens</span>
+        <a href="app-additional-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
+      </div>
+      <p class="section-desc">Foto-Vollansicht, Kommentare, Upload-Best&auml;tigung, Push-Permission, Empf&auml;nger verwalten, Abo-Auswahl, Push-Notifications, In-App Messages, 4-Schritt Checkout-Wizard.</p>
+      <button class="preview-toggle" onclick="togglePreview(this, 'app-additional-preview.html', 1510, 3400, 0.42)">&#x1f50d; Live Preview laden</button>
+      <div class="live-preview"></div>
+      <div class="phones-grid">
+
+        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--gray">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen" style="background:#111">
+            <div class="phone-screen-icon" style="filter:invert(1)">&#x1f5bc;</div>
+            <div class="phone-screen-title" style="color:white">Foto-Vollansicht</div>
+          </div></div>
+          <div class="phone-label">Foto-Vollansicht</div>
+        </a>
+
+        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--blue">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4ac;</div>
+            <div class="phone-screen-title">Kommentar</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-img"></div><div class="wire-spacer"></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div></div>
+          </div></div>
+          <div class="phone-label">Kommentar<br><span style="color:var(--mid-gray);font-size:9px">schreiben</span></div>
+        </a>
+
+        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x2705;</div>
+            <div class="phone-screen-title">Upload Erfolg</div>
+            <div class="wire"><div class="wire-spacer"></div><div style="font-size:20px;text-align:center">&#x2714;&#xfe0f;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Upload<br><span style="color:var(--mid-gray);font-size:9px">Best&auml;tigung</span></div>
+        </a>
+
+        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--blue">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f514;</div>
+            <div class="phone-screen-title">Push Permission</div>
+            <div class="wire"><div class="wire-spacer"></div><div style="font-size:20px;text-align:center">&#x1f514;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--blue"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Push<br><span style="color:var(--mid-gray);font-size:9px">Permission</span></div>
+        </a>
+
+        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--turquoise">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4e6;</div>
+            <div class="phone-screen-title">Empf&auml;nger</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Empf&auml;nger<br><span style="color:var(--mid-gray);font-size:9px">verwalten</span></div>
+        </a>
+
+        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4b3;</div>
+            <div class="phone-screen-title">Abo ausw&auml;hlen</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect wire-rect--tall" style="border-color:var(--orange)"></div><div class="wire-spacer"></div><div class="wire-rect wire-rect--tall"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Abo<br><span style="color:var(--mid-gray);font-size:9px">ausw&auml;hlen</span></div>
+        </a>
+
+        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--gray">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen" style="background:#111">
+            <div class="phone-screen-icon" style="filter:invert(1)">&#x1f4f2;</div>
+            <div class="phone-screen-title" style="color:white">Push Notification</div>
+            <div class="phone-screen-sub" style="color:#aaa">Lock Screen</div>
+          </div></div>
+          <div class="phone-label">Push<br><span style="color:var(--mid-gray);font-size:9px">Notification</span></div>
+        </a>
+
+        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4e8;</div>
+            <div class="phone-screen-title">In-App Messages</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div style="width:20px;height:12px;border-radius:3px;background:rgba(255,166,49,0.2)"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="width:20px;height:12px;border-radius:3px;background:rgba(231,76,60,0.2)"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="width:20px;height:12px;border-radius:3px;background:rgba(76,175,80,0.2)"></div><div class="wire-bar" style="flex:1"></div></div></div>
+          </div></div>
+          <div class="phone-label">In-App<br><span style="color:var(--mid-gray);font-size:9px">Messages</span></div>
+        </a>
+
+        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--turquoise">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x31;&#xfe0f;&#x20e3;</div>
+            <div class="phone-screen-title">Checkout: Plan</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--accent" style="height:3px"></div><div class="wire-spacer"></div><div class="wire-rect wire-rect--tall" style="border-color:var(--orange)"></div><div class="wire-rect wire-rect--tall"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Checkout 1/4<br><span style="color:var(--mid-gray);font-size:9px">Plan w&auml;hlen</span></div>
+        </a>
+
+        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--turquoise">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x32;&#xfe0f;&#x20e3;</div>
+            <div class="phone-screen-title">Checkout: Empf.</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--accent" style="height:3px;width:50%"></div><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Checkout 2/4<br><span style="color:var(--mid-gray);font-size:9px">Empf&auml;nger</span></div>
+        </a>
+
+        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--turquoise">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x33;&#xfe0f;&#x20e3;</div>
+            <div class="phone-screen-title">Checkout: Zahlung</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--accent" style="height:3px;width:75%"></div><div class="wire-spacer"></div><div class="wire-row"><div style="width:16px;height:10px;border-radius:3px;background:var(--blue-soft)"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="width:16px;height:10px;border-radius:3px;background:var(--blue-soft)"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Checkout 3/4<br><span style="color:var(--mid-gray);font-size:9px">Zahlung</span></div>
+        </a>
+
+        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x2705;</div>
+            <div class="phone-screen-title">Checkout: Fertig!</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--accent" style="height:3px;width:100%"></div><div class="wire-spacer"></div><div style="font-size:20px;text-align:center">&#x1f389;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Checkout 4/4<br><span style="color:var(--mid-gray);font-size:9px">Best&auml;tigung</span></div>
+        </a>
+
+      </div>
+    </div>
+
+    <div class="page-footer">
+      &hearts; remoryo &middot; N&auml;he, die ankommt. &middot; Stand 5. M&auml;rz 2026
+    </div>
+
+  </main>
+
+  <!-- ═══ SCROLL SPY + LIVE PREVIEW ═══ -->
+  <script>
+    /* Scroll Spy */
+    const sections = document.querySelectorAll('.section, .flow-banner, .design-system');
+    const navItems = document.querySelectorAll('.nav-item');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          navItems.forEach(item => item.classList.toggle('active', item.getAttribute('href') === '#' + id));
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    sections.forEach(s => { if (s.id) observer.observe(s); });
+
+    /* Live Preview Toggle */
+    function togglePreview(btn, src, iframeW, iframeH, scale) {
+      const container = btn.nextElementSibling;
+      if (!container || !container.classList.contains('live-preview')) return;
+
+      const isVisible = container.classList.contains('visible');
+
+      if (isVisible) {
+        container.classList.remove('visible');
+        container.innerHTML = '';
+        btn.classList.remove('active');
+        btn.textContent = '\u{1F50D} Live Preview laden';
+      } else {
+        const scaledW = Math.round(iframeW * scale);
+        const scaledH = Math.round(iframeH * scale);
+        const iframe = document.createElement('iframe');
+        iframe.src = src;
+        iframe.style.cssText = `
+          width: ${iframeW}px;
+          height: ${iframeH}px;
+          transform: scale(${scale});
+          transform-origin: top left;
+          border: none;
+          border-radius: 8px;
+        `;
+        const wrapper = document.createElement('div');
+        wrapper.style.cssText = `
+          width: ${scaledW}px;
+          height: ${scaledH}px;
+          overflow: hidden;
+          border-radius: 8px;
+          box-shadow: 0 2px 12px rgba(27,44,67,0.10);
+          background: white;
+        `;
+        wrapper.appendChild(iframe);
+        container.innerHTML = '';
+        container.appendChild(wrapper);
+        container.classList.add('visible');
+        btn.classList.add('active');
+        btn.textContent = '\u2716 Live Preview schlie\u00DFen';
+      }
+    }
+  </script>
+
+</body>
+</html>
