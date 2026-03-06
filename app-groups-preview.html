@@ -431,7 +431,7 @@
       cursor: pointer;
     }
     .recipient-action-btn svg { width: 18px; height: 18px; }
-    .recipients-add-btn { margin: 16px 20px 0; }
+    .recipients-add-btn { margin: 16px 20px 0; width: auto !important; }
     .recipients-bottom-spacer { flex: 1; }
 
     /* ── Empf&auml;nger hinzuf&uuml;gen (Screen 9) ── */
@@ -791,10 +791,20 @@
 
             <!-- Consequence List -->
             <div class="consequence-list">
-              <div class="consequence-item">Alle hochgeladenen Fotos</div>
-              <div class="consequence-item">Alle erstellten Magazine</div>
-              <div class="consequence-item">Alle Mitgliedschaften</div>
+              <div class="consequence-item">Alle Mitglieder werden aus der Gruppe entfernt</div>
+              <div class="consequence-item">Das aktive Abo wird gek&uuml;ndigt</div>
+              <div class="consequence-item">Alle hochgeladenen Fotos &amp; Magazine</div>
               <div class="consequence-item">Versandhistorie &amp; Einstellungen</div>
+            </div>
+
+            <!-- Member impact banner -->
+            <div style="background: #FFF8EB; border-radius: 12px; padding: 12px 14px; margin-top: 16px; display: flex; align-items: flex-start; gap: 10px;">
+              <div style="flex-shrink: 0; margin-top: 1px;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8920B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+              </div>
+              <div style="font-size: 13px; font-weight: 500; color: #8B6914; line-height: 1.45;">
+                <strong>3 Mitglieder betroffen:</strong> Alle Mitglieder verlieren den Zugang und werden per Benachrichtigung informiert.
+              </div>
             </div>
 
             <!-- Warning Banner -->
@@ -1216,6 +1226,32 @@
             </div>
           </div>
 
+          <!-- Recipient 3 — Pflegeheim (discounted) -->
+          <div class="recipient-card">
+            <div class="recipient-avatar" style="background: linear-gradient(135deg, var(--beige), #D4C4B0);">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+            </div>
+            <div class="recipient-info">
+              <div class="recipient-name">Seniorenresidenz Am Park</div>
+              <div class="recipient-address">Zimmer 204, Parkstra&szlig;e 8, 60322 Frankfurt</div>
+              <div class="recipient-badge" style="background: #E8F5E9; color: #2E7D32;">Pflegeheim &middot; 11,99&thinsp;&euro;/Monat</div>
+            </div>
+            <div class="recipient-actions">
+              <div class="recipient-action-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+              </div>
+              <div class="recipient-action-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>
+              </div>
+            </div>
+          </div>
+
+          <!-- Care home discount info -->
+          <div style="margin: 8px 20px 0; background: #E8F5E9; border-radius: 10px; padding: 10px 14px; display: flex; align-items: flex-start; gap: 8px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#2E7D32" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 1px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <span style="font-size: 12px; color: #1B5E20; line-height: 1.45; font-weight: 500;">Pflegeheim-Versand: 11,99&thinsp;&euro;/Monat statt 14,99&thinsp;&euro;. Nur f&uuml;r Monatsabo verf&uuml;gbar. Pflegeheime werden vom Admin-Panel verwaltet.</span>
+          </div>
+
           <!-- Add Recipient Button -->
           <button class="btn btn-outline recipients-add-btn">
             <svg viewBox="0 0 24 24" fill="none" width="18" height="18" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
@@ -1307,6 +1343,77 @@
 
           <div class="safe-bottom"></div>
 
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- ROW 4 — Mitglieder-Flows                          -->
+  <!-- ══════════════════════════════════════════════════ -->
+
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <h1 style="white-space: nowrap;">Mitglieder-Flows</h1>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="preview-row">
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 10 — Gruppe aufgel&ouml;st (Mitglied-Sicht) -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">10 &middot; Gruppe aufgel&ouml;st (Mitglied)</div>
+      <div class="phone" style="background: var(--white);">
+
+        <div class="status-bar"></div>
+
+        <!-- App Header -->
+        <div style="display: flex; align-items: center; padding: 8px 16px 12px; gap: 12px;">
+          <img src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
+          <span style="font-weight: 800; font-size: 16px; color: var(--navy); letter-spacing: -0.5px;">remoryo</span>
+        </div>
+
+        <!-- Content -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 28px; text-align: center;">
+
+          <!-- Icon -->
+          <div style="width: 72px; height: 72px; border-radius: 50%; background: var(--turquoise-light); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
+            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
+              <circle cx="9" cy="7" r="4"/>
+              <line x1="18" y1="8" x2="23" y2="13"/>
+              <line x1="23" y1="8" x2="18" y2="13"/>
+            </svg>
+          </div>
+
+          <!-- Title -->
+          <div style="font-weight: 800; font-size: 22px; color: var(--navy); margin-bottom: 10px; line-height: 1.3;">
+            Gruppe aufgel&ouml;st
+          </div>
+
+          <!-- Description -->
+          <div style="font-size: 15px; color: var(--dark-gray); font-weight: 500; line-height: 1.55; margin-bottom: 24px;">
+            Die Gruppe <strong style="color: var(--navy);">Familie Bl&uuml;mel</strong> wurde vom Administrator aufgel&ouml;st. Du hast keinen Zugang mehr zu den Fotos und Magazinen dieser Gruppe.
+          </div>
+
+          <!-- Info box -->
+          <div style="background: var(--blue-light); border-radius: 12px; padding: 14px 16px; width: 100%; display: flex; align-items: flex-start; gap: 10px; text-align: left; margin-bottom: 24px;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 1px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+            <div style="font-size: 13px; color: var(--navy); line-height: 1.5; font-weight: 500;">
+              Du kannst jederzeit eine eigene Gruppe erstellen oder einer Einladung folgen.
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Bottom Actions -->
+        <div style="padding: 0 20px 40px; display: flex; flex-direction: column; gap: 8px;">
+          <button class="btn-primary">Eigene Gruppe erstellen</button>
+          <button class="btn-text-gray">Sp&auml;ter</button>
         </div>
 
       </div>
