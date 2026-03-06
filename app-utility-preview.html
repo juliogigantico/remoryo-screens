@@ -215,6 +215,50 @@
       background: var(--navy);
       opacity: 0.4;
     }
+
+    /* ── Password Input with Icon ── */
+    .input-with-icon {
+      position: relative;
+    }
+
+    .input-icon {
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--mid-gray);
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+
+    /* ── Password Strength Indicator ── */
+    .pw-strength {
+      display: flex;
+      gap: 4px;
+      margin-top: -6px;
+      align-items: center;
+    }
+
+    .pw-bar {
+      flex: 1;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border);
+    }
+
+    .pw-bar.active {
+      background: var(--orange);
+    }
+
+    .pw-strength-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--mid-gray);
+      margin-left: 8px;
+      white-space: nowrap;
+    }
   </style>
 </head>
 <body>
@@ -282,10 +326,86 @@
     </div>
 
     <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 2 — Passwort vergessen (Erfolg)        -->
+    <!-- SCREEN 2 — Neues Passwort setzen              -->
     <!-- ══════════════════════════════════════════════ -->
     <div>
-      <div class="screen-label">2 &middot; Passwort vergessen (Erfolg)</div>
+      <div class="screen-label">2 &middot; Neues Passwort setzen</div>
+      <div class="phone" style="background: var(--beige);">
+
+        <div class="status-bar"></div>
+
+        <!-- Content -->
+        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding: 0 20px;">
+
+          <!-- Logo -->
+          <div style="margin-top: 40px; margin-bottom: 32px;">
+            <img src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="width: 56px; height: auto;">
+          </div>
+
+          <!-- Headline -->
+          <div style="text-align: center; margin-bottom: 12px;">
+            <div style="font-weight: 800; font-size: 26px; color: var(--navy); line-height: 1.3;">Neues Passwort setzen</div>
+          </div>
+
+          <!-- Description -->
+          <div style="text-align: center; font-size: 15px; color: var(--dark-gray); line-height: 1.55; font-weight: 500; margin-bottom: 32px; max-width: 300px;">
+            W&auml;hle ein sicheres Passwort f&uuml;r deinen Account.
+          </div>
+
+          <!-- Password fields -->
+          <div style="width: 100%; display: flex; flex-direction: column; gap: 10px; margin-bottom: 8px;">
+            <div class="input-with-icon">
+              <input class="input" type="password" placeholder="Neues Passwort" style="padding-right: 48px;">
+              <span class="input-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </span>
+            </div>
+            <div class="input-with-icon">
+              <input class="input" type="password" placeholder="Passwort best&auml;tigen" style="padding-right: 48px;">
+              <span class="input-icon">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+              </span>
+            </div>
+          </div>
+
+          <!-- Password strength indicator -->
+          <div class="pw-strength" style="width: 100%; margin-bottom: 24px;">
+            <div class="pw-bar active"></div>
+            <div class="pw-bar active"></div>
+            <div class="pw-bar active"></div>
+            <div class="pw-bar"></div>
+            <span class="pw-strength-label">Stark</span>
+          </div>
+
+          <!-- CTA -->
+          <button class="btn btn-primary">Passwort speichern</button>
+
+          <div style="flex: 1;"></div>
+
+          <!-- Back link -->
+          <a class="btn-text" style="gap: 6px; margin-bottom: 20px;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="15 18 9 12 15 6"/>
+            </svg>
+            Zur&uuml;ck zum Login
+          </a>
+
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 3 — Passwort vergessen (Erfolg)        -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div>
+      <div class="screen-label">3 &middot; Passwort vergessen (Erfolg)</div>
       <div class="phone" style="background: var(--beige);">
 
         <div class="status-bar"></div>
@@ -858,7 +978,13 @@
               <div style="width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--border); flex-shrink: 0;"></div>
             </div>
 
-            <!-- Option 4 — Anderer Grund -->
+            <!-- Option 4 — Liebste nicht mehr da -->
+            <div style="display: flex; align-items: center; padding: 14px 16px; border-radius: 14px; border: 1.5px solid var(--border); background: var(--white); cursor: pointer; gap: 12px;">
+              <div style="flex: 1; font-size: 15px; font-weight: 500; color: var(--navy);">Meine Liebsten sind leider nicht mehr da</div>
+              <div style="width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--border); flex-shrink: 0;"></div>
+            </div>
+
+            <!-- Option 5 — Anderer Grund -->
             <div style="display: flex; align-items: center; padding: 14px 16px; border-radius: 14px; border: 1.5px solid var(--border); background: var(--white); cursor: pointer; gap: 12px;">
               <div style="flex: 1; font-size: 15px; font-weight: 500; color: var(--navy);">Anderer Grund</div>
               <div style="width: 22px; height: 22px; border-radius: 50%; border: 1.5px solid var(--border); flex-shrink: 0;"></div>
