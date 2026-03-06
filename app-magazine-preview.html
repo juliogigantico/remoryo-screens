@@ -13,7 +13,6 @@
       --blue: #82B7D8;
       --blue-light: #EAF3F9;
       --blue-soft: #D4E8F2;
-      --turquoise: #B8E0E0;
       --turquoise-light: #E2F3F3;
       --navy: #1B2C43;
       --orange: #FFA631;
@@ -178,8 +177,6 @@
     }
     .mag-status--editing { background: #FFF3DC; color: #D48B00; }
     .mag-status--sent { background: #E6F7EE; color: #1D8348; }
-    .mag-status--printed { background: var(--blue-light); color: var(--blue); }
-
     /* FIX #4: Deadline info text */
     .mag-deadline {
       position: absolute;
@@ -490,25 +487,11 @@
       background: var(--orange);
       color: white;
     }
-    .btn-secondary {
-      background: var(--blue);
-      color: white;
-    }
     .btn-outline {
       background: var(--white);
       color: var(--navy);
       border: 1.5px solid var(--navy);
     }
-    .btn-text {
-      background: none;
-      color: var(--navy);
-      padding: 14px 8px;
-    }
-    .btn-danger {
-      background: #FFF0EE;
-      color: var(--red);
-    }
-
     /* ── Group Indicator Pill ── */
     .group-indicator {
       display: flex;
@@ -522,13 +505,6 @@
       color: var(--navy);
       cursor: pointer;
     }
-    .group-indicator-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
     .footer-note {
       font-size: 11px; color: #A0A0A0; font-weight: 500; text-align: center;
     }
