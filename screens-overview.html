@@ -383,12 +383,12 @@
       <div class="nav-section">Screens</div>
       <a href="#onboarding" class="nav-item"><span class="nav-icon">&#x1f680;</span>Onboarding<span class="nav-badge">2</span></a>
       <a href="#auth" class="nav-item"><span class="nav-icon">&#x1f510;</span>Authentifizierung<span class="nav-badge">6</span></a>
-      <a href="#home" class="nav-item"><span class="nav-icon">&#x1f4f7;</span>Home / Fotos<span class="nav-badge">5</span></a>
-      <a href="#magazine" class="nav-item"><span class="nav-icon">&#x1f4d6;</span>Magazin<span class="nav-badge">4</span></a>
-      <a href="#settings" class="nav-item"><span class="nav-icon">&#x2699;&#xfe0f;</span>Einstellungen<span class="nav-badge">4</span></a>
-      <a href="#settings-detail" class="nav-item"><span class="nav-icon">&#x1f527;</span>Settings Detail<span class="nav-badge">12</span></a>
-      <a href="#utility" class="nav-item"><span class="nav-icon">&#x1f6e0;&#xfe0f;</span>Utility / Flows<span class="nav-badge">12</span></a>
-      <a href="#additional" class="nav-item"><span class="nav-icon">&#x1f4f1;</span>Zus&auml;tzliche Screens<span class="nav-badge">15</span></a>
+      <a href="#home" class="nav-item"><span class="nav-icon">&#x1f4f7;</span>Home &amp; Fotos<span class="nav-badge">10</span></a>
+      <a href="#magazine" class="nav-item"><span class="nav-icon">&#x1f4d6;</span>Magazin<span class="nav-badge">5</span></a>
+      <a href="#settings" class="nav-item"><span class="nav-icon">&#x2699;&#xfe0f;</span>Settings &amp; Account<span class="nav-badge">9</span></a>
+      <a href="#abo" class="nav-item"><span class="nav-icon">&#x1f4b3;</span>Abo &amp; Payment<span class="nav-badge">9</span></a>
+      <a href="#groups" class="nav-item"><span class="nav-icon">&#x1f46a;</span>Gruppen &amp; Einladungen<span class="nav-badge">9</span></a>
+      <a href="#system" class="nav-item"><span class="nav-icon">&#x1f6e0;&#xfe0f;</span>System &amp; Support<span class="nav-badge">10</span></a>
     </nav>
   </aside>
 
@@ -581,11 +581,11 @@
       <div class="section-header">
         <div class="section-icon icon-home">&#x1f4f7;</div>
         <h3>Home / Fotos</h3>
-        <span class="section-badge">5 Screens</span>
+        <span class="section-badge">10 Screens</span>
         <a href="app-home-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
       </div>
-      <p class="section-desc">Zwei Tabs: Fotos-Feed + Heft-Tab mit Deadline-Banner. Empty States motivieren zum ersten Upload.</p>
-      <button class="preview-toggle" onclick="togglePreview(this, 'app-home-preview.html', 2480, 1140, 0.38)">&#x1f50d; Live Preview laden</button>
+      <p class="section-desc">Fotos-Tab, Empty States, Magazine-Tab, Kommentare, Foto-Vollansicht, Kommentar schreiben, Upload-Best&auml;tigung, Foto-Zugriff, Foto l&ouml;schen.</p>
+      <button class="preview-toggle" onclick="togglePreview(this, 'app-home-preview.html', 1510, 3000, 0.42)">&#x1f50d; Live Preview laden</button>
       <div class="live-preview"></div>
       <div class="phones-grid">
 
@@ -642,6 +642,52 @@
           <div class="phone-label">Kommentare</div>
         </a>
 
+        <a href="app-home-preview.html" target="_blank" class="phone-card phone--gray">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen" style="background:#111">
+            <div class="phone-screen-icon" style="filter:invert(1)">&#x1f5bc;</div>
+            <div class="phone-screen-title" style="color:white">Foto-Vollansicht</div>
+          </div></div>
+          <div class="phone-label">Foto-Vollansicht</div>
+        </a>
+
+        <a href="app-home-preview.html" target="_blank" class="phone-card phone--blue">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x270f;&#xfe0f;</div>
+            <div class="phone-screen-title">Kommentar schreiben</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-img"></div><div class="wire-spacer"></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-spacer"></div><div class="wire-rect" style="width:100%"></div></div>
+          </div></div>
+          <div class="phone-label">Kommentar<br><span style="color:var(--mid-gray);font-size:9px">schreiben</span></div>
+        </a>
+
+        <a href="app-home-preview.html" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x2705;</div>
+            <div class="phone-screen-title">Upload-Best&auml;tigung</div>
+            <div class="wire"><div class="wire-spacer"></div><div style="font-size:20px;text-align:center">&#x2714;&#xfe0f;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Upload<br><span style="color:var(--mid-gray);font-size:9px">Best&auml;tigung</span></div>
+        </a>
+
+        <a href="app-home-preview.html" target="_blank" class="phone-card phone--blue">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4f7;</div>
+            <div class="phone-screen-title">Foto-Zugriff</div>
+            <div class="phone-screen-sub">Pre-Permission</div>
+            <div class="wire"><div class="wire-spacer"></div><div style="font-size:20px;text-align:center">&#x1f4f7;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Foto-Zugriff</div>
+        </a>
+
+        <a href="app-home-preview.html" target="_blank" class="phone-card phone--red">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f5d1;&#xfe0f;</div>
+            <div class="phone-screen-title">Foto l&ouml;schen</div>
+            <div class="phone-screen-sub">Bottom Sheet</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn" style="background:rgba(231,76,60,0.2)"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Foto l&ouml;schen</div>
+        </a>
+
       </div>
     </div>
 
@@ -650,11 +696,11 @@
       <div class="section-header">
         <div class="section-icon icon-magazine">&#x1f4d6;</div>
         <h3>Magazin-Erstellung</h3>
-        <span class="section-badge">4 Screens</span>
+        <span class="section-badge">5 Screens</span>
         <a href="app-magazine-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
       </div>
-      <p class="section-desc">&Uuml;bersicht aller Magazine, Seiten-Editor mit Layout-Wechsel, Foto-Auswahl mit Multi-Select (min. 5 Fotos), Magazin-Vorschau.</p>
-      <button class="preview-toggle" onclick="togglePreview(this, 'app-magazine-preview.html', 1510, 1140, 0.42)">&#x1f50d; Live Preview laden</button>
+      <p class="section-desc">Magazin-&Uuml;bersicht, Seiten&uuml;bersicht (Editor), Foto ausw&auml;hlen (Multi-Select), Magazin-Vorschau, Erstes Magazin erstellt.</p>
+      <button class="preview-toggle" onclick="togglePreview(this, 'app-magazine-preview.html', 1510, 1500, 0.42)">&#x1f50d; Live Preview laden</button>
       <div class="live-preview"></div>
       <div class="phones-grid">
 
@@ -707,19 +753,37 @@
           <div class="phone-label">Foto ausw&auml;hlen</div>
         </a>
 
+        <a href="app-magazine-preview.html" target="_blank" class="phone-card phone--purple">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f440;</div>
+            <div class="phone-screen-title">Magazin-Vorschau</div>
+            <div class="wire"><div class="wire-spacer"></div><div style="width:40px;height:56px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border);margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Magazin-Vorschau</div>
+        </a>
+
+        <a href="app-magazine-preview.html" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f389;</div>
+            <div class="phone-screen-title">Erstes Magazin erstellt!</div>
+            <div class="wire"><div class="wire-spacer"></div><div style="font-size:20px;text-align:center">&#x1f38a;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Erstes Magazin<br><span style="color:var(--mid-gray);font-size:9px">erstellt</span></div>
+        </a>
+
       </div>
     </div>
 
-    <!-- ═══════ 5. SETTINGS ═══════ -->
+    <!-- ═══════ 5. SETTINGS & ACCOUNT ═══════ -->
     <div class="section" id="settings">
       <div class="section-header">
         <div class="section-icon icon-settings">&#x2699;&#xfe0f;</div>
-        <h3>Einstellungen</h3>
-        <span class="section-badge">4 Screens</span>
+        <h3>Settings &amp; Account</h3>
+        <span class="section-badge">9 Screens</span>
         <a href="app-settings-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
       </div>
-      <p class="section-desc">Hauptmen&uuml; mit Multi-Entity (B2C + B2B), Profil-&Uuml;bersicht, Abo-Verwaltung (aktiv + kein Abo).</p>
-      <button class="preview-toggle" onclick="togglePreview(this, 'app-settings-preview.html', 1510, 1140, 0.42)">&#x1f50d; Live Preview laden</button>
+      <p class="section-desc">Hauptmen&uuml;, Nutzerprofil (Ansicht + Bearbeitung), Passwort &auml;ndern, Lieferadresse, Zahlungsmethode (Owner vs. Mitglied), Account l&ouml;schen, Versandstatus.</p>
+      <button class="preview-toggle" onclick="togglePreview(this, 'app-settings-preview.html', 1510, 2800, 0.42)">&#x1f50d; Live Preview laden</button>
       <div class="live-preview"></div>
       <div class="phones-grid">
 
@@ -735,39 +799,31 @@
         <a href="app-settings-preview.html" target="_blank" class="phone-card phone--gray">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
             <div class="phone-screen-icon">&#x1f464;</div>
-            <div class="phone-screen-title">Mein Profil</div>
-            <div class="wire"><div class="wire-spacer"></div><div class="wire-avatar" style="width:28px;height:28px"></div><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+            <div class="phone-screen-title">Nutzerprofil</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-avatar" style="width:28px;height:28px"></div><div class="wire-spacer"></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div></div></div>
           </div></div>
-          <div class="phone-label">Mein Profil</div>
+          <div class="phone-label">Nutzerprofil</div>
         </a>
 
-        <a href="app-settings-preview.html" target="_blank" class="phone-card phone--orange">
+        <a href="app-settings-preview.html" target="_blank" class="phone-card phone--blue">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x1f4b3;</div>
-            <div class="phone-screen-title">Abonnement</div>
-            <div class="phone-screen-sub">14,99&euro; / Monat</div>
-            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--accent" style="height:6px;border-radius:3px;width:40%;margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div></div></div>
+            <div class="phone-screen-icon">&#x270f;&#xfe0f;</div>
+            <div class="phone-screen-title">Profil bearbeiten</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-avatar" style="width:28px;height:28px"></div><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
           </div></div>
-          <div class="phone-label">Abonnement</div>
+          <div class="phone-label">Profil bearbeiten</div>
         </a>
 
-      </div>
-    </div>
+        <a href="app-settings-preview.html" target="_blank" class="phone-card phone--gray">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f511;</div>
+            <div class="phone-screen-title">Passwort &auml;ndern</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Passwort &auml;ndern</div>
+        </a>
 
-    <!-- ═══════ 6. SETTINGS DETAIL ═══════ -->
-    <div class="section" id="settings-detail">
-      <div class="section-header">
-        <div class="section-icon icon-settings-detail">&#x1f527;</div>
-        <h3>Einstellungen &mdash; Detail</h3>
-        <span class="section-badge">12 Screens</span>
-        <a href="app-settings-detail-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
-      </div>
-      <p class="section-desc">Lieferadresse, Zahlungsmethode (Owner vs. Mitglied), Gruppenmitglieder, Passwort, Account l&ouml;schen, Profil bearbeiten, Versandstatus, Benachrichtigungen.</p>
-      <button class="preview-toggle" onclick="togglePreview(this, 'app-settings-detail-preview.html', 1510, 2200, 0.42)">&#x1f50d; Live Preview laden</button>
-      <div class="live-preview"></div>
-      <div class="phones-grid">
-
-        <a href="app-settings-detail-preview.html" target="_blank" class="phone-card phone--gray">
+        <a href="app-settings-preview.html" target="_blank" class="phone-card phone--gray">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
             <div class="phone-screen-icon">&#x1f4e6;</div>
             <div class="phone-screen-title">Lieferadresse</div>
@@ -776,7 +832,7 @@
           <div class="phone-label">Lieferadresse</div>
         </a>
 
-        <a href="app-settings-detail-preview.html" target="_blank" class="phone-card phone--orange">
+        <a href="app-settings-preview.html" target="_blank" class="phone-card phone--orange">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
             <div class="phone-screen-icon">&#x1f4b3;</div>
             <div class="phone-screen-title">Zahlungsmethode</div>
@@ -786,7 +842,7 @@
           <div class="phone-label">Zahlung<br><span style="color:var(--mid-gray);font-size:9px">Verwalter</span></div>
         </a>
 
-        <a href="app-settings-detail-preview.html" target="_blank" class="phone-card phone--gray">
+        <a href="app-settings-preview.html" target="_blank" class="phone-card phone--gray">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
             <div class="phone-screen-icon">&#x1f512;</div>
             <div class="phone-screen-title">Zahlungsmethode</div>
@@ -796,25 +852,7 @@
           <div class="phone-label">Zahlung<br><span style="color:var(--mid-gray);font-size:9px">Mitglied</span></div>
         </a>
 
-        <a href="app-settings-detail-preview.html" target="_blank" class="phone-card phone--blue">
-          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x1f465;</div>
-            <div class="phone-screen-title">Gruppen&shy;mitglieder</div>
-            <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
-          </div></div>
-          <div class="phone-label">Gruppenmitglieder</div>
-        </a>
-
-        <a href="app-settings-detail-preview.html" target="_blank" class="phone-card phone--gray">
-          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x1f511;</div>
-            <div class="phone-screen-title">Passwort &auml;ndern</div>
-            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
-          </div></div>
-          <div class="phone-label">Passwort &auml;ndern</div>
-        </a>
-
-        <a href="app-settings-detail-preview.html" target="_blank" class="phone-card phone--red">
+        <a href="app-settings-preview.html" target="_blank" class="phone-card phone--red">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
             <div class="phone-screen-icon">&#x1f5d1;&#xfe0f;</div>
             <div class="phone-screen-title">Account l&ouml;schen</div>
@@ -823,204 +861,41 @@
           <div class="phone-label">Account l&ouml;schen</div>
         </a>
 
-      </div>
-    </div>
-
-    <!-- ═══════ 7. UTILITY ═══════ -->
-    <div class="section" id="utility">
-      <div class="section-header">
-        <div class="section-icon icon-utility">&#x1f6e0;&#xfe0f;</div>
-        <h3>Utility / Flow Pages</h3>
-        <span class="section-badge">12 Screens</span>
-        <a href="app-utility-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
-      </div>
-      <p class="section-desc">Passwort-Reset, Netzwerk-Fehler, Gruppen-Wechsel, Einladung annehmen, Magazin erstellt, Mitglied einladen, Abo k&uuml;ndigen, Logout, Hilfe &amp; Support.</p>
-      <button class="preview-toggle" onclick="togglePreview(this, 'app-utility-preview.html', 1510, 2200, 0.42)">&#x1f50d; Live Preview laden</button>
-      <div class="live-preview"></div>
-      <div class="phones-grid">
-
-        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--beige">
-          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x1f4e7;</div>
-            <div class="phone-screen-title">PW vergessen</div>
-            <div class="phone-screen-sub">Eingabe</div>
-            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
-          </div></div>
-          <div class="phone-label">PW vergessen<br><span style="color:var(--mid-gray);font-size:9px">Eingabe</span></div>
-        </a>
-
-        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--turquoise">
-          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x2709;&#xfe0f;</div>
-            <div class="phone-screen-title">PW vergessen</div>
-            <div class="phone-screen-sub">Erfolg</div>
-            <div class="wire"><div class="wire-spacer"></div><div style="font-size:24px;text-align:center">&#x2705;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
-          </div></div>
-          <div class="phone-label">PW vergessen<br><span style="color:var(--mid-gray);font-size:9px">Erfolg</span></div>
-        </a>
-
-        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--red">
-          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x1f4e1;</div>
-            <div class="phone-screen-title">Netzwerk-Fehler</div>
-            <div class="wire"><div class="wire-spacer"></div><div style="font-size:24px;text-align:center">&#x26a0;&#xfe0f;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
-          </div></div>
-          <div class="phone-label">Netzwerk-Fehler</div>
-        </a>
-
-        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--blue">
-          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x1f504;</div>
-            <div class="phone-screen-title">Gruppen wechseln</div>
-            <div class="phone-screen-sub">Bottom Sheet</div>
-            <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px;background:var(--orange)"></div><div class="wire-bar" style="flex:1"></div><div style="font-size:8px">&#x2714;</div></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px;background:var(--turquoise)"></div><div class="wire-bar" style="flex:1"></div></div></div>
-          </div></div>
-          <div class="phone-label">Gruppen wechseln<br><span style="color:var(--mid-gray);font-size:9px">Bottom Sheet</span></div>
-        </a>
-
-        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--turquoise">
-          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x1f91d;</div>
-            <div class="phone-screen-title">Einladung annehmen</div>
-            <div class="wire"><div class="wire-spacer"></div><div class="wire-avatar"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
-          </div></div>
-          <div class="phone-label">Einladung<br><span style="color:var(--mid-gray);font-size:9px">Annehmen</span></div>
-        </a>
-
-        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--orange">
-          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x1f389;</div>
-            <div class="phone-screen-title">Erstes Magazin erstellt!</div>
-            <div class="wire"><div class="wire-spacer"></div><div style="font-size:20px;text-align:center">&#x1f38a;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
-          </div></div>
-          <div class="phone-label">Erstes Magazin<br><span style="color:var(--mid-gray);font-size:9px">Erfolg</span></div>
-        </a>
-
-        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--turquoise">
-          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x1f517;</div>
-            <div class="phone-screen-title">Mitglied einladen</div>
-            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
-          </div></div>
-          <div class="phone-label">Mitglied<br><span style="color:var(--mid-gray);font-size:9px">Einladen</span></div>
-        </a>
-
-        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--red">
-          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x274c;</div>
-            <div class="phone-screen-title">Abo k&uuml;ndigen</div>
-            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-row"><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid var(--border)"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid var(--border)"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-spacer"></div><div class="wire-btn" style="background:rgba(231,76,60,0.25)"></div></div>
-          </div></div>
-          <div class="phone-label">Abo k&uuml;ndigen<br><span style="color:var(--mid-gray);font-size:9px">Best&auml;tigung</span></div>
-        </a>
-
-        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--gray">
-          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x1f6aa;</div>
-            <div class="phone-screen-title">Logout</div>
-            <div class="phone-screen-sub">Bottom Sheet</div>
-            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn" style="background:rgba(231,76,60,0.25)"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
-          </div></div>
-          <div class="phone-label">Logout<br><span style="color:var(--mid-gray);font-size:9px">Best&auml;tigung</span></div>
-        </a>
-
-        <a href="app-utility-preview.html" target="_blank" class="phone-card phone--beige">
-          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x2753;</div>
-            <div class="phone-screen-title">Hilfe &amp; Support</div>
-            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div><div style="font-size:8px">&#x25bc;</div></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div><div style="font-size:8px">&#x25b6;</div></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div><div style="font-size:8px">&#x25b6;</div></div></div>
-          </div></div>
-          <div class="phone-label">Hilfe &amp; Support<br><span style="color:var(--mid-gray);font-size:9px">FAQ + Kontakt</span></div>
-        </a>
-
-      </div>
-    </div>
-
-    <!-- ═══════ 8. ADDITIONAL ═══════ -->
-    <div class="section" id="additional">
-      <div class="section-header">
-        <div class="section-icon" style="background:linear-gradient(135deg, var(--orange), #FF8C00); color:white">&#x1f4f1;</div>
-        <h3>Zus&auml;tzliche Screens</h3>
-        <span class="section-badge">15 Screens</span>
-        <a href="app-additional-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
-      </div>
-      <p class="section-desc">Foto-Vollansicht, Kommentare, Upload-Best&auml;tigung, Push-Permission, Empf&auml;nger verwalten, Abo-Auswahl, Push-Notifications, In-App Messages, 4-Schritt Checkout-Wizard.</p>
-      <button class="preview-toggle" onclick="togglePreview(this, 'app-additional-preview.html', 1510, 3400, 0.42)">&#x1f50d; Live Preview laden</button>
-      <div class="live-preview"></div>
-      <div class="phones-grid">
-
-        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--gray">
-          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen" style="background:#111">
-            <div class="phone-screen-icon" style="filter:invert(1)">&#x1f5bc;</div>
-            <div class="phone-screen-title" style="color:white">Foto-Vollansicht</div>
-          </div></div>
-          <div class="phone-label">Foto-Vollansicht</div>
-        </a>
-
-        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--blue">
-          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x1f4ac;</div>
-            <div class="phone-screen-title">Kommentar</div>
-            <div class="wire"><div class="wire-spacer"></div><div class="wire-img"></div><div class="wire-spacer"></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div></div>
-          </div></div>
-          <div class="phone-label">Kommentar<br><span style="color:var(--mid-gray);font-size:9px">schreiben</span></div>
-        </a>
-
-        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--orange">
-          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x2705;</div>
-            <div class="phone-screen-title">Upload Erfolg</div>
-            <div class="wire"><div class="wire-spacer"></div><div style="font-size:20px;text-align:center">&#x2714;&#xfe0f;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
-          </div></div>
-          <div class="phone-label">Upload<br><span style="color:var(--mid-gray);font-size:9px">Best&auml;tigung</span></div>
-        </a>
-
-        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--blue">
-          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x1f514;</div>
-            <div class="phone-screen-title">Push Permission</div>
-            <div class="wire"><div class="wire-spacer"></div><div style="font-size:20px;text-align:center">&#x1f514;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--blue"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
-          </div></div>
-          <div class="phone-label">Push<br><span style="color:var(--mid-gray);font-size:9px">Permission</span></div>
-        </a>
-
-        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--turquoise">
+        <a href="app-settings-preview.html" target="_blank" class="phone-card phone--blue">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
             <div class="phone-screen-icon">&#x1f4e6;</div>
-            <div class="phone-screen-title">Empf&auml;nger</div>
-            <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+            <div class="phone-screen-title">Versandstatus</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div style="width:10px;height:10px;border-radius:50%;background:rgba(76,175,80,0.3)"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="width:10px;height:10px;border-radius:50%;background:rgba(255,166,49,0.3)"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="width:10px;height:10px;border-radius:50%;background:var(--border)"></div><div class="wire-bar" style="flex:1"></div></div></div>
           </div></div>
-          <div class="phone-label">Empf&auml;nger<br><span style="color:var(--mid-gray);font-size:9px">verwalten</span></div>
+          <div class="phone-label">Versandstatus</div>
         </a>
 
-        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--orange">
+      </div>
+    </div>
+
+    <!-- ═══════ 6. ABO & PAYMENT ═══════ -->
+    <div class="section" id="abo">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg, var(--orange), #FF8C00); color:white">&#x1f4b3;</div>
+        <h3>Abo &amp; Payment</h3>
+        <span class="section-badge">9 Screens</span>
+        <a href="app-abo-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
+      </div>
+      <p class="section-desc">Abo-Auswahl, 4-Schritt Checkout-Wizard (Plan &rarr; Empf&auml;nger &rarr; Zahlung &rarr; Best&auml;tigung), Abo aktiviert, Abo aktiv, Kein Abo, Abo k&uuml;ndigen.</p>
+      <button class="preview-toggle" onclick="togglePreview(this, 'app-abo-preview.html', 1510, 2800, 0.42)">&#x1f50d; Live Preview laden</button>
+      <div class="live-preview"></div>
+      <div class="phones-grid">
+
+        <a href="app-abo-preview.html" target="_blank" class="phone-card phone--orange">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
             <div class="phone-screen-icon">&#x1f4b3;</div>
             <div class="phone-screen-title">Abo ausw&auml;hlen</div>
             <div class="wire"><div class="wire-spacer"></div><div class="wire-rect wire-rect--tall" style="border-color:var(--orange)"></div><div class="wire-spacer"></div><div class="wire-rect wire-rect--tall"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
           </div></div>
-          <div class="phone-label">Abo<br><span style="color:var(--mid-gray);font-size:9px">ausw&auml;hlen</span></div>
+          <div class="phone-label">Abo ausw&auml;hlen</div>
         </a>
 
-        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--gray">
-          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen" style="background:#111">
-            <div class="phone-screen-icon" style="filter:invert(1)">&#x1f4f2;</div>
-            <div class="phone-screen-title" style="color:white">Push Notification</div>
-            <div class="phone-screen-sub" style="color:#aaa">Lock Screen</div>
-          </div></div>
-          <div class="phone-label">Push<br><span style="color:var(--mid-gray);font-size:9px">Notification</span></div>
-        </a>
-
-        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--orange">
-          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x1f4e8;</div>
-            <div class="phone-screen-title">In-App Messages</div>
-            <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div style="width:20px;height:12px;border-radius:3px;background:rgba(255,166,49,0.2)"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="width:20px;height:12px;border-radius:3px;background:rgba(231,76,60,0.2)"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="width:20px;height:12px;border-radius:3px;background:rgba(76,175,80,0.2)"></div><div class="wire-bar" style="flex:1"></div></div></div>
-          </div></div>
-          <div class="phone-label">In-App<br><span style="color:var(--mid-gray);font-size:9px">Messages</span></div>
-        </a>
-
-        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--turquoise">
+        <a href="app-abo-preview.html" target="_blank" class="phone-card phone--turquoise">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
             <div class="phone-screen-icon">&#x31;&#xfe0f;&#x20e3;</div>
             <div class="phone-screen-title">Checkout: Plan</div>
@@ -1029,7 +904,7 @@
           <div class="phone-label">Checkout 1/4<br><span style="color:var(--mid-gray);font-size:9px">Plan w&auml;hlen</span></div>
         </a>
 
-        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--turquoise">
+        <a href="app-abo-preview.html" target="_blank" class="phone-card phone--turquoise">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
             <div class="phone-screen-icon">&#x32;&#xfe0f;&#x20e3;</div>
             <div class="phone-screen-title">Checkout: Empf.</div>
@@ -1038,7 +913,7 @@
           <div class="phone-label">Checkout 2/4<br><span style="color:var(--mid-gray);font-size:9px">Empf&auml;nger</span></div>
         </a>
 
-        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--turquoise">
+        <a href="app-abo-preview.html" target="_blank" class="phone-card phone--turquoise">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
             <div class="phone-screen-icon">&#x33;&#xfe0f;&#x20e3;</div>
             <div class="phone-screen-title">Checkout: Zahlung</div>
@@ -1047,7 +922,7 @@
           <div class="phone-label">Checkout 3/4<br><span style="color:var(--mid-gray);font-size:9px">Zahlung</span></div>
         </a>
 
-        <a href="app-additional-preview.html" target="_blank" class="phone-card phone--orange">
+        <a href="app-abo-preview.html" target="_blank" class="phone-card phone--orange">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
             <div class="phone-screen-icon">&#x2705;</div>
             <div class="phone-screen-title">Checkout: Fertig!</div>
@@ -1056,11 +931,256 @@
           <div class="phone-label">Checkout 4/4<br><span style="color:var(--mid-gray);font-size:9px">Best&auml;tigung</span></div>
         </a>
 
+        <a href="app-abo-preview.html" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f389;</div>
+            <div class="phone-screen-title">Abo aktiviert!</div>
+            <div class="wire"><div class="wire-spacer"></div><div style="font-size:20px;text-align:center">&#x1f38a;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Abo aktiviert!</div>
+        </a>
+
+        <a href="app-abo-preview.html" target="_blank" class="phone-card phone--turquoise">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x2705;</div>
+            <div class="phone-screen-title">Abo aktiv</div>
+            <div class="phone-screen-sub">14,99&euro; / Monat</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Abo aktiv</div>
+        </a>
+
+        <a href="app-abo-preview.html" target="_blank" class="phone-card phone--gray">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f6ab;</div>
+            <div class="phone-screen-title">Kein Abo</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Kein Abo</div>
+        </a>
+
+        <a href="app-abo-preview.html" target="_blank" class="phone-card phone--red">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x274c;</div>
+            <div class="phone-screen-title">Abo k&uuml;ndigen</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-row"><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid var(--border)"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="width:8px;height:8px;border-radius:50%;border:1.5px solid var(--border)"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-spacer"></div><div class="wire-btn" style="background:rgba(231,76,60,0.25)"></div></div>
+          </div></div>
+          <div class="phone-label">Abo k&uuml;ndigen</div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- ═══════ 7. GRUPPEN & EINLADUNGEN ═══════ -->
+    <div class="section" id="groups">
+      <div class="section-header">
+        <div class="section-icon" style="background:linear-gradient(135deg, var(--blue), #5A9BC6); color:white">&#x1f46a;</div>
+        <h3>Gruppen &amp; Einladungen</h3>
+        <span class="section-badge">9 Screens</span>
+        <a href="app-groups-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
+      </div>
+      <p class="section-desc">Gruppenmitglieder, Gruppe erstellen/verwalten/l&ouml;schen, Gruppen wechseln, Mitglied einladen, Einladung annehmen, Empf&auml;nger verwalten/hinzuf&uuml;gen.</p>
+      <button class="preview-toggle" onclick="togglePreview(this, 'app-groups-preview.html', 1510, 2800, 0.42)">&#x1f50d; Live Preview laden</button>
+      <div class="live-preview"></div>
+      <div class="phones-grid">
+
+        <a href="app-groups-preview.html" target="_blank" class="phone-card phone--blue">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f465;</div>
+            <div class="phone-screen-title">Gruppen&shy;mitglieder</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Gruppenmitglieder</div>
+        </a>
+
+        <a href="app-groups-preview.html" target="_blank" class="phone-card phone--turquoise">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x2795;</div>
+            <div class="phone-screen-title">Gruppe erstellen</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-avatar" style="width:28px;height:28px"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Gruppe erstellen</div>
+        </a>
+
+        <a href="app-groups-preview.html" target="_blank" class="phone-card phone--gray">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x2699;&#xfe0f;</div>
+            <div class="phone-screen-title">Gruppe verwalten</div>
+            <div class="phone-screen-sub">Nur Admin</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Gruppe verwalten<br><span style="color:var(--mid-gray);font-size:9px">Admin</span></div>
+        </a>
+
+        <a href="app-groups-preview.html" target="_blank" class="phone-card phone--red">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f5d1;&#xfe0f;</div>
+            <div class="phone-screen-title">Gruppe l&ouml;schen</div>
+            <div class="phone-screen-sub">Nur Admin</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn" style="background:rgba(231,76,60,0.2)"></div></div>
+          </div></div>
+          <div class="phone-label">Gruppe l&ouml;schen</div>
+        </a>
+
+        <a href="app-groups-preview.html" target="_blank" class="phone-card phone--blue">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f504;</div>
+            <div class="phone-screen-title">Gruppen wechseln</div>
+            <div class="phone-screen-sub">Bottom Sheet</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px;background:var(--orange)"></div><div class="wire-bar" style="flex:1"></div><div style="font-size:8px">&#x2714;</div></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px;background:var(--turquoise)"></div><div class="wire-bar" style="flex:1"></div></div></div>
+          </div></div>
+          <div class="phone-label">Gruppen wechseln</div>
+        </a>
+
+        <a href="app-groups-preview.html" target="_blank" class="phone-card phone--turquoise">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f517;</div>
+            <div class="phone-screen-title">Mitglied einladen</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Mitglied einladen</div>
+        </a>
+
+        <a href="app-groups-preview.html" target="_blank" class="phone-card phone--turquoise">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f91d;</div>
+            <div class="phone-screen-title">Einladung annehmen</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-avatar"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Einladung annehmen</div>
+        </a>
+
+        <a href="app-groups-preview.html" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4e6;</div>
+            <div class="phone-screen-title">Empf&auml;nger</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div class="wire-avatar" style="width:14px;height:14px"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Empf&auml;nger<br><span style="color:var(--mid-gray);font-size:9px">verwalten</span></div>
+        </a>
+
+        <a href="app-groups-preview.html" target="_blank" class="phone-card phone--turquoise">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x2795;</div>
+            <div class="phone-screen-title">Empf&auml;nger hinzuf&uuml;gen</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Empf&auml;nger<br><span style="color:var(--mid-gray);font-size:9px">hinzuf&uuml;gen</span></div>
+        </a>
+
+      </div>
+    </div>
+
+    <!-- ═══════ 8. SYSTEM & SUPPORT ═══════ -->
+    <div class="section" id="system">
+      <div class="section-header">
+        <div class="section-icon icon-utility">&#x1f6e0;&#xfe0f;</div>
+        <h3>System &amp; Support</h3>
+        <span class="section-badge">10 Screens</span>
+        <a href="app-system-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
+      </div>
+      <p class="section-desc">Passwort vergessen/zur&uuml;cksetzen, Netzwerk-Fehler, Logout, Hilfe &amp; Support (FAQ + Kontakt), Push Notifications, In-App Messages, Push Permission, Benachrichtigungen.</p>
+      <button class="preview-toggle" onclick="togglePreview(this, 'app-system-preview.html', 1510, 3000, 0.42)">&#x1f50d; Live Preview laden</button>
+      <div class="live-preview"></div>
+      <div class="phones-grid">
+
+        <a href="app-system-preview.html" target="_blank" class="phone-card phone--beige">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4e7;</div>
+            <div class="phone-screen-title">PW vergessen</div>
+            <div class="phone-screen-sub">Eingabe</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">PW vergessen</div>
+        </a>
+
+        <a href="app-system-preview.html" target="_blank" class="phone-card phone--beige">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f511;</div>
+            <div class="phone-screen-title">Neues PW setzen</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Neues PW setzen</div>
+        </a>
+
+        <a href="app-system-preview.html" target="_blank" class="phone-card phone--turquoise">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x2709;&#xfe0f;</div>
+            <div class="phone-screen-title">PW Erfolg</div>
+            <div class="wire"><div class="wire-spacer"></div><div style="font-size:24px;text-align:center">&#x2705;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">PW Erfolg</div>
+        </a>
+
+        <a href="app-system-preview.html" target="_blank" class="phone-card phone--red">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4e1;</div>
+            <div class="phone-screen-title">Netzwerk-Fehler</div>
+            <div class="wire"><div class="wire-spacer"></div><div style="font-size:24px;text-align:center">&#x26a0;&#xfe0f;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Netzwerk-Fehler</div>
+        </a>
+
+        <a href="app-system-preview.html" target="_blank" class="phone-card phone--gray">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f6aa;</div>
+            <div class="phone-screen-title">Logout</div>
+            <div class="phone-screen-sub">Bottom Sheet</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn" style="background:rgba(231,76,60,0.25)"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Logout</div>
+        </a>
+
+        <a href="app-system-preview.html" target="_blank" class="phone-card phone--beige">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x2753;</div>
+            <div class="phone-screen-title">Hilfe &amp; Support</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div><div style="font-size:8px">&#x25bc;</div></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div><div style="font-size:8px">&#x25b6;</div></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div><div style="font-size:8px">&#x25b6;</div></div></div>
+          </div></div>
+          <div class="phone-label">Hilfe &amp; Support</div>
+        </a>
+
+        <a href="app-system-preview.html" target="_blank" class="phone-card phone--gray">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen" style="background:#111">
+            <div class="phone-screen-icon" style="filter:invert(1)">&#x1f4f2;</div>
+            <div class="phone-screen-title" style="color:white">Push Notifications</div>
+            <div class="phone-screen-sub" style="color:#aaa">Lock Screen</div>
+          </div></div>
+          <div class="phone-label">Push Notifications</div>
+        </a>
+
+        <a href="app-system-preview.html" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4e8;</div>
+            <div class="phone-screen-title">In-App Messages</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div style="width:20px;height:12px;border-radius:3px;background:rgba(255,166,49,0.2)"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="width:20px;height:12px;border-radius:3px;background:rgba(231,76,60,0.2)"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="width:20px;height:12px;border-radius:3px;background:rgba(76,175,80,0.2)"></div><div class="wire-bar" style="flex:1"></div></div></div>
+          </div></div>
+          <div class="phone-label">In-App Messages</div>
+        </a>
+
+        <a href="app-system-preview.html" target="_blank" class="phone-card phone--blue">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f514;</div>
+            <div class="phone-screen-title">Push Permission</div>
+            <div class="wire"><div class="wire-spacer"></div><div style="font-size:20px;text-align:center">&#x1f514;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--blue"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Push Permission</div>
+        </a>
+
+        <a href="app-system-preview.html" target="_blank" class="phone-card phone--gray">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f514;</div>
+            <div class="phone-screen-title">Benach&shy;richtigungen</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div><div style="width:20px;height:10px;border-radius:5px;background:rgba(76,175,80,0.3)"></div></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div><div style="width:20px;height:10px;border-radius:5px;background:var(--border)"></div></div><div class="wire-row"><div class="wire-bar" style="flex:1"></div><div style="width:20px;height:10px;border-radius:5px;background:rgba(76,175,80,0.3)"></div></div></div>
+          </div></div>
+          <div class="phone-label">Benachrichtigungen</div>
+        </a>
+
       </div>
     </div>
 
     <div class="page-footer">
-      &hearts; remoryo &middot; N&auml;he, die ankommt. &middot; Stand 5. M&auml;rz 2026
+      &hearts; remoryo &middot; N&auml;he, die ankommt. &middot; Stand 6. M&auml;rz 2026
     </div>
 
   </main>
