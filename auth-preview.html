@@ -23,6 +23,7 @@
       --mid-gray: #94A3B3;
       --light-gray: #F5F6F8;
       --border: #E2E6EB;
+      --beige: #E8DDD1;
       --btn-radius: 14px;
       --input-radius: 12px;
     }
@@ -603,6 +604,8 @@
       height: 20px;
       flex-shrink: 0;
     }
+
+    [id^="screen-"] { scroll-margin-top: 20px; }
   </style>
 </head>
 <body>
@@ -614,8 +617,8 @@
     <!-- ══════════════════════════════════════════════ -->
     <!-- SCREEN 1 — Login                              -->
     <!-- ══════════════════════════════════════════════ -->
-    <div>
-      <div class="screen-label">Login</div>
+    <div id="screen-1">
+      <div class="screen-label">1 &middot; Login</div>
       <div class="phone">
 
         <div class="top top--blue" style="padding-bottom: 28px;">
@@ -676,8 +679,8 @@
     <!-- ══════════════════════════════════════════════ -->
     <!-- SCREEN 1b — Login (Error State)                -->
     <!-- ══════════════════════════════════════════════ -->
-    <div>
-      <div class="screen-label">Login — Fehler</div>
+    <div id="screen-1b">
+      <div class="screen-label">1b &middot; Login &mdash; Fehler</div>
       <div class="phone">
 
         <div class="top top--blue" style="padding-bottom: 28px;">
@@ -747,8 +750,8 @@
     <!-- ══════════════════════════════════════════════ -->
     <!-- SCREEN 2 — Registrierung                      -->
     <!-- ══════════════════════════════════════════════ -->
-    <div>
-      <div class="screen-label">Registrierung</div>
+    <div id="screen-2">
+      <div class="screen-label">2 &middot; Registrierung</div>
       <div class="phone">
 
         <div class="top top--turquoise" style="padding-bottom: 16px;">
@@ -848,7 +851,7 @@
     <!-- ══════════════════════════════════════════════ -->
     <!-- SCREEN 4 — Web Landing Page (Mobile Browser)  -->
     <!-- ══════════════════════════════════════════════ -->
-    <div>
+    <div id="screen-4">
       <div class="screen-label">4 · Web Landing (Mobile Browser)</div>
       <div class="phone">
 
@@ -968,7 +971,7 @@
     <!-- ══════════════════════════════════════════════ -->
     <!-- SCREEN 5 — In-App Invite Welcome               -->
     <!-- ══════════════════════════════════════════════ -->
-    <div>
+    <div id="screen-5">
       <div class="screen-label">5 · In-App Welcome (nach Download)</div>
       <div class="phone">
 
@@ -1027,14 +1030,14 @@
     <!-- ══════════════════════════════════════════════ -->
     <!-- SCREEN 6 — E-Mail Bestätigung                 -->
     <!-- ══════════════════════════════════════════════ -->
-    <div>
+    <div id="screen-6">
       <div class="screen-label">6 · E-Mail Bestätigung</div>
       <div class="phone">
 
         <div class="top top--turquoise">
           <img class="logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo">
           <!-- Mail icon circle -->
-          <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--blue-light); display: flex; align-items: center; justify-content: center; margin-bottom: -44px; position: relative; z-index: 3; box-shadow: 0 20px 50px rgba(27, 44, 67, 0.24), 0 8px 20px rgba(27, 44, 67, 0.12);">
+          <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--orange); display: flex; align-items: center; justify-content: center; margin-bottom: -44px; position: relative; z-index: 3; box-shadow: 0 20px 50px rgba(27, 44, 67, 0.24), 0 8px 20px rgba(27, 44, 67, 0.12);">
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--white)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
               <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
               <polyline points="22,6 12,13 2,6"/>
