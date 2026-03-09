@@ -5,63 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Remoryo Onboarding — Visual Preview</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --blue: #82B7D8;
-      --blue-light: #EAF3F9;
-      --blue-soft: #D4E8F2;
-      --turquoise: #B8E0E0;
-      --turquoise-light: #E2F3F3;
-      --navy: #1B2C43;
-      --orange: #FFA631;
-      --white: #FFFFFF;
-      --dark-gray: #5A6B7A;
-      --mid-gray: #94A3B3;
-      --border: #E2E6EB;
-      --light-gray: #F5F6F8;
-      --beige: #E8DDD1;
-      --red: #E74C3C;
-      --btn-radius: 14px;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: #F0F2F5;
-      display: flex; flex-direction: column; align-items: center;
-      padding: 32px 20px; gap: 20px;
-    }
-
-    h1 { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--mid-gray); }
-    .preview-row { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; }
-
-    .screen-label {
-      font-size: 11px; font-weight: 700; color: var(--mid-gray);
-      text-align: center; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;
-    }
-
-    /* ── Phone Frame ── */
-    .phone {
-      width: 393px; height: 852px; background: var(--white);
-      border-radius: 48px; overflow: hidden;
-      box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 8px 30px rgba(0,0,0,0.08), 0 30px 70px rgba(0,0,0,0.12);
-      position: relative; display: flex; flex-direction: column;
-    }
-    .phone::before {
-      content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
-      width: 126px; height: 36px; background: #000; border-radius: 20px; z-index: 10;
-    }
+    @import url('shared-styles.css');
 
     /* ── Top Section ── */
-    .top-section {
+    .top {
       padding: 64px 24px 0;
       display: flex; flex-direction: column; align-items: center;
       position: relative; z-index: 2; flex-shrink: 0;
     }
-    .top-section--blue { background: linear-gradient(180deg, var(--blue-soft) 0%, var(--blue-light) 75%, var(--white) 100%); }
-    .top-section--turquoise { background: linear-gradient(180deg, var(--turquoise) 0%, var(--turquoise-light) 75%, var(--white) 100%); }
+    .top--blue { background: linear-gradient(180deg, var(--blue-soft) 0%, var(--blue-light) 75%, var(--white) 100%); }
+    .top--turquoise { background: linear-gradient(180deg, var(--turquoise) 0%, var(--turquoise-light) 75%, var(--white) 100%); }
 
     /* ── Logo ── */
     .logo { width: 36px; height: auto; margin-bottom: 14px; }
@@ -81,19 +34,18 @@
       margin-bottom: -48px; position: relative; z-index: 3;
     }
 
-    /* ── Bottom Content ── */
-    .bottom {
+    /* ── Content Area ── */
+    .content {
       flex: 1; padding: 56px 20px 8px;
       display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
       gap: 16px; position: relative; z-index: 1;
     }
 
-    /* ── Back Arrow ── */
+    /* ── Back Arrow (position override) ── */
     .back-arrow {
       position: absolute; top: 54px; left: 20px;
-      width: 44px; height: 44px; background: none; border: none;
-      cursor: pointer; padding: 10px;
-      display: flex; align-items: center; justify-content: center; z-index: 11;
+      background: none; border: none;
+      padding: 10px; z-index: 11;
     }
 
     /* ── Steps Row ── */
@@ -105,19 +57,10 @@
 
     /* ── Text ── */
     .bottom-text { text-align: center; }
-    .headline { font-weight: 800; font-size: 28px; color: var(--navy); text-align: center; line-height: 1.3; margin-bottom: 10px; }
-    .sub { font-weight: 500; font-size: 15px; color: var(--dark-gray); text-align: center; line-height: 1.55; }
     .benefit { font-weight: 500; font-size: 13px; color: var(--mid-gray); text-align: center; line-height: 1.5; margin-top: 8px; }
 
     /* ── Actions ── */
     .bottom-actions { margin-top: 24px; width: 100%; }
-    .btn {
-      width: 100%; padding: 16px; border-radius: var(--btn-radius);
-      font-weight: 700; font-size: 16px; border: none; cursor: pointer; text-align: center;
-      min-height: 48px; display: flex; align-items: center; justify-content: center;
-    }
-    .btn-primary { background: var(--orange); color: var(--white); }
-    .btn-stack { display: flex; flex-direction: column; gap: 12px; width: 100%; }
     .skip {
       font-weight: 500; font-size: 14px; color: var(--mid-gray);
       padding: 14px; background: none; border: none; cursor: pointer;
@@ -129,9 +72,6 @@
     .dot { width: 8px; height: 8px; border-radius: 4px; background: #D8DDE3; }
     .dot.on { width: 24px; background: var(--orange); }
     .dot.done { background: var(--navy); opacity: 0.4; }
-
-    .footer-note { font-size: 11px; color: #A0A0A0; font-weight: 500; text-align: center; }
-    [id^="screen-"] { scroll-margin-top: 20px; }
   </style>
 </head>
 <body>
@@ -144,11 +84,11 @@
     <div id="screen-1">
       <div class="screen-label">Screen 1 — So funktioniert's</div>
       <div class="phone">
-        <div class="top-section top-section--blue">
+        <div class="top top--blue">
           <img class="logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo">
           <img class="hero-photo" src="flyer/foto.jpg" alt="Oma liest das remoryo Fotoheft">
         </div>
-        <div class="bottom">
+        <div class="content">
           <div class="steps">
             <div class="step">
               <svg class="step-icon" width="56" height="56" viewBox="0 0 56 56" fill="none">
@@ -219,7 +159,7 @@
     <div id="screen-2">
       <div class="screen-label">Screen 2 — Familie einladen</div>
       <div class="phone">
-        <div class="top-section top-section--turquoise">
+        <div class="top top--turquoise">
           <img class="logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo">
           <img class="family-photo" src="app-repo/assets/images/happy-family-fake-image.png" alt="Familie">
         </div>
@@ -228,7 +168,7 @@
             <path d="M15 18L9 12L15 6" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
-        <div class="bottom">
+        <div class="content">
           <div class="bottom-text">
             <div class="headline">Lade deine<br>Familie ein</div>
             <div class="sub">Lade deine Liebsten ein und sammelt<br>eure schönsten Momente</div>

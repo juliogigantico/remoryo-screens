@@ -3,628 +3,2090 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Remoryo Magazine — Visual Preview</title>
+  <title>Remoryo Magazin-Erstellung — Visual Preview</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+    @import url('shared-styles.css');
 
-    * { margin: 0; padding: 0; box-sizing: border-box; }
+    /* ══════════════════════════════════════════
+       SCREEN-SPECIFIC: Magazine Creation
+       ══════════════════════════════════════════ */
 
-    :root {
-      --blue: #82B7D8;
-      --blue-light: #EAF3F9;
-      --blue-soft: #D4E8F2;
-      --turquoise: #B8E0E0;
-      --turquoise-light: #E2F3F3;
-      --navy: #1B2C43;
-      --orange: #FFA631;
-      --white: #FFFFFF;
-      --dark-gray: #5A6B7A;
-      --mid-gray: #94A3B3;
-      --light-gray: #F5F6F8;
-      --border: #E2E6EB;
-      --btn-radius: 14px;
-      --beige: #E8DDD1;
-      --input-radius: 12px;
-      --red: #E74C3C;
+    /* Entry cards (Screen 1) */
+    .entry-card {
+      border-radius: 16px;
+      padding: 24px;
     }
-
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: #F0F2F5;
-      display: flex; flex-direction: column; align-items: center;
-      padding: 32px 20px; gap: 20px;
+    .entry-card--primary {
+      background: linear-gradient(135deg, #D4E8F2 0%, var(--white) 100%);
+      margin: 16px 20px;
     }
-
-    h1 { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--mid-gray); }
-    .preview-row { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; }
-
-    .screen-label {
-      font-size: 11px; font-weight: 700; color: var(--mid-gray);
-      text-align: center; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;
+    .entry-card--secondary {
+      background: var(--light-gray);
+      margin: 0 20px;
     }
-
-    /* ── Phone Frame ── */
-    .phone {
-      width: 393px; height: 852px; background: var(--white);
-      border-radius: 48px; overflow: hidden;
-      box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 8px 30px rgba(0,0,0,0.08), 0 30px 70px rgba(0,0,0,0.12);
-      position: relative; display: flex; flex-direction: column;
+    .entry-card-icon { margin-bottom: 12px; }
+    .entry-card-title {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
     }
-    .phone::before {
-      content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
-      width: 126px; height: 36px; background: #000; border-radius: 20px; z-index: 10;
+    .entry-card-desc {
+      font-size: 14px;
+      color: var(--dark-gray);
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+    .info-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      font-size: 12px;
+      color: var(--mid-gray);
+      padding: 16px 20px;
     }
 
-    .status-bar { height: 59px; flex-shrink: 0; }
-
-    /* ── App Header ── */
-    .app-header {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 8px 20px 12px; border-bottom: 1px solid var(--border); flex-shrink: 0;
-    }
-    .app-header-logo { height: 26px; width: auto; }
-    .header-wordmark { font-weight: 700; font-size: 16px; color: var(--navy); letter-spacing: -0.3px; }
-    .header-settings {
-      width: 44px; height: 44px; border-radius: 22px;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer; -webkit-tap-highlight-color: transparent;
-    }
-    .header-settings svg { width: 24px; height: 24px; }
-
-    /* ── Group Indicator Pill ── */
-    .group-pill-wrap { padding: 12px 16px 0; display: flex; justify-content: center; flex-shrink: 0; }
-    .group-indicator {
-      display: flex; align-items: center; gap: 6px; padding: 6px 14px;
-      background: var(--blue-light); border-radius: 20px;
-      font-size: 13px; font-weight: 600; color: var(--navy); cursor: pointer;
+    /* Info banner (Screens 2, 13) */
+    .info-banner {
+      background: var(--soft-orange-bg);
+      border-left: 3px solid var(--orange);
+      border-radius: 12px;
+      margin: 12px 16px;
+      padding: 14px 16px;
+      font-size: 13px;
+      color: var(--dark-gray);
+      line-height: 1.5;
     }
 
-    /* ── Scroll Area ── */
-    .scroll-area { flex: 1; overflow-y: auto; background: var(--white); }
-
-    /* ── Magazine Card ── */
-    .mag-card { margin: 16px 20px; border-radius: 16px; overflow: hidden; position: relative; background: var(--white); box-shadow: 0 4px 20px rgba(27,44,67,0.1); }
-    .mag-card-inner {
-      position: relative; padding: 20px;
-      background: linear-gradient(145deg, #FFF8F0 0%, #FFF 50%, #F0F8FF 100%);
-      border: 1.5px solid rgba(0,0,0,0.06); border-radius: 16px;
-    }
-    .mag-accent-orange { position: absolute; top: -10px; right: -10px; width: 80px; height: 80px; border-radius: 50%; background: rgba(255,166,49,0.15); }
-    .mag-accent-turquoise { position: absolute; bottom: -15px; left: -15px; width: 60px; height: 60px; border-radius: 50%; background: rgba(184,224,224,0.2); }
-    .mag-logo {
-      width: 100px; height: 20px; margin-bottom: 12px;
-      background: var(--blue-light); border-radius: 4px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 9px; font-weight: 700; color: var(--blue); letter-spacing: 1px;
-    }
-    .mag-cover { width: 100%; aspect-ratio: 16/10; border-radius: 10px; object-fit: cover; margin-bottom: 14px; }
-    .mag-group-name { font-weight: 600; font-size: 12px; color: var(--dark-gray); letter-spacing: 0.3px; text-transform: uppercase; margin-bottom: 2px; }
-    .mag-title { font-weight: 700; font-size: 18px; color: var(--navy); margin-bottom: 4px; line-height: 1.3; }
-    .mag-date-row { display: flex; justify-content: space-between; align-items: baseline; }
-    .mag-month { font-weight: 600; font-size: 13px; color: var(--dark-gray); }
-    .mag-year { font-weight: 500; font-size: 12px; color: var(--mid-gray); }
-
-    /* ── Magazine Status Badges ── */
-    .mag-status {
-      display: inline-flex; align-items: center; gap: 6px;
-      padding: 5px 12px; border-radius: 100px; font-size: 11px; font-weight: 700;
-      position: absolute; top: 12px; right: 12px; z-index: 2; margin-top: 0;
-    }
-    .mag-status--editing { background: #FFF3DC; color: #D48B00; }
-    .mag-status--sent { background: #E6F7EE; color: #1D8348; }
-    .mag-deadline { position: absolute; top: 38px; right: 12px; z-index: 2; font-size: 12px; color: var(--dark-gray); }
-
-    /* ── Magazine Action Buttons ── */
-    .mag-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
-    .mag-action-btn {
-      flex: 1; min-width: 100px; padding: 10px 14px; border-radius: 10px;
-      font-size: 12px; font-weight: 700; border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 48px;
-    }
-    .mag-action-btn--primary { background: var(--orange); color: white; }
-    .mag-action-btn--outline { background: white; color: var(--navy); border: 1.5px solid var(--border); }
-    .mag-action-btn--danger { background: #FFF0EE; color: #E74C3C; }
-
-    /* ── Pages Overview (Editor) ── */
-    .pages-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 12px; }
-    .page-thumb {
-      aspect-ratio: 210/297; border-radius: 8px; border: 2px solid var(--border);
-      overflow: hidden; position: relative; background: var(--white); cursor: pointer;
-    }
-    .page-thumb:hover { border-color: var(--blue); }
-    .page-thumb-img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .page-number {
-      position: absolute; bottom: 6px; right: 8px;
-      font-size: 10px; font-weight: 700; color: var(--white);
-      background: rgba(27,44,67,0.6); padding: 2px 8px; border-radius: 6px;
-    }
-    .page-thumb--add {
-      border: 2px dashed var(--border);
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
-      gap: 6px; color: var(--mid-gray); font-size: 12px; font-weight: 600;
-    }
-    .page-thumb--add-icon {
-      width: 36px; height: 36px; border-radius: 18px;
-      background: var(--blue-light); display: flex; align-items: center;
-      justify-content: center; font-size: 20px; color: var(--blue);
-    }
-    .pages-info-bar {
-      display: flex; align-items: center; justify-content: center;
-      padding: 10px 12px; background: rgba(255,255,255,0.7);
-      font-size: 12px; font-weight: 600; color: var(--dark-gray);
-      border-bottom: 1px solid rgba(0,0,0,0.06);
-    }
-
-    /* ── Photo Selection Grid ── */
-    .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; padding: 0; }
-    .photo-grid-item { aspect-ratio: 1; object-fit: cover; cursor: pointer; position: relative; }
-    .photo-grid-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
-    .photo-grid-check {
-      position: absolute; top: 8px; right: 8px; width: 24px; height: 24px;
-      border-radius: 12px; background: var(--orange); border: 2px solid white;
-      display: flex; align-items: center; justify-content: center;
-    }
-    .photo-grid-uncheck {
-      position: absolute; top: 8px; right: 8px; width: 24px; height: 24px;
-      border-radius: 12px; background: rgba(255,255,255,0.3); border: 2px solid rgba(255,255,255,0.8);
-    }
-
-    /* ── Selection Bar ── */
+    /* Selection bar (Screen 2) */
     .selection-bar {
-      padding: 14px 20px; display: flex; align-items: center; justify-content: space-between;
-      border-bottom: 1px solid var(--border); flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px;
+      border-bottom: 1px solid var(--border);
     }
-    .selection-bar-text { font-size: 15px; font-weight: 700; color: var(--navy); }
-    .selection-bar-btn {
-      padding: 10px 22px; border-radius: 10px; background: var(--orange); color: white;
-      font-weight: 700; font-size: 14px; border: none; cursor: pointer;
-      min-height: 48px; display: inline-flex; align-items: center; justify-content: center;
+    .selection-count {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--navy);
     }
-    .selection-bar-btn.disabled { opacity: 0.45; pointer-events: none; }
-    .selection-bar-hint { font-size: 11px; color: var(--mid-gray); font-weight: 500; }
-
-    /* ── Bottom Tab Bar ── */
-    .tab-bar {
-      display: flex; align-items: flex-end; justify-content: center;
-      height: 68px; background: var(--white); flex-shrink: 0;
-      padding-bottom: 6px; position: relative;
-      box-shadow: 0 -1px 12px rgba(27, 44, 67, 0.06);
-    }
-    .tab-item {
-      display: flex; flex-direction: column; align-items: center; gap: 3px;
-      cursor: pointer; position: relative; flex: 1; padding-top: 10px;
-    }
-    .tab-icon { width: 56px; height: 30px; border-radius: 15px; display: flex; align-items: center; justify-content: center; }
-    .tab-icon svg { width: 26px; height: 26px; }
-    .tab-item.active .tab-icon { background: rgba(130, 183, 216, 0.18); }
-    .tab-label { font-size: 11px; font-weight: 600; color: var(--mid-gray); letter-spacing: -0.2px; }
-    .tab-item.active .tab-label { color: var(--navy); font-weight: 700; }
-    .tab-fab-wrapper {
-      display: flex; flex-direction: column; align-items: center;
-      flex: 0 0 auto; padding: 0 16px; position: relative; top: -18px;
-    }
-    .tab-fab {
-      width: 62px; height: 62px; border-radius: 50%;
-      background: linear-gradient(145deg, #FFB84D 0%, var(--orange) 100%);
-      display: flex; align-items: center; justify-content: center; cursor: pointer;
-      box-shadow: 0 6px 20px rgba(255, 166, 49, 0.45), 0 2px 6px rgba(0,0,0,0.08);
-      border: 3px solid var(--white);
-    }
-    .tab-fab svg { width: 28px; height: 28px; }
-    .tab-fab-label { font-size: 11px; font-weight: 700; color: var(--orange); margin-top: 3px; letter-spacing: -0.2px; }
-
-    .safe-bottom { height: 20px; background: var(--white); flex-shrink: 0; }
-
-    /* ── Section Header ── */
-    .section-back {
-      display: flex; align-items: center; gap: 10px;
-      padding: 10px 16px 10px; flex-shrink: 0; border-bottom: 1px solid var(--border);
-    }
-    .section-back-arrow {
-      width: 44px; height: 44px; display: flex; align-items: center;
-      justify-content: center; cursor: pointer; flex-shrink: 0;
-    }
-    .section-back-arrow svg { width: 24px; height: 24px; color: var(--navy); }
-    .section-back-title { font-weight: 700; font-size: 17px; color: var(--navy); }
-
-    .save-bar {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 10px 20px; border-top: 1px solid var(--border);
-      background: var(--white); flex-shrink: 0;
-    }
-    .save-bar-info { font-size: 12px; color: var(--mid-gray); }
-    .save-bar-btn {
-      padding: 10px 24px; border-radius: 10px; background: var(--orange);
-      color: white; font-weight: 700; font-size: 13px; border: none; cursor: pointer;
-      min-height: 48px; display: inline-flex; align-items: center; justify-content: center;
+    .btn-small-orange {
+      background: var(--orange);
+      color: var(--white);
+      border: none;
+      border-radius: var(--btn-radius);
+      padding: 10px 22px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
     }
 
-    /* ── Standard Button System ── */
-    .btn {
-      min-height: 48px; padding: 14px 24px; border-radius: var(--btn-radius);
-      font-weight: 700; font-size: 16px; border: none; cursor: pointer; text-align: center;
-      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    /* Photo grid */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 3px;
+      padding: 3px;
     }
-    .btn-primary { background: var(--orange); color: white; }
-    .btn-outline { background: var(--white); color: var(--navy); border: 1.5px solid var(--navy); }
-    .btn-text {
-      background: none; border: none; font-weight: 600; font-size: 14px; color: var(--navy);
-      cursor: pointer; padding: 12px; text-align: center; width: 100%; font-family: inherit;
-      min-height: 48px; display: flex; align-items: center; justify-content: center;
+    .photo-cell {
+      position: relative;
+      aspect-ratio: 1;
+      overflow: hidden;
+    }
+    .photo-cell img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .photo-check {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 24px;
+      height: 24px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .photo-check--selected {
+      background: var(--orange);
+    }
+    .photo-check--unselected {
+      border: 2px solid rgba(255,255,255,0.7);
+      background: rgba(255,255,255,0.2);
+    }
+    .photo-cell--selected {
+      outline: 3px solid var(--orange);
+      outline-offset: -3px;
+    }
+    .photo-page-badge {
+      position: absolute;
+      bottom: 6px;
+      left: 6px;
+      font-size: 10px;
+      color: var(--white);
+      background: rgba(27,44,67,0.7);
+      border-radius: 6px;
+      padding: 2px 6px;
+      font-weight: 600;
     }
 
-    .footer-note { font-size: 11px; color: #A0A0A0; font-weight: 500; text-align: center; }
-    [id^="screen-"] { scroll-margin-top: 20px; }
+    /* Loading screen (Screen 3) */
+    .loading-screen {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(180deg, var(--blue-light) 0%, var(--white) 100%);
+      gap: 20px;
+      padding: 40px;
+    }
+    .loading-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--navy);
+      text-align: center;
+    }
+    .loading-sub {
+      font-size: 14px;
+      color: var(--mid-gray);
+      text-align: center;
+    }
+    .progress-track {
+      width: 240px;
+      height: 6px;
+      border-radius: 3px;
+      background: var(--border);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: var(--orange);
+    }
+    .progress-fill--animated {
+      animation: progressGrow 3s ease-in-out infinite;
+    }
+    @keyframes progressGrow {
+      0% { width: 0%; }
+      100% { width: 75%; }
+    }
+    @keyframes pulse {
+      0%, 100% { transform: scale(0.95); opacity: 0.7; }
+      50% { transform: scale(1.05); opacity: 1; }
+    }
+    .loading-icon {
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    /* Progress section (Screen 4) */
+    .progress-section {
+      padding: 16px 20px;
+    }
+    .progress-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+    .progress-label {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .progress-bar {
+      height: 6px;
+      border-radius: 3px;
+      background: var(--border);
+      overflow: hidden;
+    }
+    .progress-bar-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: var(--orange);
+    }
+    .progress-hint {
+      font-size: 12px;
+      color: var(--orange);
+      font-weight: 600;
+      margin-top: 6px;
+    }
+
+    /* Title row (Screen 4) */
+    .title-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 20px 12px;
+    }
+    .title-row-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .title-row-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .title-row-date {
+      font-size: 13px;
+      color: var(--mid-gray);
+    }
+
+    /* Page grid (Screens 4, 13) */
+    .page-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      padding: 0 16px;
+    }
+    .page-thumb {
+      aspect-ratio: 210 / 297;
+      border-radius: 8px;
+      border: 2px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      background: var(--white);
+    }
+    .page-thumb--empty {
+      border: 2px dashed var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .page-thumb-add {
+      width: 36px;
+      height: 36px;
+      border-radius: 18px;
+      background: var(--blue-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .page-thumb-label {
+      font-size: 12px;
+      color: var(--mid-gray);
+    }
+    .page-number {
+      position: absolute;
+      bottom: 4px;
+      right: 4px;
+      background: rgba(27,44,67,0.6);
+      color: var(--white);
+      font-size: 10px;
+      font-weight: 600;
+      border-radius: 6px;
+      padding: 2px 6px;
+    }
+    .page-block {
+      border-radius: 4px;
+      margin: 4px;
+    }
+    .page-block--photo {
+      background: var(--blue-light);
+    }
+    .page-block--entertainment {
+      background: var(--turquoise-light);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .page-text-line {
+      height: 3px;
+      background: var(--border);
+      border-radius: 2px;
+      margin: 3px 4px;
+    }
+
+    /* Cover overlay (page 1 in grid) */
+    .page-cover-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 4px 6px;
+      background: linear-gradient(transparent, rgba(27,44,67,0.7));
+    }
+    .page-cover-overlay span {
+      display: block;
+      color: var(--white);
+      font-size: 6px;
+      line-height: 1.3;
+    }
+    .page-cover-overlay .cover-title {
+      font-size: 8px;
+      font-weight: 700;
+    }
+
+    /* Bottom action bar */
+    .bottom-action-bar {
+      padding: 14px 20px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+    .bottom-action-bar .btn-outline { flex: 1; font-size: 13px; padding: 12px 8px; }
+    .bottom-action-bar .btn-primary { flex: 1.5; font-size: 13px; padding: 12px 8px; }
+
+    /* Page editor (Screen 5) */
+    .page-preview-container {
+      padding: 16px;
+    }
+    .page-preview {
+      aspect-ratio: 210 / 297;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+    .page-preview-photo {
+      flex: 0.6;
+      position: relative;
+      overflow: hidden;
+    }
+    .page-preview-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .page-preview-entertainment {
+      flex: 0.4;
+      background: var(--turquoise-light);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      position: relative;
+    }
+    .page-preview-entertainment span {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--dark-gray);
+    }
+    .icon-overlay {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 32px;
+      height: 32px;
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+    }
+
+    /* Caption section */
+    .caption-section {
+      padding: 16px 20px;
+    }
+    .char-counter {
+      font-size: 12px;
+      color: var(--mid-gray);
+      text-align: right;
+      margin-top: 4px;
+    }
+
+    /* Bottom sheet overlay */
+    .bottom-sheet-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 5;
+    }
+    .bottom-sheet {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      border-radius: 24px 24px 0 0;
+      padding: 20px 20px 28px;
+      z-index: 10;
+    }
+    .drag-handle {
+      width: 40px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--border-alt);
+      margin: 0 auto 16px;
+    }
+    .sheet-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--navy);
+    }
+    .sheet-subtitle {
+      font-size: 13px;
+      color: var(--mid-gray);
+      margin-bottom: 16px;
+    }
+
+    /* Layout options grid (Screen 6) */
+    .layout-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+    }
+    .layout-option {
+      border-radius: 12px;
+      border: 2px solid var(--border);
+      padding: 12px;
+      cursor: pointer;
+      text-align: center;
+      position: relative;
+    }
+    .layout-option--selected {
+      border-color: var(--orange);
+    }
+    .layout-option-check {
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      width: 20px;
+      height: 20px;
+      border-radius: 10px;
+      background: var(--orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .layout-option-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--navy);
+      margin-top: 8px;
+    }
+    .layout-preview {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-height: 80px;
+    }
+    .layout-block {
+      border-radius: 4px;
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .layout-block--photo { background: var(--blue-light); }
+    .layout-block--puzzle { background: var(--turquoise-light); }
+    .layout-option--wide {
+      grid-column: 1 / -1;
+    }
+    .layout-preview--row {
+      flex-direction: row;
+    }
+
+    /* Entertainment list (Screen 8) */
+    .entertainment-list {
+      max-height: 400px;
+      overflow-y: auto;
+    }
+    .entertainment-row {
+      display: flex;
+      align-items: center;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      gap: 14px;
+    }
+    .entertainment-row--selected {
+      border-left: 3px solid var(--orange);
+    }
+    .entertainment-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .entertainment-text {
+      flex: 1;
+    }
+    .entertainment-title {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .entertainment-desc {
+      font-size: 12px;
+      color: var(--mid-gray);
+    }
+    .radio-circle {
+      width: 20px;
+      height: 20px;
+      border-radius: 10px;
+      border: 2px solid var(--border);
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .radio-circle--selected {
+      border-color: var(--orange);
+    }
+    .radio-circle-fill {
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
+      background: var(--orange);
+    }
+
+    /* Cover preview (Screen 9) */
+    .cover-preview {
+      margin: 16px 20px;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+      border: 1px solid var(--border);
+      position: relative;
+    }
+    .cover-photo {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: block;
+    }
+    .cover-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 20px;
+      background: linear-gradient(transparent, rgba(27,44,67,0.8));
+    }
+    .cover-overlay-logo {
+      height: 20px;
+      width: auto;
+      opacity: 0.9;
+      margin-bottom: 8px;
+      filter: brightness(10);
+    }
+    .cover-overlay-family {
+      font-size: 10px;
+      color: rgba(255,255,255,0.8);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .cover-overlay-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--white);
+    }
+    .cover-overlay-date {
+      font-size: 12px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    /* Care home section (Screen 9) */
+    .care-home-section {
+      border: 2px dashed var(--turquoise);
+      border-radius: 12px;
+      padding: 16px;
+      margin: 0 20px;
+    }
+    .care-home-badge {
+      display: inline-block;
+      background: var(--turquoise-light);
+      color: var(--navy);
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 6px;
+      padding: 3px 8px;
+      margin-bottom: 12px;
+    }
+    .care-home-hint {
+      font-size: 12px;
+      color: var(--mid-gray);
+      margin-top: 6px;
+    }
+
+    /* Recipient rows */
+    .recipient-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      background: var(--bg);
+      border-radius: 10px;
+      padding: 12px;
+    }
+    .recipient-info { flex: 1; min-width: 0; }
+    .recipient-name {
+      font-weight: 600;
+      font-size: 14px;
+      color: var(--navy);
+    }
+    .recipient-addr {
+      font-size: 12px;
+      color: var(--mid-gray);
+      margin-top: 2px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .btn-text-add {
+      background: none;
+      border: none;
+      color: var(--blue);
+      font-weight: 600;
+      font-size: 14px;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    /* Photo change row */
+    .photo-change-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .photo-thumb {
+      width: 48px;
+      height: 48px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    /* Last page preview (Screen 10) */
+    .last-page-preview {
+      margin: 16px 20px;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      padding: 24px;
+      text-align: center;
+      background: var(--white);
+    }
+    .last-page-logo {
+      height: 24px;
+      width: auto;
+    }
+    .last-page-subtitle {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--mid-gray);
+      margin: 16px 0 20px;
+    }
+    .contributors-row {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    .contributor {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+    }
+    .contributor-circle {
+      width: 48px;
+      height: 48px;
+      border-radius: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 16px;
+      color: var(--white);
+    }
+    .contributor-name {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .contributor-count {
+      font-size: 10px;
+      color: var(--mid-gray);
+    }
+    .birthday-section {
+      text-align: center;
+    }
+    .birthday-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--navy);
+      margin-bottom: 8px;
+    }
+    .birthday-entry {
+      font-size: 13px;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+    .birthday-badge {
+      background: var(--soft-orange);
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 700;
+      border-radius: 4px;
+      padding: 1px 5px;
+      margin-left: 4px;
+    }
+    .last-page-wordmark {
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--mid-gray);
+    }
+    .last-page-tagline {
+      font-size: 10px;
+      color: var(--mid-gray);
+      margin-top: 2px;
+    }
+    .info-note-block {
+      font-size: 13px;
+      color: var(--dark-gray);
+      padding: 12px 20px;
+    }
+
+    /* Spread viewer (Screens 11, 12) */
+    .preview-title {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--navy);
+      padding: 20px 20px 0;
+    }
+    .preview-subtitle {
+      font-size: 14px;
+      color: var(--dark-gray);
+      padding: 0 20px;
+    }
+    .spread-viewer {
+      margin: 20px 16px;
+      background: var(--light-gray);
+      border-radius: 12px;
+      padding: 16px 12px;
+      position: relative;
+    }
+    .spread-pages {
+      display: flex;
+      gap: 4px;
+      align-items: stretch;
+    }
+    .spread-page {
+      flex: 1;
+      background: var(--white);
+      aspect-ratio: 210 / 297;
+      box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .spread-page--left { border-radius: 4px 0 0 4px; }
+    .spread-page--right { border-radius: 0 4px 4px 0; }
+    .spread-spine {
+      width: 2px;
+      background: var(--border);
+      flex-shrink: 0;
+    }
+    .spread-page img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .spread-arrow {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 32px;
+      height: 32px;
+      border-radius: 16px;
+      background: var(--white);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: none;
+      z-index: 2;
+    }
+    .spread-arrow--left { left: 4px; }
+    .spread-arrow--right { right: 4px; }
+    .spread-indicator {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--dark-gray);
+      text-align: center;
+      margin-top: 12px;
+    }
+    .stats-card {
+      margin: 0 20px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+    }
+    .stats-main {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .stats-sub {
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--orange);
+      margin-top: 6px;
+    }
+    .status-badge-green {
+      background: var(--soft-green);
+      color: var(--green-text);
+      border-radius: 100px;
+      text-align: center;
+      margin: 12px 20px;
+      padding: 8px 16px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    /* Drag mode (Screen 13) */
+    .page-thumb--locked {
+      opacity: 0.5;
+    }
+    .page-thumb--dragging {
+      transform: scale(1.05) rotate(2deg);
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      border-color: var(--blue);
+      z-index: 5;
+    }
+    .page-thumb--drop-zone {
+      border: 2px dashed var(--blue);
+      background: var(--blue-light);
+    }
+    .grip-handle {
+      position: absolute;
+      top: 50%;
+      left: 6px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      z-index: 2;
+    }
+    .grip-dot-row {
+      display: flex;
+      gap: 3px;
+    }
+    .grip-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 2px;
+      background: var(--mid-gray);
+    }
+    .lock-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Modal (Screen 14) */
+    .modal-overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(0,0,0,0.4);
+      z-index: 5;
+    }
+    .modal-dimmed {
+      filter: blur(2px);
+      opacity: 0.5;
+    }
+    .modal {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: var(--white);
+      border-radius: 24px;
+      padding: 28px;
+      width: calc(100% - 48px);
+      max-width: 340px;
+      z-index: 10;
+    }
+    .modal-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 24px;
+      background: var(--soft-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto;
+    }
+    .modal-headline {
+      font-size: 20px;
+      font-weight: 800;
+      color: var(--navy);
+      text-align: center;
+      margin: 16px 0 8px;
+    }
+    .modal-progress-text {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+      text-align: center;
+    }
+    .modal-desc {
+      font-size: 14px;
+      color: var(--dark-gray);
+      text-align: center;
+      line-height: 1.5;
+    }
+    .modal-toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin: 16px 0;
+    }
+    .modal-toggle-label {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--navy);
+    }
+    .modal-hint {
+      font-size: 12px;
+      color: var(--mid-gray);
+    }
+
+    /* Simple content divider inside phones */
+    .inner-divider {
+      height: 1px;
+      background: var(--border);
+      margin: 16px 20px;
+    }
+    .inner-divider--wide {
+      margin: 20px 0;
+    }
   </style>
 </head>
 <body>
 
-  <h1>Remoryo Magazine Preview</h1>
+<h1>Remoryo Magazin-Erstellung Preview</h1>
 
-  <div class="preview-row">
+<!-- ═══════════════════════════════════ SECTION: Einstieg ═══════════════════════════════════ -->
+<div class="section-divider">
+  <div class="section-divider-line"></div>
+  <span style="font-size:12px;font-weight:700;color:var(--mid-gray);text-transform:uppercase;letter-spacing:1.5px;">Einstieg</span>
+  <div class="section-divider-line"></div>
+</div>
 
-    <!-- ═══ SCREEN 1 — Magazin-Übersicht ═══ -->
-    <div id="screen-1">
-      <div class="screen-label">1 &middot; Magazin-Übersicht</div>
-      <div class="phone">
-        <div class="status-bar"></div>
-        <div class="app-header">
-          <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
-          <span class="header-wordmark">remoryo</span>
-          <div class="header-settings">
-            <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
-          </div>
+<div class="preview-row">
+
+<!-- ─── SCREEN 1 — Fotoheft erstellen ─── -->
+<div id="screen-1">
+  <div class="screen-label">1 · Fotoheft erstellen</div>
+  <div class="phone">
+    <div class="status-bar"></div>
+    <div class="section-back">
+      <div class="section-back-arrow" aria-label="Zurück">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <span class="section-back-title">Fotoheft erstellen</span>
+    </div>
+    <div class="scroll-area">
+      <!-- Card 1: Auto -->
+      <div class="entry-card entry-card--primary">
+        <div class="entry-card-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><path d="M16 2L18.5 9.5L26 12L18.5 14.5L16 22L13.5 14.5L6 12L13.5 9.5L16 2Z" fill="var(--orange)"/><circle cx="25" cy="6" r="2" fill="var(--orange)" opacity="0.5"/><circle cx="7" cy="22" r="1.5" fill="var(--orange)" opacity="0.4"/></svg>
         </div>
-        <div class="group-pill-wrap" style="background: var(--white);">
-          <div class="group-indicator">
-            <span>Familie Blümel</span>
-            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
-          </div>
+        <div class="entry-card-title">Automatisch erstellen</div>
+        <div class="entry-card-desc">Wähle deine Fotos — wir gestalten den Rest. Rätsel &amp; Unterhaltung werden automatisch eingefügt.</div>
+        <button class="btn-primary">Fotos auswählen</button>
+      </div>
+      <!-- Card 2: Manual -->
+      <div class="entry-card entry-card--secondary">
+        <div class="entry-card-icon">
+          <svg width="32" height="32" viewBox="0 0 32 32" fill="none"><rect x="4" y="4" width="10" height="10" rx="2" stroke="var(--navy)" stroke-width="2"/><rect x="18" y="4" width="10" height="10" rx="2" stroke="var(--navy)" stroke-width="2"/><rect x="4" y="18" width="10" height="10" rx="2" stroke="var(--navy)" stroke-width="2"/><rect x="18" y="18" width="10" height="10" rx="2" stroke="var(--navy)" stroke-width="2"/></svg>
         </div>
-        <div class="scroll-area">
-          <!-- Editing Magazine -->
-          <div class="mag-card">
-            <div class="mag-card-inner">
-              <div class="mag-accent-orange"></div>
-              <div class="mag-accent-turquoise"></div>
-              <div class="mag-status mag-status--editing"><svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M17 3a2.83 2.83 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> In Bearbeitung</div>
-              <div class="mag-deadline">Änderbar bis 31. März 2026</div>
-              <div class="mag-logo">REMORYO</div>
-              <img class="mag-cover" src="flyer/foto.jpg" alt="Cover März 2026">
-              <div class="mag-group-name">Familie Blümel</div>
-              <div class="mag-title">Frühlingsgefühle</div>
-              <div class="mag-date-row">
-                <span class="mag-month">März</span>
-                <span class="mag-year">2026</span>
-              </div>
-              <div class="mag-actions">
-                <button class="mag-action-btn mag-action-btn--primary">Bearbeiten</button>
-                <button class="mag-action-btn mag-action-btn--outline">
-                  <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  PDF
-                </button>
-                <button class="mag-action-btn mag-action-btn--danger">
-                  <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  Löschen
-                </button>
-              </div>
-            </div>
-          </div>
-          <!-- Printed Magazine -->
-          <div class="mag-card">
-            <div class="mag-card-inner">
-              <div class="mag-accent-orange"></div>
-              <div class="mag-accent-turquoise"></div>
-              <div class="mag-status mag-status--sent"><svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Gedruckt &amp; Versendet</div>
-              <div class="mag-logo">REMORYO</div>
-              <img class="mag-cover" src="app-repo/assets/images/happy-family-fake-image.png" alt="Cover Feb 2026">
-              <div class="mag-group-name">Familie Blümel</div>
-              <div class="mag-title">Winterzauber</div>
-              <div class="mag-date-row">
-                <span class="mag-month">Februar</span>
-                <span class="mag-year">2026</span>
-              </div>
-              <div class="mag-actions">
-                <button class="mag-action-btn mag-action-btn--outline" style="flex: 1;">
-                  <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  PDF herunterladen
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Bottom Tab Bar -->
-        <div class="tab-bar">
-          <div class="tab-item">
-            <div class="tab-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-            </div>
-            <span class="tab-label">Fotos</span>
-          </div>
-          <div class="tab-fab-wrapper">
-            <div class="tab-fab">
-              <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>
-            </div>
-            <span class="tab-fab-label">Erstellen</span>
-          </div>
-          <div class="tab-item active">
-            <div class="tab-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
-            </div>
-            <span class="tab-label">Heft</span>
-          </div>
-        </div>
-        <div class="safe-bottom"></div>
+        <div class="entry-card-title">Selbst gestalten</div>
+        <div class="entry-card-desc">Erstelle jede Seite einzeln — wähle Layout, Fotos und Rätsel selbst.</div>
+        <button class="btn-outline">Leeres Heft starten</button>
+      </div>
+      <!-- Info note -->
+      <div class="info-note">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
+        Dein Fotoheft hat immer 12 Seiten.
       </div>
     </div>
-
-    <!-- ═══ SCREEN 2 — Seitenübersicht (Page Overview) ═══ -->
-    <div id="screen-2">
-      <div class="screen-label">2 &middot; Seitenübersicht (Editor)</div>
-      <div class="phone">
-        <div class="status-bar"></div>
-        <div class="section-back">
-          <div class="section-back-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M15 18l-6-6 6-6"/>
-            </svg>
-          </div>
-          <span class="section-back-title">Fotoheft erstellen</span>
-        </div>
-        <div class="scroll-area" style="background: var(--beige);">
-          <!-- Heft-Titel Input -->
-          <div style="padding: 16px 20px 8px;">
-            <div style="font-size: 12px; font-weight: 600; color: var(--dark-gray); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.3px;">Heft-Titel</div>
-            <div style="display: flex; align-items: center; gap: 10px; background: var(--white); border: 1.5px solid var(--border); border-radius: var(--input-radius); padding: 0 14px; height: 48px;">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.83 2.83 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
-              <span style="font-size: 15px; font-weight: 600; color: var(--navy);">Frühlingsgefühle</span>
-            </div>
-            <div style="font-size: 11px; color: var(--mid-gray); margin-top: 4px; padding-left: 2px;">Erscheint auf der Titelseite deines Fotohefts</div>
-          </div>
-          <div class="pages-info-bar">5 Seiten · 8 Fotos · 2 Rätsel</div>
-          <div class="pages-grid">
-            <!-- Cover -->
-            <div class="page-thumb" style="position: relative;">
-              <img class="page-thumb-img" src="flyer/foto.jpg" alt="Cover" style="object-position: center;">
-              <div style="position: absolute; bottom: 18px; left: 0; right: 0; padding: 0 8px; text-align: center;">
-                <div style="font-size: 5px; font-weight: 600; color: white; text-transform: uppercase; letter-spacing: 0.5px; text-shadow: 0 1px 3px rgba(0,0,0,0.5); margin-bottom: 1px;">Familie Blümel</div>
-                <div style="font-size: 7px; font-weight: 800; color: white; text-shadow: 0 1px 3px rgba(0,0,0,0.5); margin-bottom: 1px;">Frühlingsgefühle</div>
-                <div style="font-size: 5px; font-weight: 500; color: rgba(255,255,255,0.85); text-shadow: 0 1px 3px rgba(0,0,0,0.5);">März 2026</div>
-              </div>
-              <div class="page-number">Cover</div>
-            </div>
-            <!-- Page 2 -->
-            <div class="page-thumb">
-              <div style="padding: 12px; display: flex; flex-direction: column; gap: 6px; height: 100%;">
-                <div style="flex: 1; background: var(--blue-light); border-radius: 6px;"></div>
-                <div style="height: 8px; background: var(--border); border-radius: 3px; width: 80%;"></div>
-                <div style="height: 6px; background: var(--border); border-radius: 3px; width: 50%;"></div>
-              </div>
-              <div class="page-number">S. 2</div>
-            </div>
-            <!-- Page 3 -->
-            <div class="page-thumb">
-              <img class="page-thumb-img" src="app-repo/assets/images/happy-family-fake-image.png" alt="Seite 3">
-              <div class="page-number">S. 3</div>
-            </div>
-            <!-- Page 4 -->
-            <div class="page-thumb">
-              <div style="padding: 12px; display: flex; flex-direction: column; gap: 6px; height: 100%;">
-                <div style="height: 8px; background: var(--border); border-radius: 3px; width: 70%;"></div>
-                <div style="flex: 1; background: var(--blue-light); border-radius: 6px;"></div>
-                <div style="height: 6px; background: var(--border); border-radius: 3px; width: 60%;"></div>
-              </div>
-              <div class="page-number">S. 4</div>
-            </div>
-            <!-- Page 5 -->
-            <div class="page-thumb">
-              <div style="padding: 12px; display: flex; flex-direction: column; gap: 6px; height: 100%;">
-                <div style="flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 4px;">
-                  <div style="background: var(--turquoise-light); border-radius: 4px;"></div>
-                  <div style="background: var(--blue-light); border-radius: 4px;"></div>
-                </div>
-                <div style="height: 8px; background: var(--border); border-radius: 3px; width: 90%;"></div>
-              </div>
-              <div class="page-number">S. 5</div>
-            </div>
-            <!-- Add Page -->
-            <div class="page-thumb page-thumb--add">
-              <div class="page-thumb--add-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
-              Seite hinzufügen
-            </div>
-          </div>
-        </div>
-        <div class="save-bar">
-          <span class="save-bar-info">5 Seiten · März 2026</span>
-          <button class="save-bar-btn">Speichern</button>
-        </div>
-        <div class="safe-bottom"></div>
-      </div>
-    </div>
-
-    <!-- ═══ SCREEN 3 — Foto auswählen ═══ -->
-    <div id="screen-3">
-      <div class="screen-label">3 &middot; Foto auswählen</div>
-      <div class="phone">
-        <div class="status-bar"></div>
-        <div class="section-back">
-          <div class="section-back-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M15 18l-6-6 6-6"/>
-            </svg>
-          </div>
-          <span class="section-back-title">Foto auswählen</span>
-        </div>
-        <div class="selection-bar">
-          <span class="selection-bar-text">3 von 18 Fotos ausgewählt</span>
-          <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px;">
-            <button class="selection-bar-btn disabled">Fertig</button>
-            <span class="selection-bar-hint">Mind. 5 Fotos auswählen</span>
-          </div>
-        </div>
-        <div class="scroll-area" style="background: var(--white);">
-          <div class="photo-grid">
-            <div class="photo-grid-item">
-              <img src="flyer/foto.jpg" alt="">
-              <div class="photo-grid-check">
-                <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-            </div>
-            <div class="photo-grid-item">
-              <img src="app-repo/assets/images/happy-family-fake-image.png" alt="">
-              <div class="photo-grid-uncheck"></div>
-            </div>
-            <div class="photo-grid-item">
-              <img src="flyer/foto.jpg" alt="" style="filter: hue-rotate(40deg);">
-              <div class="photo-grid-check">
-                <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-            </div>
-            <div class="photo-grid-item">
-              <img src="app-repo/assets/images/happy-family-fake-image.png" alt="" style="filter: saturate(1.4);">
-              <div class="photo-grid-uncheck"></div>
-            </div>
-            <div class="photo-grid-item">
-              <img src="flyer/foto.jpg" alt="" style="filter: hue-rotate(120deg);">
-              <div class="photo-grid-uncheck"></div>
-            </div>
-            <div class="photo-grid-item">
-              <img src="app-repo/assets/images/happy-family-fake-image.png" alt="" style="filter: brightness(1.1);">
-              <div class="photo-grid-check">
-                <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              </div>
-            </div>
-            <div class="photo-grid-item">
-              <img src="flyer/foto.jpg" alt="" style="filter: hue-rotate(200deg);">
-              <div class="photo-grid-uncheck"></div>
-            </div>
-            <div class="photo-grid-item">
-              <img src="app-repo/assets/images/happy-family-fake-image.png" alt="" style="filter: grayscale(0.3);">
-              <div class="photo-grid-uncheck"></div>
-            </div>
-            <div class="photo-grid-item">
-              <img src="flyer/foto.jpg" alt="" style="filter: sepia(0.3);">
-              <div class="photo-grid-uncheck"></div>
-            </div>
-          </div>
-        </div>
-        <div class="safe-bottom"></div>
-      </div>
-    </div>
-
-    <!-- ═══ SCREEN 4 — Magazin-Vorschau ═══ -->
-    <div id="screen-4">
-      <div class="screen-label">4 &middot; Magazin-Vorschau</div>
-      <div class="phone">
-        <div class="status-bar"></div>
-        <div class="section-back">
-          <div class="section-back-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M15 18l-6-6 6-6"/>
-            </svg>
-          </div>
-          <span class="section-back-title">Vorschau</span>
-        </div>
-        <div class="scroll-area">
-          <!-- Title Section -->
-          <div style="padding: 20px 20px 0;">
-            <div style="font-size: 20px; font-weight: 800; color: var(--navy); line-height: 1.3;">Vorschau: März 2026</div>
-            <div style="font-size: 14px; color: var(--dark-gray); margin-top: 4px;">Prüfe dein Heft bevor es in den Druck geht.</div>
-          </div>
-          <!-- Magazine Spread Preview -->
-          <div style="padding: 20px 16px;">
-            <div style="background: var(--light-gray); border-radius: 12px; padding: 16px 12px; position: relative;">
-              <div style="display: flex; gap: 4px; position: relative;">
-                <!-- Left Arrow -->
-                <div style="position: absolute; left: -6px; top: 50%; transform: translateY(-50%); z-index: 2; width: 32px; height: 32px; border-radius: 50%; background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                  <svg viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
-                </div>
-                <!-- Right Arrow -->
-                <div style="position: absolute; right: -6px; top: 50%; transform: translateY(-50%); z-index: 2; width: 32px; height: 32px; border-radius: 50%; background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: center; cursor: pointer;">
-                  <svg viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
-                </div>
-                <!-- Left Page -->
-                <div style="flex: 1; background: var(--white); border-radius: 4px 0 0 4px; aspect-ratio: 210/297; display: flex; flex-direction: column; overflow: hidden; box-shadow: -2px 2px 8px rgba(0,0,0,0.06);">
-                  <div style="flex: 1; background: linear-gradient(135deg, var(--blue-light) 0%, var(--turquoise-light) 100%); margin: 10px 10px 6px; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
-                    <svg viewBox="0 0 24 24" fill="none" width="28" height="28" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-                  </div>
-                  <div style="text-align: center; padding: 0 10px 10px;">
-                    <div style="font-size: 11px; font-weight: 600; color: var(--mid-gray);">Seite 2</div>
-                  </div>
-                </div>
-                <!-- Spine line -->
-                <div style="width: 2px; background: var(--border); flex-shrink: 0;"></div>
-                <!-- Right Page -->
-                <div style="flex: 1; background: var(--white); border-radius: 0 4px 4px 0; aspect-ratio: 210/297; display: flex; flex-direction: column; overflow: hidden; box-shadow: 2px 2px 8px rgba(0,0,0,0.06);">
-                  <div style="flex: 1; background: linear-gradient(135deg, var(--turquoise-light) 0%, var(--blue-light) 100%); margin: 10px 10px 6px; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
-                    <svg viewBox="0 0 24 24" fill="none" width="28" height="28" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
-                  </div>
-                  <div style="text-align: center; padding: 0 10px 10px;">
-                    <div style="font-size: 11px; font-weight: 600; color: var(--mid-gray);">Seite 3</div>
-                  </div>
-                </div>
-              </div>
-              <div style="text-align: center; margin-top: 12px; font-size: 12px; font-weight: 600; color: var(--dark-gray);">Seite 2–3 von 12</div>
-            </div>
-          </div>
-          <!-- Status Card -->
-          <div style="margin: 0 20px 16px; padding: 16px; background: var(--white); border: 1.5px solid var(--border); border-radius: 12px;">
-            <div style="font-size: 14px; font-weight: 600; color: var(--navy);">12 Fotos · 6 Doppelseiten</div>
-            <div style="font-size: 13px; font-weight: 700; color: var(--orange); margin-top: 4px;">Druckschluss: 5. März 2026</div>
-          </div>
-          <!-- Action Buttons -->
-          <div style="padding: 0 20px 24px; display: flex; flex-direction: column; gap: 10px;">
-            <button class="btn btn-primary" style="width: 100%;">Zum Druck freigeben</button>
-            <button class="btn btn-outline" style="width: 100%;">Weiter bearbeiten</button>
-          </div>
-        </div>
-        <div class="safe-bottom"></div>
-      </div>
-    </div>
-
-    <!-- ═══ SCREEN 5 — Erstes Magazin erstellt (Erfolg) ═══ -->
-    <div id="screen-5">
-      <div class="screen-label">5 &middot; Erstes Magazin erstellt (Erfolg)</div>
-      <div class="phone" style="background: var(--white);">
-        <div class="status-bar"></div>
-        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 20px;">
-          <div style="margin-bottom: 24px;">
-            <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-              <rect x="14" y="6" width="4" height="8" rx="2" fill="var(--orange)" transform="rotate(-15 16 10)"/>
-              <rect x="46" y="8" width="4" height="8" rx="2" fill="var(--blue)" transform="rotate(20 48 12)"/>
-              <rect x="30" y="2" width="4" height="8" rx="2" fill="var(--turquoise)" transform="rotate(5 32 6)"/>
-              <circle cx="10" cy="20" r="3" fill="var(--turquoise)"/>
-              <circle cx="54" cy="22" r="3" fill="var(--orange)"/>
-              <circle cx="22" cy="4" r="2.5" fill="var(--blue)"/>
-              <circle cx="42" cy="3" r="2.5" fill="var(--orange)"/>
-              <path d="M32 16l2.5 7.5H42l-6 4.5 2.5 7.5-6-4.5-6 4.5 2.5-7.5-6-4.5h7.5z" fill="var(--orange)"/>
-              <path d="M18 58L10 46l30-18" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-              <path d="M10 46l8 12 4-2-6-12z" fill="var(--navy)" opacity="0.15"/>
-              <line x1="28" y1="36" x2="48" y2="18" stroke="var(--orange)" stroke-width="2" stroke-linecap="round"/>
-              <line x1="24" y1="42" x2="38" y2="24" stroke="var(--blue)" stroke-width="2" stroke-linecap="round"/>
-              <line x1="20" y1="48" x2="44" y2="28" stroke="var(--turquoise)" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </div>
-          <div style="font-weight: 800; font-size: 24px; color: var(--navy); text-align: center; margin-bottom: 8px;">Geschafft!</div>
-          <div style="font-weight: 600; font-size: 17px; color: var(--navy); text-align: center; margin-bottom: 16px;">Dein erstes Fotoheft ist fertig!</div>
-          <div style="font-size: 15px; color: var(--dark-gray); text-align: center; line-height: 1.55; font-weight: 500; max-width: 300px;">Du kannst es bis zum Monatsende noch bearbeiten. Danach wird es automatisch gedruckt und verschickt.</div>
-        </div>
-        <div style="padding: 0 20px 40px; display: flex; flex-direction: column; align-items: center;">
-          <button class="btn btn-primary" style="margin-bottom: 8px;">Zur Startseite</button>
-          <a class="btn-text" style="font-weight: 600; font-size: 14px; gap: 4px;">
-            Jetzt Familie einladen
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <polyline points="9 18 15 12 9 6"/>
-            </svg>
-          </a>
-        </div>
-        <div class="safe-bottom"></div>
-      </div>
-    </div>
-
+    <div class="safe-bottom"></div>
   </div>
+</div>
 
-  <p class="footer-note">Preview nutzt Inter als Stand-in für Helvetica Now Display.</p>
+<!-- ─── SCREEN 2 — Fotos auswählen ─── -->
+<div id="screen-2">
+  <div class="screen-label">2 · Fotos auswählen</div>
+  <div class="phone">
+    <div class="status-bar"></div>
+    <div class="section-back">
+      <div class="section-back-arrow" aria-label="Zurück">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <span class="section-back-title">Fotos auswählen</span>
+    </div>
+    <div class="info-banner">Wähle mindestens 1 Foto. Je mehr Fotos, desto weniger Rätsel.</div>
+    <div class="selection-bar">
+      <span class="selection-count">4 Fotos ausgewählt</span>
+      <button class="btn-small-orange">Weiter</button>
+    </div>
+    <div class="scroll-area">
+      <div class="photo-grid">
+        <!-- Row 1 -->
+        <div class="photo-cell photo-cell--selected">
+          <img src="flyer/foto.jpg" alt="Foto 1">
+          <div class="photo-check photo-check--selected" aria-label="Ausgewählt"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polyline points="3 7 6 10 11 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="photo-cell">
+          <img src="app-repo/assets/images/happy-family-fake-image.png" alt="Foto 2">
+          <div class="photo-check photo-check--unselected"></div>
+        </div>
+        <div class="photo-cell photo-cell--selected">
+          <img src="flyer/foto.jpg" alt="Foto 3" style="filter:hue-rotate(40deg)">
+          <div class="photo-check photo-check--selected" aria-label="Ausgewählt"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polyline points="3 7 6 10 11 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <!-- Row 2 -->
+        <div class="photo-cell">
+          <img src="app-repo/assets/images/happy-family-fake-image.png" alt="Foto 4" style="filter:hue-rotate(120deg)">
+          <div class="photo-check photo-check--unselected"></div>
+        </div>
+        <div class="photo-cell photo-cell--selected">
+          <img src="flyer/foto.jpg" alt="Foto 5" style="filter:saturate(1.4)">
+          <div class="photo-check photo-check--selected" aria-label="Ausgewählt"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polyline points="3 7 6 10 11 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="photo-cell">
+          <img src="app-repo/assets/images/happy-family-fake-image.png" alt="Foto 6" style="filter:brightness(1.1)">
+          <div class="photo-check photo-check--unselected"></div>
+        </div>
+        <!-- Row 3 -->
+        <div class="photo-cell photo-cell--selected">
+          <img src="flyer/foto.jpg" alt="Foto 7" style="filter:sepia(0.3)">
+          <div class="photo-check photo-check--selected" aria-label="Ausgewählt"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polyline points="3 7 6 10 11 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="photo-cell">
+          <img src="app-repo/assets/images/happy-family-fake-image.png" alt="Foto 8" style="filter:hue-rotate(200deg)">
+          <div class="photo-check photo-check--unselected"></div>
+        </div>
+        <div class="photo-cell">
+          <img src="flyer/foto.jpg" alt="Foto 9" style="filter:grayscale(0.3)">
+          <div class="photo-check photo-check--unselected"></div>
+        </div>
+      </div>
+    </div>
+    <div class="safe-bottom"></div>
+  </div>
+</div>
+
+</div><!-- /preview-row -->
+
+<!-- ═══════════════════════════════════ SECTION: Auto-Erstellung ═══════════════════════════════════ -->
+<div class="section-divider">
+  <div class="section-divider-line"></div>
+  <span style="font-size:12px;font-weight:700;color:var(--mid-gray);text-transform:uppercase;letter-spacing:1.5px;">Auto-Erstellung</span>
+  <div class="section-divider-line"></div>
+</div>
+
+<div class="preview-row">
+
+<!-- ─── SCREEN 3 — Heft wird erstellt ─── -->
+<div id="screen-3">
+  <div class="screen-label">3 · Heft wird erstellt</div>
+  <div class="phone">
+    <div class="status-bar"></div>
+    <div class="loading-screen">
+      <svg class="loading-icon" width="64" height="64" viewBox="0 0 64 64" fill="none">
+        <path d="M8 52V12a4 4 0 014-4h20l2 2v42a4 4 0 01-4 4H12a4 4 0 01-4-4z" stroke="var(--navy)" stroke-width="2.5" fill="var(--blue-light)"/>
+        <path d="M34 8h8a4 4 0 014 4v40a4 4 0 01-4 4H30" stroke="var(--navy)" stroke-width="2.5" fill="var(--blue-light)"/>
+        <path d="M14 20h12M14 26h8" stroke="var(--navy)" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="50" cy="10" r="3" fill="var(--orange)"/><circle cx="54" cy="18" r="2" fill="var(--orange)" opacity="0.6"/><circle cx="48" cy="4" r="1.5" fill="var(--orange)" opacity="0.4"/>
+      </svg>
+      <div class="loading-title">Dein Fotoheft wird erstellt...</div>
+      <div class="progress-track">
+        <div class="progress-fill progress-fill--animated"></div>
+      </div>
+      <div class="loading-sub">Fotos werden sortiert, Rätsel ausgewählt...</div>
+    </div>
+    <div class="safe-bottom"></div>
+  </div>
+</div>
+
+</div><!-- /preview-row -->
+
+<!-- ═══════════════════════════════════ SECTION: Bearbeitung ═══════════════════════════════════ -->
+<div class="section-divider">
+  <div class="section-divider-line"></div>
+  <span style="font-size:12px;font-weight:700;color:var(--mid-gray);text-transform:uppercase;letter-spacing:1.5px;">Bearbeitung</span>
+  <div class="section-divider-line"></div>
+</div>
+
+<div class="preview-row">
+
+<!-- ─── SCREEN 4 — Seitenübersicht ─── -->
+<div id="screen-4">
+  <div class="screen-label">4 · Seitenübersicht</div>
+  <div class="phone">
+    <div class="status-bar"></div>
+    <div class="section-back">
+      <div class="section-back-arrow" aria-label="Zurück">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <span class="section-back-title">Seitenübersicht</span>
+    </div>
+    <div class="scroll-area">
+      <!-- Progress section -->
+      <div class="progress-section">
+        <div class="progress-row">
+          <span class="progress-label">10 von 12 Seiten fertig</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M12 9v4M12 17h.01" stroke="var(--orange)" stroke-width="2" stroke-linecap="round"/><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z" stroke="var(--orange)" stroke-width="2"/></svg>
+        </div>
+        <div class="progress-bar">
+          <div class="progress-bar-fill" style="width:83%"></div>
+        </div>
+        <div class="progress-hint">2 Seiten brauchen noch Inhalt</div>
+      </div>
+      <!-- Title row -->
+      <div class="title-row">
+        <div class="title-row-left">
+          <span class="title-row-title">Frühlingsgefühle</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3a2.83 2.83 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+        </div>
+        <span class="title-row-date">März 2026</span>
+      </div>
+      <!-- 12-page grid -->
+      <div class="page-grid">
+        <!-- Page 1: Cover -->
+        <div class="page-thumb" style="overflow:hidden">
+          <img src="flyer/foto.jpg" alt="Cover" style="width:100%;height:100%;object-fit:cover">
+          <div class="page-cover-overlay">
+            <span>Familie Blümel</span>
+            <span class="cover-title">Frühlingsgefühle</span>
+            <span>März 2026</span>
+          </div>
+          <div class="page-number">Cover</div>
+        </div>
+        <!-- Page 2 -->
+        <div class="page-thumb">
+          <div class="page-block page-block--photo" style="height:65%;margin-bottom:0"></div>
+          <div class="page-text-line" style="width:60%"></div>
+          <div class="page-text-line" style="width:40%"></div>
+          <div class="page-number">S. 2</div>
+        </div>
+        <!-- Page 3 -->
+        <div class="page-thumb">
+          <div class="page-block page-block--photo" style="height:65%;margin-bottom:0"></div>
+          <div class="page-text-line" style="width:55%"></div>
+          <div class="page-text-line" style="width:35%"></div>
+          <div class="page-number">S. 3</div>
+        </div>
+        <!-- Page 4 -->
+        <div class="page-thumb">
+          <div class="page-block page-block--photo" style="height:45%;margin-bottom:0"></div>
+          <div class="page-block page-block--photo" style="height:45%"></div>
+          <div class="page-number">S. 4</div>
+        </div>
+        <!-- Page 5 -->
+        <div class="page-thumb">
+          <div class="page-block page-block--photo" style="height:50%;margin-bottom:0"></div>
+          <div class="page-block page-block--entertainment" style="height:40%">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h7v7"/></svg>
+          </div>
+          <div class="page-number">S. 5</div>
+        </div>
+        <!-- Page 6 -->
+        <div class="page-thumb">
+          <div class="page-block page-block--entertainment" style="height:90%">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h7v7"/></svg>
+          </div>
+          <div class="page-number">S. 6</div>
+        </div>
+        <!-- Page 7 -->
+        <div class="page-thumb">
+          <div class="page-block page-block--photo" style="height:65%;margin-bottom:0"></div>
+          <div class="page-text-line" style="width:55%"></div>
+          <div class="page-text-line" style="width:40%"></div>
+          <div class="page-number">S. 7</div>
+        </div>
+        <!-- Page 8 -->
+        <div class="page-thumb">
+          <div class="page-block page-block--photo" style="height:65%;margin-bottom:0"></div>
+          <div class="page-text-line" style="width:50%"></div>
+          <div class="page-text-line" style="width:30%"></div>
+          <div class="page-number">S. 8</div>
+        </div>
+        <!-- Page 9 -->
+        <div class="page-thumb">
+          <div class="page-block page-block--photo" style="height:50%;margin-bottom:0"></div>
+          <div class="page-block page-block--entertainment" style="height:40%">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h7v7"/></svg>
+          </div>
+          <div class="page-number">S. 9</div>
+        </div>
+        <!-- Page 10: Empty -->
+        <div class="page-thumb page-thumb--empty">
+          <div class="page-thumb-add">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+          <span class="page-thumb-label">Seite füllen</span>
+        </div>
+        <!-- Page 11: Empty -->
+        <div class="page-thumb page-thumb--empty">
+          <div class="page-thumb-add">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+          </div>
+          <span class="page-thumb-label">Seite füllen</span>
+        </div>
+        <!-- Page 12: Last page -->
+        <div class="page-thumb" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">
+          <div style="display:flex;gap:4px">
+            <div style="width:16px;height:16px;border-radius:8px;background:linear-gradient(135deg,var(--blue-soft),var(--blue))"></div>
+            <div style="width:16px;height:16px;border-radius:8px;background:var(--orange)"></div>
+            <div style="width:16px;height:16px;border-radius:8px;background:var(--turquoise)"></div>
+            <div style="width:16px;height:16px;border-radius:8px;background:var(--beige)"></div>
+          </div>
+          <span style="font-size:9px;color:var(--mid-gray)">Letzte Seite</span>
+          <div class="page-number">S. 12</div>
+        </div>
+      </div>
+    </div>
+    <!-- Bottom action bar -->
+    <div class="bottom-action-bar">
+      <button class="btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 16V4M7 4l-4 4M7 4l4 4M17 8v12M17 20l-4-4M17 20l4-4"/></svg>
+        Umsortieren
+      </button>
+      <button class="btn-outline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3"/><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/></svg>
+        Vorschau
+      </button>
+      <button class="btn-primary">Speichern</button>
+    </div>
+    <div class="safe-bottom"></div>
+  </div>
+</div>
+
+<!-- ─── SCREEN 5 — Seite bearbeiten ─── -->
+<div id="screen-5">
+  <div class="screen-label">5 · Seite bearbeiten</div>
+  <div class="phone">
+    <div class="status-bar"></div>
+    <div class="section-back">
+      <div class="section-back-arrow" aria-label="Zurück">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <span class="section-back-title">Seite 3 bearbeiten</span>
+    </div>
+    <div class="scroll-area">
+      <!-- Page preview -->
+      <div class="page-preview-container">
+        <div class="page-preview">
+          <div class="page-preview-photo">
+            <img src="flyer/foto.jpg" alt="Seite 3 Foto">
+            <div class="icon-overlay" aria-label="Foto tauschen">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="2" stroke-linecap="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+            </div>
+          </div>
+          <div class="page-preview-entertainment">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h7v7"/></svg>
+            <span>Kreuzworträtsel</span>
+            <div class="icon-overlay" aria-label="Entertainment tauschen">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="2" stroke-linecap="round"><polyline points="1 4 1 10 7 10"/><polyline points="23 20 23 14 17 14"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10M23 14l-4.64 4.36A9 9 0 013.51 15"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Caption -->
+      <div class="caption-section">
+        <div class="form-label">BILDUNTERSCHRIFT</div>
+        <div class="input-with-icon">
+          <input class="form-input" type="text" value="Omas 85. Geburtstag">
+          <span class="input-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 3a2.83 2.83 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg>
+          </span>
+        </div>
+        <div class="char-counter">20/120</div>
+      </div>
+      <!-- Action buttons -->
+      <div style="padding:0 20px 20px;display:flex;flex-direction:column;gap:10px">
+        <button class="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>
+          Layout ändern
+        </button>
+        <button class="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          Foto tauschen
+        </button>
+        <button class="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h7v7"/></svg>
+          Entertainment tauschen
+        </button>
+      </div>
+    </div>
+    <div class="safe-bottom"></div>
+  </div>
+</div>
+
+</div><!-- /preview-row -->
+
+<div class="preview-row">
+
+<!-- ─── SCREEN 6 — Layout wählen ─── -->
+<div id="screen-6">
+  <div class="screen-label">6 · Layout wählen</div>
+  <div class="phone">
+    <div class="status-bar"></div>
+    <!-- Dimmed content behind -->
+    <div style="flex:1;background:var(--light-gray);opacity:0.3"></div>
+    <!-- Overlay + Bottom sheet -->
+    <div class="bottom-sheet-overlay"></div>
+    <div class="bottom-sheet">
+      <div class="drag-handle"></div>
+      <div class="sheet-title">Layout wählen</div>
+      <div class="sheet-subtitle">Für Seite 3</div>
+      <div class="layout-grid">
+        <!-- 1 Foto -->
+        <div class="layout-option">
+          <div class="layout-preview">
+            <div class="layout-block layout-block--photo" style="flex:1"></div>
+          </div>
+          <div class="layout-option-label">1 Foto</div>
+        </div>
+        <!-- 2 Fotos -->
+        <div class="layout-option">
+          <div class="layout-preview">
+            <div class="layout-block layout-block--photo" style="flex:1"></div>
+            <div class="layout-block layout-block--photo" style="flex:1"></div>
+          </div>
+          <div class="layout-option-label">2 Fotos</div>
+        </div>
+        <!-- 1 Foto + Rätsel (selected) -->
+        <div class="layout-option layout-option--selected">
+          <div class="layout-option-check" aria-label="Ausgewählt">
+            <svg width="12" height="12" viewBox="0 0 14 14" fill="none"><polyline points="3 7 6 10 11 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="layout-preview">
+            <div class="layout-block layout-block--photo" style="flex:0.55"></div>
+            <div class="layout-block layout-block--puzzle" style="flex:0.4">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h7v7"/></svg>
+            </div>
+          </div>
+          <div class="layout-option-label">1 Foto + Rätsel</div>
+        </div>
+        <!-- Rätsel + 1 Foto -->
+        <div class="layout-option">
+          <div class="layout-preview">
+            <div class="layout-block layout-block--puzzle" style="flex:0.45">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h7v7"/></svg>
+            </div>
+            <div class="layout-block layout-block--photo" style="flex:0.5"></div>
+          </div>
+          <div class="layout-option-label">Rätsel + 1 Foto</div>
+        </div>
+        <!-- 1 Rätsel (groß) -->
+        <div class="layout-option">
+          <div class="layout-preview">
+            <div class="layout-block layout-block--puzzle" style="flex:1">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h7v7"/></svg>
+            </div>
+          </div>
+          <div class="layout-option-label">1 Rätsel (groß)</div>
+        </div>
+        <!-- 2 Rätsel -->
+        <div class="layout-option">
+          <div class="layout-preview">
+            <div class="layout-block layout-block--puzzle" style="flex:1">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h7v7"/></svg>
+            </div>
+            <div class="layout-block layout-block--puzzle" style="flex:1">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h7v7"/></svg>
+            </div>
+          </div>
+          <div class="layout-option-label">2 Rätsel</div>
+        </div>
+        <!-- 3 Fotos (wide) -->
+        <div class="layout-option layout-option--wide">
+          <div class="layout-preview layout-preview--row" style="min-height:50px">
+            <div class="layout-block layout-block--photo" style="flex:1"></div>
+            <div class="layout-block layout-block--photo" style="flex:1"></div>
+            <div class="layout-block layout-block--photo" style="flex:1"></div>
+          </div>
+          <div class="layout-option-label">3 Fotos <span style="font-weight:400;color:var(--mid-gray)">(für kleine Bilder)</span></div>
+        </div>
+      </div>
+      <div style="height:20px"></div>
+      <button class="btn-primary">Übernehmen</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── SCREEN 7 — Foto für Seite wählen ─── -->
+<div id="screen-7">
+  <div class="screen-label">7 · Foto für Seite wählen</div>
+  <div class="phone">
+    <div class="status-bar"></div>
+    <div class="section-back">
+      <div class="section-back-arrow" aria-label="Zurück">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <span class="section-back-title">Foto wählen</span>
+    </div>
+    <div style="font-size:13px;color:var(--mid-gray);padding:10px 20px;background:var(--light-gray)">Für Seite 3, Slot A</div>
+    <div class="scroll-area">
+      <div class="photo-grid">
+        <!-- Row 1 -->
+        <div class="photo-cell photo-cell--selected">
+          <img src="flyer/foto.jpg" alt="Foto 1">
+          <div class="photo-check photo-check--selected" aria-label="Ausgewählt"><svg width="14" height="14" viewBox="0 0 14 14" fill="none"><polyline points="3 7 6 10 11 4" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="photo-cell">
+          <img src="app-repo/assets/images/happy-family-fake-image.png" alt="Foto 2">
+          <div class="photo-check photo-check--unselected"></div>
+        </div>
+        <div class="photo-cell">
+          <img src="flyer/foto.jpg" alt="Foto 3" style="filter:hue-rotate(40deg)">
+          <div class="photo-check photo-check--unselected"></div>
+        </div>
+        <!-- Row 2 -->
+        <div class="photo-cell">
+          <img src="app-repo/assets/images/happy-family-fake-image.png" alt="Foto 4" style="filter:hue-rotate(120deg)">
+          <div class="photo-check photo-check--unselected"></div>
+          <div class="photo-page-badge">S. 5</div>
+        </div>
+        <div class="photo-cell">
+          <img src="flyer/foto.jpg" alt="Foto 5" style="filter:saturate(1.4)">
+          <div class="photo-check photo-check--unselected"></div>
+        </div>
+        <div class="photo-cell">
+          <img src="app-repo/assets/images/happy-family-fake-image.png" alt="Foto 6" style="filter:brightness(1.1)">
+          <div class="photo-check photo-check--unselected"></div>
+        </div>
+        <!-- Row 3 -->
+        <div class="photo-cell">
+          <img src="flyer/foto.jpg" alt="Foto 7" style="filter:sepia(0.3)">
+          <div class="photo-check photo-check--unselected"></div>
+          <div class="photo-page-badge">S. 8</div>
+        </div>
+        <div class="photo-cell">
+          <img src="app-repo/assets/images/happy-family-fake-image.png" alt="Foto 8" style="filter:hue-rotate(200deg)">
+          <div class="photo-check photo-check--unselected"></div>
+        </div>
+        <div class="photo-cell">
+          <img src="flyer/foto.jpg" alt="Foto 9" style="filter:grayscale(0.3)">
+          <div class="photo-check photo-check--unselected"></div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:0 20px 20px">
+      <button class="btn-primary">Übernehmen</button>
+    </div>
+    <div class="safe-bottom"></div>
+  </div>
+</div>
+
+</div><!-- /preview-row -->
+
+<div class="preview-row">
+
+<!-- ─── SCREEN 8 — Entertainment tauschen ─── -->
+<div id="screen-8">
+  <div class="screen-label">8 · Entertainment tauschen</div>
+  <div class="phone">
+    <div class="status-bar"></div>
+    <div style="flex:1;background:var(--light-gray);opacity:0.3"></div>
+    <div class="bottom-sheet-overlay"></div>
+    <div class="bottom-sheet" style="padding-bottom:20px">
+      <div class="drag-handle"></div>
+      <div class="sheet-title">Entertainment wählen</div>
+      <div class="sheet-subtitle">Für Seite 3</div>
+      <div class="entertainment-list">
+        <!-- Kreuzworträtsel (selected) -->
+        <div class="entertainment-row entertainment-row--selected">
+          <div class="entertainment-icon" style="background:var(--blue)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h7v7"/></svg>
+          </div>
+          <div class="entertainment-text">
+            <div class="entertainment-title">Kreuzworträtsel</div>
+            <div class="entertainment-desc">Klassisches Kreuzworträtsel</div>
+          </div>
+          <div class="radio-circle radio-circle--selected"><div class="radio-circle-fill"></div></div>
+        </div>
+        <!-- Zahlenrätsel -->
+        <div class="entertainment-row">
+          <div class="entertainment-icon" style="background:var(--orange)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5" stroke-linecap="round"><path d="M4 9h4M12 4v16M16 15h4"/></svg>
+          </div>
+          <div class="entertainment-text">
+            <div class="entertainment-title">Zahlenrätsel</div>
+            <div class="entertainment-desc">Sudoku &amp; Co.</div>
+          </div>
+          <div class="radio-circle"></div>
+        </div>
+        <!-- Witze -->
+        <div class="entertainment-row">
+          <div class="entertainment-icon" style="background:var(--soft-orange-bg);font-size:20px">😂</div>
+          <div class="entertainment-text">
+            <div class="entertainment-title">Witze</div>
+            <div class="entertainment-desc">Lustige Witze &amp; Sprüche</div>
+          </div>
+          <div class="radio-circle"></div>
+        </div>
+        <!-- Motivation -->
+        <div class="entertainment-row">
+          <div class="entertainment-icon" style="background:var(--turquoise)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.27 5.82 21 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+          </div>
+          <div class="entertainment-text">
+            <div class="entertainment-title">Motivation</div>
+            <div class="entertainment-desc">Inspirierende Zitate</div>
+          </div>
+          <div class="radio-circle"></div>
+        </div>
+        <!-- Lieder -->
+        <div class="entertainment-row">
+          <div class="entertainment-icon" style="background:var(--blue-soft)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          </div>
+          <div class="entertainment-text">
+            <div class="entertainment-title">Lieder</div>
+            <div class="entertainment-desc">Liedtexte zum Mitsingen</div>
+          </div>
+          <div class="radio-circle"></div>
+        </div>
+        <!-- Wissensquiz -->
+        <div class="entertainment-row">
+          <div class="entertainment-icon" style="background:var(--soft-green)">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--green-text)" stroke-width="2"><path d="M12 2a7 7 0 017 7c0 2.38-1.19 4.47-3 5.74V17a2 2 0 01-2 2h-4a2 2 0 01-2-2v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 017-7z"/><line x1="9" y1="21" x2="15" y2="21"/></svg>
+          </div>
+          <div class="entertainment-text">
+            <div class="entertainment-title">Wissensquiz</div>
+            <div class="entertainment-desc">Allgemeinwissen-Fragen</div>
+          </div>
+          <div class="radio-circle"></div>
+        </div>
+        <!-- Worträtsel -->
+        <div class="entertainment-row" style="border-bottom:none">
+          <div class="entertainment-icon" style="background:var(--beige)">
+            <span style="font-size:14px;font-weight:700;color:var(--navy)">ABC</span>
+          </div>
+          <div class="entertainment-text">
+            <div class="entertainment-title">Worträtsel</div>
+            <div class="entertainment-desc">Buchstabenspiele</div>
+          </div>
+          <div class="radio-circle"></div>
+        </div>
+      </div>
+      <div style="height:12px"></div>
+      <button class="btn-primary">Übernehmen</button>
+    </div>
+  </div>
+</div>
+
+</div><!-- /preview-row -->
+
+<!-- ═══════════════════════════════════ SECTION: Spezialseiten ═══════════════════════════════════ -->
+<div class="section-divider">
+  <div class="section-divider-line"></div>
+  <span style="font-size:12px;font-weight:700;color:var(--mid-gray);text-transform:uppercase;letter-spacing:1.5px;">Spezialseiten</span>
+  <div class="section-divider-line"></div>
+</div>
+
+<div class="preview-row">
+
+<!-- ─── SCREEN 9a — Titelseite (Familie / B2C) ─── -->
+<div id="screen-9a">
+  <div class="screen-label">9a · Titelseite — Familie</div>
+  <div class="phone">
+    <div class="status-bar"></div>
+    <div class="section-back">
+      <div class="section-back-arrow" aria-label="Zurück">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <span class="section-back-title">Titelseite</span>
+    </div>
+    <div class="scroll-area">
+      <!-- Cover preview -->
+      <div class="cover-preview">
+        <img src="flyer/foto.jpg" alt="Coverfoto" class="cover-photo">
+        <div class="icon-overlay" style="position:absolute;top:12px;right:12px" aria-label="Foto ändern">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="2" stroke-linecap="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        </div>
+        <div class="cover-overlay">
+          <img src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" class="cover-overlay-logo">
+          <div class="cover-overlay-family">Familie Blümel</div>
+          <div class="cover-overlay-title">Frühlingsgefühle</div>
+          <div class="cover-overlay-date">März 2026</div>
+        </div>
+      </div>
+      <!-- Form fields -->
+      <div style="padding:16px 20px">
+        <div class="form-label">HEFT-TITEL</div>
+        <input class="form-input" type="text" value="Frühlingsgefühle">
+        <div style="margin-top:20px">
+          <div class="form-label">COVERFOTO</div>
+          <div class="photo-change-row">
+            <img src="flyer/foto.jpg" alt="Coverfoto" class="photo-thumb">
+            <span class="link">Foto ändern</span>
+          </div>
+        </div>
+      </div>
+      <div class="inner-divider"></div>
+      <!-- Versand / Recipients -->
+      <div style="padding:16px 20px">
+        <div class="form-label">VERSAND AN</div>
+        <div class="recipient-row">
+          <div class="recipient-info">
+            <div class="recipient-name">Oma & Opa Blümel</div>
+            <div class="recipient-addr">Musterstr. 12, 60311 Frankfurt</div>
+          </div>
+          <span class="link" style="flex-shrink:0">Ändern</span>
+        </div>
+        <div class="recipient-row" style="margin-top:10px">
+          <div class="recipient-info">
+            <div class="recipient-name">Oma Ingrid</div>
+            <div class="recipient-addr">Gartenweg 5, 10115 Berlin</div>
+          </div>
+          <span class="link" style="flex-shrink:0">Ändern</span>
+        </div>
+        <button class="btn-text-add" style="margin-top:12px">+ Empfänger hinzufügen</button>
+      </div>
+      <div style="padding:8px 20px 20px">
+        <button class="btn-primary">Speichern</button>
+      </div>
+    </div>
+    <div class="safe-bottom"></div>
+  </div>
+</div>
+
+<!-- ─── SCREEN 9b — Titelseite (Pflegeheim / B2B) ─── -->
+<div id="screen-9b">
+  <div class="screen-label">9b · Titelseite — Pflegeheim</div>
+  <div class="phone">
+    <div class="status-bar"></div>
+    <div class="section-back">
+      <div class="section-back-arrow" aria-label="Zurück">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <span class="section-back-title">Titelseite</span>
+    </div>
+    <div class="scroll-area">
+      <!-- Cover preview -->
+      <div class="cover-preview">
+        <img src="flyer/foto.jpg" alt="Coverfoto" class="cover-photo">
+        <div class="icon-overlay" style="position:absolute;top:12px;right:12px" aria-label="Foto ändern">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="2" stroke-linecap="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        </div>
+        <div class="cover-overlay">
+          <img src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" class="cover-overlay-logo">
+          <div class="cover-overlay-family">Familie Blümel</div>
+          <div class="cover-overlay-title">Frühlingsgefühle</div>
+          <div class="cover-overlay-date">März 2026</div>
+        </div>
+      </div>
+      <!-- Form fields -->
+      <div style="padding:16px 20px">
+        <div class="form-label">HEFT-TITEL</div>
+        <input class="form-input" type="text" value="Frühlingsgefühle">
+        <div style="margin-top:20px">
+          <div class="form-label">COVERFOTO</div>
+          <div class="photo-change-row">
+            <img src="flyer/foto.jpg" alt="Coverfoto" class="photo-thumb">
+            <span class="link">Foto ändern</span>
+          </div>
+        </div>
+      </div>
+      <div class="inner-divider"></div>
+      <!-- Care home recipients -->
+      <div class="care-home-section">
+        <div class="care-home-badge">Pflegeheim-Versand</div>
+        <div class="form-label" style="margin-top:12px">EMPFÄNGER IM PFLEGEHEIM</div>
+        <div class="recipient-row" style="margin-top:8px">
+          <div class="recipient-info">
+            <div class="recipient-name">Hildegard Müller, Zi. 204</div>
+            <div class="recipient-addr">Seniorenresidenz Am Park, Goethestr. 8, 60313 Frankfurt</div>
+          </div>
+          <span class="link" style="flex-shrink:0">Ändern</span>
+        </div>
+        <div class="recipient-row" style="margin-top:10px">
+          <div class="recipient-info">
+            <div class="recipient-name">Gertrud Blümel, Zi. 112</div>
+            <div class="recipient-addr">Haus Sonnenschein, Lindenallee 3, 61118 Bad Vilbel</div>
+          </div>
+          <span class="link" style="flex-shrink:0">Ändern</span>
+        </div>
+        <div class="care-home-hint" style="margin-top:10px">Der Empfängername wird auf dem Heft gedruckt, damit das Pflegeheim es zuordnen kann</div>
+        <button class="btn-text-add" style="margin-top:12px">+ Empfänger hinzufügen</button>
+      </div>
+      <div style="padding:16px 20px">
+        <button class="btn-primary">Speichern</button>
+      </div>
+    </div>
+    <div class="safe-bottom"></div>
+  </div>
+</div>
+
+<!-- ─── SCREEN 10 — Letzte Seite ─── -->
+<div id="screen-10">
+  <div class="screen-label">10 · Letzte Seite</div>
+  <div class="phone">
+    <div class="status-bar"></div>
+    <div class="section-back">
+      <div class="section-back-arrow" aria-label="Zurück">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <span class="section-back-title">Letzte Seite</span>
+    </div>
+    <div class="scroll-area">
+      <div class="last-page-preview">
+        <img src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" class="last-page-logo">
+        <div class="last-page-subtitle">Mit Liebe erstellt von</div>
+        <!-- Contributors -->
+        <div class="contributors-row">
+          <div class="contributor">
+            <div class="contributor-circle" style="background:linear-gradient(135deg,var(--blue-soft),var(--blue))">JB</div>
+            <span class="contributor-name">Julius</span>
+            <span class="contributor-count">8 Fotos</span>
+          </div>
+          <div class="contributor">
+            <div class="contributor-circle" style="background:var(--orange)">PP</div>
+            <span class="contributor-name">Philipp</span>
+            <span class="contributor-count">4 Fotos</span>
+          </div>
+          <div class="contributor">
+            <div class="contributor-circle" style="background:var(--turquoise)">MB</div>
+            <span class="contributor-name">Maria</span>
+            <span class="contributor-count">3 Fotos</span>
+          </div>
+          <div class="contributor">
+            <div class="contributor-circle" style="background:var(--beige);color:var(--navy)">SB</div>
+            <span class="contributor-name">Sarah</span>
+            <span class="contributor-count">2 Fotos</span>
+          </div>
+        </div>
+        <div style="height:1px;background:var(--border);margin:20px 0"></div>
+        <!-- Birthdays -->
+        <div class="birthday-section">
+          <div class="birthday-title">🎂 Geburtstage im März</div>
+          <div class="birthday-entry">Oma Hildegard — 12. März <span class="birthday-badge">(85!)</span></div>
+          <div class="birthday-entry">Onkel Thomas — 28. März</div>
+        </div>
+        <div style="height:1px;background:var(--border);margin:16px 0"></div>
+        <div class="last-page-wordmark">remoryo</div>
+        <div class="last-page-tagline">Erinnerungen, die ankommen</div>
+      </div>
+      <div class="info-note-block">ℹ️ Diese Seite wird automatisch erstellt</div>
+      <div style="padding:0 20px 20px">
+        <button class="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
+          Geburtstage bearbeiten
+        </button>
+      </div>
+    </div>
+    <div class="safe-bottom"></div>
+  </div>
+</div>
+
+</div><!-- /preview-row -->
+
+<!-- ═══════════════════════════════════ SECTION: Vorschau & Finalisierung ═══════════════════════════════════ -->
+<div class="section-divider">
+  <div class="section-divider-line"></div>
+  <span style="font-size:12px;font-weight:700;color:var(--mid-gray);text-transform:uppercase;letter-spacing:1.5px;">Vorschau &amp; Finalisierung</span>
+  <div class="section-divider-line"></div>
+</div>
+
+<div class="preview-row">
+
+<!-- ─── SCREEN 11 — Heft-Vorschau (Editing) ─── -->
+<div id="screen-11">
+  <div class="screen-label">11 · Heft-Vorschau (Bearbeitung)</div>
+  <div class="phone">
+    <div class="status-bar"></div>
+    <div class="section-back">
+      <div class="section-back-arrow" aria-label="Zurück">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <span class="section-back-title">Vorschau</span>
+    </div>
+    <div class="scroll-area">
+      <div class="preview-title">Vorschau: März 2026</div>
+      <div class="preview-subtitle">So sieht dein Fotoheft aus.</div>
+      <!-- Spread viewer -->
+      <div class="spread-viewer">
+        <div class="spread-pages">
+          <div class="spread-page spread-page--left" style="background:var(--blue-light)">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg>
+          </div>
+          <div class="spread-spine"></div>
+          <div class="spread-page spread-page--right" style="background:var(--turquoise-light)">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h7v7"/></svg>
+          </div>
+        </div>
+        <button class="spread-arrow spread-arrow--left" aria-label="Vorherige Seite">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="spread-arrow spread-arrow--right" aria-label="Nächste Seite">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="spread-indicator">Seite 4–5 von 12</div>
+      </div>
+      <!-- Stats -->
+      <div class="stats-card">
+        <div class="stats-main">12 Seiten · 14 Fotos · 3 Rätsel · 1 Lied</div>
+        <div class="stats-sub">Wird am 31. März automatisch gedruckt</div>
+      </div>
+      <div style="padding:16px 20px">
+        <button class="btn-primary">Weiter bearbeiten</button>
+      </div>
+    </div>
+    <div class="safe-bottom"></div>
+  </div>
+</div>
+
+<!-- ─── SCREEN 12 — Heft-Ansicht (Gedruckt) ─── -->
+<div id="screen-12">
+  <div class="screen-label">12 · Heft-Ansicht (Gedruckt)</div>
+  <div class="phone">
+    <div class="status-bar"></div>
+    <div class="section-back">
+      <div class="section-back-arrow" aria-label="Zurück">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <span class="section-back-title">März 2026</span>
+    </div>
+    <div class="scroll-area">
+      <div class="status-badge-green">✓ Gedruckt am 1. April 2026</div>
+      <!-- Spread viewer -->
+      <div class="spread-viewer">
+        <div class="spread-pages">
+          <div class="spread-page spread-page--left">
+            <img src="flyer/foto.jpg" alt="Cover">
+          </div>
+          <div class="spread-spine"></div>
+          <div class="spread-page spread-page--right">
+            <img src="app-repo/assets/images/happy-family-fake-image.png" alt="Foto">
+          </div>
+        </div>
+        <button class="spread-arrow spread-arrow--left" aria-label="Vorherige Seite">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
+        <button class="spread-arrow spread-arrow--right" aria-label="Nächste Seite">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+        <div class="spread-indicator">Seite 1–2 von 12</div>
+      </div>
+      <!-- Stats -->
+      <div class="stats-card">
+        <div class="stats-main">12 Seiten · 14 Fotos · 3 Rätsel · 1 Lied</div>
+      </div>
+      <div style="padding:16px 20px;display:flex;flex-direction:column;gap:10px">
+        <button class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+          PDF herunterladen
+        </button>
+        <button class="btn-outline">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+          Teilen
+        </button>
+      </div>
+    </div>
+    <div class="safe-bottom"></div>
+  </div>
+</div>
+
+</div><!-- /preview-row -->
+
+<div class="preview-row">
+
+<!-- ─── SCREEN 13 — Seiten umsortieren ─── -->
+<div id="screen-13">
+  <div class="screen-label">13 · Seiten umsortieren</div>
+  <div class="phone">
+    <div class="status-bar"></div>
+    <div class="section-back">
+      <div class="section-back-arrow" aria-label="Zurück">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </div>
+      <span class="section-back-title">Umsortieren</span>
+    </div>
+    <div class="scroll-area">
+      <div class="info-banner" style="border-left:none;background:var(--soft-orange-bg);border-radius:12px">Halte eine Seite gedrückt zum Verschieben. Titel- und letzte Seite sind fixiert.</div>
+      <div class="page-grid" style="padding-bottom:16px">
+        <!-- Page 1: Locked -->
+        <div class="page-thumb page-thumb--locked" style="overflow:hidden">
+          <img src="flyer/foto.jpg" alt="Cover" style="width:100%;height:100%;object-fit:cover">
+          <div class="page-cover-overlay">
+            <span class="cover-title">Cover</span>
+          </div>
+          <div class="lock-overlay">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+        </div>
+        <!-- Page 2 -->
+        <div class="page-thumb" style="box-shadow:0 2px 8px rgba(0,0,0,0.08)">
+          <div class="grip-handle"><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div></div>
+          <div class="page-block page-block--photo" style="height:65%;margin-bottom:0"></div>
+          <div class="page-text-line" style="width:60%"></div>
+          <div class="page-number">S. 2</div>
+        </div>
+        <!-- Page 3 -->
+        <div class="page-thumb" style="box-shadow:0 2px 8px rgba(0,0,0,0.08)">
+          <div class="grip-handle"><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div></div>
+          <div class="page-block page-block--photo" style="height:65%;margin-bottom:0"></div>
+          <div class="page-text-line" style="width:55%"></div>
+          <div class="page-number">S. 3</div>
+        </div>
+        <!-- Drop zone -->
+        <div class="page-thumb page-thumb--drop-zone"></div>
+        <!-- Page 4 -->
+        <div class="page-thumb" style="box-shadow:0 2px 8px rgba(0,0,0,0.08)">
+          <div class="grip-handle"><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div></div>
+          <div class="page-block page-block--photo" style="height:45%;margin-bottom:0"></div>
+          <div class="page-block page-block--photo" style="height:45%"></div>
+          <div class="page-number">S. 4</div>
+        </div>
+        <!-- Page 5 (being dragged) -->
+        <div class="page-thumb page-thumb--dragging" style="box-shadow:0 8px 24px rgba(0,0,0,0.2)">
+          <div class="grip-handle"><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div></div>
+          <div class="page-block page-block--photo" style="height:50%;margin-bottom:0"></div>
+          <div class="page-block page-block--entertainment" style="height:40%">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h7v7"/></svg>
+          </div>
+          <div class="page-number">S. 5</div>
+        </div>
+        <!-- Page 6 -->
+        <div class="page-thumb" style="box-shadow:0 2px 8px rgba(0,0,0,0.08)">
+          <div class="grip-handle"><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div></div>
+          <div class="page-block page-block--entertainment" style="height:90%">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h7v7"/></svg>
+          </div>
+          <div class="page-number">S. 6</div>
+        </div>
+        <!-- Page 7 -->
+        <div class="page-thumb" style="box-shadow:0 2px 8px rgba(0,0,0,0.08)">
+          <div class="grip-handle"><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div></div>
+          <div class="page-block page-block--photo" style="height:65%;margin-bottom:0"></div>
+          <div class="page-text-line" style="width:55%"></div>
+          <div class="page-number">S. 7</div>
+        </div>
+        <!-- Page 8 -->
+        <div class="page-thumb" style="box-shadow:0 2px 8px rgba(0,0,0,0.08)">
+          <div class="grip-handle"><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div></div>
+          <div class="page-block page-block--photo" style="height:65%;margin-bottom:0"></div>
+          <div class="page-text-line" style="width:50%"></div>
+          <div class="page-number">S. 8</div>
+        </div>
+        <!-- Page 9 -->
+        <div class="page-thumb" style="box-shadow:0 2px 8px rgba(0,0,0,0.08)">
+          <div class="grip-handle"><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div></div>
+          <div class="page-block page-block--photo" style="height:50%;margin-bottom:0"></div>
+          <div class="page-block page-block--entertainment" style="height:40%">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h7v7"/></svg>
+          </div>
+          <div class="page-number">S. 9</div>
+        </div>
+        <!-- Page 10 -->
+        <div class="page-thumb" style="box-shadow:0 2px 8px rgba(0,0,0,0.08)">
+          <div class="grip-handle"><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div></div>
+          <div class="page-block page-block--photo" style="height:65%;margin-bottom:0"></div>
+          <div class="page-text-line" style="width:45%"></div>
+          <div class="page-number">S. 10</div>
+        </div>
+        <!-- Page 11 -->
+        <div class="page-thumb" style="box-shadow:0 2px 8px rgba(0,0,0,0.08)">
+          <div class="grip-handle"><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div><div class="grip-dot-row"><div class="grip-dot"></div><div class="grip-dot"></div></div></div>
+          <div class="page-block page-block--photo" style="height:65%;margin-bottom:0"></div>
+          <div class="page-text-line" style="width:40%"></div>
+          <div class="page-number">S. 11</div>
+        </div>
+        <!-- Page 12: Locked -->
+        <div class="page-thumb page-thumb--locked" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px">
+          <div style="display:flex;gap:4px">
+            <div style="width:14px;height:14px;border-radius:7px;background:var(--blue)"></div>
+            <div style="width:14px;height:14px;border-radius:7px;background:var(--orange)"></div>
+            <div style="width:14px;height:14px;border-radius:7px;background:var(--turquoise)"></div>
+            <div style="width:14px;height:14px;border-radius:7px;background:var(--beige)"></div>
+          </div>
+          <span style="font-size:9px;color:var(--mid-gray)">S. 12</span>
+          <div class="lock-overlay">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div style="padding:14px 20px;border-top:1px solid var(--border);flex-shrink:0">
+      <button class="btn-primary">Fertig</button>
+    </div>
+    <div class="safe-bottom"></div>
+  </div>
+</div>
+
+<!-- ─── SCREEN 14 — Unfertig speichern (Warning Modal) ─── -->
+<div id="screen-14">
+  <div class="screen-label">14 · Unfertig speichern</div>
+  <div class="phone">
+    <div class="status-bar"></div>
+    <!-- Dimmed background showing screen 4 content -->
+    <div class="modal-dimmed" style="flex:1;display:flex;flex-direction:column">
+      <div class="section-back">
+        <div class="section-back-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg></div>
+        <span class="section-back-title">Seitenübersicht</span>
+      </div>
+      <div style="padding:16px 20px">
+        <div style="display:flex;justify-content:space-between;margin-bottom:8px">
+          <span style="font-size:14px;font-weight:700;color:var(--navy)">10 von 12 Seiten fertig</span>
+        </div>
+        <div style="height:6px;border-radius:3px;background:var(--border)"><div style="height:100%;width:83%;border-radius:3px;background:var(--orange)"></div></div>
+      </div>
+      <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:8px;padding:0 16px">
+        <div style="aspect-ratio:210/297;border-radius:6px;border:1px solid var(--border);background:var(--blue-light)"></div>
+        <div style="aspect-ratio:210/297;border-radius:6px;border:1px solid var(--border);background:var(--blue-light)"></div>
+        <div style="aspect-ratio:210/297;border-radius:6px;border:1px solid var(--border);background:var(--turquoise-light)"></div>
+        <div style="aspect-ratio:210/297;border-radius:6px;border:1px solid var(--border);background:var(--blue-light)"></div>
+      </div>
+    </div>
+    <!-- Modal overlay -->
+    <div class="modal-overlay"></div>
+    <!-- Modal -->
+    <div class="modal">
+      <div class="modal-icon">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="9" x2="12" y2="13"/><circle cx="12" cy="17" r="0.5" fill="var(--orange)"/></svg>
+      </div>
+      <div class="modal-headline">Heft noch nicht fertig</div>
+      <div class="modal-progress-text">10 von 12 Seiten gefüllt</div>
+      <div style="margin:12px 0 16px">
+        <div class="progress-bar">
+          <div class="progress-bar-fill" style="width:83%"></div>
+        </div>
+      </div>
+      <div class="modal-desc">Nur vollständige Hefte mit 12 Seiten werden am Monatsende gedruckt. Du kannst jederzeit weiter bearbeiten.</div>
+      <div class="modal-toggle-row">
+        <span class="modal-toggle-label">Erinnerung aktivieren</span>
+        <div class="toggle on"></div>
+      </div>
+      <div class="modal-hint">Du wirst 5 Tage vor Druckschluss erinnert.</div>
+      <button class="btn-primary" style="margin-top:20px">Speichern &amp; später fortfahren</button>
+      <button class="btn-text">Weiter bearbeiten</button>
+    </div>
+    <div class="safe-bottom"></div>
+  </div>
+</div>
+
+</div><!-- /preview-row -->
+
+<p class="footer-note">Preview nutzt Inter als Stand-in für Helvetica Now Display.</p>
 
 </body>
 </html>

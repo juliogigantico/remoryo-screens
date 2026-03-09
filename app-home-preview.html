@@ -5,163 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Remoryo Home — Visual Preview</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --blue: #82B7D8;
-      --blue-light: #EAF3F9;
-      --blue-soft: #D4E8F2;
-      --turquoise: #B8E0E0;
-      --turquoise-light: #E2F3F3;
-      --navy: #1B2C43;
-      --orange: #FFA631;
-      --white: #FFFFFF;
-      --dark-gray: #5A6B7A;
-      --mid-gray: #94A3B3;
-      --light-gray: #F5F6F8;
-      --border: #E2E6EB;
-      --btn-radius: 14px;
-      --red: #E74C3C;
-      --beige: #E8DDD1;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: #F0F2F5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 32px 20px;
-      gap: 20px;
-    }
-
-    h1 {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--mid-gray);
-    }
-
-    .preview-row {
-      display: flex;
-      gap: 40px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .screen-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--mid-gray);
-      text-align: center;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    /* ── Phone Frame ── */
-    .phone {
-      width: 393px;
-      height: 852px;
-      background: var(--white);
-      border-radius: 48px;
-      overflow: hidden;
-      box-shadow:
-        0 0 0 1px rgba(0,0,0,0.05),
-        0 8px 30px rgba(0,0,0,0.08),
-        0 30px 70px rgba(0,0,0,0.12);
-      position: relative;
-      display: flex;
-      flex-direction: column;
-    }
-
-    /* Dynamic Island */
-    .phone::before {
-      content: '';
-      position: absolute;
-      top: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 126px;
-      height: 36px;
-      background: #000;
-      border-radius: 20px;
-      z-index: 10;
-    }
-
-    /* ── Status Bar Area ── */
-    .status-bar {
-      height: 59px;
-      flex-shrink: 0;
-    }
-
-    /* ── App Header ── */
-    .app-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 20px 12px;
-      border-bottom: 1px solid var(--border);
-      flex-shrink: 0;
-    }
-
-    .app-header-logo {
-      height: 26px;
-      width: auto;
-    }
-
-    .header-wordmark {
-      font-weight: 700;
-      font-size: 16px;
-      color: var(--navy);
-      letter-spacing: -0.3px;
-    }
-
-    .header-settings {
-      width: 44px;
-      height: 44px;
-      border-radius: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    .header-settings svg {
-      width: 24px;
-      height: 24px;
-    }
-
-    /* ── Group Indicator Pill ── */
-    .group-pill-wrap {
-      padding: 12px 16px 0;
-      display: flex;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .group-indicator {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      background: var(--blue-light);
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--navy);
-      cursor: pointer;
-    }
-
-    /* ── Scrollable Content ── */
-    .scroll-area {
-      flex: 1;
-      overflow-y: auto;
-      background: var(--light-gray);
-    }
+    @import url('shared-styles.css');
 
     /* ── Magazine Deadline Banner ── */
     .deadline-banner {
@@ -201,7 +45,7 @@
       display: flex;
       align-items: center;
       gap: 12px;
-      background: #FFF8F0;
+      background: var(--soft-orange-bg);
       border: 1.5px solid rgba(255, 166, 49, 0.15);
       padding: 14px 16px;
       border-radius: 12px;
@@ -445,119 +289,7 @@
       margin-bottom: 28px;
     }
 
-    .btn {
-      width: 100%;
-      padding: 14px 24px;
-      border-radius: var(--btn-radius);
-      font-weight: 700;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-      text-align: center;
-    }
-
-    .btn-primary {
-      background: var(--orange);
-      color: var(--white);
-      min-height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    /* ── Bottom Tab Bar (2-tab + central FAB) ── */
-    .tab-bar {
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      height: 68px;
-      background: var(--white);
-      flex-shrink: 0;
-      padding-bottom: 6px;
-      position: relative;
-      box-shadow: 0 -1px 12px rgba(27, 44, 67, 0.06);
-    }
-
-    .tab-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      cursor: pointer;
-      position: relative;
-      flex: 1;
-      padding-top: 10px;
-    }
-
-    .tab-icon {
-      width: 56px;
-      height: 30px;
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .tab-icon svg {
-      width: 26px;
-      height: 26px;
-    }
-
-    .tab-item.active .tab-icon {
-      background: rgba(130, 183, 216, 0.18);
-    }
-
-    .tab-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--mid-gray);
-      letter-spacing: -0.2px;
-    }
-
-    .tab-item.active .tab-label {
-      color: var(--navy);
-      font-weight: 700;
-    }
-
-    /* Central FAB button */
-    .tab-fab-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex: 0 0 auto;
-      padding: 0 16px;
-      position: relative;
-      top: -18px;
-    }
-
-    .tab-fab {
-      width: 62px;
-      height: 62px;
-      border-radius: 50%;
-      background: linear-gradient(145deg, #FFB84D 0%, var(--orange) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      box-shadow: 0 6px 20px rgba(255, 166, 49, 0.45), 0 2px 6px rgba(0,0,0,0.08);
-      border: 3px solid var(--white);
-    }
-
-    .tab-fab svg {
-      width: 28px;
-      height: 28px;
-    }
-
-    .tab-fab-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--orange);
-      margin-top: 3px;
-      letter-spacing: -0.2px;
-    }
-
-    /* ── Magazine Cards (reused from magazine preview) ── */
+    /* ── Magazine Cards ── */
     .mag-card {
       margin: 16px 20px;
       border-radius: 16px;
@@ -570,7 +302,7 @@
     .mag-card-inner {
       position: relative;
       padding: 20px;
-      background: linear-gradient(145deg, #FFF8F0 0%, #FFF 50%, #F0F8FF 100%);
+      background: linear-gradient(145deg, var(--soft-orange-bg) 0%, #FFF 50%, #F0F8FF 100%);
       border: 1px solid rgba(0,0,0,0.06);
       border-radius: 16px;
     }
@@ -668,13 +400,13 @@
     }
 
     .mag-status--editing {
-      background: #FFF3DC;
-      color: #D48B00;
+      background: var(--soft-orange);
+      color: var(--orange-dark);
     }
 
     .mag-status--sent {
-      background: #E6F7EE;
-      color: #1D8348;
+      background: var(--soft-green);
+      color: var(--green-text);
     }
 
     .mag-deadline {
@@ -721,8 +453,8 @@
     }
 
     .mag-action-btn--danger {
-      background: #FFF0EE;
-      color: #E74C3C;
+      background: var(--soft-red);
+      color: var(--red);
     }
 
     /* ── Comments Screen ── */
@@ -733,21 +465,6 @@
       padding: 8px 16px 12px;
       border-bottom: 1px solid var(--border);
       flex-shrink: 0;
-    }
-
-    .back-arrow {
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-    .back-arrow svg {
-      width: 24px;
-      height: 24px;
-      color: var(--navy);
     }
 
     .comments-title {
@@ -848,20 +565,6 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-    }
-
-    /* ── Safe Area ── */
-    .safe-bottom {
-      height: 20px;
-      background: var(--white);
-      flex-shrink: 0;
-    }
-
-    .footer-note {
-      font-size: 11px;
-      color: #A0A0A0;
-      font-weight: 500;
-      text-align: center;
     }
 
     /* ── Screen 6: Foto-Vollansicht ── */
@@ -1164,21 +867,6 @@
       gap: 14px;
     }
 
-    .btn-outline {
-      background: var(--white);
-      color: var(--navy);
-      min-height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      border: 1.5px solid var(--navy);
-    }
-
-    .btn-text {
-      color: var(--navy);
-    }
-    [id^="screen-"] { scroll-margin-top: 20px; }
     @keyframes blink { 0%, 100% { opacity: 1; } 50% { opacity: 0; } }
 
     /* ── Keyboard Keys (Screen 7) ── */
@@ -1198,10 +886,6 @@
 
     /* ── Info Banner ── */
     .info-banner { border-radius: 12px; padding: 12px 14px; display: flex; align-items: flex-start; gap: 10px; }
-
-    /* ── Section Divider ── */
-    .section-divider { width: 100%; display: flex; align-items: center; gap: 16px; margin: 12px 0 4px; }
-    .section-divider-line { flex: 1; height: 1px; background: #D0D5DB; }
   </style>
 </head>
 <body>
@@ -1222,7 +906,7 @@
         <div class="app-header">
           <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
           <span class="header-wordmark">remoryo</span>
-          <div class="header-settings">
+          <div class="header-settings" aria-label="Einstellungen">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
           </div>
         </div>
@@ -1262,16 +946,16 @@
                 <div class="avatar-placeholder">J</div>
                 <span class="card-username">Julius Blümel</span>
               </div>
-              <div class="card-more"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/></svg></div>
+              <div class="card-more" aria-label="Mehr Optionen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/></svg></div>
             </div>
             <img class="card-photo" src="flyer/foto.jpg" alt="Oma liest Fotoheft">
             <div class="card-actions">
               <div class="card-actions-left">
-                <div class="action-btn">
+                <div class="action-btn" aria-label="Gefällt mir">
                   <svg viewBox="0 0 24 24" fill="var(--red)"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
                   <div class="badge">3</div>
                 </div>
-                <div class="action-btn">
+                <div class="action-btn" aria-label="Kommentare">
                   <svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                   <div class="badge">2</div>
                 </div>
@@ -1280,7 +964,7 @@
                   Im Heft
                 </div>
               </div>
-              <div class="action-edit">
+              <div class="action-edit" aria-label="Bearbeiten">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
             </div>
@@ -1294,19 +978,19 @@
                 <div class="avatar-placeholder" style="background: linear-gradient(135deg, #B8E0E0, #82B7D8);">M</div>
                 <span class="card-username">Maria Blümel</span>
               </div>
-              <div class="card-more"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/></svg></div>
+              <div class="card-more" aria-label="Mehr Optionen"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1.5"/><circle cx="19" cy="12" r="1.5"/><circle cx="5" cy="12" r="1.5"/></svg></div>
             </div>
             <img class="card-photo" src="app-repo/assets/images/happy-family-fake-image.png" alt="Familie beim Essen">
             <div class="card-actions">
               <div class="card-actions-left">
-                <div class="action-btn">
+                <div class="action-btn" aria-label="Gefällt mir">
                   <svg viewBox="0 0 24 24" fill="none"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
-                <div class="action-btn">
+                <div class="action-btn" aria-label="Kommentare">
                   <svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </div>
               </div>
-              <div class="action-edit">
+              <div class="action-edit" aria-label="Bearbeiten">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
             </div>
@@ -1324,7 +1008,7 @@
             <span class="tab-label">Fotos</span>
           </div>
           <div class="tab-fab-wrapper">
-            <div class="tab-fab">
+            <div class="tab-fab" aria-label="Foto hinzufügen">
               <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>
             </div>
             <span class="tab-fab-label">Foto</span>
@@ -1354,7 +1038,7 @@
         <div class="app-header">
           <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
           <span class="header-wordmark">remoryo</span>
-          <div class="header-settings">
+          <div class="header-settings" aria-label="Einstellungen">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
           </div>
         </div>
@@ -1389,7 +1073,7 @@
             <span class="tab-label">Fotos</span>
           </div>
           <div class="tab-fab-wrapper">
-            <div class="tab-fab">
+            <div class="tab-fab" aria-label="Foto hinzufügen">
               <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>
             </div>
             <span class="tab-fab-label">Foto</span>
@@ -1419,7 +1103,7 @@
         <div class="app-header">
           <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
           <span class="header-wordmark">remoryo</span>
-          <div class="header-settings">
+          <div class="header-settings" aria-label="Einstellungen">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
           </div>
         </div>
@@ -1498,7 +1182,7 @@
             <span class="tab-label">Fotos</span>
           </div>
           <div class="tab-fab-wrapper">
-            <div class="tab-fab">
+            <div class="tab-fab" aria-label="Foto hinzufügen">
               <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>
             </div>
             <span class="tab-fab-label">Erstellen</span>
@@ -1528,7 +1212,7 @@
         <div class="app-header">
           <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
           <span class="header-wordmark">remoryo</span>
-          <div class="header-settings">
+          <div class="header-settings" aria-label="Einstellungen">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
           </div>
         </div>
@@ -1563,7 +1247,7 @@
             <span class="tab-label">Fotos</span>
           </div>
           <div class="tab-fab-wrapper">
-            <div class="tab-fab">
+            <div class="tab-fab" aria-label="Foto hinzufügen">
               <svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="white" stroke-width="3" stroke-linecap="round"/></svg>
             </div>
             <span class="tab-fab-label">Erstellen</span>
@@ -1591,7 +1275,7 @@
         <div class="status-bar"></div>
 
         <div class="comments-header">
-          <div class="back-arrow">
+          <div class="back-arrow" aria-label="Zurück">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M15 18l-6-6 6-6"/>
             </svg>
@@ -1641,7 +1325,7 @@
 
         <div class="comment-input-bar">
           <input class="comment-input" type="text" placeholder="Kommentar schreiben..." style="color: var(--mid-gray);">
-          <button class="comment-send" style="background: var(--border); opacity: 0.5;">
+          <button class="comment-send" aria-label="Senden" style="background: var(--border); opacity: 0.5;">
             <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
@@ -1690,17 +1374,17 @@
 
           <div class="fullscreen-bottom-overlay">
             <div class="fullscreen-actions">
-              <div class="fullscreen-action-btn">
+              <div class="fullscreen-action-btn" aria-label="Gefällt mir">
                 <svg viewBox="0 0 24 24" fill="var(--red)"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z"/></svg>
               </div>
-              <div class="fullscreen-action-btn">
+              <div class="fullscreen-action-btn" aria-label="Kommentare">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 <span class="fullscreen-action-count">3</span>
               </div>
-              <div class="fullscreen-action-btn">
+              <div class="fullscreen-action-btn" aria-label="Teilen">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M4 12v8a2 2 0 002 2h12a2 2 0 002-2v-8" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="16 6 12 2 8 6" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="2" x2="12" y2="15" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
-              <div class="fullscreen-action-btn">
+              <div class="fullscreen-action-btn" aria-label="Herunterladen">
                 <svg viewBox="0 0 24 24" fill="none"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="7 10 12 15 17 10" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><line x1="12" y1="15" x2="12" y2="3" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
             </div>
@@ -1722,7 +1406,7 @@
         <div class="status-bar"></div>
 
         <div class="comments-header">
-          <div class="back-arrow">
+          <div class="back-arrow" aria-label="Zurück">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
           </div>
           <span class="comments-title">Kommentare</span>
@@ -1751,7 +1435,7 @@
 
             <div style="position: absolute; right: 8px; top: 50%; transform: translateY(-50%); width: 2px; height: 18px; background: var(--blue); animation: blink 1s step-end infinite;"></div>
           </div>
-          <button class="comment-send" style="background: var(--orange);">
+          <button class="comment-send" aria-label="Senden" style="background: var(--orange);">
             <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           </button>
         </div>
@@ -1903,7 +1587,7 @@
             <div class="sheet-handle" style="margin-bottom: 24px;"></div>
 
             <div style="display: flex; justify-content: center; margin-bottom: 16px;">
-              <div style="width: 48px; height: 48px; border-radius: 50%; background: #FFF0EE; display: flex; align-items: center; justify-content: center;">
+              <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--soft-red); display: flex; align-items: center; justify-content: center;">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="3 6 5 6 21 6"/>
                   <path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
@@ -2003,7 +1687,7 @@
               <div class="sheet-label">Beschriftung bearbeiten</div>
             </div>
             <div class="sheet-item">
-              <div class="sheet-icon" style="background: #FFF3DC;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+              <div class="sheet-icon" style="background: var(--soft-orange);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
               <div>
                 <div class="sheet-label">Im Heft verwenden</div>
                 <div style="font-size: 12px; color: var(--mid-gray); margin-top: 1px;">Zum Magazin-Editor wechseln</div>
@@ -2019,7 +1703,7 @@
             </div>
             <div style="height: 1px; background: var(--border); margin: 4px 20px;"></div>
             <div class="sheet-item">
-              <div class="sheet-icon" style="background: #FFF0EE;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E74C3C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg></div>
+              <div class="sheet-icon" style="background: var(--soft-red);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E74C3C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg></div>
               <div style="font-size: 15px; font-weight: 600; color: #E74C3C;">Foto l&ouml;schen</div>
             </div>
           </div>

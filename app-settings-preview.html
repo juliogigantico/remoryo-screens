@@ -5,107 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Remoryo Settings — Visual Preview</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --blue: #82B7D8;
-      --blue-light: #EAF3F9;
-      --blue-soft: #D4E8F2;
-      --turquoise: #B8E0E0;
-      --turquoise-light: #E2F3F3;
-      --navy: #1B2C43;
-      --orange: #FFA631;
-      --white: #FFFFFF;
-      --dark-gray: #5A6B7A;
-      --mid-gray: #94A3B3;
-      --light-gray: #F5F6F8;
-      --border: #E2E6EB;
-      --btn-radius: 14px;
-      --input-radius: 12px;
-      --red: #E74C3C;
-      --beige: #E8DDD1;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: #F0F2F5;
-      display: flex; flex-direction: column; align-items: center;
-      padding: 32px 20px; gap: 20px;
-    }
-
-    h1 { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--mid-gray); }
-    .preview-row { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; }
-    .screen-label {
-      font-size: 11px; font-weight: 700; color: var(--mid-gray);
-      text-align: center; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;
-    }
-
-    /* ── Phone Frame ── */
-    .phone {
-      width: 393px; height: 852px; background: var(--white);
-      border-radius: 48px; overflow: hidden;
-      box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 8px 30px rgba(0,0,0,0.08), 0 30px 70px rgba(0,0,0,0.12);
-      position: relative; display: flex; flex-direction: column;
-    }
-    .phone::before {
-      content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
-      width: 126px; height: 36px; background: #000; border-radius: 20px; z-index: 10;
-    }
-
-    .status-bar { height: 59px; flex-shrink: 0; }
-    .scroll-area { flex: 1; overflow-y: auto; background: var(--white); }
-    .safe-bottom { height: 20px; background: var(--white); flex-shrink: 0; }
-
-    /* ── Section Header ── */
-    .section-back {
-      display: flex; align-items: center; gap: 10px;
-      padding: 10px 16px 10px; flex-shrink: 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .section-back-arrow {
-      width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
-      cursor: pointer; flex-shrink: 0;
-    }
-    .section-back-arrow svg {
-      width: 24px; height: 24px; color: var(--navy);
-    }
-    .section-back-title { font-weight: 700; font-size: 17px; color: var(--navy); }
-
-    /* ── Settings Menu ── */
-    .settings-section {
-      padding: 20px 20px 8px;
-    }
-    .settings-section-title {
-      font-size: 11px; font-weight: 700; color: var(--mid-gray);
-      text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 12px;
-    }
-
-    .settings-item {
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 16px 0; border-bottom: 1px solid var(--border); cursor: pointer;
-    }
-    .settings-item:last-child { border-bottom: none; }
-
-    .settings-item-left {
-      display: flex; align-items: center; gap: 14px;
-    }
-    .settings-item-icon {
-      width: 36px; height: 36px; border-radius: 10px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 18px; flex-shrink: 0;
-    }
-    .settings-item-label {
-      font-weight: 600; font-size: 15px; color: var(--navy);
-    }
-    .settings-item-sub {
-      font-size: 12px; color: var(--mid-gray); margin-top: 2px;
-    }
-    .settings-chevron {
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
-    }
+    @import url('shared-styles.css');
 
     /* ── Invite Banner ── */
     .invite-banner {
@@ -120,9 +20,7 @@
       background: var(--blue); display: flex; align-items: center;
       justify-content: center; font-size: 22px; flex-shrink: 0;
     }
-    .invite-banner-text {
-      flex: 1;
-    }
+    .invite-banner-text { flex: 1; }
     .invite-banner-title {
       font-weight: 700; font-size: 14px; color: var(--navy); margin-bottom: 2px;
     }
@@ -130,153 +28,36 @@
       font-size: 12px; color: var(--dark-gray);
     }
 
-    /* ── Profile Section ── */
-    .profile-header {
-      display: flex; flex-direction: column; align-items: center;
-      padding: 24px 20px 20px;
-    }
-    .profile-avatar {
-      width: 80px; height: 80px; border-radius: 40px;
-      background: linear-gradient(135deg, var(--blue-soft), var(--blue));
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 800; font-size: 28px; color: white;
-      margin-bottom: 12px; position: relative;
-    }
-    .profile-name {
-      font-weight: 700; font-size: 20px; color: var(--navy); margin-bottom: 4px;
-    }
-    .profile-email {
-      font-size: 14px; color: var(--mid-gray);
-    }
-
     /* ── Logout ── */
     .logout-btn {
       margin: 24px 20px 0; padding: 14px;
       min-height: 48px; display: flex; align-items: center; justify-content: center;
       border-radius: var(--btn-radius);
-      background: #FFF0EE; color: var(--red);
+      background: var(--soft-red); color: var(--red);
       font-weight: 700; font-size: 15px;
       border: none; cursor: pointer; text-align: center; width: calc(100% - 40px);
     }
-
-    /* ── Logout hint ── */
     .logout-hint {
       font-size: 12px; color: var(--mid-gray); text-align: center;
       padding: 6px 20px 0;
     }
 
-    /* ── Account delete link ── */
+    /* ── Account delete ── */
     .account-delete-link {
       font-size: 13px; color: var(--red); text-align: center;
       padding: 16px 20px 24px; cursor: pointer;
       background: none; border: none; font-family: inherit;
       text-decoration: none;
     }
-    .account-delete-link:hover {
-      text-decoration: underline;
-    }
-
-    /* ── Account delete hint ── */
+    .account-delete-link:hover { text-decoration: underline; }
     .account-delete-hint {
       font-size: 12px; color: var(--mid-gray); text-align: center;
       margin-top: 4px; padding: 0 20px;
     }
 
-    /* ── Static settings item (non-interactive) ── */
-    .settings-item--static {
-      cursor: default;
-      opacity: 0.9;
-    }
-    .settings-item--static:hover {
-      background: none;
-    }
-
-    /* ── Buttons ── */
-    .btn-primary {
-      width: 100%; padding: 14px 24px; min-height: 48px;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: var(--btn-radius); background: var(--orange); color: white;
-      font-weight: 700; font-size: 16px; border: none; cursor: pointer; font-family: inherit;
-    }
-    .btn-danger-soft {
-      width: 100%; padding: 14px; min-height: 48px;
-      display: flex; align-items: center; justify-content: center;
-      border-radius: var(--btn-radius); background: #FFF0EE; color: var(--red);
-      font-weight: 700; font-size: 15px; border: none; cursor: pointer; font-family: inherit;
-    }
-
-    /* ── Profile Info Rows (read-only) ── */
-    .profile-info-row {
-      display: flex; flex-direction: column; gap: 2px;
-      padding: 14px 0; border-bottom: 1px solid var(--border);
-    }
-    .profile-info-row:last-child { border-bottom: none; }
-    .profile-info-label {
-      font-size: 12px; font-weight: 600; color: var(--mid-gray);
-      text-transform: uppercase; letter-spacing: 0.5px;
-    }
-    .profile-info-value {
-      font-size: 15px; font-weight: 500; color: var(--navy);
-    }
-
-    /* ── Form Elements (from settings-detail) ── */
-    .form-section { padding: 0 20px 20px; }
-    .form-label {
-      font-size: 12px; font-weight: 700; color: var(--mid-gray);
-      text-transform: uppercase; letter-spacing: 0.5px;
-      margin-bottom: 8px; margin-top: 20px;
-    }
-    .form-input {
-      width: 100%; padding: 14px 16px; border-radius: var(--input-radius);
-      border: 1.5px solid var(--border); font-size: 15px;
-      font-weight: 500; color: var(--navy); font-family: inherit;
-      background: var(--white); outline: none; height: 48px;
-    }
-    .form-input:focus { border-color: var(--blue); }
-    .form-input::placeholder { color: var(--mid-gray); font-weight: 400; }
-
-    .form-row {
-      display: flex; gap: 12px;
-    }
-    .form-row .form-group { flex: 1; }
-    .form-row .form-group--small { flex: 0 0 120px; }
-
-    .form-hint {
-      font-size: 12px; color: var(--mid-gray); margin-top: 6px;
-    }
-    .form-note {
-      font-size: 13px; color: var(--dark-gray); line-height: 1.5;
-      padding: 16px 20px 0;
-    }
-
-    .btn-outline {
-      width: 100%; padding: 14px; min-height: 48px;
-      border-radius: var(--btn-radius); background: var(--white); color: var(--navy);
-      font-weight: 700; font-size: 15px; border: 1.5px solid var(--navy);
-      cursor: pointer; font-family: inherit; text-align: center;
-    }
-    .btn-danger {
-      width: 100%; padding: 14px; min-height: 48px;
-      border-radius: var(--btn-radius); background: var(--red); color: white;
-      font-weight: 700; font-size: 16px; border: none; cursor: pointer; font-family: inherit;
-    }
-    .btn-danger:disabled { opacity: 0.4; cursor: not-allowed; }
-
-    /* ── Text button ── */
-    .btn-text {
-      font-size: 14px; color: var(--navy); text-align: center;
-      cursor: pointer; padding: 12px; font-family: inherit;
-      background: none; border: none; font-weight: 500;
-      min-height: 48px;
-    }
-
     /* ── Password Input with Eye Icon ── */
-    .input-wrapper {
-      position: relative;
-    }
-    .input-wrapper .form-input {
-      padding-right: 48px;
-    }
+    .input-wrapper { position: relative; }
+    .input-wrapper .form-input { padding-right: 48px; }
     .input-eye {
       position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
       width: 44px; height: 44px; display: flex; align-items: center;
@@ -285,25 +66,19 @@
     .input-eye svg { width: 20px; height: 20px; }
 
     /* ── Password Strength Indicator ── */
-    .password-strength {
-      display: flex; gap: 4px; margin-top: 8px;
-    }
+    .password-strength { display: flex; gap: 4px; margin-top: 8px; }
     .password-strength-bar {
       flex: 1; height: 4px; border-radius: 2px; background: var(--border);
     }
     .password-strength-bar.active { background: var(--orange); }
     .password-strength-label {
-      font-size: 11px; color: var(--orange); font-weight: 600;
-      margin-top: 4px;
+      font-size: 11px; color: var(--orange); font-weight: 600; margin-top: 4px;
     }
 
     /* ── Payment Card ── */
     .payment-card {
-      margin: 20px 20px 16px;
-      padding: 20px;
-      border-radius: 16px;
-      border: 1.5px solid var(--border);
-      background: var(--white);
+      margin: 20px 20px 16px; padding: 20px; border-radius: 16px;
+      border: 1.5px solid var(--border); background: var(--white);
       display: flex; align-items: center; gap: 16px;
     }
     .payment-card-icon {
@@ -315,9 +90,7 @@
     .payment-card-number {
       font-weight: 600; font-size: 15px; color: var(--navy); margin-bottom: 2px;
     }
-    .payment-card-expiry {
-      font-size: 12px; color: var(--mid-gray);
-    }
+    .payment-card-expiry { font-size: 12px; color: var(--mid-gray); }
     .payment-badge {
       font-size: 11px; font-weight: 700; color: var(--blue);
       background: var(--blue-light); padding: 4px 10px;
@@ -326,17 +99,13 @@
 
     /* ── Non-owner message ── */
     .non-owner-message {
-      margin: 40px 20px;
-      padding: 24px;
-      border-radius: 16px;
-      background: var(--light-gray);
-      text-align: center;
+      margin: 40px 20px; padding: 24px; border-radius: 16px;
+      background: var(--light-gray); text-align: center;
     }
     .non-owner-message-icon { margin-bottom: 12px; display: flex; justify-content: center; }
     .non-owner-message-icon svg { width: 32px; height: 32px; }
     .non-owner-message-text {
-      font-size: 14px; color: var(--dark-gray); line-height: 1.5;
-      margin-bottom: 16px;
+      font-size: 14px; color: var(--dark-gray); line-height: 1.5; margin-bottom: 16px;
     }
     .non-owner-message-owner {
       font-size: 14px; font-weight: 600; color: var(--navy);
@@ -351,31 +120,26 @@
 
     /* ── Info Note ── */
     .info-note {
-      margin: 16px 20px; padding: 16px;
-      border-radius: 12px; background: var(--blue-light);
-      font-size: 13px; color: var(--dark-gray); line-height: 1.5;
-      display: flex; align-items: flex-start; gap: 10px;
+      margin: 16px 20px; padding: 16px; border-radius: 12px;
+      background: var(--blue-light); font-size: 13px; color: var(--dark-gray);
+      line-height: 1.5; display: flex; align-items: flex-start; gap: 10px;
     }
     .info-note-icon { flex-shrink: 0; display: flex; align-items: center; }
     .info-note-icon svg { width: 18px; height: 18px; }
 
     /* ── Delete Account Warning ── */
     .delete-warning-icon {
-      text-align: center; padding: 32px 0 16px;
-      display: flex; justify-content: center;
+      text-align: center; padding: 32px 0 16px; display: flex; justify-content: center;
     }
     .delete-warning-icon svg { width: 56px; height: 56px; }
     .delete-warning-text {
       font-size: 16px; font-weight: 700; color: var(--red);
       text-align: center; padding: 0 20px; margin-bottom: 20px;
     }
-    .delete-consequence-list {
-      padding: 0 24px; margin-bottom: 24px;
-    }
+    .delete-consequence-list { padding: 0 24px; margin-bottom: 24px; }
     .delete-consequence-item {
       display: flex; align-items: flex-start; gap: 12px;
-      padding: 10px 0; font-size: 14px; color: var(--dark-gray);
-      line-height: 1.4;
+      padding: 10px 0; font-size: 14px; color: var(--dark-gray); line-height: 1.4;
     }
     .delete-consequence-item::before {
       content: ''; width: 6px; height: 6px; border-radius: 3px;
@@ -389,38 +153,28 @@
       width: 100%; padding: 14px 16px; border-radius: var(--input-radius);
       border: 1.5px solid var(--red); font-size: 15px;
       font-weight: 500; color: var(--navy); font-family: inherit;
-      background: #FFF8F7; outline: none; height: 48px;
-      opacity: 0.6;
+      background: #FFF8F7; outline: none; height: 48px; opacity: 0.6;
     }
-    .delete-confirm-input::placeholder {
-      color: var(--mid-gray); font-weight: 400;
-    }
+    .delete-confirm-input::placeholder { color: var(--mid-gray); font-weight: 400; }
 
     /* ── Profile Avatar Section ── */
     .profile-avatar-section {
       display: flex; flex-direction: column; align-items: center;
       padding: 28px 20px 8px;
     }
-    .profile-avatar-wrapper {
-      position: relative; width: 80px; height: 80px;
-    }
+    .profile-avatar-wrapper { position: relative; width: 80px; height: 80px; }
     .profile-avatar-camera {
       position: absolute; bottom: 0; right: 0;
       width: 28px; height: 28px; border-radius: 50%;
       background: var(--navy); border: 2.5px solid var(--white);
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
     }
-    .profile-avatar-camera svg {
-      width: 14px; height: 14px;
-    }
+    .profile-avatar-camera svg { width: 14px; height: 14px; }
 
     /* ── Locked Input ── */
     .form-input--locked {
-      background: var(--light-gray);
-      color: var(--mid-gray);
-      cursor: not-allowed;
-      padding-right: 44px;
+      background: var(--light-gray); color: var(--mid-gray);
+      cursor: not-allowed; padding-right: 44px;
     }
     .input-lock {
       position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
@@ -430,31 +184,20 @@
 
     /* ── Shipping Timeline ── */
     .magazine-card {
-      margin: 16px 20px;
-      padding: 16px;
-      border-radius: 16px;
-      background: var(--light-gray);
-      display: flex; align-items: center; gap: 14px;
+      margin: 16px 20px; padding: 16px; border-radius: 16px;
+      background: var(--light-gray); display: flex; align-items: center; gap: 14px;
     }
     .magazine-card-icon {
-      width: 48px; height: 56px; border-radius: 8px;
-      background: var(--beige);
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
+      width: 48px; height: 56px; border-radius: 8px; background: var(--beige);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
     }
     .magazine-card-info { flex: 1; }
-    .magazine-card-title {
-      font-weight: 700; font-size: 16px; color: var(--navy);
-    }
-    .magazine-card-status {
-      font-size: 13px; color: var(--orange); font-weight: 600; margin-top: 2px;
-    }
+    .magazine-card-title { font-weight: 700; font-size: 16px; color: var(--navy); }
+    .magazine-card-status { font-size: 13px; color: var(--orange); font-weight: 600; margin-top: 2px; }
 
     .timeline { padding: 8px 20px 20px; }
     .timeline-step {
-      display: flex; gap: 16px;
-      position: relative;
-      padding-bottom: 28px;
+      display: flex; gap: 16px; position: relative; padding-bottom: 28px;
     }
     .timeline-step:last-child { padding-bottom: 0; }
     .timeline-step::before {
@@ -488,25 +231,16 @@
     .timeline-dot--pending { background: var(--white); border: 2px solid var(--border); }
 
     .timeline-content { flex: 1; padding-top: 4px; }
-    .timeline-label {
-      font-weight: 600; font-size: 15px; color: var(--navy);
-    }
-    .timeline-step--pending .timeline-label {
-      color: var(--mid-gray); font-weight: 500;
-    }
-    .timeline-step--current .timeline-label {
-      font-weight: 700; color: var(--navy);
-    }
-    .timeline-date {
-      font-size: 12px; color: var(--mid-gray); margin-top: 2px;
-    }
-    .timeline-step--current .timeline-date {
-      color: var(--orange); font-weight: 500;
-    }
+    .timeline-label { font-weight: 600; font-size: 15px; color: var(--navy); }
+    .timeline-step--pending .timeline-label { color: var(--mid-gray); font-weight: 500; }
+    .timeline-step--current .timeline-label { font-weight: 700; color: var(--navy); }
+    .timeline-date { font-size: 12px; color: var(--mid-gray); margin-top: 2px; }
+    .timeline-step--current .timeline-date { color: var(--orange); font-weight: 500; }
 
     .delivery-estimate {
-      margin: 8px 20px 20px; padding: 16px; border-radius: 12px; background: var(--blue-light);
-      font-size: 14px; color: var(--navy); font-weight: 600; text-align: center;
+      margin: 8px 20px 20px; padding: 16px; border-radius: 12px;
+      background: var(--blue-light); font-size: 14px; color: var(--navy);
+      font-weight: 600; text-align: center;
       display: flex; align-items: center; justify-content: center; gap: 8px;
     }
     .delivery-estimate svg { width: 18px; height: 18px; color: var(--blue); flex-shrink: 0; }
@@ -520,25 +254,6 @@
     .shipping-disclaimer-text {
       font-size: 12px; font-weight: 500; color: var(--dark-gray); line-height: 1.45;
     }
-
-    /* ── Section Divider ── */
-    .section-divider {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin: 12px 0 4px;
-    }
-    .section-divider-line {
-      flex: 1;
-      height: 1px;
-      background: #D0D5DB;
-    }
-
-    .footer-note {
-      font-size: 11px; color: #A0A0A0; font-weight: 500; text-align: center;
-    }
-    [id^="screen-"] { scroll-margin-top: 20px; }
 
     /* ── Utility Classes ── */
     .optional-label { font-weight: 400; text-transform: none; }
@@ -559,22 +274,20 @@
     .pay-option-label { flex: 1; font-size: 14px; font-weight: 600; color: var(--navy); }
     .pay-option-radio { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border); }
 
-    /* ── Toggle Switch ── */
+    /* ── Toggle Switch (custom track/knob variant) ── */
     .toggle-track { width: 52px; height: 32px; background: var(--orange); border-radius: 16px; position: relative; flex-shrink: 0; cursor: pointer; }
     .toggle-knob { width: 26px; height: 26px; background: white; border-radius: 13px; position: absolute; top: 3px; right: 3px; box-shadow: 0 2px 4px rgba(0,0,0,0.15); }
-
-    /* ── Toggle Row (label + switch) ── */
     .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
 
-    /* ── Section Label (small caps, inline variant) ── */
+    /* ── Section Label ── */
     .section-label { font-size: 12px; font-weight: 700; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
     .section-label--sm { font-size: 11px; letter-spacing: 1px; margin-bottom: 10px; }
 
-    /* ── Group Avatar (in settings menu) ── */
+    /* ── Group Avatar ── */
     .group-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
     .group-avatar-text { font-weight: 700; font-size: 14px; }
 
-    /* ── Format Card (fotoheft format choice) ── */
+    /* ── Format Card ── */
     .format-card { flex: 1; border-radius: 14px; padding: 14px; text-align: center; }
     .format-card--active { border: 2px solid var(--orange); background: #FFF8EB; cursor: pointer; }
     .format-card--disabled { border: 1.5px solid var(--border); opacity: 0.5; }
@@ -595,23 +308,23 @@
     .toggle-title { font-size: 15px; font-weight: 600; color: var(--navy); }
     .toggle-desc { font-size: 13px; color: var(--dark-gray); margin-top: 2px; }
 
-    /* ── Address Card (verification) ── */
+    /* ── Address Card ── */
     .addr-card { border-radius: 12px; padding: 16px; }
     .addr-card-text { font-size: 15px; font-weight: 500; color: var(--navy); line-height: 1.5; }
 
-    /* ── Current Magazine Info Card ── */
+    /* ── Magazine Info Card ── */
     .mag-info { background: var(--blue-light); border-radius: 14px; padding: 16px; display: flex; align-items: center; gap: 14px; }
     .mag-info-icon { width: 48px; height: 62px; border-radius: 6px; background: linear-gradient(135deg, var(--blue-soft), var(--blue)); display: flex; align-items: center; justify-content: center; }
     .mag-info-title { font-weight: 700; font-size: 15px; color: var(--navy); }
     .mag-info-sub { font-size: 13px; color: var(--dark-gray); margin-top: 2px; }
 
-    /* ── Warning Banner (address verification) ── */
-    .warn-banner { margin: 16px 20px; padding: 18px 20px; background: #FFF3DC; border-radius: 14px; display: flex; align-items: flex-start; gap: 14px; }
+    /* ── Warning Banner ── */
+    .warn-banner { margin: 16px 20px; padding: 18px 20px; background: var(--soft-orange); border-radius: 14px; display: flex; align-items: flex-start; gap: 14px; }
     .warn-banner-icon { flex-shrink: 0; margin-top: 2px; }
     .warn-banner-title { font-weight: 700; font-size: 15px; color: var(--navy); margin-bottom: 4px; }
     .warn-banner-desc { font-size: 13px; color: var(--dark-gray); line-height: 1.5; }
 
-    /* ── Group Item Row (Screen 1 group section) ── */
+    /* ── Group Item Row ── */
     .group-row { display: flex; align-items: center; gap: 10px; }
   </style>
 </head>
@@ -636,7 +349,7 @@
         <div class="status-bar"></div>
 
         <div class="section-back">
-          <div class="section-back-arrow">
+          <div class="section-back-arrow" aria-label="Zurück">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M15 18l-6-6 6-6"/>
             </svg>
@@ -709,7 +422,7 @@
 
             <div class="settings-item">
               <div class="settings-item-left">
-                <div class="settings-item-icon" style="background: #FFF3DC;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
+                <div class="settings-item-icon" style="background: var(--soft-orange);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
                 <div>
                   <div class="settings-item-label">Fotoheft Einstellungen</div>
                   <div class="settings-item-sub">Titel, Format, Vorlagen</div>
@@ -736,7 +449,7 @@
 
             <div class="settings-item">
               <div class="settings-item-left">
-                <div class="settings-item-icon" style="background: #E6F7EE;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
+                <div class="settings-item-icon" style="background: var(--soft-green);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div>
                 <div>
                   <div class="settings-item-label">Remoryo Abonnement</div>
                   <div class="settings-item-sub">Monatlich &middot; Aktiv</div>
@@ -747,7 +460,7 @@
 
             <div class="settings-item">
               <div class="settings-item-left">
-                <div class="settings-item-icon" style="background: #FFF0EE;"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
+                <div class="settings-item-icon" style="background: var(--soft-red);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div>
                 <div>
                   <div class="settings-item-label">Zahlungseinstellungen</div>
                   <div class="settings-item-sub">Zahlungsmethode verwalten</div>
@@ -837,7 +550,7 @@
         <div class="status-bar"></div>
 
         <div class="section-back">
-          <div class="section-back-arrow">
+          <div class="section-back-arrow" aria-label="Zurück">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M15 18l-6-6 6-6"/>
             </svg>
@@ -905,7 +618,7 @@
         <div class="status-bar"></div>
 
         <div class="section-back">
-          <div class="section-back-arrow">
+          <div class="section-back-arrow" aria-label="Zurück">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M15 18l-6-6 6-6"/>
             </svg>
@@ -919,7 +632,7 @@
           <div class="profile-avatar-section">
             <div class="profile-avatar-wrapper">
               <div class="profile-avatar">J</div>
-              <div class="profile-avatar-camera">
+              <div class="profile-avatar-camera" aria-label="Profilbild ändern">
                 <svg viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
                   <circle cx="12" cy="13" r="4"/>
@@ -993,7 +706,7 @@
         <div class="status-bar"></div>
 
         <div class="section-back">
-          <div class="section-back-arrow">
+          <div class="section-back-arrow" aria-label="Zurück">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M15 18l-6-6 6-6"/>
             </svg>
@@ -1007,7 +720,7 @@
             <div class="form-label">Aktuelles Passwort</div>
             <div class="input-wrapper">
               <input class="form-input" type="password" value="••••••••" readonly>
-              <div class="input-eye">
+              <div class="input-eye" aria-label="Passwort anzeigen">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                   <circle cx="12" cy="12" r="3"/>
@@ -1018,7 +731,7 @@
             <div class="form-label">Neues Passwort</div>
             <div class="input-wrapper">
               <input class="form-input" type="password" value="••••••••••" readonly>
-              <div class="input-eye">
+              <div class="input-eye" aria-label="Passwort anzeigen">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                   <circle cx="12" cy="12" r="3"/>
@@ -1037,7 +750,7 @@
             <div class="form-label">Neues Passwort bestätigen</div>
             <div class="input-wrapper">
               <input class="form-input" type="password" value="••••••••••" readonly>
-              <div class="input-eye">
+              <div class="input-eye" aria-label="Passwort anzeigen">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
                   <circle cx="12" cy="12" r="3"/>
@@ -1061,7 +774,7 @@
         <div class="status-bar"></div>
 
         <div class="section-back">
-          <div class="section-back-arrow">
+          <div class="section-back-arrow" aria-label="Zurück">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M15 18l-6-6 6-6"/>
             </svg>
@@ -1136,7 +849,7 @@
         <div class="status-bar"></div>
 
         <div class="section-back">
-          <div class="section-back-arrow">
+          <div class="section-back-arrow" aria-label="Zurück">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M15 18l-6-6 6-6"/>
             </svg>
@@ -1215,7 +928,7 @@
         <div class="status-bar"></div>
 
         <div class="section-back">
-          <div class="section-back-arrow">
+          <div class="section-back-arrow" aria-label="Zurück">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M15 18l-6-6 6-6"/>
             </svg>
@@ -1251,7 +964,7 @@
         <div class="status-bar"></div>
 
         <div class="section-back">
-          <div class="section-back-arrow">
+          <div class="section-back-arrow" aria-label="Zurück">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M15 18l-6-6 6-6"/>
             </svg>
@@ -1314,7 +1027,7 @@
         <div class="status-bar"></div>
 
         <div class="section-back">
-          <div class="section-back-arrow">
+          <div class="section-back-arrow" aria-label="Zurück">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M15 18l-6-6 6-6"/>
             </svg>
@@ -1445,7 +1158,7 @@
         <div class="status-bar"></div>
 
         <div class="section-back">
-          <div class="section-back-arrow">
+          <div class="section-back-arrow" aria-label="Zurück">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M15 18l-6-6 6-6"/>
             </svg>
@@ -1568,7 +1281,7 @@
         <div class="status-bar"></div>
 
         <div class="section-back">
-          <div class="section-back-arrow">
+          <div class="section-back-arrow" aria-label="Zurück">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <path d="M15 18l-6-6 6-6"/>
             </svg>

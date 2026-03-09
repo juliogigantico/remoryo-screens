@@ -5,212 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Remoryo Abo &amp; Payment &mdash; Visual Preview</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
-
-    * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    :root {
-      --blue: #82B7D8;
-      --blue-light: #EAF3F9;
-      --blue-soft: #D4E8F2;
-      --turquoise: #B8E0E0;
-      --turquoise-light: #E2F3F3;
-      --navy: #1B2C43;
-      --orange: #FFA631;
-      --white: #FFFFFF;
-      --dark-gray: #5A6B7A;
-      --mid-gray: #94A3B3;
-      --light-gray: #F5F6F8;
-      --border: #E2E6EB;
-      --btn-radius: 14px;
-      --input-radius: 12px;
-      --red: #E74C3C;
-      --beige: #E8DDD1;
-    }
-
-    body {
-      font-family: 'Inter', -apple-system, sans-serif;
-      background: #F0F2F5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 32px 20px;
-      gap: 20px;
-    }
-
-    h1 {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--mid-gray);
-    }
-
-    .preview-row {
-      display: flex;
-      gap: 40px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .screen-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--mid-gray);
-      text-align: center;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-    }
-
-    /* ── Section Divider ── */
-    .section-divider {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin: 12px 0 4px;
-    }
-    .section-divider-line { flex: 1; height: 1px; background: #D0D5DB; }
-
-    /* ── Phone Frame ── */
-    .phone {
-      width: 393px;
-      height: 852px;
-      background: var(--white);
-      border-radius: 48px;
-      overflow: hidden;
-      box-shadow:
-        0 0 0 1px rgba(0,0,0,0.05),
-        0 8px 30px rgba(0,0,0,0.08),
-        0 30px 70px rgba(0,0,0,0.12);
-      position: relative;
-      display: flex;
-      flex-direction: column;
-    }
-    .phone::before {
-      content: '';
-      position: absolute;
-      top: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 126px;
-      height: 36px;
-      background: #000;
-      border-radius: 20px;
-      z-index: 10;
-    }
-
-    .status-bar { height: 59px; flex-shrink: 0; }
-    .safe-bottom { height: 20px; background: var(--white); flex-shrink: 0; }
-    .scroll-area { flex: 1; overflow-y: auto; background: var(--white); }
-    .footer-note { font-size: 11px; color: #A0A0A0; font-weight: 500; text-align: center; }
-
-    /* ── Buttons ── */
-    .btn {
-      width: 100%;
-      padding: 14px 24px;
-      border-radius: var(--btn-radius);
-      font-weight: 700;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-      text-align: center;
-      font-family: inherit;
-      min-height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .btn-primary {
-      width: 100%;
-      padding: 14px 24px;
-      min-height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: var(--btn-radius);
-      background: var(--orange);
-      color: white;
-      font-weight: 700;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-    }
-    .btn-text {
-      background: none;
-      border: none;
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--navy);
-      cursor: pointer;
-      padding: 12px;
-      text-align: center;
-      width: 100%;
-      font-family: inherit;
-      min-height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    /* ── Back Arrow ── */
-    .back-arrow {
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-    .back-arrow svg { width: 24px; height: 24px; color: var(--navy); }
-
-    /* ── Section Header ── */
-    .section-back {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      padding: 10px 16px 10px;
-      flex-shrink: 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .section-back-arrow {
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      flex-shrink: 0;
-    }
-    .section-back-arrow svg { width: 24px; height: 24px; color: var(--navy); }
-    .section-back-title { font-weight: 700; font-size: 17px; color: var(--navy); }
-
-    /* ── Settings Items ── */
-    .settings-section { padding: 20px 20px 8px; }
-    .settings-section-title {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--mid-gray);
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      margin-bottom: 12px;
-    }
-    .settings-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 16px 0;
-      border-bottom: 1px solid var(--border);
-      cursor: pointer;
-    }
-    .settings-item:last-child { border-bottom: none; }
-    .settings-item-left { display: flex; align-items: center; gap: 14px; }
-    .settings-item-label { font-weight: 600; font-size: 15px; color: var(--navy); }
-    .settings-item-sub { font-size: 12px; color: var(--mid-gray); margin-top: 2px; }
-    .settings-chevron { display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-    .settings-item--static { cursor: default; opacity: 0.9; }
+    @import url('shared-styles.css');
 
     /* ── Plan Card ── */
     .plan-card {
@@ -234,24 +29,6 @@
       align-items: center;
       justify-content: center;
       flex-shrink: 0;
-    }
-
-    /* ── Danger button ── */
-    .btn-danger-soft {
-      width: 100%;
-      padding: 14px;
-      min-height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: var(--btn-radius);
-      background: #FFF0EE;
-      color: var(--red);
-      font-weight: 700;
-      font-size: 15px;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
     }
 
     /* ── Abo auswählen ── */
@@ -358,7 +135,7 @@
     .summary-row-label { font-size: 13px; font-weight: 600; color: var(--mid-gray); }
     .summary-row-value { font-size: 14px; font-weight: 600; color: var(--navy); text-align: right; }
 
-    /* ── Checkout Wizard extracted patterns ── */
+    /* ── Checkout Wizard ── */
     .checkout-nav { display: flex; align-items: center; padding: 8px 16px 0; gap: 12px; }
     .checkout-nav-title { flex: 1; font-weight: 700; font-size: 17px; color: var(--navy); }
     .checkout-nav-step { font-size: 12px; color: var(--mid-gray); font-weight: 600; }
@@ -382,15 +159,7 @@
       font-family: inherit;
     }
 
-    /* ── Form fields ── */
-    .form-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--mid-gray);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 4px;
-    }
+    /* ── Form fields (screen-specific overrides) ── */
     .form-value {
       padding: 12px 14px;
       border-radius: 10px;
@@ -605,8 +374,6 @@
     .sub-plan { font-size: 13px; color: var(--dark-gray); font-weight: 500; }
     .sub-recipients { font-size: 12px; color: var(--mid-gray); margin-top: 2px; }
     .chevron-right { flex-shrink: 0; display: flex; align-items: center; justify-content: center; }
-
-    [id^="screen-"] { scroll-margin-top: 20px; }
   </style>
 </head>
 <body>
@@ -632,7 +399,7 @@
         <div class="status-bar"></div>
         <div class="abo-screen">
           <div class="abo-nav">
-            <div class="back-arrow">
+            <div class="back-arrow" role="button" aria-label="Zur&uuml;ck">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
             </div>
             <span class="abo-nav-title">Abo ausw&auml;hlen</span>
@@ -694,7 +461,7 @@
       <div class="phone">
         <div class="status-bar"></div>
         <div class="checkout-nav">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <svg role="button" aria-label="Zur&uuml;ck" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
           <div class="checkout-nav-title">Abo aktivieren</div>
           <div class="checkout-nav-step">1/4</div>
         </div>
@@ -782,7 +549,7 @@
       <div class="phone">
         <div class="status-bar"></div>
         <div class="checkout-nav">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <svg role="button" aria-label="Zur&uuml;ck" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
           <div class="checkout-nav-title">Empf&auml;nger</div>
           <div class="checkout-nav-step">2/4</div>
         </div>
@@ -840,7 +607,7 @@
       <div class="phone">
         <div class="status-bar"></div>
         <div class="checkout-nav">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <svg role="button" aria-label="Zur&uuml;ck" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
           <div class="checkout-nav-title">Zahlung</div>
           <div class="checkout-nav-step">3/4</div>
         </div>
@@ -907,7 +674,7 @@
       <div class="phone">
         <div class="status-bar"></div>
         <div class="checkout-nav">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <svg role="button" aria-label="Zur&uuml;ck" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
           <div class="checkout-nav-title">Best&auml;tigung</div>
           <div class="checkout-nav-step">4/4</div>
         </div>
@@ -1036,7 +803,7 @@
       <div class="phone">
         <div class="status-bar"></div>
         <div class="section-back">
-          <div class="section-back-arrow">
+          <div class="section-back-arrow" role="button" aria-label="Zur&uuml;ck">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
           </div>
           <span class="section-back-title">Remoryo Abonnement</span>
@@ -1114,7 +881,7 @@
       <div class="phone">
         <div class="status-bar"></div>
         <div class="section-back">
-          <div class="section-back-arrow">
+          <div class="section-back-arrow" role="button" aria-label="Zur&uuml;ck">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
           </div>
           <span class="section-back-title">Abonnement</span>
@@ -1219,7 +986,7 @@
       <div class="phone" style="background: var(--white);">
         <div class="status-bar"></div>
         <div style="display: flex; align-items: center; padding: 8px 16px 12px; gap: 12px;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          <svg role="button" aria-label="Zur&uuml;ck" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
           <div class="checkout-nav-title">Abo k&uuml;ndigen</div>
         </div>
         <div style="flex: 1; display: flex; flex-direction: column; padding: 0 20px; overflow-y: auto;">
@@ -1303,7 +1070,7 @@
       <div class="phone">
         <div class="status-bar"></div>
         <div class="section-back">
-          <div class="section-back-arrow">
+          <div class="section-back-arrow" role="button" aria-label="Zur&uuml;ck">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
           </div>
           <div class="section-back-title">Meine Abonnements</div>
