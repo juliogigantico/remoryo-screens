@@ -296,7 +296,7 @@
       font-size: 11px; font-weight: 700; padding: 3px 10px;
       border-radius: 8px; display: inline-block; white-space: nowrap;
     }
-    .role-pill--admin {
+    .role-pill--verwalter {
       color: white; background: var(--orange);
     }
     .role-pill--member {
@@ -469,15 +469,137 @@
       flex-shrink: 0;
     }
     [id^="screen-"] { scroll-margin-top: 20px; }
+
+    /* ── Reusable layout helpers ── */
+    .pad-section { padding: 24px 20px 0; }
+    .pad-box { padding: 24px; }
+    .pad-bottom-bar { padding: 12px 20px; border-top: 1px solid var(--border); background: var(--white); flex-shrink: 0; }
+    .mt-8 { margin-top: 8px; }
+    .mt-16 { margin-top: 16px; }
+    .mt-20 { margin-top: 20px; }
+    .mt-24 { margin-top: 24px; }
+    .text-center { text-align: center; }
+    .flex-col-center { display: flex; flex-direction: column; align-items: center; }
+    .flex-col-gap8 { display: flex; flex-direction: column; gap: 8px; }
+    .optional-label { font-weight: 400; text-transform: none; }
+    .danger-hint { font-size: 12px; color: var(--mid-gray); text-align: center; margin-top: 8px; }
+
+    /* ── Bottom Sheet Overlay Pattern ── */
+    .sheet-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.4); z-index: 5; }
+    .sheet-panel { position: absolute; bottom: 0; left: 0; right: 0; background: var(--white); border-radius: 24px 24px 0 0; padding: 24px 24px 20px; z-index: 6; box-shadow: 0 -8px 30px rgba(0,0,0,0.12); }
+    .sheet-handle { width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 20px; }
+
+    /* ── Skeleton Background (dimmed fake content) ── */
+    .skeleton-bg { position: absolute; inset: 0; background: var(--white); opacity: 0.9; }
+    .skeleton-bar { background: var(--border); border-radius: 4px; }
+    .skeleton-circle { border-radius: 50%; background: var(--blue-soft); }
+
+    /* ── Info Banner (blue-light bg + icon + text) ── */
+    .info-banner { border-radius: 12px; padding: 14px 16px; display: flex; align-items: flex-start; gap: 10px; }
+    .info-banner--blue { background: var(--blue-light); }
+    .info-banner--turquoise { background: var(--turquoise-light); }
+    .info-banner--amber { background: #FFF8EB; }
+    .info-banner-icon { flex-shrink: 0; margin-top: 1px; }
+    .info-banner-text { font-size: 13px; line-height: 1.45; font-weight: 500; }
+    .info-banner-text--navy { color: var(--navy); }
+    .info-banner-text--amber { color: #8B6914; font-weight: 600; }
+
+    /* ── Full-Page Message (centered icon + title + desc) ── */
+    .fullpage-msg { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 28px; text-align: center; }
+    .fullpage-icon { width: 72px; height: 72px; border-radius: 50%; background: var(--turquoise-light); display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
+    .fullpage-title { font-weight: 800; font-size: 22px; color: var(--navy); margin-bottom: 10px; line-height: 1.3; }
+    .fullpage-desc { font-size: 15px; color: var(--dark-gray); font-weight: 500; line-height: 1.55; margin-bottom: 24px; }
+    .fullpage-actions { padding: 0 20px 40px; display: flex; flex-direction: column; gap: 8px; }
+
+    /* ── App Header (logo + name) ── */
+    .app-header { display: flex; align-items: center; padding: 8px 16px 12px; gap: 12px; }
+    .app-header-logo { height: 26px; }
+    .app-header-name { font-weight: 800; font-size: 16px; color: var(--navy); letter-spacing: -0.5px; }
+
+    /* ── Share Option Icon ── */
+    .share-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+    .share-option { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+    .share-option-label { font-size: 10px; font-weight: 600; color: var(--dark-gray); }
+
+    /* ── Invited Person Row ── */
+    .invite-row { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+    .invite-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; }
+    .invite-name { font-size: 13px; font-weight: 600; color: var(--navy); }
+    .invite-status { font-size: 11px; font-weight: 500; }
+    .invite-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+    /* ── Action Sheet Item ── */
+    .action-item { display: flex; align-items: center; gap: 14px; padding: 14px 20px; cursor: pointer; }
+    .action-icon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; }
+    .action-label { font-size: 15px; font-weight: 600; color: var(--navy); }
+    .action-sublabel { font-size: 12px; color: var(--mid-gray); margin-top: 1px; }
+
+    /* ── Sheet Member Info ── */
+    .sheet-member { display: flex; align-items: center; gap: 12px; padding: 0 20px 16px; border-bottom: 1px solid var(--border); }
+    .sheet-member-avatar { width: 44px; height: 44px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .sheet-member-name { font-weight: 600; font-size: 15px; color: var(--navy); }
+    .sheet-member-meta { font-size: 12px; color: var(--mid-gray); }
+
+    /* ── Confirmation Sheet ── */
+    .confirm-icon { display: flex; justify-content: center; margin-bottom: 16px; }
+    .confirm-icon-circle { width: 48px; height: 48px; border-radius: 50%; background: #FFF0EE; display: flex; align-items: center; justify-content: center; }
+    .confirm-title { font-weight: 700; font-size: 20px; color: var(--navy); text-align: center; margin-bottom: 8px; }
+    .confirm-desc { font-size: 14px; color: var(--dark-gray); text-align: center; line-height: 1.55; font-weight: 500; margin-bottom: 16px; }
+
+    /* ── Pflegeheim Card ── */
+    .pflege-card { margin: 12px 20px 0; background: var(--white); border-radius: 16px; padding: 16px; display: flex; align-items: center; gap: 14px; cursor: pointer; }
+    .pflege-card--selected { border: 2px solid var(--orange); margin-top: 16px; }
+    .pflege-card--default { border: 1.5px solid var(--border); }
+    .pflege-avatar { width: 46px; height: 46px; border-radius: 23px; background: linear-gradient(135deg, var(--beige), #D4C4B0); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .pflege-name { font-weight: 700; font-size: 15px; color: var(--navy); margin-bottom: 2px; }
+    .pflege-address { font-size: 13px; color: var(--dark-gray); line-height: 1.4; }
+    .pflege-price { display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; margin-top: 6px; background: #E8F5E9; color: #2E7D32; }
+    .pflege-check { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .pflege-check--active { background: var(--orange); }
+    .pflege-check--inactive { border: 2px solid var(--border); }
+
+    /* ── Bottom Sheet Group Switcher ── */
+    .group-switch-item { display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 14px; min-height: 56px; }
+    .group-switch-avatar { width: 42px; height: 42px; border-radius: 21px; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; flex-shrink: 0; }
+    .group-switch-name { font-weight: 600; font-size: 15px; color: var(--navy); }
+    .group-switch-role { font-size: 12px; font-weight: 600; padding: 2px 8px; border-radius: 6px; }
+
+    /* ── Divider line ── */
+    .divider { height: 1px; background: var(--border); }
+
+    /* ── Warning Icon Circle (Screen 4) ── */
+    .warning-circle { width: 64px; height: 64px; border-radius: 50%; background: #FFF0EE; display: flex; align-items: center; justify-content: center; }
+
+    /* ── Inline nav bar ── */
+    .inline-nav { display: flex; align-items: center; padding: 8px 16px 12px; gap: 12px; }
+
+    /* ── Screen 6: invite section header ── */
+    .invite-section-title { font-size: 11px; font-weight: 700; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 1px; }
+
+    /* ── Screen 6: link card ── */
+    .link-card { background: var(--light-gray); border-radius: 14px; padding: 12px 14px; margin-bottom: 16px; }
+    .link-field { flex: 1; font-size: 13px; color: var(--navy); font-weight: 500; background: white; padding: 10px 12px; border-radius: 8px; border: 1.5px solid var(--border); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* ── Screen 7: invite accept header ── */
+    .invite-gradient { background: linear-gradient(180deg, var(--turquoise) 0%, var(--turquoise-light) 70%, var(--white) 100%); padding: 59px 24px 0; display: flex; flex-direction: column; align-items: center; flex-shrink: 0; }
+    .invite-circle { width: 64px; height: 64px; border-radius: 50%; background: var(--orange); display: flex; align-items: center; justify-content: center; margin-top: 16px; margin-bottom: 12px; box-shadow: 0 8px 24px rgba(255, 166, 49, 0.3); }
+
+    /* ── Pflegeheim dashed add card (Screen 8) ── */
+    .pflege-add-card { margin: 12px 20px 0; background: var(--light-gray); border: 1.5px dashed var(--border); border-radius: 16px; padding: 18px 16px; display: flex; align-items: center; gap: 14px; cursor: pointer; }
+    .pflege-add-icon { width: 44px; height: 44px; border-radius: 22px; background: var(--beige); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+
+    /* ── Screen 5: dimmed header elements ── */
+    .dimmed-header { padding: 8px 20px 16px; display: flex; align-items: center; justify-content: space-between; opacity: 0.4; }
+    .dimmed-content { padding: 0 20px; opacity: 0.3; }
+    .dimmed-avatar { width: 36px; height: 36px; border-radius: 18px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 13px; }
   </style>
 </head>
 <body>
 
   <h1>Remoryo Gruppen &amp; Einladungen &mdash; Visual Preview</h1>
 
-  <!-- ══════════════════════════════════════════════════ -->
-  <!-- ROW 1 — Gruppenmitglieder & Verwaltung            -->
-  <!-- ══════════════════════════════════════════════════ -->
+  <!--ROW 1 — Gruppenmitglieder & Verwaltung            -->
+
 
   <div class="section-divider">
     <div class="section-divider-line"></div>
@@ -487,9 +609,8 @@
 
   <div class="preview-row">
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 1 — Gruppenmitglieder                   -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 1 — Gruppenmitglieder                   -->
+
     <div id="screen-1">
       <div class="screen-label">1 &middot; Gruppenmitglieder</div>
       <div class="phone">
@@ -560,9 +681,8 @@
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 2 — Gruppe erstellen                    -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 2 — Gruppe erstellen                    -->
+
     <div id="screen-2">
       <div class="screen-label">2 &middot; Gruppe erstellen</div>
       <div class="phone">
@@ -580,7 +700,7 @@
         <div class="scroll-area">
 
           <!-- Group Avatar -->
-          <div style="display: flex; flex-direction: column; align-items: center; padding: 28px 20px 0;">
+          <div class="flex-col-center" style="padding: 28px 20px 0;">
             <div class="group-create-avatar">
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--turquoise)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
@@ -595,7 +715,7 @@
                 </svg>
               </div>
             </div>
-            <div style="font-size: 12px; color: var(--mid-gray); margin-top: 8px; text-align: center;">Gruppenfoto (optional)</div>
+            <div style="font-size: 12px; color: var(--mid-gray); margin-top: 8px;" class="text-center">Gruppenfoto (optional)</div>
           </div>
 
           <!-- Form Fields -->
@@ -603,38 +723,29 @@
             <div class="form-label" style="margin-top: 24px;">Gruppenname</div>
             <input class="form-input" type="text" value="Familie M&uuml;ller" readonly>
 
-            <div class="form-label">Beschreibung <span style="font-weight: 400; text-transform: none;">(optional)</span></div>
+            <div class="form-label">Beschreibung <span class="optional-label">(optional)</span></div>
             <input class="form-input" type="text" placeholder="z.B. F&uuml;r Oma Helga" readonly>
           </div>
 
           <!-- Info Box -->
-          <div style="margin: 8px 20px 20px; padding: 14px 16px; border-radius: 12px; background: var(--turquoise-light); display: flex; align-items: flex-start; gap: 10px;">
-            <span style="flex-shrink: 0; display: flex; align-items: center;">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="12" y1="16" x2="12" y2="12"/>
-                <line x1="12" y1="8" x2="12.01" y2="8"/>
-              </svg>
-            </span>
-            <span style="font-size: 14px; color: var(--navy); line-height: 1.5;">Du wirst automatisch als Admin dieser Gruppe eingetragen.</span>
+          <div class="info-banner info-banner--turquoise" style="margin: 8px 20px 20px;">
+            <span class="info-banner-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></span>
+            <span style="font-size: 14px; color: var(--navy); line-height: 1.5;">Du wirst automatisch als Verwalter dieser Gruppe eingetragen.</span>
           </div>
 
         </div>
 
         <!-- Bottom Action Bar -->
-        <div style="padding: 12px 20px; border-top: 1px solid var(--border); background: var(--white); flex-shrink: 0;">
+        <div class="pad-bottom-bar">
           <button class="btn-primary">Gruppe erstellen</button>
-          <div style="text-align: center; margin-top: 4px;">
-            <button class="btn-text">Abbrechen</button>
-          </div>
+          <div class="text-center" style="margin-top: 4px;"><button class="btn-text">Abbrechen</button></div>
         </div>
         <div class="safe-bottom"></div>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 3 — Gruppe verwalten                    -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 3 — Gruppe verwalten                    -->
+
     <div id="screen-3">
       <div class="screen-label">3 &middot; Gruppe verwalten</div>
       <div class="phone">
@@ -657,7 +768,7 @@
             <div class="group-manage-info">
               <div class="group-manage-name">
                 Familie Bl&uuml;mel
-                <span class="role-pill role-pill--admin">Admin</span>
+                <span class="role-pill role-pill--verwalter">Verwalter</span>
               </div>
               <div class="group-manage-meta">Erstellt am 15. November 2024 &middot; 4 Mitglieder</div>
             </div>
@@ -687,7 +798,7 @@
               <div class="member-avatar" style="background: linear-gradient(135deg, var(--blue-soft), var(--blue));">J</div>
               <div class="member-info">
                 <div class="member-name">Julius Bl&uuml;mel</div>
-                <span class="role-pill role-pill--admin">Admin</span>
+                <span class="role-pill role-pill--verwalter">Verwalter</span>
               </div>
             </div>
 
@@ -738,11 +849,11 @@
           </div>
 
           <!-- Danger Zone -->
-          <div style="margin-top: 24px;">
+          <div class="mt-24">
             <div class="section-title section-title--red">Gefahrenzone</div>
             <div style="padding: 0 20px;">
               <button class="btn-danger-soft">Gruppe l&ouml;schen</button>
-              <div style="font-size: 12px; color: var(--mid-gray); text-align: center; margin-top: 8px;">Alle Daten dieser Gruppe werden unwiderruflich gel&ouml;scht.</div>
+              <div class="danger-hint">Alle Daten dieser Gruppe werden unwiderruflich gel&ouml;scht.</div>
             </div>
           </div>
 
@@ -751,9 +862,8 @@
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 4 — Gruppe l&ouml;schen                 -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 4 — Gruppe l&ouml;schen                 -->
+
     <div id="screen-4">
       <div class="screen-label">4 &middot; Gruppe l&ouml;schen</div>
       <div class="phone">
@@ -770,21 +880,15 @@
 
         <div class="scroll-area">
 
-          <div style="padding: 24px;">
+          <div class="pad-box">
             <!-- Warning Icon -->
             <div style="display: flex; justify-content: center; margin-bottom: 20px;">
-              <div style="width: 64px; height: 64px; border-radius: 50%; background: #FFF0EE; display: flex; align-items: center; justify-content: center;">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/>
-                  <line x1="12" y1="9" x2="12" y2="13"/>
-                  <line x1="12" y1="17" x2="12.01" y2="17"/>
-                </svg>
+              <div class="warning-circle">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
               </div>
             </div>
-
             <!-- Title -->
-            <div style="font-size: 22px; font-weight: 800; color: var(--navy); text-align: center; margin-bottom: 16px;">Gruppe endg&uuml;ltig l&ouml;schen?</div>
-
+            <div class="text-center" style="font-size: 22px; font-weight: 800; color: var(--navy); margin-bottom: 16px;">Gruppe endg&uuml;ltig l&ouml;schen?</div>
             <!-- Description -->
             <div style="font-size: 15px; font-weight: 500; color: var(--dark-gray); text-align: center; line-height: 1.5; margin-bottom: 4px;">
               Wenn du die Gruppe <strong style="color: var(--navy);">Familie Bl&uuml;mel</strong> l&ouml;schst, werden alle zugeh&ouml;rigen Daten unwiderruflich entfernt:
@@ -799,31 +903,22 @@
             </div>
 
             <!-- Member impact banner -->
-            <div style="background: #FFF8EB; border-radius: 12px; padding: 12px 14px; margin-top: 16px; display: flex; align-items: flex-start; gap: 10px;">
-              <div style="flex-shrink: 0; margin-top: 1px;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8920B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              </div>
-              <div style="font-size: 13px; font-weight: 500; color: #8B6914; line-height: 1.45;">
-                <strong>3 Mitglieder betroffen:</strong> Alle Mitglieder verlieren den Zugang und werden per Benachrichtigung informiert.
-              </div>
+            <div class="info-banner info-banner--amber mt-16" style="padding: 12px 14px;">
+              <div class="info-banner-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8920B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+              <div class="info-banner-text info-banner-text--amber"><strong>3 Mitglieder betroffen:</strong> Alle Mitglieder verlieren den Zugang und werden per Benachrichtigung informiert.</div>
             </div>
 
             <!-- Warning Banner -->
             <div class="warning-banner">Diese Aktion kann nicht r&uuml;ckg&auml;ngig gemacht werden.</div>
 
             <!-- Confirmation Input -->
-            <div style="margin-top: 20px;">
+            <div class="mt-20">
               <div class="form-label">Tippe L&Ouml;SCHEN zum Best&auml;tigen</div>
               <input class="form-input" type="text" placeholder="L&Ouml;SCHEN" readonly style="border-color: var(--border);">
             </div>
-
             <!-- Buttons -->
-            <div style="margin-top: 20px;">
-              <button class="btn-danger" disabled style="opacity: 0.45;">Gruppe l&ouml;schen</button>
-            </div>
-            <div style="margin-top: 8px;">
-              <button class="btn-outline">Abbrechen</button>
-            </div>
+            <div class="mt-20"><button class="btn-danger" disabled style="opacity: 0.45;">Gruppe l&ouml;schen</button></div>
+            <div class="mt-8"><button class="btn-outline">Abbrechen</button></div>
           </div>
 
         </div>
@@ -833,9 +928,8 @@
 
   </div>
 
-  <!-- ══════════════════════════════════════════════════ -->
-  <!-- ROW 2 — Einladungen & Wechsel                     -->
-  <!-- ══════════════════════════════════════════════════ -->
+  <!--ROW 2 — Einladungen & Wechsel                     -->
+
 
   <div class="section-divider">
     <div class="section-divider-line"></div>
@@ -845,9 +939,8 @@
 
   <div class="preview-row">
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 5 — Gruppen wechseln (Bottom Sheet)    -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 5 — Gruppen wechseln (Bottom Sheet)    -->
+
     <div id="screen-5">
       <div class="screen-label">5 &middot; Gruppen wechseln (Bottom Sheet)</div>
       <div class="phone" style="background: var(--light-gray);">
@@ -856,11 +949,10 @@
 
         <!-- Dimmed app background (fake content behind) -->
         <div style="flex: 1; position: relative;">
-
           <!-- Fake dimmed header -->
-          <div style="padding: 8px 20px 16px; display: flex; align-items: center; justify-content: space-between; opacity: 0.4;">
+          <div class="dimmed-header">
             <div style="display: flex; align-items: center; gap: 10px;">
-              <div style="width: 36px; height: 36px; border-radius: 18px; background: var(--orange); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 13px;">FB</div>
+              <div class="dimmed-avatar" style="background: var(--orange);">FB</div>
               <div>
                 <div style="font-weight: 700; font-size: 15px; color: var(--navy);">Familie Bl&uuml;mel</div>
                 <div style="font-size: 12px; color: var(--mid-gray);">3 Mitglieder</div>
@@ -868,64 +960,41 @@
             </div>
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg>
           </div>
-
           <!-- Fake dimmed content blocks -->
-          <div style="padding: 0 20px; opacity: 0.3;">
-            <div style="width: 100%; height: 160px; background: var(--border); border-radius: 16px; margin-bottom: 12px;"></div>
-            <div style="width: 70%; height: 14px; background: var(--border); border-radius: 7px; margin-bottom: 8px;"></div>
-            <div style="width: 50%; height: 14px; background: var(--border); border-radius: 7px; margin-bottom: 24px;"></div>
-            <div style="width: 100%; height: 80px; background: var(--border); border-radius: 16px;"></div>
+          <div class="dimmed-content">
+            <div style="width: 100%; height: 160px; border-radius: 16px; margin-bottom: 12px;" class="skeleton-bar"></div>
+            <div style="width: 70%; height: 14px; border-radius: 7px; margin-bottom: 8px;" class="skeleton-bar"></div>
+            <div style="width: 50%; height: 14px; border-radius: 7px; margin-bottom: 24px;" class="skeleton-bar"></div>
+            <div style="width: 100%; height: 80px; border-radius: 16px;" class="skeleton-bar"></div>
           </div>
-
           <!-- Dark overlay -->
-          <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); z-index: 5;"></div>
-
+          <div class="sheet-backdrop" style="background: rgba(0,0,0,0.45);"></div>
           <!-- Bottom Sheet -->
-          <div style="position: absolute; bottom: 0; left: 0; right: 0; background: var(--white); border-radius: 24px 24px 0 0; padding: 24px 24px 20px; z-index: 6;">
-
-            <!-- Handle bar -->
-            <div style="width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 20px;"></div>
-
-            <!-- Sheet header -->
+          <div class="sheet-panel" style="box-shadow: none;">
+            <div class="sheet-handle"></div>
             <div style="font-weight: 700; font-size: 18px; color: var(--navy); margin-bottom: 20px;">Gruppe wechseln</div>
-
             <!-- Group list -->
             <div style="display: flex; flex-direction: column; gap: 4px;">
-
               <!-- Group 1 — Active -->
-              <div style="display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 14px; background: var(--light-gray); min-height: 56px;">
-                <!-- Avatar -->
-                <div style="width: 42px; height: 42px; border-radius: 21px; background: var(--orange); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 14px; flex-shrink: 0;">FB</div>
-                <!-- Info -->
+              <div class="group-switch-item" style="background: var(--light-gray);">
+                <div class="group-switch-avatar" style="background: var(--orange); color: white;">FB</div>
                 <div style="flex: 1;">
-                  <div style="font-weight: 600; font-size: 15px; color: var(--navy);">Familie Bl&uuml;mel</div>
-                  <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px;">
-                    <span style="font-size: 12px; font-weight: 600; color: var(--orange); background: rgba(255,166,49,0.12); padding: 2px 8px; border-radius: 6px;">Verwalter</span>
-                  </div>
+                  <div class="group-switch-name">Familie Bl&uuml;mel</div>
+                  <div style="margin-top: 2px;"><span class="group-switch-role" style="color: var(--orange); background: rgba(255,166,49,0.12);">Verwalter</span></div>
                 </div>
-                <!-- Checkmark -->
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="20 6 9 17 4 12"/>
-                </svg>
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
               </div>
-
               <!-- Group 2 -->
-              <div style="display: flex; align-items: center; gap: 14px; padding: 14px 16px; border-radius: 14px; min-height: 56px; cursor: pointer;">
-                <!-- Avatar -->
-                <div style="width: 42px; height: 42px; border-radius: 21px; background: var(--turquoise); display: flex; align-items: center; justify-content: center; color: var(--navy); font-weight: 700; font-size: 14px; flex-shrink: 0;">SW</div>
-                <!-- Info -->
+              <div class="group-switch-item" style="cursor: pointer;">
+                <div class="group-switch-avatar" style="background: var(--turquoise); color: var(--navy);">SW</div>
                 <div style="flex: 1;">
-                  <div style="font-weight: 600; font-size: 15px; color: var(--navy);">Seniorenheim Waldblick</div>
-                  <div style="display: flex; align-items: center; gap: 6px; margin-top: 2px;">
-                    <span style="font-size: 12px; font-weight: 600; color: var(--dark-gray); background: var(--light-gray); padding: 2px 8px; border-radius: 6px;">Mitglied</span>
-                  </div>
+                  <div class="group-switch-name">Seniorenheim Waldblick</div>
+                  <div style="margin-top: 2px;"><span class="group-switch-role" style="color: var(--dark-gray); background: var(--light-gray);">Mitglied</span></div>
                 </div>
               </div>
-
             </div>
-
             <!-- New group link -->
-            <div style="margin-top: 20px; padding-top: 16px; border-top: 1.5px solid var(--border); text-align: center;">
+            <div style="margin-top: 20px; padding-top: 16px; border-top: 1.5px solid var(--border);" class="text-center">
               <a class="link" style="display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 14px; min-height: 44px;">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round">
                   <line x1="12" y1="5" x2="12" y2="19"/>
@@ -942,9 +1011,8 @@
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 6 — Mitglied einladen (Share Sheet)    -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 6 — Mitglied einladen (Share Sheet)    -->
+
     <div id="screen-6">
       <div class="screen-label">6 &middot; Mitglied einladen</div>
       <div class="phone" style="background: var(--white);">
@@ -952,137 +1020,64 @@
         <div class="status-bar"></div>
 
         <!-- Nav Bar -->
-        <div style="display: flex; align-items: center; padding: 8px 16px 12px; gap: 12px;">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <polyline points="15 18 9 12 15 6"/>
-          </svg>
+        <div class="inline-nav">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
           <div style="flex: 1; font-weight: 700; font-size: 17px; color: var(--navy);">Einladen</div>
         </div>
-
         <!-- Content -->
         <div style="flex: 1; display: flex; flex-direction: column; padding: 0 20px; overflow-y: auto;">
-
           <!-- Header -->
-          <div style="text-align: center; margin: 8px 0 16px;">
+          <div class="text-center" style="margin: 8px 0 16px;">
             <div style="width: 64px; height: 64px; margin: 0 auto 12px; background: var(--turquoise-light); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#5A9E9E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-                <circle cx="8.5" cy="7" r="4"/>
-                <line x1="20" y1="8" x2="20" y2="14"/>
-                <line x1="23" y1="11" x2="17" y2="11"/>
-              </svg>
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#5A9E9E" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="20" y1="8" x2="20" y2="14"/><line x1="23" y1="11" x2="17" y2="11"/></svg>
             </div>
             <div style="font-weight: 700; font-size: 18px; color: var(--navy); margin-bottom: 4px;">Familienmitglied einladen</div>
             <div style="font-size: 13px; color: var(--dark-gray); line-height: 1.5;">Gib einen Namen ein &mdash; wir erstellen<br>einen pers&ouml;nlichen Einladungslink.</div>
           </div>
-
           <!-- Name Input + Generate -->
           <div style="margin-bottom: 16px;">
-            <div style="font-size: 11px; font-weight: 700; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">Name</div>
+            <div class="invite-section-title" style="margin-bottom: 6px;">Name</div>
             <div style="display: flex; gap: 8px;">
-              <div style="flex: 1; padding: 12px 14px; border-radius: 10px; border: 1.5px solid var(--orange); font-size: 14px; color: var(--navy); font-weight: 500; background: white;">
-                Tante Sabine
-              </div>
-              <button style="background: var(--orange); color: white; border: none; border-radius: 10px; padding: 12px 14px; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap;">
-                Link erstellen
-              </button>
+              <div style="flex: 1; padding: 12px 14px; border-radius: 10px; border: 1.5px solid var(--orange); font-size: 14px; color: var(--navy); font-weight: 500; background: white;">Tante Sabine</div>
+              <button style="background: var(--orange); color: white; border: none; border-radius: 10px; padding: 12px 14px; font-size: 13px; font-weight: 700; cursor: pointer; white-space: nowrap;">Link erstellen</button>
             </div>
           </div>
-
           <!-- Generated Invite Link Card -->
-          <div style="background: var(--light-gray); border-radius: 14px; padding: 12px 14px; margin-bottom: 16px;">
-            <div style="font-size: 11px; font-weight: 700; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 6px;">Link f&uuml;r Tante Sabine</div>
+          <div class="link-card">
+            <div class="invite-section-title" style="margin-bottom: 6px;">Link f&uuml;r Tante Sabine</div>
             <div style="display: flex; align-items: center; gap: 8px;">
-              <div style="flex: 1; font-size: 13px; color: var(--navy); font-weight: 500; background: white; padding: 10px 12px; border-radius: 8px; border: 1.5px solid var(--border); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                remoryo.de/invite/s4b1n3
-              </div>
-              <button style="background: var(--navy); color: white; border: none; border-radius: 8px; padding: 10px 14px; font-size: 12px; font-weight: 600; cursor: pointer;">
-                Kopieren
-              </button>
+              <div class="link-field">remoryo.de/invite/s4b1n3</div>
+              <button style="background: var(--navy); color: white; border: none; border-radius: 8px; padding: 10px 14px; font-size: 12px; font-weight: 600; cursor: pointer;">Kopieren</button>
             </div>
           </div>
-
           <!-- Share Options -->
           <div style="display: flex; gap: 14px; margin-bottom: 16px; justify-content: center;">
-            <!-- WhatsApp -->
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
-              <div style="width: 48px; height: 48px; border-radius: 14px; background: #25D366; display: flex; align-items: center; justify-content: center;">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                  <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                  <path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" fill-rule="evenodd"/>
-                </svg>
-              </div>
-              <div style="font-size: 10px; font-weight: 600; color: var(--dark-gray);">WhatsApp</div>
-            </div>
-
-            <!-- SMS -->
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
-              <div style="width: 48px; height: 48px; border-radius: 14px; background: var(--blue); display: flex; align-items: center; justify-content: center;">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
-                </svg>
-              </div>
-              <div style="font-size: 10px; font-weight: 600; color: var(--dark-gray);">SMS</div>
-            </div>
-
-            <!-- E-Mail -->
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
-              <div style="width: 48px; height: 48px; border-radius: 14px; background: var(--orange); display: flex; align-items: center; justify-content: center;">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="2" y="4" width="20" height="16" rx="2"/>
-                  <polyline points="22,4 12,13 2,4"/>
-                </svg>
-              </div>
-              <div style="font-size: 10px; font-weight: 600; color: var(--dark-gray);">E-Mail</div>
-            </div>
-
-            <!-- Mehr -->
-            <div style="display: flex; flex-direction: column; align-items: center; gap: 4px;">
-              <div style="width: 48px; height: 48px; border-radius: 14px; background: var(--light-gray); border: 1.5px solid var(--border); display: flex; align-items: center; justify-content: center;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="1"/>
-                  <circle cx="19" cy="12" r="1"/>
-                  <circle cx="5" cy="12" r="1"/>
-                </svg>
-              </div>
-              <div style="font-size: 10px; font-weight: 600; color: var(--dark-gray);">Mehr</div>
-            </div>
+            <div class="share-option"><div class="share-icon" style="background: #25D366;"><svg width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 2C6.477 2 2 6.477 2 12c0 1.89.525 3.66 1.438 5.168L2 22l4.832-1.438A9.955 9.955 0 0012 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" fill-rule="evenodd"/></svg></div><div class="share-option-label">WhatsApp</div></div>
+            <div class="share-option"><div class="share-icon" style="background: var(--blue);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/></svg></div><div class="share-option-label">SMS</div></div>
+            <div class="share-option"><div class="share-icon" style="background: var(--orange);"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><polyline points="22,4 12,13 2,4"/></svg></div><div class="share-option-label">E-Mail</div></div>
+            <div class="share-option"><div class="share-icon" style="background: var(--light-gray); border: 1.5px solid var(--border);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/><circle cx="5" cy="12" r="1"/></svg></div><div class="share-option-label">Mehr</div></div>
           </div>
-
           <!-- Separator -->
-          <div style="height: 1px; background: var(--border); margin-bottom: 14px;"></div>
-
+          <div class="divider" style="margin-bottom: 14px;"></div>
           <!-- Already invited -->
-          <div style="font-size: 11px; font-weight: 700; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Einladungen (3)</div>
-
+          <div class="invite-section-title" style="margin-bottom: 10px;">Einladungen (3)</div>
           <!-- Invited person 1 — joined -->
-          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-            <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--blue-soft); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: var(--navy);">M</div>
-            <div style="flex: 1;">
-              <div style="font-size: 13px; font-weight: 600; color: var(--navy);">Mama</div>
-              <div style="font-size: 11px; color: #34C759; font-weight: 500;">Beigetreten</div>
-            </div>
-            <div style="width: 8px; height: 8px; border-radius: 50%; background: #34C759;"></div>
+          <div class="invite-row">
+            <div class="invite-avatar" style="background: var(--blue-soft); color: var(--navy);">M</div>
+            <div style="flex: 1;"><div class="invite-name">Mama</div><div class="invite-status" style="color: #34C759;">Beigetreten</div></div>
+            <div class="invite-dot" style="background: #34C759;"></div>
           </div>
-
           <!-- Invited person 2 — pending -->
-          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-            <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--turquoise-light); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: var(--navy);">L</div>
-            <div style="flex: 1;">
-              <div style="font-size: 13px; font-weight: 600; color: var(--navy);">Schwester Lisa</div>
-              <div style="font-size: 11px; color: var(--orange); font-weight: 500;">Link ge&ouml;ffnet &middot; noch nicht registriert</div>
-            </div>
-            <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--orange);"></div>
+          <div class="invite-row">
+            <div class="invite-avatar" style="background: var(--turquoise-light); color: var(--navy);">L</div>
+            <div style="flex: 1;"><div class="invite-name">Schwester Lisa</div><div class="invite-status" style="color: var(--orange);">Link ge&ouml;ffnet &middot; noch nicht registriert</div></div>
+            <div class="invite-dot" style="background: var(--orange);"></div>
           </div>
-
           <!-- Invited person 3 — not opened -->
-          <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 10px;">
-            <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--light-gray); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 14px; color: var(--mid-gray);">S</div>
-            <div style="flex: 1;">
-              <div style="font-size: 13px; font-weight: 600; color: var(--navy);">Tante Sabine</div>
-              <div style="font-size: 11px; color: var(--mid-gray); font-weight: 500;">Link verschickt &middot; noch nicht ge&ouml;ffnet</div>
-            </div>
-            <div style="width: 8px; height: 8px; border-radius: 50%; background: var(--border);"></div>
+          <div class="invite-row">
+            <div class="invite-avatar" style="background: var(--light-gray); color: var(--mid-gray);">S</div>
+            <div style="flex: 1;"><div class="invite-name">Tante Sabine</div><div class="invite-status" style="color: var(--mid-gray);">Link verschickt &middot; noch nicht ge&ouml;ffnet</div></div>
+            <div class="invite-dot" style="background: var(--border);"></div>
           </div>
 
         </div>
@@ -1091,62 +1086,34 @@
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 7 — Einladung annehmen (In-App)        -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 7 — Einladung annehmen (In-App)        -->
+
     <div id="screen-7">
       <div class="screen-label">7 &middot; Einladung annehmen (In-App)</div>
       <div class="phone" style="background: var(--white);">
 
         <!-- Turquoise gradient header -->
-        <div style="background: linear-gradient(180deg, var(--turquoise) 0%, var(--turquoise-light) 70%, var(--white) 100%); padding: 59px 24px 0; display: flex; flex-direction: column; align-items: center; flex-shrink: 0;">
-
-          <!-- Envelope icon in CI circle -->
-          <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--orange); display: flex; align-items: center; justify-content: center; margin-top: 16px; margin-bottom: 12px; box-shadow: 0 8px 24px rgba(255, 166, 49, 0.3);">
-            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
-            </svg>
+        <div class="invite-gradient">
+          <div class="invite-circle">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
           </div>
-
           <div style="font-size: 12px; font-weight: 700; color: var(--navy); text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 24px;">Einladung</div>
-
         </div>
-
         <!-- Content -->
-        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; padding: 16px 20px 0;">
-
-          <!-- Headline -->
-          <div style="font-weight: 800; font-size: 24px; color: var(--navy); text-align: center; line-height: 1.3; margin-bottom: 12px;">
-            Julius hat dich<br>eingeladen!
-          </div>
-
-          <!-- Description -->
-          <div style="font-size: 15px; color: var(--dark-gray); text-align: center; line-height: 1.55; font-weight: 500; margin-bottom: 28px; max-width: 300px;">
-            Tritt der Gruppe &laquo;Familie Bl&uuml;mel&raquo; bei und teile deine sch&ouml;nsten Fotos.
-          </div>
-
+        <div class="flex-col-center" style="flex: 1; padding: 16px 20px 0;">
+          <div class="text-center" style="font-weight: 800; font-size: 24px; color: var(--navy); line-height: 1.3; margin-bottom: 12px;">Julius hat dich<br>eingeladen!</div>
+          <div class="text-center" style="font-size: 15px; color: var(--dark-gray); line-height: 1.55; font-weight: 500; margin-bottom: 28px; max-width: 300px;">Tritt der Gruppe &laquo;Familie Bl&uuml;mel&raquo; bei und teile deine sch&ouml;nsten Fotos.</div>
           <!-- Group info card -->
           <div style="width: 100%; background: var(--light-gray); border-radius: 16px; padding: 18px 20px; display: flex; align-items: center; gap: 14px; margin-bottom: 32px;">
-            <!-- Avatar -->
             <div style="width: 46px; height: 46px; border-radius: 23px; background: var(--orange); display: flex; align-items: center; justify-content: center; color: white; font-weight: 700; font-size: 15px; flex-shrink: 0;">FB</div>
-            <!-- Info -->
             <div>
               <div style="font-weight: 700; font-size: 16px; color: var(--navy);">Familie Bl&uuml;mel</div>
               <div style="font-size: 13px; color: var(--mid-gray); font-weight: 500; margin-top: 2px;">2 Mitglieder</div>
             </div>
           </div>
-
           <div style="flex: 1;"></div>
-
-          <!-- CTA -->
-          <div style="width: 100%; margin-bottom: 8px;">
-            <button class="btn btn-primary">Einladung annehmen</button>
-          </div>
-
-          <!-- Decline link -->
+          <div style="width: 100%; margin-bottom: 8px;"><button class="btn btn-primary">Einladung annehmen</button></div>
           <a class="btn-text-gray" style="margin-bottom: 20px;">Ablehnen</a>
-
         </div>
 
       </div>
@@ -1154,9 +1121,8 @@
 
   </div>
 
-  <!-- ══════════════════════════════════════════════════ -->
-  <!-- ROW 3 — Empf&auml;nger                           -->
-  <!-- ══════════════════════════════════════════════════ -->
+  <!--ROW 3 — Empf&auml;nger                           -->
+
 
   <div class="section-divider">
     <div class="section-divider-line"></div>
@@ -1166,9 +1132,8 @@
 
   <div class="preview-row">
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 8 — Empf&auml;nger verwalten            -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 8 — Empf&auml;nger verwalten            -->
+
     <div id="screen-8">
       <div class="screen-label">8 &middot; Empf&auml;nger verwalten</div>
       <div class="phone">
@@ -1228,14 +1193,9 @@
           </div>
 
           <!-- Pflegeheim selection card -->
-          <div style="margin: 12px 20px 0; background: var(--light-gray); border: 1.5px dashed var(--border); border-radius: 16px; padding: 18px 16px; display: flex; align-items: center; gap: 14px; cursor: pointer;">
-            <div style="width: 44px; height: 44px; border-radius: 22px; background: var(--beige); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-            </div>
-            <div style="flex: 1;">
-              <div style="font-weight: 700; font-size: 15px; color: var(--navy);">Pflegeheim hinzuf&uuml;gen</div>
-              <div style="font-size: 12px; color: var(--mid-gray); margin-top: 2px;">Aus Admin-Panel verf&uuml;gbare Pflegeheime w&auml;hlen</div>
-            </div>
+          <div class="pflege-add-card">
+            <div class="pflege-add-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+            <div style="flex: 1;"><div class="pflege-name">Pflegeheim hinzuf&uuml;gen</div><div style="font-size: 12px; color: var(--mid-gray); margin-top: 2px;">Verf&uuml;gbare Pflegeheime ausw&auml;hlen</div></div>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           </div>
 
@@ -1254,9 +1214,8 @@
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 9 — Empf&auml;nger hinzuf&uuml;gen      -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 9 — Empf&auml;nger hinzuf&uuml;gen      -->
+
     <div id="screen-9">
       <div class="screen-label">9 &middot; Empf&auml;nger hinzuf&uuml;gen</div>
       <div class="phone">
@@ -1314,8 +1273,7 @@
               </div>
             </div>
 
-            <!-- Info Banner -->
-            <div style="background: var(--blue-light); border-radius: 10px; padding: 10px 14px; display: flex; align-items: flex-start; gap: 8px; margin-bottom: 16px;">
+            <div class="info-banner info-banner--blue" style="border-radius: 10px; padding: 10px 14px; margin-bottom: 16px; gap: 8px;">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 1px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
               <span style="font-size: 14px; color: var(--navy); line-height: 1.5;">Zus&auml;tzliche Empf&auml;nger kosten +8,00&thinsp;&euro;/Monat.</span>
             </div>
@@ -1337,9 +1295,8 @@
 
   </div>
 
-  <!-- ══════════════════════════════════════════════════ -->
-  <!-- ROW 4 — Mitglieder-Flows                          -->
-  <!-- ══════════════════════════════════════════════════ -->
+  <!--ROW 4 — Mitglieder-Flows                          -->
+
 
   <div class="section-divider">
     <div class="section-divider-line"></div>
@@ -1349,68 +1306,36 @@
 
   <div class="preview-row">
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 10 — Gruppe aufgel&ouml;st (Mitglied-Sicht) -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 10 — Gruppe aufgel&ouml;st (Mitglied-Sicht) -->
+
     <div id="screen-10">
       <div class="screen-label">10 &middot; Gruppe aufgel&ouml;st (Mitglied)</div>
       <div class="phone" style="background: var(--white);">
 
         <div class="status-bar"></div>
 
-        <!-- App Header -->
-        <div style="display: flex; align-items: center; padding: 8px 16px 12px; gap: 12px;">
-          <img src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
-          <span style="font-weight: 800; font-size: 16px; color: var(--navy); letter-spacing: -0.5px;">remoryo</span>
+        <div class="app-header">
+          <img src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" class="app-header-logo">
+          <span class="app-header-name">remoryo</span>
         </div>
-
-        <!-- Content -->
-        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 28px; text-align: center;">
-
-          <!-- Icon -->
-          <div style="width: 72px; height: 72px; border-radius: 50%; background: var(--turquoise-light); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-              <circle cx="9" cy="7" r="4"/>
-              <line x1="18" y1="8" x2="23" y2="13"/>
-              <line x1="23" y1="8" x2="18" y2="13"/>
-            </svg>
-          </div>
-
-          <!-- Title -->
-          <div style="font-weight: 800; font-size: 22px; color: var(--navy); margin-bottom: 10px; line-height: 1.3;">
-            Gruppe aufgel&ouml;st
-          </div>
-
-          <!-- Description -->
-          <div style="font-size: 15px; color: var(--dark-gray); font-weight: 500; line-height: 1.55; margin-bottom: 24px;">
-            Die Gruppe <strong style="color: var(--navy);">Familie Bl&uuml;mel</strong> wurde vom Administrator aufgel&ouml;st. Du hast keinen Zugang mehr zu den Fotos und Magazinen dieser Gruppe.
-          </div>
-
-          <!-- Info box -->
-          <div style="background: var(--blue-light); border-radius: 12px; padding: 14px 16px; width: 100%; display: flex; align-items: flex-start; gap: 10px; text-align: left; margin-bottom: 24px;">
+        <div class="fullpage-msg">
+          <div class="fullpage-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="18" y1="8" x2="23" y2="13"/><line x1="23" y1="8" x2="18" y2="13"/></svg></div>
+          <div class="fullpage-title">Gruppe aufgel&ouml;st</div>
+          <div class="fullpage-desc">Die Gruppe <strong style="color: var(--navy);">Familie Bl&uuml;mel</strong> wurde vom Verwalter aufgel&ouml;st. Du hast keinen Zugang mehr zu den Fotos und Magazinen dieser Gruppe.</div>
+          <div class="info-banner info-banner--blue" style="width: 100%; text-align: left; margin-bottom: 24px;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 1px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-            <div style="font-size: 13px; color: var(--navy); line-height: 1.5; font-weight: 500;">
-              Du kannst jederzeit eine eigene Gruppe erstellen oder einer Einladung folgen.
-            </div>
+            <div class="info-banner-text info-banner-text--navy">Du kannst jederzeit eine eigene Gruppe erstellen oder einer Einladung folgen.</div>
           </div>
-
         </div>
-
-        <!-- Bottom Actions -->
-        <div style="padding: 0 20px 40px; display: flex; flex-direction: column; gap: 8px;">
+        <div class="fullpage-actions">
           <button class="btn-primary">Eigene Gruppe erstellen</button>
           <button class="btn-text-gray">Sp&auml;ter</button>
         </div>
-
       </div>
     </div>
-
   </div>
 
-  <!-- ══════════════════════════════════════════════════ -->
-  <!-- ROW 5: Context-Men&uuml;s & Best&auml;tigungen     -->
-  <!-- ══════════════════════════════════════════════════ -->
+  <!-- ROW 5: Context-Menüs & Bestätigungen -->
 
   <div class="section-divider">
     <div class="section-divider-line"></div>
@@ -1420,9 +1345,8 @@
 
   <div class="preview-row">
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 11 — Mitglied Context-Men&uuml; (Action Sheet) -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 11 — Mitglied Context-Men&uuml; (Action Sheet) -->
+
     <div id="screen-11">
       <div class="screen-label">11 &middot; Mitglied-Aktionen</div>
       <div class="phone" style="background: var(--white);">
@@ -1430,86 +1354,33 @@
         <div class="status-bar"></div>
 
         <div style="flex: 1; position: relative;">
-
-          <!-- Fake background (member list) -->
-          <div style="position: absolute; inset: 0; background: var(--white); opacity: 0.9;">
+          <div class="skeleton-bg">
             <div style="padding: 54px 20px 0;">
-              <div style="width: 180px; height: 14px; background: var(--border); border-radius: 4px; margin-bottom: 20px;"></div>
-              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--blue-soft);"></div>
-                <div style="width: 130px; height: 12px; background: var(--border); border-radius: 4px;"></div>
-              </div>
-              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--turquoise-light);"></div>
-                <div style="width: 110px; height: 12px; background: var(--border); border-radius: 4px;"></div>
-              </div>
+              <div class="skeleton-bar" style="width: 180px; height: 14px; margin-bottom: 20px;"></div>
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;"><div class="skeleton-circle" style="width: 40px; height: 40px;"></div><div class="skeleton-bar" style="width: 130px; height: 12px;"></div></div>
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;"><div style="width: 40px; height: 40px; border-radius: 50%; background: var(--turquoise-light);"></div><div class="skeleton-bar" style="width: 110px; height: 12px;"></div></div>
             </div>
           </div>
-
-          <!-- Dark overlay -->
-          <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); z-index: 5;"></div>
-
-          <!-- Bottom Sheet -->
-          <div style="position: absolute; bottom: 0; left: 0; right: 0; background: var(--white); border-radius: 24px 24px 0 0; padding: 16px 0 20px; z-index: 6; box-shadow: 0 -8px 30px rgba(0,0,0,0.12);">
-
-            <!-- Handle bar -->
-            <div style="width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 16px;"></div>
-
-            <!-- Member info -->
-            <div style="display: flex; align-items: center; gap: 12px; padding: 0 20px 16px; border-bottom: 1px solid var(--border);">
-              <div style="width: 44px; height: 44px; border-radius: 50%; background: linear-gradient(135deg, var(--turquoise-light), var(--turquoise)); display: flex; align-items: center; justify-content: center;">
-                <span style="font-weight: 700; font-size: 16px; color: var(--navy);">MB</span>
-              </div>
-              <div>
-                <div style="font-weight: 600; font-size: 15px; color: var(--navy);">Maria Bl&uuml;mel</div>
-                <div style="font-size: 12px; color: var(--mid-gray);">Mitglied seit Jan. 2026</div>
-              </div>
+          <div class="sheet-backdrop"></div>
+          <div class="sheet-panel" style="padding: 16px 0 20px;">
+            <div class="sheet-handle" style="margin-bottom: 16px;"></div>
+            <div class="sheet-member">
+              <div class="sheet-member-avatar" style="background: linear-gradient(135deg, var(--turquoise-light), var(--turquoise));"><span style="font-weight: 700; font-size: 16px; color: var(--navy);">MB</span></div>
+              <div><div class="sheet-member-name">Maria Bl&uuml;mel</div><div class="sheet-member-meta">Mitglied seit Jan. 2026</div></div>
             </div>
-
-            <!-- Action items -->
             <div style="padding: 4px 0;">
-
-              <div style="display: flex; align-items: center; gap: 14px; padding: 14px 20px; cursor: pointer;">
-                <div style="width: 36px; height: 36px; border-radius: 10px; background: #FFF3DC; display: flex; align-items: center; justify-content: center;">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-                </div>
-                <div>
-                  <div style="font-size: 15px; font-weight: 600; color: var(--navy);">Zum Admin machen</div>
-                  <div style="font-size: 12px; color: var(--mid-gray); margin-top: 1px;">Kann Gruppe &amp; Mitglieder verwalten</div>
-                </div>
-              </div>
-
-              <div style="display: flex; align-items: center; gap: 14px; padding: 14px 20px; cursor: pointer;">
-                <div style="width: 36px; height: 36px; border-radius: 10px; background: var(--light-gray); display: flex; align-items: center; justify-content: center;">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 7v10a2 2 0 01-2 2H4a2 2 0 01-2-2V7"/><path d="M2 7l10 7 10-7"/><path d="M2 7a2 2 0 012-2h16a2 2 0 012 2"/></svg>
-                </div>
-                <div style="font-size: 15px; font-weight: 600; color: var(--navy);">Einladung erneut senden</div>
-              </div>
-
-              <!-- Divider -->
-              <div style="height: 1px; background: var(--border); margin: 4px 20px;"></div>
-
-              <div style="display: flex; align-items: center; gap: 14px; padding: 14px 20px; cursor: pointer;">
-                <div style="width: 36px; height: 36px; border-radius: 10px; background: #FFF0EE; display: flex; align-items: center; justify-content: center;">
-                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E74C3C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="18" y1="8" x2="23" y2="13"/><line x1="23" y1="8" x2="18" y2="13"/></svg>
-                </div>
-                <div style="font-size: 15px; font-weight: 600; color: #E74C3C;">Mitglied entfernen</div>
-              </div>
-
+              <div class="action-item"><div class="action-icon" style="background: #FFF3DC;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></div><div><div class="action-label">Zum Verwalter machen</div><div class="action-sublabel">Kann Gruppe &amp; Mitglieder verwalten</div></div></div>
+              <div class="action-item"><div class="action-icon" style="background: var(--light-gray);"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 7v10a2 2 0 01-2 2H4a2 2 0 01-2-2V7"/><path d="M2 7l10 7 10-7"/><path d="M2 7a2 2 0 012-2h16a2 2 0 012 2"/></svg></div><div class="action-label">Einladung erneut senden</div></div>
+              <div class="divider" style="margin: 4px 20px;"></div>
+              <div class="action-item"><div class="action-icon" style="background: #FFF0EE;"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#E74C3C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="18" y1="8" x2="23" y2="13"/><line x1="23" y1="8" x2="18" y2="13"/></svg></div><div style="font-size: 15px; font-weight: 600; color: #E74C3C;">Mitglied entfernen</div></div>
             </div>
-
             <div style="height: 14px;"></div>
-
           </div>
-
         </div>
-
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 12 — Mitglied entfernen Best&auml;tigung -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 12 — Mitglied entfernen Bestätigung -->
     <div id="screen-12">
       <div class="screen-label">12 &middot; Mitglied entfernen</div>
       <div class="phone" style="background: var(--white);">
@@ -1517,150 +1388,70 @@
         <div class="status-bar"></div>
 
         <div style="flex: 1; position: relative;">
-
-          <!-- Fake background -->
-          <div style="position: absolute; inset: 0; background: var(--white); opacity: 0.9;">
+          <div class="skeleton-bg">
             <div style="padding: 54px 20px 0;">
-              <div style="width: 180px; height: 14px; background: var(--border); border-radius: 4px; margin-bottom: 20px;"></div>
-              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--blue-soft);"></div>
-                <div style="width: 130px; height: 12px; background: var(--border); border-radius: 4px;"></div>
-              </div>
+              <div class="skeleton-bar" style="width: 180px; height: 14px; margin-bottom: 20px;"></div>
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;"><div class="skeleton-circle" style="width: 40px; height: 40px;"></div><div class="skeleton-bar" style="width: 130px; height: 12px;"></div></div>
             </div>
           </div>
-
-          <!-- Dark overlay -->
-          <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); z-index: 5;"></div>
-
-          <!-- Bottom Sheet -->
-          <div style="position: absolute; bottom: 0; left: 0; right: 0; background: var(--white); border-radius: 24px 24px 0 0; padding: 24px 24px 20px; z-index: 6; box-shadow: 0 -8px 30px rgba(0,0,0,0.12);">
-
-            <!-- Handle bar -->
-            <div style="width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 24px;"></div>
-
-            <!-- Warning icon -->
-            <div style="display: flex; justify-content: center; margin-bottom: 16px;">
-              <div style="width: 48px; height: 48px; border-radius: 50%; background: #FFF0EE; display: flex; align-items: center; justify-content: center;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="18" y1="8" x2="23" y2="13"/><line x1="23" y1="8" x2="18" y2="13"/></svg>
-              </div>
+          <div class="sheet-backdrop"></div>
+          <div class="sheet-panel">
+            <div class="sheet-handle" style="margin-bottom: 24px;"></div>
+            <div class="confirm-icon"><div class="confirm-icon-circle"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="18" y1="8" x2="23" y2="13"/><line x1="23" y1="8" x2="18" y2="13"/></svg></div></div>
+            <div class="confirm-title">Mitglied entfernen?</div>
+            <div class="confirm-desc"><strong style="color: var(--navy);">Maria Bl&uuml;mel</strong> wird aus der Gruppe entfernt und verliert Zugriff auf alle Fotos und Magazine.</div>
+            <div class="info-banner info-banner--blue" style="padding: 10px 14px; margin-bottom: 20px;">
+              <div class="info-banner-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg></div>
+              <div style="font-size: 12px; font-weight: 500; color: var(--navy); line-height: 1.45;">Die Person kann jederzeit erneut eingeladen werden.</div>
             </div>
-
-            <!-- Title -->
-            <div style="font-weight: 700; font-size: 20px; color: var(--navy); text-align: center; margin-bottom: 8px;">Mitglied entfernen?</div>
-
-            <!-- Description -->
-            <div style="font-size: 14px; color: var(--dark-gray); text-align: center; line-height: 1.55; font-weight: 500; margin-bottom: 16px;">
-              <strong style="color: var(--navy);">Maria Bl&uuml;mel</strong> wird aus der Gruppe entfernt und verliert Zugriff auf alle Fotos und Magazine.
-            </div>
-
-            <!-- Info banner -->
-            <div style="background: var(--blue-light); border-radius: 12px; padding: 10px 14px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 10px;">
-              <div style="flex-shrink: 0; margin-top: 1px;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-              </div>
-              <div style="font-size: 12px; font-weight: 500; color: var(--navy); line-height: 1.45;">
-                Die Person kann jederzeit erneut eingeladen werden.
-              </div>
-            </div>
-
-            <!-- Buttons -->
-            <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="flex-col-gap8">
               <button class="btn-danger-soft" style="background: var(--red); color: white;">Mitglied entfernen</button>
               <button class="btn-outline" style="border-color: var(--navy); color: var(--navy);">Abbrechen</button>
             </div>
-
             <div style="height: 14px;"></div>
-
           </div>
-
         </div>
-
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 13 — Empf&auml;nger entfernen Best&auml;tigung -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 13 — Empfänger entfernen Bestätigung -->
     <div id="screen-13">
       <div class="screen-label">13 &middot; Empf&auml;nger entfernen</div>
       <div class="phone" style="background: var(--white);">
-
         <div class="status-bar"></div>
-
         <div style="flex: 1; position: relative;">
-
-          <!-- Fake background -->
-          <div style="position: absolute; inset: 0; background: var(--white); opacity: 0.9;">
+          <div class="skeleton-bg">
             <div style="padding: 54px 20px 0;">
-              <div style="width: 160px; height: 14px; background: var(--border); border-radius: 4px; margin-bottom: 20px;"></div>
-              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-                <div style="width: 40px; height: 40px; border-radius: 50%; background: #F0E6FF;"></div>
-                <div style="width: 120px; height: 12px; background: var(--border); border-radius: 4px;"></div>
-              </div>
+              <div class="skeleton-bar" style="width: 160px; height: 14px; margin-bottom: 20px;"></div>
+              <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;"><div style="width: 40px; height: 40px; border-radius: 50%; background: #F0E6FF;"></div><div class="skeleton-bar" style="width: 120px; height: 12px;"></div></div>
             </div>
           </div>
-
-          <!-- Dark overlay -->
-          <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); z-index: 5;"></div>
-
-          <!-- Bottom Sheet -->
-          <div style="position: absolute; bottom: 0; left: 0; right: 0; background: var(--white); border-radius: 24px 24px 0 0; padding: 24px 24px 20px; z-index: 6; box-shadow: 0 -8px 30px rgba(0,0,0,0.12);">
-
-            <!-- Handle bar -->
-            <div style="width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 24px;"></div>
-
-            <!-- Warning icon -->
-            <div style="display: flex; justify-content: center; margin-bottom: 16px;">
-              <div style="width: 48px; height: 48px; border-radius: 50%; background: #FFF0EE; display: flex; align-items: center; justify-content: center;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-              </div>
-            </div>
-
-            <!-- Title -->
-            <div style="font-weight: 700; font-size: 20px; color: var(--navy); text-align: center; margin-bottom: 8px;">Empf&auml;nger entfernen?</div>
-
-            <!-- Recipient info card -->
+          <div class="sheet-backdrop"></div>
+          <div class="sheet-panel">
+            <div class="sheet-handle" style="margin-bottom: 24px;"></div>
+            <div class="confirm-icon"><div class="confirm-icon-circle"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg></div></div>
+            <div class="confirm-title">Empf&auml;nger entfernen?</div>
             <div style="background: var(--light-gray); border-radius: 12px; padding: 14px 16px; margin-bottom: 16px;">
               <div style="font-weight: 600; font-size: 15px; color: var(--navy); margin-bottom: 4px;">Oma Ingrid Bl&uuml;mel</div>
               <div style="font-size: 13px; color: var(--dark-gray); line-height: 1.4;">Bergstra&szlig;e 12<br>60311 Frankfurt</div>
             </div>
-
-            <!-- Description -->
-            <div style="font-size: 14px; color: var(--dark-gray); text-align: center; line-height: 1.55; font-weight: 500; margin-bottom: 16px;">
-              An diese Adresse wird kein Heft mehr versendet. Bereits gedruckte Hefte sind nicht betroffen.
+            <div class="confirm-desc">An diese Adresse wird kein Heft mehr versendet. Bereits gedruckte Hefte sind nicht betroffen.</div>
+            <div class="info-banner info-banner--amber" style="padding: 10px 14px; margin-bottom: 20px;">
+              <div class="info-banner-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8920B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div>
+              <div class="info-banner-text info-banner-text--amber">Dein Abo-Preis reduziert sich um 8&nbsp;&euro;/Monat f&uuml;r diese Zusatzadresse.</div>
             </div>
-
-            <!-- Info about cost -->
-            <div style="background: #FFF8EB; border-radius: 12px; padding: 10px 14px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 10px;">
-              <div style="flex-shrink: 0; margin-top: 1px;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#E8920B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
-              </div>
-              <div style="font-size: 13px; font-weight: 600; color: #8B6914; line-height: 1.45;">
-                Dein Abo-Preis reduziert sich um 8&nbsp;&euro;/Monat f&uuml;r diese Zusatzadresse.
-              </div>
-            </div>
-
-            <!-- Buttons -->
-            <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div class="flex-col-gap8">
               <button class="btn-danger-soft" style="background: var(--red); color: white;">Empf&auml;nger entfernen</button>
               <button class="btn-outline" style="border-color: var(--navy); color: var(--navy);">Abbrechen</button>
             </div>
-
             <div style="height: 14px;"></div>
-
           </div>
-
         </div>
-
       </div>
     </div>
-
   </div>
 
-  <!-- ══════════════════════════════════════════════════ -->
-  <!-- ROW 6: Pflegeheim & Benachrichtigungen            -->
-  <!-- ══════════════════════════════════════════════════ -->
-
+  <!-- ROW 6: Pflegeheim & Benachrichtigungen -->
   <div class="section-divider">
     <div class="section-divider-line"></div>
     <h1 style="white-space: nowrap;">Pflegeheim &amp; Benachrichtigungen</h1>
@@ -1669,9 +1460,8 @@
 
   <div class="preview-row">
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 14 — Pflegeheim ausw&auml;hlen          -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 14 — Pflegeheim ausw&auml;hlen          -->
+
     <div id="screen-14">
       <div class="screen-label">14 &middot; Pflegeheim ausw&auml;hlen</div>
       <div class="phone">
@@ -1694,124 +1484,61 @@
             <!-- Info Banner -->
             <div style="display: flex; align-items: flex-start; gap: 8px; padding: 10px 16px; margin: 16px 20px 0; background: var(--white); border-radius: var(--input-radius); border: 1px solid var(--border);">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 1px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-              <span style="font-size: 13px; color: var(--dark-gray); line-height: 1.4;">Pflegeheime werden zentral im Admin-Panel verwaltet. Neues Pflegeheim? Kontaktiere den Support.</span>
+              <span style="font-size: 13px; color: var(--dark-gray); line-height: 1.4;">Pflegeheime werden zentral verwaltet. Neues Pflegeheim hinzuf&uuml;gen? Kontaktiere den Support.</span>
             </div>
 
             <!-- Pflegeheim 1 — Selected -->
-            <div style="margin: 16px 20px 0; background: var(--white); border: 2px solid var(--orange); border-radius: 16px; padding: 16px; display: flex; align-items: center; gap: 14px; cursor: pointer;">
-              <div style="width: 46px; height: 46px; border-radius: 23px; background: linear-gradient(135deg, var(--beige), #D4C4B0); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              </div>
-              <div style="flex: 1; min-width: 0;">
-                <div style="font-weight: 700; font-size: 15px; color: var(--navy); margin-bottom: 2px;">Seniorenresidenz Am Park</div>
-                <div style="font-size: 13px; color: var(--dark-gray); line-height: 1.4;">Parkstra&szlig;e 8, 60322 Frankfurt</div>
-                <div style="display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; margin-top: 6px; background: #E8F5E9; color: #2E7D32;">11,99&thinsp;&euro;/Monat</div>
-              </div>
-              <div style="width: 28px; height: 28px; border-radius: 50%; background: var(--orange); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-              </div>
+            <div class="pflege-card pflege-card--selected">
+              <div class="pflege-avatar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+              <div style="flex: 1; min-width: 0;"><div class="pflege-name">Seniorenresidenz Am Park</div><div class="pflege-address">Parkstra&szlig;e 8, 60322 Frankfurt</div><div class="pflege-price">11,99&thinsp;&euro;/Monat</div></div>
+              <div class="pflege-check pflege-check--active"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
             </div>
-
             <!-- Pflegeheim 2 — Not selected -->
-            <div style="margin: 12px 20px 0; background: var(--white); border: 1.5px solid var(--border); border-radius: 16px; padding: 16px; display: flex; align-items: center; gap: 14px; cursor: pointer;">
-              <div style="width: 46px; height: 46px; border-radius: 23px; background: linear-gradient(135deg, var(--beige), #D4C4B0); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              </div>
-              <div style="flex: 1; min-width: 0;">
-                <div style="font-weight: 700; font-size: 15px; color: var(--navy); margin-bottom: 2px;">Haus Sonnenschein</div>
-                <div style="font-size: 13px; color: var(--dark-gray); line-height: 1.4;">Lindenallee 15, 61118 Bad Vilbel</div>
-                <div style="display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; margin-top: 6px; background: #E8F5E9; color: #2E7D32;">11,99&thinsp;&euro;/Monat</div>
-              </div>
-              <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--border); flex-shrink: 0;"></div>
+            <div class="pflege-card pflege-card--default">
+              <div class="pflege-avatar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+              <div style="flex: 1; min-width: 0;"><div class="pflege-name">Haus Sonnenschein</div><div class="pflege-address">Lindenallee 15, 61118 Bad Vilbel</div><div class="pflege-price">11,99&thinsp;&euro;/Monat</div></div>
+              <div class="pflege-check pflege-check--inactive"></div>
             </div>
-
             <!-- Pflegeheim 3 — Not selected -->
-            <div style="margin: 12px 20px 0; background: var(--white); border: 1.5px solid var(--border); border-radius: 16px; padding: 16px; display: flex; align-items: center; gap: 14px; cursor: pointer;">
-              <div style="width: 46px; height: 46px; border-radius: 23px; background: linear-gradient(135deg, var(--beige), #D4C4B0); display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
-              </div>
-              <div style="flex: 1; min-width: 0;">
-                <div style="font-weight: 700; font-size: 15px; color: var(--navy); margin-bottom: 2px;">Pflegeheim Taunusblick</div>
-                <div style="font-size: 13px; color: var(--dark-gray); line-height: 1.4;">Hauptstra&szlig;e 42, 61440 Oberursel</div>
-                <div style="display: inline-block; padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700; margin-top: 6px; background: #E8F5E9; color: #2E7D32;">11,99&thinsp;&euro;/Monat</div>
-              </div>
-              <div style="width: 28px; height: 28px; border-radius: 50%; border: 2px solid var(--border); flex-shrink: 0;"></div>
+            <div class="pflege-card pflege-card--default">
+              <div class="pflege-avatar"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></div>
+              <div style="flex: 1; min-width: 0;"><div class="pflege-name">Pflegeheim Taunusblick</div><div class="pflege-address">Hauptstra&szlig;e 42, 61440 Oberursel</div><div class="pflege-price">11,99&thinsp;&euro;/Monat</div></div>
+              <div class="pflege-check pflege-check--inactive"></div>
             </div>
-
           </div>
-
           <!-- Bottom Button -->
-          <div style="padding: 12px 20px; flex-shrink: 0;">
-            <button class="btn-primary">Ausw&auml;hlen</button>
-          </div>
-
+          <div style="padding: 12px 20px; flex-shrink: 0;"><button class="btn-primary">Ausw&auml;hlen</button></div>
         </div>
-
         <div class="safe-bottom"></div>
-
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 15 — Du wurdest entfernt               -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 15 — Du wurdest entfernt -->
     <div id="screen-15">
       <div class="screen-label">15 &middot; Du wurdest entfernt</div>
       <div class="phone" style="background: var(--white);">
-
         <div class="status-bar"></div>
-
-        <!-- App Header -->
-        <div style="display: flex; align-items: center; padding: 8px 16px 12px; gap: 12px;">
-          <img src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
-          <span style="font-weight: 800; font-size: 16px; color: var(--navy); letter-spacing: -0.5px;">remoryo</span>
+        <div class="app-header">
+          <img src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" class="app-header-logo">
+          <span class="app-header-name">remoryo</span>
         </div>
-
-        <!-- Content -->
-        <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 28px; text-align: center;">
-
-          <!-- Icon -->
-          <div style="width: 72px; height: 72px; border-radius: 50%; background: var(--turquoise-light); display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
-            <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/>
-              <circle cx="8.5" cy="7" r="4"/>
-              <line x1="18" y1="8" x2="23" y2="13"/>
-              <line x1="23" y1="8" x2="18" y2="13"/>
-            </svg>
-          </div>
-
-          <!-- Title -->
-          <div style="font-weight: 800; font-size: 22px; color: var(--navy); margin-bottom: 10px; line-height: 1.3;">
-            Du wurdest entfernt
-          </div>
-
-          <!-- Description -->
-          <div style="font-size: 15px; color: var(--dark-gray); font-weight: 500; line-height: 1.55; margin-bottom: 24px;">
-            <strong style="color: var(--navy);">Julius Bl&uuml;mel</strong> hat dich aus der Gruppe <strong style="color: var(--navy);">&laquo;Familie Bl&uuml;mel&raquo;</strong> entfernt. Du hast keinen Zugang mehr zu den Fotos und Magazinen dieser Gruppe.
-          </div>
-
-          <!-- Info box -->
-          <div style="background: var(--blue-light); border-radius: 12px; padding: 14px 16px; width: 100%; display: flex; align-items: flex-start; gap: 10px; text-align: left; margin-bottom: 24px;">
+        <div class="fullpage-msg">
+          <div class="fullpage-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="18" y1="8" x2="23" y2="13"/><line x1="23" y1="8" x2="18" y2="13"/></svg></div>
+          <div class="fullpage-title">Du wurdest entfernt</div>
+          <div class="fullpage-desc"><strong style="color: var(--navy);">Julius Bl&uuml;mel</strong> hat dich aus der Gruppe <strong style="color: var(--navy);">&laquo;Familie Bl&uuml;mel&raquo;</strong> entfernt. Du hast keinen Zugang mehr zu den Fotos und Magazinen dieser Gruppe.</div>
+          <div class="info-banner info-banner--blue" style="width: 100%; text-align: left; margin-bottom: 24px;">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="flex-shrink: 0; margin-top: 1px;"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
-            <div style="font-size: 13px; color: var(--navy); line-height: 1.5; font-weight: 500;">
-              Du kannst jederzeit eine eigene Gruppe erstellen oder einer neuen Einladung folgen.
-            </div>
+            <div class="info-banner-text info-banner-text--navy">Du kannst jederzeit eine eigene Gruppe erstellen oder einer neuen Einladung folgen.</div>
           </div>
-
         </div>
-
-        <!-- Bottom Actions -->
-        <div style="padding: 0 20px 40px; display: flex; flex-direction: column; gap: 8px;">
+        <div class="fullpage-actions">
           <button class="btn-primary">Eigene Gruppe erstellen</button>
           <button class="btn-text-gray">Verstanden</button>
         </div>
-
       </div>
     </div>
-
   </div>
 
   <p class="footer-note">Preview nutzt Inter als Stand-in f&uuml;r Helvetica Now Display.</p>
-
 </body>
 </html>

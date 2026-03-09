@@ -38,572 +38,246 @@
       gap: 20px;
     }
 
-    h1 {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--mid-gray);
-    }
+    h1 { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--mid-gray); }
 
-    .preview-row {
-      display: flex;
-      gap: 40px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+    .preview-row { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; }
 
     .screen-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--mid-gray);
-      text-align: center;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      font-size: 11px; font-weight: 700; color: var(--mid-gray);
+      text-align: center; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;
     }
 
     /* ── Phone Frame ── */
     .phone {
-      width: 393px;
-      height: 852px;
-      background: var(--white);
-      border-radius: 48px;
-      overflow: hidden;
-      box-shadow:
-        0 0 0 1px rgba(0,0,0,0.05),
-        0 8px 30px rgba(0,0,0,0.08),
-        0 30px 70px rgba(0,0,0,0.12);
-      position: relative;
-      display: flex;
-      flex-direction: column;
+      width: 393px; height: 852px; background: var(--white);
+      border-radius: 48px; overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 8px 30px rgba(0,0,0,0.08), 0 30px 70px rgba(0,0,0,0.12);
+      position: relative; display: flex; flex-direction: column;
     }
-
-    /* Dynamic Island */
     .phone::before {
-      content: '';
-      position: absolute;
-      top: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 126px;
-      height: 36px;
-      background: #000;
-      border-radius: 20px;
-      z-index: 10;
+      content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+      width: 126px; height: 36px; background: #000; border-radius: 20px; z-index: 10;
     }
 
     /* ── Top Section ── */
     .top {
       padding: 64px 24px 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-      flex-shrink: 0;
+      display: flex; flex-direction: column; align-items: center;
+      position: relative; z-index: 2; flex-shrink: 0;
     }
-
-    .top--blue {
-      background: linear-gradient(180deg, var(--blue-soft) 0%, var(--blue-light) 75%, var(--white) 100%);
-    }
-
-    .top--turquoise {
-      background: linear-gradient(180deg, var(--turquoise) 0%, var(--turquoise-light) 75%, var(--white) 100%);
-    }
+    .top--blue { background: linear-gradient(180deg, var(--blue-soft) 0%, var(--blue-light) 75%, var(--white) 100%); }
+    .top--turquoise { background: linear-gradient(180deg, var(--turquoise) 0%, var(--turquoise-light) 75%, var(--white) 100%); }
+    .top--pb28 { padding-bottom: 28px; }
+    .top--pb16 { padding-bottom: 16px; }
 
     /* ── Logo ── */
-    .logo {
-      width: 36px;
-      height: auto;
-      margin-bottom: 14px;
-    }
-
-    .logo-large {
-      width: 120px;
-      height: auto;
-      margin-bottom: 8px;
-    }
+    .logo { width: 36px; height: auto; margin-bottom: 14px; }
+    .logo-large { width: 120px; height: auto; margin-bottom: 8px; }
 
     /* ── Photos ── */
     .hero-photo {
-      width: 280px;
-      height: 200px;
-      object-fit: cover;
-      border-radius: 20px;
-      box-shadow:
-        0 20px 50px rgba(27, 44, 67, 0.24),
-        0 8px 20px rgba(27, 44, 67, 0.12);
+      width: 280px; height: 200px; object-fit: cover; border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(27, 44, 67, 0.24), 0 8px 20px rgba(27, 44, 67, 0.12);
       border: 4px solid rgba(255,255,255,0.85);
-      margin-bottom: -44px;
-      position: relative;
-      z-index: 3;
+      margin-bottom: -44px; position: relative; z-index: 3;
     }
 
     /* ── Content Area ── */
     .content {
-      flex: 1;
-      padding: 52px 20px 16px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      position: relative;
-      z-index: 1;
+      flex: 1; padding: 52px 20px 16px;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      position: relative; z-index: 1;
     }
+    .content--pt24 { padding-top: 24px; }
+    .content--reg { padding-top: 16px; padding-bottom: 12px; justify-content: flex-start; }
 
     /* ── Text ── */
-    .headline {
-      font-weight: 800;
-      font-size: 28px;
-      color: var(--navy);
-      text-align: center;
-      line-height: 1.3;
-      margin-bottom: 10px;
-    }
-
-    .sub {
-      font-weight: 500;
-      font-size: 15px;
-      color: var(--dark-gray);
-      text-align: center;
-      line-height: 1.55;
-    }
+    .headline { font-weight: 800; font-size: 28px; color: var(--navy); text-align: center; line-height: 1.3; margin-bottom: 10px; }
+    .headline--sm { font-size: 24px; margin-bottom: 4px; }
+    .sub { font-weight: 500; font-size: 15px; color: var(--dark-gray); text-align: center; line-height: 1.55; }
+    .sub--sm { font-size: 14px; }
 
     /* ── Form Elements ── */
-    .form-group {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      margin-top: 24px;
-    }
+    .form-group { width: 100%; display: flex; flex-direction: column; gap: 14px; margin-top: 24px; }
+    .form-group--compact { margin-top: 0; gap: 10px; }
 
     .input {
-      width: 100%;
-      padding: 16px 18px;
-      border-radius: var(--input-radius);
-      border: 1.5px solid var(--border);
-      font-size: 15px;
-      font-weight: 500;
-      color: var(--navy);
-      background: var(--white);
-      outline: none;
-      transition: border-color 0.15s;
+      width: 100%; padding: 16px 18px; border-radius: var(--input-radius);
+      border: 1.5px solid var(--border); font-size: 15px; font-weight: 500;
+      color: var(--navy); background: var(--white); outline: none; transition: border-color 0.15s;
     }
+    .input::placeholder { color: var(--mid-gray); font-weight: 400; }
+    .input:focus { border-color: var(--blue); }
+    .input.error { border-color: var(--red); }
+    .input--compact { padding: 14px 16px; }
 
-    .input::placeholder {
-      color: var(--mid-gray);
-      font-weight: 400;
-    }
-
-    .input:focus {
-      border-color: var(--blue);
-    }
-
-    .input-with-icon {
-      position: relative;
-    }
-
+    .input-with-icon { position: relative; }
     .input-icon {
-      position: absolute;
-      right: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--mid-gray);
-      font-size: 18px;
-      display: flex;
-      align-items: center;
-      cursor: pointer;
+      position: absolute; right: 16px; top: 50%; transform: translateY(-50%);
+      color: var(--mid-gray); font-size: 18px; display: flex; align-items: center; cursor: pointer;
     }
 
     /* ── Buttons ── */
     .btn {
-      width: 100%;
-      padding: 14px 24px;
-      border-radius: var(--btn-radius);
-      font-weight: 700;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-      text-align: center;
-      min-height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
+      width: 100%; padding: 14px 24px; border-radius: var(--btn-radius);
+      font-weight: 700; font-size: 16px; border: none; cursor: pointer; text-align: center;
+      min-height: 48px; display: flex; align-items: center; justify-content: center; gap: 8px;
     }
-
-    .btn-primary {
-      background: var(--orange);
-      color: var(--white);
-    }
-
-    .btn-primary.disabled {
-      opacity: 0.45;
-      cursor: not-allowed;
-    }
-
-    .btn-outline {
-      background: var(--white);
-      color: var(--navy);
-      border: 1.5px solid var(--navy);
-    }
+    .btn-primary { background: var(--orange); color: var(--white); }
+    .btn-primary.disabled { opacity: 0.45; cursor: not-allowed; }
+    .btn-outline { background: var(--white); color: var(--navy); border: 1.5px solid var(--navy); }
 
     .btn-text {
-      background: none;
-      border: none;
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--navy);
-      cursor: pointer;
-      padding: 12px;
-      text-align: center;
-      width: 100%;
+      background: none; border: none; font-weight: 600; font-size: 14px; color: var(--navy);
+      cursor: pointer; padding: 12px; text-align: center; width: 100%;
     }
+    .btn-text--sm { padding: 8px; font-size: 13px; }
 
     .btn-nav {
-      margin-top: 12px;
-      background: none;
-      border: none;
-      color: var(--navy);
-      font-weight: 600;
-      font-size: 15px;
-      cursor: pointer;
-      padding: 12px;
-      width: 100%;
-      text-align: center;
-      font-family: inherit;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
+      margin-top: 12px; background: none; border: none; color: var(--navy);
+      font-weight: 600; font-size: 15px; cursor: pointer; padding: 12px; width: 100%;
+      text-align: center; font-family: inherit;
+      display: flex; align-items: center; justify-content: center; gap: 6px;
     }
 
-    .btn-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      width: 100%;
-    }
+    .btn-stack { display: flex; flex-direction: column; gap: 12px; width: 100%; }
+    .btn-stack--tight { gap: 8px; }
 
-    .actions {
-      margin-top: 24px;
-      width: 100%;
-    }
+    .actions { margin-top: 24px; width: 100%; }
+    .actions--sm { margin-top: 14px; }
 
     /* ── Divider ── */
-    .divider {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      width: 100%;
-      margin: 20px 0;
-    }
-
-    .divider-line {
-      flex: 1;
-      height: 1px;
-      background: var(--border);
-    }
-
-    .divider-text {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--mid-gray);
-    }
+    .divider { display: flex; align-items: center; gap: 14px; width: 100%; margin: 20px 0; }
+    .divider--compact { margin: 12px 0; }
+    .divider-line { flex: 1; height: 1px; background: var(--border); }
+    .divider-text { font-size: 13px; font-weight: 500; color: var(--mid-gray); }
 
     /* ── Social Login ── */
     .social-btn {
-      width: 100%;
-      padding: 14px;
-      border-radius: var(--btn-radius);
-      border: 1.5px solid var(--border);
-      background: var(--white);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 15px;
-      color: var(--navy);
-      min-height: 48px;
+      width: 100%; padding: 14px; border-radius: var(--btn-radius);
+      border: 1.5px solid var(--border); background: var(--white);
+      display: flex; align-items: center; justify-content: center; gap: 10px;
+      cursor: pointer; font-weight: 600; font-size: 15px; color: var(--navy); min-height: 48px;
     }
-
-    .social-btn--apple {
-      background: #000;
-      color: var(--white);
-      border-color: #000;
-    }
-
-    .social-icon {
-      width: 20px;
-      height: 20px;
-    }
+    .social-btn--apple { background: #000; color: var(--white); border-color: #000; }
+    .social-btn--compact { padding: 12px; min-height: 44px; font-size: 14px; }
+    .social-icon { width: 20px; height: 20px; }
 
     /* ── Toggle / Switch ── */
     .consent-row {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      width: 100%;
-      padding: 8px 0;
-      cursor: pointer;
-      min-height: 48px;
+      display: flex; align-items: center; gap: 14px; width: 100%;
+      padding: 8px 0; cursor: pointer; min-height: 48px;
     }
-
+    .consent-row--compact { padding: 4px 0; min-height: 44px; gap: 10px; }
     .toggle {
-      width: 44px;
-      height: 26px;
-      border-radius: 13px;
-      background: var(--border);
-      flex-shrink: 0;
-      position: relative;
-      cursor: pointer;
-      transition: background 0.2s;
+      width: 44px; height: 26px; border-radius: 13px; background: var(--border);
+      flex-shrink: 0; position: relative; cursor: pointer; transition: background 0.2s;
     }
-
-    .toggle.on {
-      background: var(--blue);
-    }
-
+    .toggle.on { background: var(--blue); }
     .toggle::after {
-      content: '';
-      width: 20px;
-      height: 20px;
-      border-radius: 10px;
-      background: white;
-      position: absolute;
-      top: 3px;
-      left: 3px;
-      transition: left 0.2s;
+      content: ''; width: 20px; height: 20px; border-radius: 10px; background: white;
+      position: absolute; top: 3px; left: 3px; transition: left 0.2s;
       box-shadow: 0 1px 3px rgba(0,0,0,0.15);
     }
-
-    .toggle.on::after {
-      left: 21px;
-    }
-
-    .consent-text {
-      font-size: 14px;
-      line-height: 1.5;
-      color: var(--dark-gray);
-    }
-
-    .consent-text a {
-      color: var(--blue);
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .consent-required {
-      color: var(--orange);
-      font-weight: 700;
-      font-size: 11px;
-      margin-left: 4px;
-    }
+    .toggle.on::after { left: 21px; }
+    .consent-text { font-size: 14px; line-height: 1.5; color: var(--dark-gray); }
+    .consent-text--sm { font-size: 12px; line-height: 1.4; }
+    .consent-text a { color: var(--blue); text-decoration: none; font-weight: 600; }
+    .consent-required { color: var(--orange); font-weight: 700; font-size: 11px; margin-left: 4px; }
 
     /* ── Invite Badge ── */
     .invite-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: rgba(255, 166, 49, 0.08);
-      border: 1.5px solid rgba(255, 166, 49, 0.2);
-      border-radius: 100px;
-      padding: 8px 18px;
-      margin-bottom: 20px;
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(255, 166, 49, 0.08); border: 1.5px solid rgba(255, 166, 49, 0.2);
+      border-radius: 100px; padding: 8px 18px; margin-bottom: 20px;
     }
-
-    .invite-badge-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 16px;
-      height: 16px;
-    }
-
-    .invite-badge-text {
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--navy);
-    }
+    .invite-badge-icon { display: flex; align-items: center; justify-content: center; width: 16px; height: 16px; }
+    .invite-badge-text { font-size: 13px; font-weight: 600; color: var(--navy); }
 
     /* ── Link ── */
-    .link {
-      font-weight: 500;
-      font-size: 14px;
-      color: var(--blue);
-      text-decoration: none;
-      cursor: pointer;
-    }
+    .link { font-weight: 500; font-size: 14px; color: var(--blue); text-decoration: none; cursor: pointer; }
+    .link--end { align-self: flex-end; font-size: 13px; }
 
     /* ── Password Strength ── */
-    .pw-strength {
-      display: flex;
-      gap: 4px;
-      margin-top: -6px;
-      align-items: center;
-    }
+    .pw-strength { display: flex; gap: 4px; margin-top: -6px; align-items: center; }
+    .pw-bar { flex: 1; height: 4px; border-radius: 2px; background: var(--border); }
+    .pw-bar.active { background: var(--orange); }
+    .pw-strength-label { font-size: 12px; font-weight: 600; color: var(--mid-gray); margin-left: 8px; white-space: nowrap; }
 
-    .pw-bar {
-      flex: 1;
-      height: 4px;
-      border-radius: 2px;
-      background: var(--border);
-    }
-
-    .pw-bar.active {
-      background: var(--orange);
-    }
-
-    .pw-strength-label {
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--mid-gray);
-      margin-left: 8px;
-      white-space: nowrap;
-    }
-
-    .footer-note {
-      font-size: 11px;
-      color: #A0A0A0;
-      font-weight: 500;
-      text-align: center;
-    }
-
-    /* ── Browser Chrome (for web landing page) ── */
-    .browser-bar {
-      background: #F8F8FA;
-      padding: 52px 12px 10px;
-      border-bottom: 1px solid var(--border);
-      flex-shrink: 0;
-    }
-
-    .browser-bar-inner {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .browser-url {
-      flex: 1;
-      background: var(--white);
-      border-radius: 10px;
-      padding: 8px 12px;
-      font-size: 13px;
-      color: var(--dark-gray);
-      font-weight: 400;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      border: 1px solid var(--border);
-    }
-
-    /* Override Dynamic Island for browser screens */
-    .phone:has(.browser-bar)::before {
-      display: none;
-    }
-
-    /* ── Store Buttons ── */
-    .store-btn {
-      width: 100%;
-      padding: 12px 20px;
-      border-radius: var(--btn-radius);
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 12px;
-      cursor: pointer;
-      font-family: inherit;
-      text-align: left;
-      min-height: 48px;
-    }
-
-    .store-btn--apple {
-      background: #000;
-      color: var(--white);
-    }
-
-    .store-btn--google {
-      background: var(--white);
-      color: var(--navy);
-      border: 1.5px solid var(--border);
-    }
-
-    /* ── Web Steps (mini) ── */
-    .web-step {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .web-step-icon {
-      width: 52px;
-      height: 52px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: 16px;
-      background: var(--light-gray);
-    }
-
-    .web-step-icon--photos { background: rgba(255, 166, 49, 0.12); }
-    .web-step-icon--magazine { background: rgba(130, 183, 216, 0.15); }
-    .web-step-icon--delivery { background: rgba(184, 224, 224, 0.25); }
-
-    .web-step-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--navy);
-      text-align: center;
-      line-height: 1.4;
-    }
-
-    .web-step-arrow {
-      color: var(--mid-gray);
-      display: flex;
-      align-items: flex-start;
-      padding-top: 20px;
-    }
+    .footer-note { font-size: 11px; color: #A0A0A0; font-weight: 500; text-align: center; }
 
     /* ── Error Message ── */
     .error-message {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background: #FFF0EE;
-      border: 1.5px solid rgba(231, 76, 60, 0.2);
-      border-radius: var(--input-radius);
-      padding: 12px 14px;
-      width: 100%;
+      display: flex; align-items: center; gap: 8px;
+      background: #FFF0EE; border: 1.5px solid rgba(231, 76, 60, 0.2);
+      border-radius: var(--input-radius); padding: 12px 14px; width: 100%;
     }
+    .error-message svg { width: 18px; height: 18px; flex-shrink: 0; }
+    .error-message-text { font-size: 13px; font-weight: 500; color: var(--red); line-height: 1.4; }
 
-    .error-message svg {
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
+    /* ── Browser Chrome (web landing page) ── */
+    .browser-bar { background: #F8F8FA; padding: 52px 12px 10px; border-bottom: 1px solid var(--border); flex-shrink: 0; }
+    .browser-bar-inner { display: flex; align-items: center; gap: 10px; }
+    .browser-url {
+      flex: 1; background: var(--white); border-radius: 10px; padding: 8px 12px;
+      font-size: 13px; color: var(--dark-gray); font-weight: 400;
+      display: flex; align-items: center; gap: 8px; border: 1px solid var(--border);
     }
+    .phone:has(.browser-bar)::before { display: none; }
 
-    .error-message-text {
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--red);
-      line-height: 1.4;
+    /* ── Store Buttons ── */
+    .store-btn {
+      width: 100%; padding: 12px 20px; border-radius: var(--btn-radius); border: none;
+      display: flex; align-items: center; justify-content: center; gap: 12px;
+      cursor: pointer; font-family: inherit; text-align: left; min-height: 48px;
     }
+    .store-btn--apple { background: #000; color: var(--white); }
+    .store-btn--google { background: var(--white); color: var(--navy); border: 1.5px solid var(--border); }
+    .store-btn-sub { font-size: 10px; font-weight: 400; opacity: 0.85; }
+    .store-btn-main { font-size: 16px; font-weight: 600; }
 
-    .input.error {
-      border-color: var(--red);
+    /* ── Web Steps (mini) ── */
+    .web-step { flex: 1; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .web-step-icon {
+      width: 52px; height: 52px; display: flex; align-items: center; justify-content: center;
+      border-radius: 16px; background: var(--light-gray);
     }
+    .web-step-icon--photos { background: rgba(255, 166, 49, 0.12); }
+    .web-step-icon--magazine { background: rgba(130, 183, 216, 0.15); }
+    .web-step-icon--delivery { background: rgba(184, 224, 224, 0.25); }
+    .web-step-label { font-size: 11px; font-weight: 600; color: var(--navy); text-align: center; line-height: 1.4; }
+    .web-step-arrow { color: var(--mid-gray); display: flex; align-items: flex-start; padding-top: 20px; }
 
     /* ── Safe Bottom ── */
-    .safe-bottom {
-      height: 20px;
-      flex-shrink: 0;
+    .safe-bottom { height: 20px; flex-shrink: 0; }
+
+    /* ── Section Divider ── */
+    .section-divider {
+      width: 100%; display: flex; align-items: center; gap: 16px; margin: 12px 0 4px;
     }
+    .section-divider-line { flex: 1; height: 1px; background: #D0D5DB; }
+
+    /* ── Flow Arrow ── */
+    .flow-arrow {
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 8px; align-self: center;
+    }
+    .flow-arrow-text {
+      font-size: 11px; font-weight: 600; color: var(--mid-gray);
+      text-transform: uppercase; letter-spacing: 1px;
+      writing-mode: vertical-lr; transform: rotate(180deg);
+    }
+
+    /* ── Mail Icon Circle ── */
+    .mail-icon-circle {
+      width: 80px; height: 80px; border-radius: 50%; background: var(--orange);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: -44px; position: relative; z-index: 3;
+      box-shadow: 0 20px 50px rgba(27, 44, 67, 0.24), 0 8px 20px rgba(27, 44, 67, 0.12);
+    }
+
+    /* ── Resend Hint ── */
+    .resend-hint { display: flex; align-items: center; gap: 8px; margin-top: 24px; }
 
     [id^="screen-"] { scroll-margin-top: 20px; }
   </style>
@@ -614,186 +288,144 @@
 
   <div class="preview-row">
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 1 — Login                              -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- ═══ SCREEN 1 — Login ═══ -->
     <div id="screen-1">
       <div class="screen-label">1 &middot; Login</div>
       <div class="phone">
-
-        <div class="top top--blue" style="padding-bottom: 28px;">
+        <div class="top top--blue top--pb28">
           <img class="logo-large" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo">
         </div>
-
-        <div class="content" style="padding-top: 24px;">
-
+        <div class="content content--pt24">
           <div>
             <div class="headline">Willkommen<br>zurück</div>
             <div class="sub">Melde dich an und mach weiter</div>
           </div>
-
           <div class="form-group">
             <input class="input" type="email" placeholder="E-Mail-Adresse">
             <div class="input-with-icon">
               <input class="input" type="password" placeholder="Passwort">
               <span class="input-icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
                 </svg>
               </span>
             </div>
-            <a class="link" style="align-self: flex-end; font-size: 13px;">Passwort vergessen?</a>
+            <a class="link link--end">Passwort vergessen?</a>
           </div>
-
           <div class="actions">
             <button class="btn btn-primary">Anmelden</button>
-
             <div class="divider">
               <div class="divider-line"></div>
               <div class="divider-text">oder</div>
               <div class="divider-line"></div>
             </div>
-
             <div class="btn-stack">
               <button class="social-btn social-btn--apple">
                 <svg class="social-icon" viewBox="0 0 20 24" fill="white"><path d="M16.5 12.5c0-2.7 2.2-4 2.3-4.1-1.3-1.8-3.2-2.1-3.9-2.1-1.6-.2-3.2 1-4 1s-2.1-1-3.5-1c-1.8 0-3.4 1-4.3 2.6-1.9 3.2-.5 8 1.3 10.6.9 1.3 2 2.7 3.4 2.6 1.4-.1 1.9-.9 3.5-.9s2.1.9 3.5.8c1.5 0 2.3-1.3 3.2-2.6 1-1.5 1.4-2.9 1.4-3-.1 0-2.9-1.1-2.9-4.3zm-2.7-7.9c.7-.9 1.2-2.2 1.1-3.4-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.2 1.2.1 2.3-.6 3-1.4z"/></svg>
                 Mit Apple anmelden
               </button>
-
               <button class="social-btn">
                 <svg class="social-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
                 Mit Google anmelden
               </button>
             </div>
-
             <button class="btn-nav">Neues Konto erstellen <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
           </div>
-
         </div>
-
         <div class="safe-bottom"></div>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 1b — Login (Error State)                -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- ═══ SCREEN 1b — Login (Error State) ═══ -->
     <div id="screen-1b">
       <div class="screen-label">1b &middot; Login &mdash; Fehler</div>
       <div class="phone">
-
-        <div class="top top--blue" style="padding-bottom: 28px;">
+        <div class="top top--blue top--pb28">
           <img class="logo-large" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo">
         </div>
-
-        <div class="content" style="padding-top: 24px;">
-
+        <div class="content content--pt24">
           <div>
             <div class="headline">Willkommen<br>zurück</div>
             <div class="sub">Melde dich an und mach weiter</div>
           </div>
-
           <div class="form-group">
             <input class="input" type="email" value="julius@remoryo.de" style="color: var(--navy);">
             <div class="input-with-icon">
               <input class="input error" type="password" value="••••••••" style="color: var(--navy);">
               <span class="input-icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
                 </svg>
               </span>
             </div>
-            <!-- Error message -->
             <div class="error-message">
               <svg viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="15" y1="9" x2="9" y2="15"/>
-                <line x1="9" y1="9" x2="15" y2="15"/>
+                <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
               </svg>
               <span class="error-message-text">E-Mail oder Passwort ist falsch. Bitte versuche es erneut.</span>
             </div>
-            <a class="link" style="align-self: flex-end; font-size: 13px;">Passwort vergessen?</a>
+            <a class="link link--end">Passwort vergessen?</a>
           </div>
-
           <div class="actions">
             <button class="btn btn-primary">Anmelden</button>
-
             <div class="divider">
               <div class="divider-line"></div>
               <div class="divider-text">oder</div>
               <div class="divider-line"></div>
             </div>
-
             <div class="btn-stack">
               <button class="social-btn social-btn--apple">
                 <svg class="social-icon" viewBox="0 0 20 24" fill="white"><path d="M16.5 12.5c0-2.7 2.2-4 2.3-4.1-1.3-1.8-3.2-2.1-3.9-2.1-1.6-.2-3.2 1-4 1s-2.1-1-3.5-1c-1.8 0-3.4 1-4.3 2.6-1.9 3.2-.5 8 1.3 10.6.9 1.3 2 2.7 3.4 2.6 1.4-.1 1.9-.9 3.5-.9s2.1.9 3.5.8c1.5 0 2.3-1.3 3.2-2.6 1-1.5 1.4-2.9 1.4-3-.1 0-2.9-1.1-2.9-4.3zm-2.7-7.9c.7-.9 1.2-2.2 1.1-3.4-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.2 1.2.1 2.3-.6 3-1.4z"/></svg>
                 Mit Apple anmelden
               </button>
-
               <button class="social-btn">
                 <svg class="social-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
                 Mit Google anmelden
               </button>
             </div>
-
             <button class="btn-nav">Neues Konto erstellen <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></button>
           </div>
-
         </div>
-
         <div class="safe-bottom"></div>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 2 — Registrierung                      -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- ═══ SCREEN 2 — Registrierung ═══ -->
     <div id="screen-2">
       <div class="screen-label">2 &middot; Registrierung</div>
       <div class="phone">
-
-        <div class="top top--turquoise" style="padding-bottom: 16px;">
+        <div class="top top--turquoise top--pb16">
           <img class="logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="margin-bottom: 8px;">
         </div>
-
-        <div class="content" style="padding-top: 16px; padding-bottom: 12px; justify-content: flex-start;">
-
+        <div class="content content--reg">
           <div style="margin-bottom: 10px;">
-            <div class="headline" style="font-size: 24px; margin-bottom: 4px;">Dein Konto erstellen</div>
-            <div class="sub" style="font-size: 14px;">Erstelle dein Konto und leg los</div>
+            <div class="headline headline--sm">Dein Konto erstellen</div>
+            <div class="sub sub--sm">Erstelle dein Konto und leg los</div>
           </div>
-
-          <!-- Social login -->
           <div style="width: 100%;">
-            <div class="btn-stack" style="gap: 8px;">
-              <button class="social-btn social-btn--apple" style="padding: 12px; min-height: 44px; font-size: 14px;">
+            <div class="btn-stack btn-stack--tight">
+              <button class="social-btn social-btn--apple social-btn--compact">
                 <svg class="social-icon" viewBox="0 0 20 24" fill="white"><path d="M16.5 12.5c0-2.7 2.2-4 2.3-4.1-1.3-1.8-3.2-2.1-3.9-2.1-1.6-.2-3.2 1-4 1s-2.1-1-3.5-1c-1.8 0-3.4 1-4.3 2.6-1.9 3.2-.5 8 1.3 10.6.9 1.3 2 2.7 3.4 2.6 1.4-.1 1.9-.9 3.5-.9s2.1.9 3.5.8c1.5 0 2.3-1.3 3.2-2.6 1-1.5 1.4-2.9 1.4-3-.1 0-2.9-1.1-2.9-4.3zm-2.7-7.9c.7-.9 1.2-2.2 1.1-3.4-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.2 1.2.1 2.3-.6 3-1.4z"/></svg>
                 Mit Apple registrieren
               </button>
-              <button class="social-btn" style="padding: 12px; min-height: 44px; font-size: 14px;">
+              <button class="social-btn social-btn--compact">
                 <svg class="social-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
                 Mit Google registrieren
               </button>
             </div>
-
-            <div class="divider" style="margin: 12px 0;">
+            <div class="divider divider--compact">
               <div class="divider-line"></div>
               <div class="divider-text">oder</div>
               <div class="divider-line"></div>
             </div>
           </div>
-
-          <!-- Email + Password form -->
-          <div class="form-group" style="margin-top: 0; gap: 10px;">
-            <input class="input" type="email" placeholder="E-Mail-Adresse" style="padding: 14px 16px;">
+          <div class="form-group form-group--compact">
+            <input class="input input--compact" type="email" placeholder="E-Mail-Adresse">
             <div class="input-with-icon">
-              <input class="input" type="password" placeholder="Passwort" style="padding: 14px 16px;">
+              <input class="input input--compact" type="password" placeholder="Passwort">
               <span class="input-icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-                  <circle cx="12" cy="12" r="3"/>
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>
                 </svg>
               </span>
             </div>
@@ -805,57 +437,44 @@
               <span class="pw-strength-label">Mittel</span>
             </div>
           </div>
-
-          <!-- Consent toggles (compact) -->
           <div style="width: 100%; display: flex; flex-direction: column; gap: 4px; margin-top: 12px;">
-            <div class="consent-row" style="padding: 4px 0; min-height: 44px; gap: 10px;">
+            <div class="consent-row consent-row--compact">
               <div class="toggle"></div>
-              <div class="consent-text" style="font-size: 12px; line-height: 1.4;">
+              <div class="consent-text consent-text--sm">
                 Ich akzeptiere die <a href="#">AGB</a> und <a href="#">Datenschutzerklärung</a><span class="consent-required">*</span>
               </div>
             </div>
-            <div class="consent-row" style="padding: 4px 0; min-height: 44px; gap: 10px;">
+            <div class="consent-row consent-row--compact">
               <div class="toggle"></div>
-              <div class="consent-text" style="font-size: 12px; line-height: 1.4;">
+              <div class="consent-text consent-text--sm">
                 E-Mails mit Angeboten und Neuigkeiten erhalten
               </div>
             </div>
           </div>
-
-          <!-- Actions -->
-          <div class="actions" style="margin-top: 14px;">
+          <div class="actions actions--sm">
             <button class="btn btn-primary disabled">Konto erstellen</button>
-            <button class="btn-text" style="padding: 8px; font-size: 13px;">Zurück zum Login</button>
+            <button class="btn-text btn-text--sm">Zurück zum Login</button>
           </div>
-
         </div>
-
         <div class="safe-bottom"></div>
       </div>
     </div>
 
   </div>
 
-  <!-- ══════════════════════════════════════════════════ -->
-  <!-- INVITE FLOW (eigene Reihe)                        -->
-  <!-- ══════════════════════════════════════════════════ -->
-
-  <div style="width: 100%; display: flex; align-items: center; gap: 16px; margin: 12px 0 4px;">
-    <div style="flex: 1; height: 1px; background: #D0D5DB;"></div>
+  <!-- ═══ INVITE FLOW ═══ -->
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
     <h1 style="white-space: nowrap;">Invite Flow — Web → App Store → App</h1>
-    <div style="flex: 1; height: 1px; background: #D0D5DB;"></div>
+    <div class="section-divider-line"></div>
   </div>
 
   <div class="preview-row">
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 4 — Web Landing Page (Mobile Browser)  -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- ═══ SCREEN 4 — Web Landing Page (Mobile Browser) ═══ -->
     <div id="screen-4">
       <div class="screen-label">4 · Web Landing (Mobile Browser)</div>
       <div class="phone">
-
-        <!-- Browser Chrome statt Dynamic Island -->
         <div class="browser-bar">
           <div class="browser-bar-inner">
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0; opacity: 0.4;">
@@ -869,46 +488,33 @@
               <span>remoryo.de/invite/a8f3...</span>
             </div>
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="flex-shrink:0; opacity: 0.4;">
-              <circle cx="8" cy="4" r="1.5" fill="#1B2C43"/>
-              <circle cx="8" cy="8" r="1.5" fill="#1B2C43"/>
-              <circle cx="8" cy="12" r="1.5" fill="#1B2C43"/>
+              <circle cx="8" cy="4" r="1.5" fill="#1B2C43"/><circle cx="8" cy="8" r="1.5" fill="#1B2C43"/><circle cx="8" cy="12" r="1.5" fill="#1B2C43"/>
             </svg>
           </div>
         </div>
-
-        <!-- Page Content -->
         <div style="flex: 1; display: flex; flex-direction: column; overflow-y: auto;">
-
-          <!-- Hero Section -->
           <div class="top top--turquoise" style="padding: 24px 24px 0;">
             <img src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="width: 32px; margin-bottom: 12px;">
             <img class="hero-photo" src="flyer/foto.jpg" alt="Oma liest Fotoheft" style="width: 260px; height: 180px;">
           </div>
-
           <div class="content" style="padding: 48px 20px 20px; justify-content: flex-start;">
-
             <div class="invite-badge" style="margin-bottom: 16px;">
               <span class="invite-badge-icon">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
-                  <circle cx="12" cy="7" r="4"/>
+                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
                 </svg>
               </span>
               <span class="invite-badge-text">Julius hat dich eingeladen</span>
             </div>
-
             <div style="margin-bottom: 8px;">
               <div class="headline" style="font-size: 26px;">Dein Fotoheft<br>f&uuml;r Oma &amp; Opa</div>
               <div class="sub" style="margin-top: 10px;">Jeden Monat die sch&ouml;nsten Familienfotos als gedrucktes Heft&nbsp;&mdash; direkt in den Briefkasten.</div>
             </div>
-
-            <!-- Step icons with colored backgrounds -->
             <div style="display: flex; gap: 12px; width: 100%; margin: 14px 0 0; align-items: flex-start;">
               <div class="web-step">
                 <div class="web-step-icon web-step-icon--photos">
                   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
-                    <circle cx="12" cy="13" r="4"/>
+                    <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/>
                   </svg>
                 </div>
                 <div class="web-step-label">Fotos<br>hochladen</div>
@@ -917,8 +523,7 @@
               <div class="web-step">
                 <div class="web-step-icon web-step-icon--magazine">
                   <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="var(--blue)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
-                    <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
+                    <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
                   </svg>
                 </div>
                 <div class="web-step-label">Heft<br>gestalten</div>
@@ -933,143 +538,113 @@
                 <div class="web-step-label">Oma<br>freut sich</div>
               </div>
             </div>
-
             <div class="actions" style="margin-top: 16px;">
               <div class="btn-stack">
                 <button class="store-btn store-btn--apple" style="border-radius: var(--btn-radius);">
                   <svg width="20" height="24" viewBox="0 0 20 24" fill="white"><path d="M16.5 12.5c0-2.7 2.2-4 2.3-4.1-1.3-1.8-3.2-2.1-3.9-2.1-1.6-.2-3.2 1-4 1s-2.1-1-3.5-1c-1.8 0-3.4 1-4.3 2.6-1.9 3.2-.5 8 1.3 10.6.9 1.3 2 2.7 3.4 2.6 1.4-.1 1.9-.9 3.5-.9s2.1.9 3.5.8c1.5 0 2.3-1.3 3.2-2.6 1-1.5 1.4-2.9 1.4-3-.1 0-2.9-1.1-2.9-4.3zm-2.7-7.9c.7-.9 1.2-2.2 1.1-3.4-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.2 1.2.1 2.3-.6 3-1.4z"/></svg>
                   <div>
-                    <div style="font-size: 10px; font-weight: 400; opacity: 0.85;">Laden im</div>
-                    <div style="font-size: 16px; font-weight: 600;">App Store</div>
+                    <div class="store-btn-sub">Laden im</div>
+                    <div class="store-btn-main">App Store</div>
                   </div>
                 </button>
                 <button class="store-btn store-btn--google" style="border-radius: var(--btn-radius);">
                   <svg width="20" height="22" viewBox="0 0 20 22" fill="none"><path d="M1 1.6L11.4 11 1 20.4V1.6z" fill="#4285F4"/><path d="M14.2 8.4L11.4 11l2.8 2.6 3.2-1.8c.9-.5.9-1.8 0-2.3l-3.2-1.8z" fill="#FBBC05"/><path d="M1 20.4l7.6-7.2L11.4 11 1 20.4z" fill="#34A853"/><path d="M11.4 11L8.6 8.8 1 1.6l10.4 9.4z" fill="#EA4335"/></svg>
                   <div>
-                    <div style="font-size: 10px; font-weight: 400; opacity: 0.85;">Jetzt bei</div>
-                    <div style="font-size: 16px; font-weight: 600;">Google Play</div>
+                    <div class="store-btn-sub">Jetzt bei</div>
+                    <div class="store-btn-main">Google Play</div>
                   </div>
                 </button>
               </div>
               <button class="btn-text" style="margin-top: 4px; font-size: 13px; color: var(--dark-gray);">Du hast remoryo schon? <span style="color: var(--blue); font-weight: 700;">Direkt &ouml;ffnen</span></button>
             </div>
-
           </div>
         </div>
-
       </div>
     </div>
 
     <!-- Flow Arrow between screens -->
-    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; align-self: center;">
-      <div style="font-size: 11px; font-weight: 600; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 1px; writing-mode: vertical-lr; transform: rotate(180deg);">Download + Öffnen</div>
+    <div class="flow-arrow">
+      <div class="flow-arrow-text">Download + Öffnen</div>
       <svg width="40" height="24" viewBox="0 0 40 24" fill="none">
         <path d="M4 12H32M32 12L24 5M32 12L24 19" stroke="#94A3B3" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
       </svg>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 5 — In-App Invite Welcome               -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- ═══ SCREEN 5 — In-App Invite Welcome ═══ -->
     <div id="screen-5">
       <div class="screen-label">5 · In-App Welcome (nach Download)</div>
       <div class="phone">
-
         <div class="top top--turquoise">
           <img class="logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo">
           <img class="hero-photo" src="app-repo/assets/images/happy-family-fake-image.png" alt="Familie" style="width: 280px; height: 200px; object-position: center 30%;">
         </div>
-
         <div class="content">
-
           <div class="invite-badge">
             <span class="invite-badge-icon">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/>
-                <circle cx="12" cy="7" r="4"/>
+                <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2"/><circle cx="12" cy="7" r="4"/>
               </svg>
             </span>
             <span class="invite-badge-text">Julius hat dich eingeladen</span>
           </div>
-
           <div>
             <div class="headline">Willkommen bei<br>remoryo</div>
             <div class="sub">Erstelle ein Konto und tritt der<br>Familie von Julius bei</div>
           </div>
-
           <div class="actions">
             <div class="btn-stack">
               <button class="btn btn-primary">Konto erstellen & beitreten</button>
-
               <div class="divider">
                 <div class="divider-line"></div>
                 <div class="divider-text">oder</div>
                 <div class="divider-line"></div>
               </div>
-
               <button class="social-btn social-btn--apple">
                 <svg class="social-icon" viewBox="0 0 20 24" fill="white"><path d="M16.5 12.5c0-2.7 2.2-4 2.3-4.1-1.3-1.8-3.2-2.1-3.9-2.1-1.6-.2-3.2 1-4 1s-2.1-1-3.5-1c-1.8 0-3.4 1-4.3 2.6-1.9 3.2-.5 8 1.3 10.6.9 1.3 2 2.7 3.4 2.6 1.4-.1 1.9-.9 3.5-.9s2.1.9 3.5.8c1.5 0 2.3-1.3 3.2-2.6 1-1.5 1.4-2.9 1.4-3-.1 0-2.9-1.1-2.9-4.3zm-2.7-7.9c.7-.9 1.2-2.2 1.1-3.4-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.2 1.2.1 2.3-.6 3-1.4z"/></svg>
                 Mit Apple registrieren
               </button>
-
               <button class="social-btn">
                 <svg class="social-icon" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
                 Mit Google registrieren
               </button>
-
               <button class="btn btn-outline">Ich habe schon ein Konto</button>
             </div>
           </div>
-
         </div>
-
         <div class="safe-bottom"></div>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 6 — E-Mail Bestätigung                 -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- ═══ SCREEN 6 — E-Mail Bestätigung ═══ -->
     <div id="screen-6">
       <div class="screen-label">6 · E-Mail Bestätigung</div>
       <div class="phone">
-
         <div class="top top--turquoise">
           <img class="logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo">
-          <!-- Mail icon circle -->
-          <div style="width: 80px; height: 80px; border-radius: 50%; background: var(--orange); display: flex; align-items: center; justify-content: center; margin-bottom: -44px; position: relative; z-index: 3; box-shadow: 0 20px 50px rgba(27, 44, 67, 0.24), 0 8px 20px rgba(27, 44, 67, 0.12);">
+          <div class="mail-icon-circle">
             <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--white)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
             </svg>
           </div>
         </div>
-
         <div class="content">
-
           <div>
             <div class="headline">Bestätige deine<br>E-Mail</div>
             <div class="sub">Wir haben eine Bestätigung an <span style="font-weight: 700; color: var(--navy);">julius@remoryo.de</span> gesendet. Bitte klicke auf den Link in der E-Mail.</div>
           </div>
-
-          <!-- Resend hint -->
-          <div style="display: flex; align-items: center; gap: 8px; margin-top: 24px;">
+          <div class="resend-hint">
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-              <polyline points="22,6 12,13 2,6"/>
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/>
             </svg>
             <a class="link" style="font-size: 14px; color: var(--navy); font-weight: 600; text-decoration: none;">E-Mail nicht erhalten?</a>
           </div>
-
           <div class="actions">
             <div class="btn-stack">
               <button class="btn btn-outline">Erneut senden</button>
               <button class="btn-text">Weiter ohne Bestätigung</button>
             </div>
           </div>
-
         </div>
-
         <div class="safe-bottom"></div>
       </div>
     </div>

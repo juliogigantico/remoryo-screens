@@ -191,40 +191,18 @@
       background: none;
     }
 
-    /* ── Primary button (orange, full-width CTA) ── */
+    /* ── Buttons ── */
     .btn-primary {
-      width: 100%;
-      padding: 14px 24px;
-      min-height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: var(--btn-radius);
-      background: var(--orange);
-      color: white;
-      font-weight: 700;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
+      width: 100%; padding: 14px 24px; min-height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: var(--btn-radius); background: var(--orange); color: white;
+      font-weight: 700; font-size: 16px; border: none; cursor: pointer; font-family: inherit;
     }
-
-    /* ── Danger button (destructive, soft red) ── */
     .btn-danger-soft {
-      width: 100%;
-      padding: 14px;
-      min-height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: var(--btn-radius);
-      background: #FFF0EE;
-      color: var(--red);
-      font-weight: 700;
-      font-size: 15px;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
+      width: 100%; padding: 14px; min-height: 48px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: var(--btn-radius); background: #FFF0EE; color: var(--red);
+      font-weight: 700; font-size: 15px; border: none; cursor: pointer; font-family: inherit;
     }
 
     /* ── Profile Info Rows (read-only) ── */
@@ -271,40 +249,18 @@
       padding: 16px 20px 0;
     }
 
-    /* ── Outline button ── */
     .btn-outline {
-      width: 100%;
-      padding: 14px;
-      border-radius: var(--btn-radius);
-      background: var(--white);
-      color: var(--navy);
-      font-weight: 700;
-      font-size: 15px;
-      border: 1.5px solid var(--navy);
-      cursor: pointer;
-      font-family: inherit;
-      text-align: center;
-      min-height: 48px;
+      width: 100%; padding: 14px; min-height: 48px;
+      border-radius: var(--btn-radius); background: var(--white); color: var(--navy);
+      font-weight: 700; font-size: 15px; border: 1.5px solid var(--navy);
+      cursor: pointer; font-family: inherit; text-align: center;
     }
-
-    /* ── Danger button (red destructive) ── */
     .btn-danger {
-      width: 100%;
-      padding: 14px;
-      border-radius: var(--btn-radius);
-      background: var(--red);
-      color: white;
-      font-weight: 700;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-      font-family: inherit;
-      min-height: 48px;
+      width: 100%; padding: 14px; min-height: 48px;
+      border-radius: var(--btn-radius); background: var(--red); color: white;
+      font-weight: 700; font-size: 16px; border: none; cursor: pointer; font-family: inherit;
     }
-    .btn-danger:disabled {
-      opacity: 0.4;
-      cursor: not-allowed;
-    }
+    .btn-danger:disabled { opacity: 0.4; cursor: not-allowed; }
 
     /* ── Text button ── */
     .btn-text {
@@ -376,13 +332,8 @@
       background: var(--light-gray);
       text-align: center;
     }
-    .non-owner-message-icon {
-      margin-bottom: 12px;
-      display: flex; justify-content: center;
-    }
-    .non-owner-message-icon svg {
-      width: 32px; height: 32px;
-    }
+    .non-owner-message-icon { margin-bottom: 12px; display: flex; justify-content: center; }
+    .non-owner-message-icon svg { width: 32px; height: 32px; }
     .non-owner-message-text {
       font-size: 14px; color: var(--dark-gray); line-height: 1.5;
       margin-bottom: 16px;
@@ -405,22 +356,15 @@
       font-size: 13px; color: var(--dark-gray); line-height: 1.5;
       display: flex; align-items: flex-start; gap: 10px;
     }
-    .info-note-icon {
-      flex-shrink: 0;
-      display: flex; align-items: center;
-    }
-    .info-note-icon svg {
-      width: 18px; height: 18px;
-    }
+    .info-note-icon { flex-shrink: 0; display: flex; align-items: center; }
+    .info-note-icon svg { width: 18px; height: 18px; }
 
     /* ── Delete Account Warning ── */
     .delete-warning-icon {
       text-align: center; padding: 32px 0 16px;
       display: flex; justify-content: center;
     }
-    .delete-warning-icon svg {
-      width: 56px; height: 56px;
-    }
+    .delete-warning-icon svg { width: 56px; height: 56px; }
     .delete-warning-text {
       font-size: 16px; font-weight: 700; color: var(--red);
       text-align: center; padding: 0 20px; margin-bottom: 20px;
@@ -434,18 +378,12 @@
       line-height: 1.4;
     }
     .delete-consequence-item::before {
-      content: '';
-      width: 6px; height: 6px; border-radius: 3px;
-      background: var(--red); flex-shrink: 0;
-      margin-top: 6px;
+      content: ''; width: 6px; height: 6px; border-radius: 3px;
+      background: var(--red); flex-shrink: 0; margin-top: 6px;
     }
-
-    .delete-confirm-section {
-      padding: 0 20px;
-    }
+    .delete-confirm-section { padding: 0 20px; }
     .delete-confirm-label {
-      font-size: 13px; color: var(--dark-gray); margin-bottom: 8px;
-      font-weight: 500;
+      font-size: 13px; color: var(--dark-gray); margin-bottom: 8px; font-weight: 500;
     }
     .delete-confirm-input {
       width: 100%; padding: 14px 16px; border-radius: var(--input-radius);
@@ -520,12 +458,8 @@
     }
     .timeline-step:last-child { padding-bottom: 0; }
     .timeline-step::before {
-      content: '';
-      position: absolute;
-      left: 15px; top: 32px;
-      width: 2px;
-      height: calc(100% - 32px);
-      background: var(--border);
+      content: ''; position: absolute; left: 15px; top: 32px;
+      width: 2px; height: calc(100% - 32px); background: var(--border);
     }
     .timeline-step:last-child::before { display: none; }
     .timeline-step--completed::before { background: #34C759; }
@@ -536,23 +470,12 @@
       display: flex; align-items: center; justify-content: center;
       flex-shrink: 0; position: relative; z-index: 1;
     }
-    .timeline-dot--completed {
-      background: #34C759;
-    }
-    .timeline-dot--completed svg {
-      width: 16px; height: 16px; color: white;
-    }
-    .timeline-dot--current {
-      background: var(--orange);
-      animation: pulse-dot 2s ease-in-out infinite;
-    }
+    .timeline-dot--completed { background: #34C759; }
+    .timeline-dot--completed svg { width: 16px; height: 16px; color: white; }
+    .timeline-dot--current { background: var(--orange); animation: pulse-dot 2s ease-in-out infinite; }
     .timeline-dot--current::after {
-      content: '';
-      position: absolute;
-      width: 32px; height: 32px; border-radius: 50%;
-      background: var(--orange);
-      opacity: 0;
-      animation: pulse-ring 2s ease-in-out infinite;
+      content: ''; position: absolute; width: 32px; height: 32px; border-radius: 50%;
+      background: var(--orange); opacity: 0; animation: pulse-ring 2s ease-in-out infinite;
     }
     @keyframes pulse-ring {
       0% { transform: scale(1); opacity: 0.4; }
@@ -562,10 +485,7 @@
       0%, 100% { opacity: 1; }
       50% { opacity: 0.85; }
     }
-    .timeline-dot--pending {
-      background: var(--white);
-      border: 2px solid var(--border);
-    }
+    .timeline-dot--pending { background: var(--white); border: 2px solid var(--border); }
 
     .timeline-content { flex: 1; padding-top: 4px; }
     .timeline-label {
@@ -585,24 +505,14 @@
     }
 
     .delivery-estimate {
-      margin: 8px 20px 20px;
-      padding: 16px;
-      border-radius: 12px;
-      background: var(--blue-light);
-      font-size: 14px; color: var(--navy); font-weight: 600;
-      text-align: center;
+      margin: 8px 20px 20px; padding: 16px; border-radius: 12px; background: var(--blue-light);
+      font-size: 14px; color: var(--navy); font-weight: 600; text-align: center;
       display: flex; align-items: center; justify-content: center; gap: 8px;
     }
-    .delivery-estimate svg {
-      width: 18px; height: 18px; color: var(--blue); flex-shrink: 0;
-    }
-
+    .delivery-estimate svg { width: 18px; height: 18px; color: var(--blue); flex-shrink: 0; }
     .shipping-disclaimer {
-      margin: 0 20px 20px;
-      padding: 12px 16px;
-      border-radius: 12px;
-      background: var(--light-gray);
-      display: flex; align-items: flex-start; gap: 10px;
+      margin: 0 20px 20px; padding: 12px 16px; border-radius: 12px;
+      background: var(--light-gray); display: flex; align-items: flex-start; gap: 10px;
     }
     .shipping-disclaimer-icon {
       flex-shrink: 0; width: 16px; height: 16px; color: var(--mid-gray); margin-top: 1px;
@@ -629,15 +539,87 @@
       font-size: 11px; color: #A0A0A0; font-weight: 500; text-align: center;
     }
     [id^="screen-"] { scroll-margin-top: 20px; }
+
+    /* ── Utility Classes ── */
+    .optional-label { font-weight: 400; text-transform: none; }
+    .text-center { text-align: center; }
+    .mt-8 { margin-top: 8px; }
+    .mt-16 { margin-top: 16px; }
+    .mt-20 { margin-top: 20px; }
+    .mt-24 { margin-top: 24px; }
+    .mt-28 { margin-top: 28px; }
+    .pad-bottom-bar { padding: 12px 20px; border-top: 1px solid var(--border); background: var(--white); }
+    .pad-hx { padding: 0 20px; }
+    .form-label--flush { margin-top: 0; }
+
+    /* ── Payment Option Row ── */
+    .pay-option { display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: white; border: 1.5px solid var(--border); border-radius: 12px; margin-bottom: 8px; cursor: pointer; }
+    .pay-option:last-child { margin-bottom: 0; }
+    .pay-option-icon { width: 40px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; }
+    .pay-option-label { flex: 1; font-size: 14px; font-weight: 600; color: var(--navy); }
+    .pay-option-radio { width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border); }
+
+    /* ── Toggle Switch ── */
+    .toggle-track { width: 52px; height: 32px; background: var(--orange); border-radius: 16px; position: relative; flex-shrink: 0; cursor: pointer; }
+    .toggle-knob { width: 26px; height: 26px; background: white; border-radius: 13px; position: absolute; top: 3px; right: 3px; box-shadow: 0 2px 4px rgba(0,0,0,0.15); }
+
+    /* ── Toggle Row (label + switch) ── */
+    .toggle-row { display: flex; align-items: center; justify-content: space-between; padding: 14px 0; }
+
+    /* ── Section Label (small caps, inline variant) ── */
+    .section-label { font-size: 12px; font-weight: 700; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; }
+    .section-label--sm { font-size: 11px; letter-spacing: 1px; margin-bottom: 10px; }
+
+    /* ── Group Avatar (in settings menu) ── */
+    .group-avatar { width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    .group-avatar-text { font-weight: 700; font-size: 14px; }
+
+    /* ── Format Card (fotoheft format choice) ── */
+    .format-card { flex: 1; border-radius: 14px; padding: 14px; text-align: center; }
+    .format-card--active { border: 2px solid var(--orange); background: #FFF8EB; cursor: pointer; }
+    .format-card--disabled { border: 1.5px solid var(--border); opacity: 0.5; }
+    .format-card-title { font-weight: 700; font-size: 15px; color: var(--navy); }
+    .format-card-sub { font-size: 12px; font-weight: 600; margin-top: 2px; }
+
+    /* ── Cover Template Card ── */
+    .cover-card { flex: 1; border-radius: 12px; overflow: hidden; cursor: pointer; }
+    .cover-card--active { border: 2px solid var(--orange); }
+    .cover-card--default { border: 1.5px solid var(--border); }
+    .cover-card-preview { height: 90px; display: flex; align-items: center; justify-content: center; }
+    .cover-card-preview-text { font-size: 11px; font-weight: 700; text-align: center; line-height: 1.3; }
+    .cover-card-label { padding: 6px; text-align: center; font-size: 11px; }
+    .cover-card-label--active { font-weight: 600; color: var(--orange); }
+    .cover-card-label--default { font-weight: 500; color: var(--dark-gray); }
+
+    /* ── Toggle Content Text ── */
+    .toggle-title { font-size: 15px; font-weight: 600; color: var(--navy); }
+    .toggle-desc { font-size: 13px; color: var(--dark-gray); margin-top: 2px; }
+
+    /* ── Address Card (verification) ── */
+    .addr-card { border-radius: 12px; padding: 16px; }
+    .addr-card-text { font-size: 15px; font-weight: 500; color: var(--navy); line-height: 1.5; }
+
+    /* ── Current Magazine Info Card ── */
+    .mag-info { background: var(--blue-light); border-radius: 14px; padding: 16px; display: flex; align-items: center; gap: 14px; }
+    .mag-info-icon { width: 48px; height: 62px; border-radius: 6px; background: linear-gradient(135deg, var(--blue-soft), var(--blue)); display: flex; align-items: center; justify-content: center; }
+    .mag-info-title { font-weight: 700; font-size: 15px; color: var(--navy); }
+    .mag-info-sub { font-size: 13px; color: var(--dark-gray); margin-top: 2px; }
+
+    /* ── Warning Banner (address verification) ── */
+    .warn-banner { margin: 16px 20px; padding: 18px 20px; background: #FFF3DC; border-radius: 14px; display: flex; align-items: flex-start; gap: 14px; }
+    .warn-banner-icon { flex-shrink: 0; margin-top: 2px; }
+    .warn-banner-title { font-weight: 700; font-size: 15px; color: var(--navy); margin-bottom: 4px; }
+    .warn-banner-desc { font-size: 13px; color: var(--dark-gray); line-height: 1.5; }
+
+    /* ── Group Item Row (Screen 1 group section) ── */
+    .group-row { display: flex; align-items: center; gap: 10px; }
   </style>
 </head>
 <body>
 
   <h1>Remoryo Settings Preview</h1>
 
-  <!-- ══════════════════════════════════════════════════ -->
-  <!-- ROW 1: Einstellungen & Profil (Screens 1-3)       -->
-  <!-- ══════════════════════════════════════════════════ -->
+  <!--ROW 1: Einstellungen & Profil (Screens 1-3)       -->
 
   <div class="section-divider">
     <div class="section-divider-line"></div>
@@ -647,9 +629,7 @@
 
   <div class="preview-row">
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 1 — Settings Hauptmenü                 -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 1 — Settings Hauptmenü                 -->
     <div id="screen-1">
       <div class="screen-label">1 &middot; Einstellungen</div>
       <div class="phone">
@@ -680,10 +660,8 @@
           <div class="settings-section">
             <div class="settings-section-title">Gruppe</div>
             <div class="settings-item" style="background: var(--blue-light); border-radius: 12px; padding: 16px; margin-bottom: 8px;">
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--orange); display: flex; align-items: center; justify-content: center;">
-                  <span style="color: white; font-weight: 700; font-size: 14px;">FB</span>
-                </div>
+              <div class="group-row">
+                <div class="group-avatar" style="background: var(--orange);"><span class="group-avatar-text" style="color: white;">FB</span></div>
                 <div>
                   <div class="settings-item-label">Familie Blümel</div>
                   <div class="settings-item-sub">Aktive Gruppe · 3 Mitglieder</div>
@@ -692,10 +670,8 @@
               <span class="settings-chevron"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg></span>
             </div>
             <div class="settings-item" style="border-radius: 12px; padding: 16px;">
-              <div style="display: flex; align-items: center; gap: 10px;">
-                <div style="width: 36px; height: 36px; border-radius: 50%; background: var(--turquoise); display: flex; align-items: center; justify-content: center;">
-                  <span style="color: var(--navy); font-weight: 700; font-size: 14px;">SW</span>
-                </div>
+              <div class="group-row">
+                <div class="group-avatar" style="background: var(--turquoise);"><span class="group-avatar-text" style="color: var(--navy);">SW</span></div>
                 <div>
                   <div class="settings-item-label">Seniorenheim Waldblick</div>
                   <div class="settings-item-sub">B2B · Hauszeitung</div>
@@ -845,7 +821,7 @@
 
           <button class="logout-btn">Abmelden</button>
           <div class="logout-hint">Du wirst abgemeldet und musst dich erneut anmelden</div>
-          <div style="text-align: center;"><span class="account-delete-link">Account löschen</span></div>
+          <div class="text-center"><span class="account-delete-link">Account löschen</span></div>
           <div class="account-delete-hint">Dein Account und alle Daten werden unwiderruflich gelöscht.</div>
 
         </div>
@@ -854,9 +830,7 @@
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 2 — Profil Übersicht (read-only)       -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 2 — Profil Übersicht (read-only)       -->
     <div id="screen-2">
       <div class="screen-label">2 &middot; Mein Nutzerprofil</div>
       <div class="phone">
@@ -882,7 +856,7 @@
           </div>
 
           <!-- Read-only profile info -->
-          <div style="padding: 0 20px 8px;">
+          <div class="pad-hx" style="padding-bottom: 8px;">
             <div class="profile-info-row">
               <div class="profile-info-label">Name</div>
               <div class="profile-info-value">Julius Blümel</div>
@@ -897,7 +871,6 @@
             </div>
           </div>
 
-          <!-- Profil bearbeiten button -->
           <div style="padding: 8px 20px 0;">
             <button class="btn-primary">Profil bearbeiten</button>
           </div>
@@ -915,8 +888,7 @@
             </div>
           </div>
 
-          <!-- Account delete link -->
-          <div style="text-align: center; padding: 16px 20px 0;">
+          <div class="text-center" style="padding: 16px 20px 0;">
             <span class="account-delete-link">Account löschen</span>
           </div>
           <div class="account-delete-hint" style="padding-bottom: 32px;">Dein Account und alle Daten werden unwiderruflich gelöscht.</div>
@@ -926,9 +898,7 @@
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 3 — Profil bearbeiten                   -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 3 — Profil bearbeiten                   -->
     <div id="screen-3">
       <div class="screen-label">3 &middot; Profil bearbeiten</div>
       <div class="phone">
@@ -980,11 +950,10 @@
             <div class="form-label">Geburtstag</div>
             <input class="form-input" type="text" value="15.03.1992" readonly>
 
-            <div class="form-label">Anzeigename <span style="font-weight: 400; text-transform: none;">(optional)</span></div>
+            <div class="form-label">Anzeigename <span class="optional-label">(optional)</span></div>
             <input class="form-input" type="text" value="Julius" readonly style="color: var(--mid-gray); font-weight: 400;">
 
-            <!-- Passwort ändern link -->
-            <div style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border);">
+            <div class="mt-24" style="padding-top: 16px; border-top: 1px solid var(--border);">
               <div class="settings-item" style="border-bottom: none; padding: 12px 0;">
                 <div class="settings-item-left">
                   <div class="settings-item-icon" style="background: var(--light-gray);"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2l-2 2m-7.61 7.61a5.5 5.5 0 11-7.778 7.778 5.5 5.5 0 017.777-7.777zm0 0L15.5 7.5m0 0l3 3L22 7l-3-3m-3.5 3.5L19 4"/></svg></div>
@@ -996,12 +965,8 @@
               </div>
             </div>
 
-            <div style="margin-top: 16px;">
-              <button class="btn-primary">Speichern</button>
-            </div>
-            <div style="text-align: center; margin-top: 4px;">
-              <button class="btn-text">Abbrechen</button>
-            </div>
+            <div class="mt-16"><button class="btn-primary">Speichern</button></div>
+            <div class="text-center" style="margin-top: 4px;"><button class="btn-text">Abbrechen</button></div>
           </div>
 
         </div>
@@ -1011,9 +976,7 @@
 
   </div>
 
-  <!-- ══════════════════════════════════════════════════ -->
-  <!-- ROW 2: Sicherheit & Adresse (Screens 4-5)        -->
-  <!-- ══════════════════════════════════════════════════ -->
+  <!--ROW 2: Sicherheit & Adresse (Screens 4-5)        -->
 
   <div class="section-divider">
     <div class="section-divider-line"></div>
@@ -1023,9 +986,7 @@
 
   <div class="preview-row">
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 4 — Passwort ändern                     -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 4 — Passwort ändern                     -->
     <div id="screen-4">
       <div class="screen-label">4 &middot; Passwort ändern</div>
       <div class="phone">
@@ -1084,10 +1045,8 @@
               </div>
             </div>
 
-            <div style="margin-top: 28px;">
-              <button class="btn-primary">Passwort ändern</button>
-            </div>
-            <div class="form-hint" style="text-align: center; margin-top: 10px;">Mindestens 8 Zeichen</div>
+            <div class="mt-28"><button class="btn-primary">Passwort ändern</button></div>
+            <div class="form-hint text-center" style="margin-top: 10px;">Mindestens 8 Zeichen</div>
           </div>
 
         </div>
@@ -1095,9 +1054,7 @@
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 5 — Lieferadresse                       -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 5 — Lieferadresse                       -->
     <div id="screen-5">
       <div class="screen-label">5 &middot; Lieferadresse</div>
       <div class="phone">
@@ -1123,39 +1080,36 @@
             <div class="form-label">Nachname</div>
             <input class="form-input" type="text" value="Blümel" readonly>
 
-            <div style="margin-top: 20px;">
+            <div class="mt-20">
               <div class="form-row">
                 <div class="form-group">
-                  <div class="form-label" style="margin-top: 0;">Straße</div>
+                  <div class="form-label form-label--flush">Straße</div>
                   <input class="form-input" type="text" value="Bergstraße" readonly>
                 </div>
                 <div class="form-group--small">
-                  <div class="form-label" style="margin-top: 0;">Hausnr.</div>
+                  <div class="form-label form-label--flush">Hausnr.</div>
                   <input class="form-input" type="text" value="12" readonly>
                 </div>
               </div>
             </div>
-
-            <div style="margin-top: 20px;">
+            <div class="mt-20">
               <div class="form-row">
                 <div class="form-group--small">
-                  <div class="form-label" style="margin-top: 0;">PLZ</div>
+                  <div class="form-label form-label--flush">PLZ</div>
                   <input class="form-input" type="text" value="60311" readonly>
                 </div>
                 <div class="form-group">
-                  <div class="form-label" style="margin-top: 0;">Ort</div>
+                  <div class="form-label form-label--flush">Ort</div>
                   <input class="form-input" type="text" value="Frankfurt" readonly>
                 </div>
               </div>
             </div>
 
-            <div class="form-label">Adresszusatz <span style="font-weight: 400; text-transform: none;">(optional)</span></div>
+            <div class="form-label">Adresszusatz <span class="optional-label">(optional)</span></div>
             <input class="form-input" type="text" placeholder="z.B. Bitte klingeln" readonly>
 
-            <div style="margin-top: 28px;">
-              <button class="btn-primary">Speichern</button>
-            </div>
-            <div class="form-hint" style="text-align: center; margin-top: 10px;">Das Fotoheft wird jeden Monat automatisch an diese Adresse geschickt.</div>
+            <div class="mt-28"><button class="btn-primary">Speichern</button></div>
+            <div class="form-hint text-center" style="margin-top: 10px;">Das Fotoheft wird jeden Monat automatisch an diese Adresse geschickt.</div>
           </div>
 
         </div>
@@ -1165,9 +1119,7 @@
 
   </div>
 
-  <!-- ══════════════════════════════════════════════════ -->
-  <!-- ROW 3: Zahlung & Account (Screens 6-8)            -->
-  <!-- ══════════════════════════════════════════════════ -->
+  <!--ROW 3: Zahlung & Account (Screens 6-8)            -->
 
   <div class="section-divider">
     <div class="section-divider-line"></div>
@@ -1177,9 +1129,7 @@
 
   <div class="preview-row">
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 6 — Zahlungsmethode (Verwalter)        -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 6 — Zahlungsmethode (Verwalter)        -->
     <div id="screen-6">
       <div class="screen-label">6 &middot; Zahlungsmethode (Verwalter)</div>
       <div class="phone">
@@ -1211,55 +1161,33 @@
           </div>
 
           <!-- Other payment options -->
-          <div style="padding: 0 20px;">
-            <div style="font-size: 11px; font-weight: 700; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">Zahlungsmethode &auml;ndern</div>
+          <div class="pad-hx">
+            <div class="section-label--sm">Zahlungsmethode &auml;ndern</div>
 
-            <!-- PayPal -->
-            <div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: white; border: 1.5px solid var(--border); border-radius: 12px; margin-bottom: 8px; cursor: pointer;">
-              <div style="width: 40px; height: 28px; background: #003087; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" font-family="Inter, sans-serif" font-weight="800" font-size="7">PP</text></svg>
-              </div>
-              <div style="flex: 1; font-size: 14px; font-weight: 600; color: var(--navy);">PayPal</div>
-              <div style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border);"></div>
+            <div class="pay-option">
+              <div class="pay-option-icon" style="background: #003087;"><svg width="20" height="20" viewBox="0 0 24 24" fill="white"><text x="50%" y="55%" text-anchor="middle" dominant-baseline="middle" font-family="Inter, sans-serif" font-weight="800" font-size="7">PP</text></svg></div>
+              <div class="pay-option-label">PayPal</div>
+              <div class="pay-option-radio"></div>
             </div>
-
-            <!-- Apple Pay -->
-            <div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: white; border: 1.5px solid var(--border); border-radius: 12px; margin-bottom: 8px; cursor: pointer;">
-              <div style="width: 40px; height: 28px; background: #000; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
-                <svg width="16" height="20" viewBox="0 0 20 24" fill="white"><path d="M16.5 12.5c0-2.7 2.2-4 2.3-4.1-1.3-1.8-3.2-2.1-3.9-2.1-1.6-.2-3.2 1-4 1s-2.1-1-3.5-1c-1.8 0-3.4 1-4.3 2.6-1.9 3.2-.5 8 1.3 10.6.9 1.3 2 2.7 3.4 2.6 1.4-.1 1.9-.9 3.5-.9s2.1.9 3.5.8c1.5 0 2.3-1.3 3.2-2.6 1-1.5 1.4-2.9 1.4-3-.1 0-2.9-1.1-2.9-4.3zm-2.7-7.9c.7-.9 1.2-2.2 1.1-3.4-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.2 1.2.1 2.3-.6 3-1.4z"/></svg>
-              </div>
-              <div style="flex: 1; font-size: 14px; font-weight: 600; color: var(--navy);">Apple Pay</div>
-              <div style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border);"></div>
+            <div class="pay-option">
+              <div class="pay-option-icon" style="background: #000;"><svg width="16" height="20" viewBox="0 0 20 24" fill="white"><path d="M16.5 12.5c0-2.7 2.2-4 2.3-4.1-1.3-1.8-3.2-2.1-3.9-2.1-1.6-.2-3.2 1-4 1s-2.1-1-3.5-1c-1.8 0-3.4 1-4.3 2.6-1.9 3.2-.5 8 1.3 10.6.9 1.3 2 2.7 3.4 2.6 1.4-.1 1.9-.9 3.5-.9s2.1.9 3.5.8c1.5 0 2.3-1.3 3.2-2.6 1-1.5 1.4-2.9 1.4-3-.1 0-2.9-1.1-2.9-4.3zm-2.7-7.9c.7-.9 1.2-2.2 1.1-3.4-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.2 1.2.1 2.3-.6 3-1.4z"/></svg></div>
+              <div class="pay-option-label">Apple Pay</div>
+              <div class="pay-option-radio"></div>
             </div>
-
-            <!-- Google Pay -->
-            <div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: white; border: 1.5px solid var(--border); border-radius: 12px; margin-bottom: 8px; cursor: pointer;">
-              <div style="width: 40px; height: 28px; background: white; border: 1px solid #ddd; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
-                <svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-              </div>
-              <div style="flex: 1; font-size: 14px; font-weight: 600; color: var(--navy);">Google Pay</div>
-              <div style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border);"></div>
+            <div class="pay-option">
+              <div class="pay-option-icon" style="background: white; border: 1px solid #ddd;"><svg width="18" height="18" viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg></div>
+              <div class="pay-option-label">Google Pay</div>
+              <div class="pay-option-radio"></div>
             </div>
-
-            <!-- Kreditkarte -->
-            <div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: white; border: 1.5px solid var(--border); border-radius: 12px; margin-bottom: 8px; cursor: pointer;">
-              <div style="width: 40px; height: 28px; background: var(--navy); border-radius: 6px; display: flex; align-items: center; justify-content: center;">
-                <svg width="20" height="16" viewBox="0 0 24 18" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-                  <rect x="1" y="1" width="22" height="16" rx="2"/>
-                  <line x1="1" y1="7" x2="23" y2="7"/>
-                </svg>
-              </div>
-              <div style="flex: 1; font-size: 14px; font-weight: 600; color: var(--navy);">Andere Kreditkarte</div>
-              <div style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border);"></div>
+            <div class="pay-option">
+              <div class="pay-option-icon" style="background: var(--navy);"><svg width="20" height="16" viewBox="0 0 24 18" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="1" width="22" height="16" rx="2"/><line x1="1" y1="7" x2="23" y2="7"/></svg></div>
+              <div class="pay-option-label">Andere Kreditkarte</div>
+              <div class="pay-option-radio"></div>
             </div>
-
-            <!-- EC-Karte / Lastschrift -->
-            <div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: white; border: 1.5px solid var(--border); border-radius: 12px; cursor: pointer;">
-              <div style="width: 40px; height: 28px; background: #0066B3; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
-                <span style="color: white; font-weight: 800; font-size: 7px; font-family: Inter, sans-serif;">EC</span>
-              </div>
-              <div style="flex: 1; font-size: 14px; font-weight: 600; color: var(--navy);">EC-Karte / Lastschrift</div>
-              <div style="width: 20px; height: 20px; border-radius: 50%; border: 2px solid var(--border);"></div>
+            <div class="pay-option">
+              <div class="pay-option-icon" style="background: #0066B3;"><span style="color: white; font-weight: 800; font-size: 7px; font-family: Inter, sans-serif;">EC</span></div>
+              <div class="pay-option-label">EC-Karte / Lastschrift</div>
+              <div class="pay-option-radio"></div>
             </div>
           </div>
 
@@ -1280,9 +1208,7 @@
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 7 — Zahlungsmethode (Mitglied)         -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 7 — Zahlungsmethode (Mitglied)         -->
     <div id="screen-7">
       <div class="screen-label">7 &middot; Zahlungsmethode (Mitglied)</div>
       <div class="phone">
@@ -1318,9 +1244,7 @@
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 8 — Account löschen                     -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 8 — Account löschen                     -->
     <div id="screen-8">
       <div class="screen-label">8 &middot; Account löschen</div>
       <div class="phone">
@@ -1362,13 +1286,8 @@
             <div class="delete-confirm-label">Gib <strong>LÖSCHEN</strong> ein um zu bestätigen</div>
             <input class="delete-confirm-input" type="text" placeholder="LÖSCHEN" readonly>
 
-            <div style="margin-top: 24px;">
-              <button class="btn-danger" disabled>Account löschen</button>
-            </div>
-
-            <div style="text-align: center; margin-top: 8px;">
-              <button class="btn-text">Abbrechen</button>
-            </div>
+            <div class="mt-24"><button class="btn-danger" disabled>Account löschen</button></div>
+            <div class="text-center mt-8"><button class="btn-text">Abbrechen</button></div>
           </div>
 
         </div>
@@ -1378,9 +1297,7 @@
 
   </div>
 
-  <!-- ══════════════════════════════════════════════════ -->
-  <!-- ROW 4: Versand (Screen 9)                         -->
-  <!-- ══════════════════════════════════════════════════ -->
+  <!--ROW 4: Versand (Screen 9)                         -->
 
   <div class="section-divider">
     <div class="section-divider-line"></div>
@@ -1390,9 +1307,7 @@
 
   <div class="preview-row">
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 9 — Versandstatus                       -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 9 — Versandstatus                       -->
     <div id="screen-9">
       <div class="screen-label">9 &middot; Versandstatus</div>
       <div class="phone">
@@ -1513,9 +1428,7 @@
 
   </div>
 
-  <!-- ══════════════════════════════════════════════════ -->
-  <!-- ROW 5: Fotoheft Einstellungen (Screen 10)         -->
-  <!-- ══════════════════════════════════════════════════ -->
+  <!--ROW 5: Fotoheft Einstellungen (Screen 10)         -->
 
   <div class="section-divider">
     <div class="section-divider-line"></div>
@@ -1525,9 +1438,7 @@
 
   <div class="preview-row">
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 10 — Fotoheft Einstellungen             -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 10 — Fotoheft Einstellungen             -->
     <div id="screen-10">
       <div class="screen-label">10 &middot; Fotoheft Einstellungen</div>
       <div class="phone">
@@ -1546,14 +1457,12 @@
 
           <!-- Current Magazine Info -->
           <div style="padding: 20px 20px 0;">
-            <div style="font-size: 12px; font-weight: 700; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px;">Aktuelles Heft</div>
-            <div style="background: var(--blue-light); border-radius: 14px; padding: 16px; display: flex; align-items: center; gap: 14px;">
-              <div style="width: 48px; height: 62px; border-radius: 6px; background: linear-gradient(135deg, var(--blue-soft), var(--blue)); display: flex; align-items: center; justify-content: center;">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
-              </div>
+            <div class="section-label">Aktuelles Heft</div>
+            <div class="mag-info">
+              <div class="mag-info-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg></div>
               <div>
-                <div style="font-weight: 700; font-size: 15px; color: var(--navy);">M&auml;rz 2026</div>
-                <div style="font-size: 13px; color: var(--dark-gray); margin-top: 2px;">12 Seiten &middot; 8 Fotos ausgew&auml;hlt</div>
+                <div class="mag-info-title">M&auml;rz 2026</div>
+                <div class="mag-info-sub">12 Seiten &middot; 8 Fotos ausgew&auml;hlt</div>
               </div>
             </div>
           </div>
@@ -1566,74 +1475,66 @@
           </div>
 
           <!-- Format -->
-          <div style="padding: 0 20px;">
+          <div class="pad-hx">
             <div class="form-label" style="margin-top: 8px;">Format</div>
             <div style="display: flex; gap: 10px; margin-top: 4px;">
-              <div style="flex: 1; border: 2px solid var(--orange); border-radius: 14px; padding: 14px; text-align: center; background: #FFF8EB; cursor: pointer;">
-                <div style="font-weight: 700; font-size: 15px; color: var(--navy);">12 Seiten</div>
-                <div style="font-size: 12px; color: var(--orange); font-weight: 600; margin-top: 2px;">Standard</div>
+              <div class="format-card format-card--active">
+                <div class="format-card-title">12 Seiten</div>
+                <div class="format-card-sub" style="color: var(--orange);">Standard</div>
               </div>
-              <div style="flex: 1; border: 1.5px solid var(--border); border-radius: 14px; padding: 14px; text-align: center; opacity: 0.5;">
-                <div style="font-weight: 700; font-size: 15px; color: var(--navy);">24 Seiten</div>
-                <div style="font-size: 12px; color: var(--mid-gray); font-weight: 600; margin-top: 2px;">Bald verf&uuml;gbar</div>
+              <div class="format-card format-card--disabled">
+                <div class="format-card-title">24 Seiten</div>
+                <div class="format-card-sub" style="color: var(--mid-gray);">Bald verf&uuml;gbar</div>
               </div>
             </div>
           </div>
 
           <!-- Automatisch erstellen -->
           <div style="padding: 20px 20px 0;">
-            <div class="form-label" style="margin-top: 0;">Automatische Erstellung</div>
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0; border-bottom: 1px solid var(--border);">
+            <div class="form-label form-label--flush">Automatische Erstellung</div>
+            <div class="toggle-row" style="border-bottom: 1px solid var(--border);">
               <div>
-                <div style="font-size: 15px; font-weight: 600; color: var(--navy);">Heft automatisch erstellen</div>
-                <div style="font-size: 13px; color: var(--dark-gray); margin-top: 2px; line-height: 1.4;">Remoryo erstellt am Monatsende<br>automatisch ein Heft aus allen Fotos</div>
+                <div class="toggle-title">Heft automatisch erstellen</div>
+                <div class="toggle-desc" style="line-height: 1.4;">Remoryo erstellt am Monatsende<br>automatisch ein Heft aus allen Fotos</div>
               </div>
-              <!-- Toggle switch (on state) -->
-              <div style="width: 52px; height: 32px; background: var(--orange); border-radius: 16px; position: relative; flex-shrink: 0; cursor: pointer;">
-                <div style="width: 26px; height: 26px; background: white; border-radius: 13px; position: absolute; top: 3px; right: 3px; box-shadow: 0 2px 4px rgba(0,0,0,0.15);"></div>
-              </div>
+              <div class="toggle-track"><div class="toggle-knob"></div></div>
             </div>
           </div>
 
           <!-- Cover-Vorlage -->
           <div style="padding: 20px 20px 0;">
-            <div class="form-label" style="margin-top: 0;">Cover-Vorlage</div>
+            <div class="form-label form-label--flush">Cover-Vorlage</div>
             <div style="display: flex; gap: 10px; margin-top: 4px;">
-              <!-- Template 1 (selected) -->
-              <div style="flex: 1; border: 2px solid var(--orange); border-radius: 12px; overflow: hidden; cursor: pointer;">
-                <div style="height: 90px; background: linear-gradient(135deg, var(--blue-soft), var(--blue)); display: flex; align-items: center; justify-content: center;">
-                  <div style="font-size: 11px; font-weight: 700; color: white; text-align: center; line-height: 1.3;">Titel<br><span style="font-size: 16px;">&#128247;</span><br><span style="font-size: 9px;">Monat Jahr</span></div>
+              <div class="cover-card cover-card--active">
+                <div class="cover-card-preview" style="background: linear-gradient(135deg, var(--blue-soft), var(--blue));">
+                  <div class="cover-card-preview-text" style="color: white;">Titel<br><span style="font-size: 16px;">&#128247;</span><br><span style="font-size: 9px;">Monat Jahr</span></div>
                 </div>
-                <div style="padding: 6px; text-align: center; font-size: 11px; font-weight: 600; color: var(--orange);">Klassisch</div>
+                <div class="cover-card-label cover-card-label--active">Klassisch</div>
               </div>
-              <!-- Template 2 -->
-              <div style="flex: 1; border: 1.5px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer;">
-                <div style="height: 90px; background: linear-gradient(135deg, #E8DDD1, #D4C8B8); display: flex; align-items: center; justify-content: center;">
-                  <div style="font-size: 11px; font-weight: 700; color: var(--navy); text-align: center; line-height: 1.3;"><span style="font-size: 16px;">&#128247;</span><br>Titel</div>
+              <div class="cover-card cover-card--default">
+                <div class="cover-card-preview" style="background: linear-gradient(135deg, #E8DDD1, #D4C8B8);">
+                  <div class="cover-card-preview-text" style="color: var(--navy);"><span style="font-size: 16px;">&#128247;</span><br>Titel</div>
                 </div>
-                <div style="padding: 6px; text-align: center; font-size: 11px; font-weight: 500; color: var(--dark-gray);">Modern</div>
+                <div class="cover-card-label cover-card-label--default">Modern</div>
               </div>
-              <!-- Template 3 -->
-              <div style="flex: 1; border: 1.5px solid var(--border); border-radius: 12px; overflow: hidden; cursor: pointer;">
-                <div style="height: 90px; background: linear-gradient(135deg, #E2F3F3, #B8E0E0); display: flex; align-items: center; justify-content: center;">
-                  <div style="font-size: 11px; font-weight: 700; color: var(--navy); text-align: center; line-height: 1.3;">Titel<br><span style="font-size: 16px;">&#127800;</span></div>
+              <div class="cover-card cover-card--default">
+                <div class="cover-card-preview" style="background: linear-gradient(135deg, #E2F3F3, #B8E0E0);">
+                  <div class="cover-card-preview-text" style="color: var(--navy);">Titel<br><span style="font-size: 16px;">&#127800;</span></div>
                 </div>
-                <div style="padding: 6px; text-align: center; font-size: 11px; font-weight: 500; color: var(--dark-gray);">Frisch</div>
+                <div class="cover-card-label cover-card-label--default">Frisch</div>
               </div>
             </div>
           </div>
 
           <!-- Unterhaltungsseite -->
           <div style="padding: 20px 20px 0;">
-            <div class="form-label" style="margin-top: 0;">Unterhaltungsseite</div>
-            <div style="display: flex; align-items: center; justify-content: space-between; padding: 14px 0;">
+            <div class="form-label form-label--flush">Unterhaltungsseite</div>
+            <div class="toggle-row">
               <div>
-                <div style="font-size: 15px; font-weight: 600; color: var(--navy);">R&auml;tsel & Witze einf&uuml;gen</div>
-                <div style="font-size: 13px; color: var(--dark-gray); margin-top: 2px;">Letzte Seite mit Unterhaltung f&uuml;llen</div>
+                <div class="toggle-title">R&auml;tsel & Witze einf&uuml;gen</div>
+                <div class="toggle-desc">Letzte Seite mit Unterhaltung f&uuml;llen</div>
               </div>
-              <div style="width: 52px; height: 32px; background: var(--orange); border-radius: 16px; position: relative; flex-shrink: 0; cursor: pointer;">
-                <div style="width: 26px; height: 26px; background: white; border-radius: 13px; position: absolute; top: 3px; right: 3px; box-shadow: 0 2px 4px rgba(0,0,0,0.15);"></div>
-              </div>
+              <div class="toggle-track"><div class="toggle-knob"></div></div>
             </div>
           </div>
 
@@ -1641,7 +1542,7 @@
         </div>
 
         <!-- Bottom Save Bar -->
-        <div style="padding: 12px 20px 36px; border-top: 1px solid var(--border); background: var(--white);">
+        <div class="pad-bottom-bar" style="padding-bottom: 36px;">
           <button class="btn-primary">Speichern</button>
         </div>
 
@@ -1650,9 +1551,7 @@
 
   </div>
 
-  <!-- ══════════════════════════════════════════════════ -->
-  <!-- ROW 6: Adress-Verifikation (Screen 11)            -->
-  <!-- ══════════════════════════════════════════════════ -->
+  <!--ROW 6: Adress-Verifikation (Screen 11)            -->
 
   <div class="section-divider">
     <div class="section-divider-line"></div>
@@ -1662,9 +1561,7 @@
 
   <div class="preview-row">
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 11 — Adress-Verifikation               -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!--SCREEN 11 — Adress-Verifikation               -->
     <div id="screen-11">
       <div class="screen-label">11 &middot; Adress-Verifikation</div>
       <div class="phone">
@@ -1682,8 +1579,8 @@
         <div class="scroll-area">
 
           <!-- Warning Banner -->
-          <div style="margin: 16px 20px; padding: 18px 20px; background: #FFF3DC; border-radius: 14px; display: flex; align-items: flex-start; gap: 14px;">
-            <div style="flex-shrink: 0; margin-top: 2px;">
+          <div class="warn-banner">
+            <div class="warn-banner-icon">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
                 <path d="M12 2L1 21h22L12 2z" fill="var(--orange)" opacity="0.2"/>
                 <path d="M12 2L1 21h22L12 2z" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
@@ -1692,30 +1589,24 @@
               </svg>
             </div>
             <div>
-              <div style="font-weight: 700; font-size: 15px; color: var(--navy); margin-bottom: 4px;">Adresse nicht verifiziert</div>
-              <div style="font-size: 13px; color: var(--dark-gray); line-height: 1.5;">Die eingegebene Adresse konnte nicht eindeutig best&auml;tigt werden. Bitte pr&uuml;fe die Angaben.</div>
+              <div class="warn-banner-title">Adresse nicht verifiziert</div>
+              <div class="warn-banner-desc">Die eingegebene Adresse konnte nicht eindeutig best&auml;tigt werden. Bitte pr&uuml;fe die Angaben.</div>
             </div>
           </div>
 
           <!-- Deine Eingabe -->
-          <div style="padding: 0 20px; margin-top: 8px;">
-            <div style="font-size: 12px; font-weight: 700; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Deine Eingabe</div>
-            <div style="background: var(--light-gray); border-radius: 12px; padding: 16px;">
-              <div style="font-size: 15px; font-weight: 500; color: var(--navy); line-height: 1.5;">
-                Bergstra&szlig;e 12a<br>
-                60311 Frankfurt
-              </div>
+          <div class="pad-hx mt-8">
+            <div class="section-label" style="margin-bottom: 8px;">Deine Eingabe</div>
+            <div class="addr-card" style="background: var(--light-gray);">
+              <div class="addr-card-text">Bergstra&szlig;e 12a<br>60311 Frankfurt</div>
             </div>
           </div>
 
           <!-- Unser Vorschlag -->
-          <div style="padding: 0 20px; margin-top: 20px;">
-            <div style="font-size: 12px; font-weight: 700; color: var(--mid-gray); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;">Unser Vorschlag</div>
-            <div style="background: var(--white); border-radius: 12px; padding: 16px; border: 1.5px solid var(--border); border-left: 4px solid var(--blue);">
-              <div style="font-size: 15px; font-weight: 500; color: var(--navy); line-height: 1.5;">
-                Bergstra&szlig;e 12<br>
-                60311 Frankfurt am Main
-              </div>
+          <div class="pad-hx mt-20">
+            <div class="section-label" style="margin-bottom: 8px;">Unser Vorschlag</div>
+            <div class="addr-card" style="background: var(--white); border: 1.5px solid var(--border); border-left: 4px solid var(--blue);">
+              <div class="addr-card-text">Bergstra&szlig;e 12<br>60311 Frankfurt am Main</div>
             </div>
           </div>
 
@@ -1723,7 +1614,7 @@
         </div>
 
         <!-- Bottom Action Bar -->
-        <div style="padding: 12px 20px 8px; border-top: 1px solid var(--border); background: var(--white);">
+        <div class="pad-bottom-bar" style="padding-bottom: 8px;">
           <button class="btn-outline" style="margin-bottom: 10px;">Adresse korrigieren</button>
           <button class="btn-primary">Trotzdem speichern</button>
           <div style="font-size: 12px; color: var(--mid-gray); text-align: center; margin-top: 10px; line-height: 1.4; padding: 0 8px;">Bei Eingabe auf eigenes Risiko kann die Zustellung nicht garantiert werden.</div>

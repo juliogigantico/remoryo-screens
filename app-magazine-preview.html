@@ -31,15 +31,11 @@
     body {
       font-family: 'Inter', -apple-system, sans-serif;
       background: #F0F2F5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 32px 20px;
-      gap: 20px;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 32px 20px; gap: 20px;
     }
 
     h1 { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--mid-gray); }
-
     .preview-row { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; }
 
     .screen-label {
@@ -63,396 +59,172 @@
 
     /* ── App Header ── */
     .app-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 8px 20px 12px;
-      border-bottom: 1px solid var(--border);
-      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 8px 20px 12px; border-bottom: 1px solid var(--border); flex-shrink: 0;
     }
-
-    .app-header-logo {
-      height: 26px;
-      width: auto;
-    }
-
-    .header-wordmark {
-      font-weight: 700;
-      font-size: 16px;
-      color: var(--navy);
-      letter-spacing: -0.3px;
-    }
-
+    .app-header-logo { height: 26px; width: auto; }
+    .header-wordmark { font-weight: 700; font-size: 16px; color: var(--navy); letter-spacing: -0.3px; }
     .header-settings {
-      width: 44px;
-      height: 44px;
-      border-radius: 22px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      -webkit-tap-highlight-color: transparent;
+      width: 44px; height: 44px; border-radius: 22px;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer; -webkit-tap-highlight-color: transparent;
     }
-
-    .header-settings svg {
-      width: 24px;
-      height: 24px;
-    }
+    .header-settings svg { width: 24px; height: 24px; }
 
     /* ── Group Indicator Pill ── */
-    .group-pill-wrap {
-      padding: 12px 16px 0;
-      display: flex;
-      justify-content: center;
-      flex-shrink: 0;
+    .group-pill-wrap { padding: 12px 16px 0; display: flex; justify-content: center; flex-shrink: 0; }
+    .group-indicator {
+      display: flex; align-items: center; gap: 6px; padding: 6px 14px;
+      background: var(--blue-light); border-radius: 20px;
+      font-size: 13px; font-weight: 600; color: var(--navy); cursor: pointer;
     }
 
     /* ── Scroll Area ── */
     .scroll-area { flex: 1; overflow-y: auto; background: var(--white); }
 
-    /* ── Magazine Card (B2C style) ── */
-    .mag-card {
-      margin: 16px 20px;
-      border-radius: 16px;
-      overflow: hidden;
-      position: relative;
-      background: var(--white);
-      box-shadow: 0 4px 20px rgba(27,44,67,0.1);
-    }
-
+    /* ── Magazine Card ── */
+    .mag-card { margin: 16px 20px; border-radius: 16px; overflow: hidden; position: relative; background: var(--white); box-shadow: 0 4px 20px rgba(27,44,67,0.1); }
     .mag-card-inner {
-      position: relative;
-      padding: 20px;
+      position: relative; padding: 20px;
       background: linear-gradient(145deg, #FFF8F0 0%, #FFF 50%, #F0F8FF 100%);
-      border: 1.5px solid rgba(0,0,0,0.06);
-      border-radius: 16px;
+      border: 1.5px solid rgba(0,0,0,0.06); border-radius: 16px;
     }
-
-    .mag-accent-orange {
-      position: absolute; top: -10px; right: -10px;
-      width: 80px; height: 80px; border-radius: 50%;
-      background: rgba(255,166,49,0.15);
-    }
-    .mag-accent-turquoise {
-      position: absolute; bottom: -15px; left: -15px;
-      width: 60px; height: 60px; border-radius: 50%;
-      background: rgba(184,224,224,0.2);
-    }
-
+    .mag-accent-orange { position: absolute; top: -10px; right: -10px; width: 80px; height: 80px; border-radius: 50%; background: rgba(255,166,49,0.15); }
+    .mag-accent-turquoise { position: absolute; bottom: -15px; left: -15px; width: 60px; height: 60px; border-radius: 50%; background: rgba(184,224,224,0.2); }
     .mag-logo {
       width: 100px; height: 20px; margin-bottom: 12px;
       background: var(--blue-light); border-radius: 4px;
       display: flex; align-items: center; justify-content: center;
       font-size: 9px; font-weight: 700; color: var(--blue); letter-spacing: 1px;
     }
-
-    .mag-cover {
-      width: 100%; aspect-ratio: 16/10; border-radius: 10px;
-      object-fit: cover; margin-bottom: 14px;
-    }
-
-    .mag-group-name {
-      font-weight: 600; font-size: 12px; color: var(--dark-gray);
-      letter-spacing: 0.3px; text-transform: uppercase; margin-bottom: 2px;
-    }
-    .mag-title {
-      font-weight: 700; font-size: 18px; color: var(--navy); margin-bottom: 4px;
-      line-height: 1.3;
-    }
-    .mag-date-row {
-      display: flex; justify-content: space-between; align-items: baseline;
-    }
+    .mag-cover { width: 100%; aspect-ratio: 16/10; border-radius: 10px; object-fit: cover; margin-bottom: 14px; }
+    .mag-group-name { font-weight: 600; font-size: 12px; color: var(--dark-gray); letter-spacing: 0.3px; text-transform: uppercase; margin-bottom: 2px; }
+    .mag-title { font-weight: 700; font-size: 18px; color: var(--navy); margin-bottom: 4px; line-height: 1.3; }
+    .mag-date-row { display: flex; justify-content: space-between; align-items: baseline; }
     .mag-month { font-weight: 600; font-size: 13px; color: var(--dark-gray); }
     .mag-year { font-weight: 500; font-size: 12px; color: var(--mid-gray); }
 
     /* ── Magazine Status Badges ── */
-    /* FIX #1: Status badge → absolute top-right of card-inner */
     .mag-status {
       display: inline-flex; align-items: center; gap: 6px;
       padding: 5px 12px; border-radius: 100px; font-size: 11px; font-weight: 700;
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      z-index: 2;
-      margin-top: 0;
+      position: absolute; top: 12px; right: 12px; z-index: 2; margin-top: 0;
     }
     .mag-status--editing { background: #FFF3DC; color: #D48B00; }
     .mag-status--sent { background: #E6F7EE; color: #1D8348; }
-    /* FIX #4: Deadline info text */
-    .mag-deadline {
-      position: absolute;
-      top: 38px;
-      right: 12px;
-      z-index: 2;
-      font-size: 12px;
-      color: var(--dark-gray);
-    }
+    .mag-deadline { position: absolute; top: 38px; right: 12px; z-index: 2; font-size: 12px; color: var(--dark-gray); }
 
     /* ── Magazine Action Buttons ── */
-    .mag-actions {
-      display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap;
-    }
+    .mag-actions { display: flex; gap: 10px; margin-top: 14px; flex-wrap: wrap; }
     .mag-action-btn {
       flex: 1; min-width: 100px; padding: 10px 14px; border-radius: 10px;
       font-size: 12px; font-weight: 700; border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center; gap: 6px;
-      min-height: 48px;
+      display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 48px;
     }
-    /* FIX #3 & #11: Primary action buttons → ORANGE */
     .mag-action-btn--primary { background: var(--orange); color: white; }
     .mag-action-btn--outline { background: white; color: var(--navy); border: 1.5px solid var(--border); }
     .mag-action-btn--danger { background: #FFF0EE; color: #E74C3C; }
 
     /* ── Pages Overview (Editor) ── */
-    /* FIX #6: Reduced gap to 10px, padding to 12px for larger thumbnails */
-    .pages-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px;
-      padding: 12px;
-    }
+    .pages-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; padding: 12px; }
     .page-thumb {
-      aspect-ratio: 210/297;
-      border-radius: 8px;
-      border: 2px solid var(--border);
-      overflow: hidden;
-      position: relative;
-      background: var(--white);
-      cursor: pointer;
+      aspect-ratio: 210/297; border-radius: 8px; border: 2px solid var(--border);
+      overflow: hidden; position: relative; background: var(--white); cursor: pointer;
     }
     .page-thumb:hover { border-color: var(--blue); }
-    .page-thumb-img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
+    .page-thumb-img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .page-number {
-      position: absolute;
-      bottom: 6px;
-      right: 8px;
-      font-size: 10px;
-      font-weight: 700;
-      color: var(--white);
-      background: rgba(27,44,67,0.6);
-      padding: 2px 8px;
-      border-radius: 6px;
+      position: absolute; bottom: 6px; right: 8px;
+      font-size: 10px; font-weight: 700; color: var(--white);
+      background: rgba(27,44,67,0.6); padding: 2px 8px; border-radius: 6px;
     }
     .page-thumb--add {
       border: 2px dashed var(--border);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: 6px;
-      color: var(--mid-gray);
-      font-size: 12px;
-      font-weight: 600;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 6px; color: var(--mid-gray); font-size: 12px; font-weight: 600;
     }
     .page-thumb--add-icon {
       width: 36px; height: 36px; border-radius: 18px;
       background: var(--blue-light); display: flex; align-items: center;
       justify-content: center; font-size: 20px; color: var(--blue);
     }
-
-    /* FIX #7: Page count info bar */
     .pages-info-bar {
       display: flex; align-items: center; justify-content: center;
-      padding: 10px 12px;
-      background: rgba(255,255,255,0.7);
-      font-size: 12px;
-      font-weight: 600;
-      color: var(--dark-gray);
+      padding: 10px 12px; background: rgba(255,255,255,0.7);
+      font-size: 12px; font-weight: 600; color: var(--dark-gray);
       border-bottom: 1px solid rgba(0,0,0,0.06);
     }
 
     /* ── Photo Selection Grid ── */
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 3px;
-      padding: 0;
-    }
-    .photo-grid-item {
-      aspect-ratio: 1;
-      object-fit: cover;
-      cursor: pointer;
-      position: relative;
-    }
-    .photo-grid-item img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-    }
+    .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; padding: 0; }
+    .photo-grid-item { aspect-ratio: 1; object-fit: cover; cursor: pointer; position: relative; }
+    .photo-grid-item img { width: 100%; height: 100%; object-fit: cover; display: block; }
     .photo-grid-check {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      width: 24px;
-      height: 24px;
-      border-radius: 12px;
-      background: var(--orange);
-      border: 2px solid white;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      position: absolute; top: 8px; right: 8px; width: 24px; height: 24px;
+      border-radius: 12px; background: var(--orange); border: 2px solid white;
+      display: flex; align-items: center; justify-content: center;
     }
-    /* FIX #8: Empty circle on unselected photos */
     .photo-grid-uncheck {
-      position: absolute;
-      top: 8px;
-      right: 8px;
-      width: 24px;
-      height: 24px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.3);
-      border: 2px solid rgba(255,255,255,0.8);
+      position: absolute; top: 8px; right: 8px; width: 24px; height: 24px;
+      border-radius: 12px; background: rgba(255,255,255,0.3); border: 2px solid rgba(255,255,255,0.8);
     }
 
-    /* FIX #10: Selection counter more prominent */
+    /* ── Selection Bar ── */
     .selection-bar {
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border);
-      flex-shrink: 0;
+      padding: 14px 20px; display: flex; align-items: center; justify-content: space-between;
+      border-bottom: 1px solid var(--border); flex-shrink: 0;
     }
-    .selection-bar-text {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--navy);
-    }
-    /* FIX #9 & #11: Fertig button → ORANGE */
+    .selection-bar-text { font-size: 15px; font-weight: 700; color: var(--navy); }
     .selection-bar-btn {
-      padding: 10px 22px;
-      border-radius: 10px;
-      background: var(--orange);
-      color: white;
-      font-weight: 700;
-      font-size: 14px;
-      border: none;
-      cursor: pointer;
-      min-height: 48px;
-      display: inline-flex; align-items: center; justify-content: center;
+      padding: 10px 22px; border-radius: 10px; background: var(--orange); color: white;
+      font-weight: 700; font-size: 14px; border: none; cursor: pointer;
+      min-height: 48px; display: inline-flex; align-items: center; justify-content: center;
     }
-    /* Disabled state for Fertig button (when fewer than 5 photos selected) */
-    .selection-bar-btn.disabled {
-      opacity: 0.45;
-      pointer-events: none;
-    }
-    .selection-bar-hint {
-      font-size: 11px;
-      color: var(--mid-gray);
-      font-weight: 500;
-    }
+    .selection-bar-btn.disabled { opacity: 0.45; pointer-events: none; }
+    .selection-bar-hint { font-size: 11px; color: var(--mid-gray); font-weight: 500; }
 
-    /* ── Bottom Tab Bar (2-tab + central FAB design) ── */
+    /* ── Bottom Tab Bar ── */
     .tab-bar {
-      display: flex;
-      align-items: flex-end;
-      justify-content: center;
-      height: 68px;
-      background: var(--white);
-      flex-shrink: 0;
-      padding-bottom: 6px;
-      position: relative;
+      display: flex; align-items: flex-end; justify-content: center;
+      height: 68px; background: var(--white); flex-shrink: 0;
+      padding-bottom: 6px; position: relative;
       box-shadow: 0 -1px 12px rgba(27, 44, 67, 0.06);
     }
-
     .tab-item {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      cursor: pointer;
-      position: relative;
-      flex: 1;
-      padding-top: 10px;
+      display: flex; flex-direction: column; align-items: center; gap: 3px;
+      cursor: pointer; position: relative; flex: 1; padding-top: 10px;
     }
-
-    .tab-icon {
-      width: 56px;
-      height: 30px;
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .tab-icon svg {
-      width: 26px;
-      height: 26px;
-    }
-
-    .tab-item.active .tab-icon {
-      background: rgba(130, 183, 216, 0.18);
-    }
-
-    .tab-label {
-      font-size: 11px;
-      font-weight: 600;
-      color: var(--mid-gray);
-      letter-spacing: -0.2px;
-    }
-
-    .tab-item.active .tab-label {
-      color: var(--navy);
-      font-weight: 700;
-    }
-
-    /* Central FAB button */
+    .tab-icon { width: 56px; height: 30px; border-radius: 15px; display: flex; align-items: center; justify-content: center; }
+    .tab-icon svg { width: 26px; height: 26px; }
+    .tab-item.active .tab-icon { background: rgba(130, 183, 216, 0.18); }
+    .tab-label { font-size: 11px; font-weight: 600; color: var(--mid-gray); letter-spacing: -0.2px; }
+    .tab-item.active .tab-label { color: var(--navy); font-weight: 700; }
     .tab-fab-wrapper {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      flex: 0 0 auto;
-      padding: 0 16px;
-      position: relative;
-      top: -18px;
+      display: flex; flex-direction: column; align-items: center;
+      flex: 0 0 auto; padding: 0 16px; position: relative; top: -18px;
     }
-
     .tab-fab {
-      width: 62px;
-      height: 62px;
-      border-radius: 50%;
+      width: 62px; height: 62px; border-radius: 50%;
       background: linear-gradient(145deg, #FFB84D 0%, var(--orange) 100%);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
+      display: flex; align-items: center; justify-content: center; cursor: pointer;
       box-shadow: 0 6px 20px rgba(255, 166, 49, 0.45), 0 2px 6px rgba(0,0,0,0.08);
       border: 3px solid var(--white);
     }
-
-    .tab-fab svg {
-      width: 28px;
-      height: 28px;
-    }
-
-    .tab-fab-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--orange);
-      margin-top: 3px;
-      letter-spacing: -0.2px;
-    }
+    .tab-fab svg { width: 28px; height: 28px; }
+    .tab-fab-label { font-size: 11px; font-weight: 700; color: var(--orange); margin-top: 3px; letter-spacing: -0.2px; }
 
     .safe-bottom { height: 20px; background: var(--white); flex-shrink: 0; }
 
-    /* ── Section Header (in overview) ── */
+    /* ── Section Header ── */
     .section-back {
       display: flex; align-items: center; gap: 10px;
-      padding: 10px 16px 10px; flex-shrink: 0;
-      border-bottom: 1px solid var(--border);
+      padding: 10px 16px 10px; flex-shrink: 0; border-bottom: 1px solid var(--border);
     }
     .section-back-arrow {
       width: 44px; height: 44px; display: flex; align-items: center;
       justify-content: center; cursor: pointer; flex-shrink: 0;
     }
-    .section-back-arrow svg {
-      width: 24px; height: 24px; color: var(--navy);
-    }
+    .section-back-arrow svg { width: 24px; height: 24px; color: var(--navy); }
     .section-back-title { font-weight: 700; font-size: 17px; color: var(--navy); }
 
     .save-bar {
@@ -461,72 +233,27 @@
       background: var(--white); flex-shrink: 0;
     }
     .save-bar-info { font-size: 12px; color: var(--mid-gray); }
-    /* FIX #5 & #11: Save bar button → ORANGE */
     .save-bar-btn {
       padding: 10px 24px; border-radius: 10px; background: var(--orange);
       color: white; font-weight: 700; font-size: 13px; border: none; cursor: pointer;
-      min-height: 48px;
-      display: inline-flex; align-items: center; justify-content: center;
+      min-height: 48px; display: inline-flex; align-items: center; justify-content: center;
     }
 
     /* ── Standard Button System ── */
     .btn {
-      min-height: 48px;
-      padding: 14px 24px;
-      border-radius: var(--btn-radius);
-      font-weight: 700;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-      text-align: center;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
+      min-height: 48px; padding: 14px 24px; border-radius: var(--btn-radius);
+      font-weight: 700; font-size: 16px; border: none; cursor: pointer; text-align: center;
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px;
     }
-    .btn-primary {
-      background: var(--orange);
-      color: white;
-    }
-    .btn-outline {
-      background: var(--white);
-      color: var(--navy);
-      border: 1.5px solid var(--navy);
-    }
-    /* ── Group Indicator Pill ── */
-    .group-indicator {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      background: var(--blue-light);
-      border-radius: 20px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--navy);
-      cursor: pointer;
-    }
-    /* ── Text Button (link-style) ── */
+    .btn-primary { background: var(--orange); color: white; }
+    .btn-outline { background: var(--white); color: var(--navy); border: 1.5px solid var(--navy); }
     .btn-text {
-      background: none;
-      border: none;
-      font-weight: 600;
-      font-size: 14px;
-      color: var(--navy);
-      cursor: pointer;
-      padding: 12px;
-      text-align: center;
-      width: 100%;
-      font-family: inherit;
-      min-height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      background: none; border: none; font-weight: 600; font-size: 14px; color: var(--navy);
+      cursor: pointer; padding: 12px; text-align: center; width: 100%; font-family: inherit;
+      min-height: 48px; display: flex; align-items: center; justify-content: center;
     }
 
-    .footer-note {
-      font-size: 11px; color: #A0A0A0; font-weight: 500; text-align: center;
-    }
+    .footer-note { font-size: 11px; color: #A0A0A0; font-weight: 500; text-align: center; }
     [id^="screen-"] { scroll-margin-top: 20px; }
   </style>
 </head>
@@ -536,15 +263,11 @@
 
   <div class="preview-row">
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 1 — Magazin-Übersicht                  -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- ═══ SCREEN 1 — Magazin-Übersicht ═══ -->
     <div id="screen-1">
       <div class="screen-label">1 &middot; Magazin-Übersicht</div>
       <div class="phone">
         <div class="status-bar"></div>
-
-        <!-- App Header -->
         <div class="app-header">
           <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
           <span class="header-wordmark">remoryo</span>
@@ -552,25 +275,19 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
           </div>
         </div>
-
-        <!-- Group Pill -->
         <div class="group-pill-wrap" style="background: var(--white);">
           <div class="group-indicator">
             <span>Familie Blümel</span>
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
           </div>
         </div>
-
         <div class="scroll-area">
-
           <!-- Editing Magazine -->
           <div class="mag-card">
             <div class="mag-card-inner">
               <div class="mag-accent-orange"></div>
               <div class="mag-accent-turquoise"></div>
-              <!-- FIX #1: Status badge at top-right (absolute positioned) -->
               <div class="mag-status mag-status--editing"><svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M17 3a2.83 2.83 0 114 4L7.5 20.5 2 22l1.5-5.5L17 3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg> In Bearbeitung</div>
-              <!-- FIX #4: Deadline info below status badge -->
               <div class="mag-deadline">Änderbar bis 31. März 2026</div>
               <div class="mag-logo">REMORYO</div>
               <img class="mag-cover" src="flyer/foto.jpg" alt="Cover März 2026">
@@ -593,13 +310,11 @@
               </div>
             </div>
           </div>
-
           <!-- Printed Magazine -->
           <div class="mag-card">
             <div class="mag-card-inner">
               <div class="mag-accent-orange"></div>
               <div class="mag-accent-turquoise"></div>
-              <!-- FIX #1: Status badge at top-right (absolute positioned) -->
               <div class="mag-status mag-status--sent"><svg viewBox="0 0 24 24" fill="none" width="12" height="12"><path d="M20 6L9 17l-5-5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg> Gedruckt &amp; Versendet</div>
               <div class="mag-logo">REMORYO</div>
               <img class="mag-cover" src="app-repo/assets/images/happy-family-fake-image.png" alt="Cover Feb 2026">
@@ -617,10 +332,8 @@
               </div>
             </div>
           </div>
-
         </div>
-
-        <!-- Bottom Tab Bar (2 tabs + central FAB) -->
+        <!-- Bottom Tab Bar -->
         <div class="tab-bar">
           <div class="tab-item">
             <div class="tab-icon">
@@ -639,21 +352,17 @@
               <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg>
             </div>
             <span class="tab-label">Heft</span>
-
           </div>
         </div>
         <div class="safe-bottom"></div>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 2 — Seitenübersicht (Page Overview)    -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- ═══ SCREEN 2 — Seitenübersicht (Page Overview) ═══ -->
     <div id="screen-2">
       <div class="screen-label">2 &middot; Seitenübersicht (Editor)</div>
       <div class="phone">
         <div class="status-bar"></div>
-
         <div class="section-back">
           <div class="section-back-arrow">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -662,9 +371,7 @@
           </div>
           <span class="section-back-title">Fotoheft erstellen</span>
         </div>
-
         <div class="scroll-area" style="background: var(--beige);">
-
           <!-- Heft-Titel Input -->
           <div style="padding: 16px 20px 8px;">
             <div style="font-size: 12px; font-weight: 600; color: var(--dark-gray); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.3px;">Heft-Titel</div>
@@ -674,16 +381,11 @@
             </div>
             <div style="font-size: 11px; color: var(--mid-gray); margin-top: 4px; padding-left: 2px;">Erscheint auf der Titelseite deines Fotohefts</div>
           </div>
-
-          <!-- Page count info bar -->
           <div class="pages-info-bar">5 Seiten · 8 Fotos · 2 Rätsel</div>
-
           <div class="pages-grid">
-
-            <!-- Cover (Titelseite: Titelbild + Gruppenname + Heft-Titel + Monat/Jahr) -->
+            <!-- Cover -->
             <div class="page-thumb" style="position: relative;">
               <img class="page-thumb-img" src="flyer/foto.jpg" alt="Cover" style="object-position: center;">
-              <!-- Cover overlay showing title elements -->
               <div style="position: absolute; bottom: 18px; left: 0; right: 0; padding: 0 8px; text-align: center;">
                 <div style="font-size: 5px; font-weight: 600; color: white; text-transform: uppercase; letter-spacing: 0.5px; text-shadow: 0 1px 3px rgba(0,0,0,0.5); margin-bottom: 1px;">Familie Blümel</div>
                 <div style="font-size: 7px; font-weight: 800; color: white; text-shadow: 0 1px 3px rgba(0,0,0,0.5); margin-bottom: 1px;">Frühlingsgefühle</div>
@@ -691,7 +393,6 @@
               </div>
               <div class="page-number">Cover</div>
             </div>
-
             <!-- Page 2 -->
             <div class="page-thumb">
               <div style="padding: 12px; display: flex; flex-direction: column; gap: 6px; height: 100%;">
@@ -701,13 +402,11 @@
               </div>
               <div class="page-number">S. 2</div>
             </div>
-
             <!-- Page 3 -->
             <div class="page-thumb">
               <img class="page-thumb-img" src="app-repo/assets/images/happy-family-fake-image.png" alt="Seite 3">
               <div class="page-number">S. 3</div>
             </div>
-
             <!-- Page 4 -->
             <div class="page-thumb">
               <div style="padding: 12px; display: flex; flex-direction: column; gap: 6px; height: 100%;">
@@ -717,7 +416,6 @@
               </div>
               <div class="page-number">S. 4</div>
             </div>
-
             <!-- Page 5 -->
             <div class="page-thumb">
               <div style="padding: 12px; display: flex; flex-direction: column; gap: 6px; height: 100%;">
@@ -729,34 +427,26 @@
               </div>
               <div class="page-number">S. 5</div>
             </div>
-
             <!-- Add Page -->
             <div class="page-thumb page-thumb--add">
               <div class="page-thumb--add-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
               Seite hinzufügen
             </div>
-
           </div>
         </div>
-
-        <!-- Save Bar -->
         <div class="save-bar">
           <span class="save-bar-info">5 Seiten · März 2026</span>
           <button class="save-bar-btn">Speichern</button>
         </div>
-
         <div class="safe-bottom"></div>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 3 — Foto auswählen                     -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- ═══ SCREEN 3 — Foto auswählen ═══ -->
     <div id="screen-3">
       <div class="screen-label">3 &middot; Foto auswählen</div>
       <div class="phone">
         <div class="status-bar"></div>
-
         <div class="section-back">
           <div class="section-back-arrow">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -765,33 +455,25 @@
           </div>
           <span class="section-back-title">Foto auswählen</span>
         </div>
-
-        <!-- FIX #10: Selection counter more prominent -->
         <div class="selection-bar">
           <span class="selection-bar-text">3 von 18 Fotos ausgewählt</span>
-          <!-- FIX #9: Fertig button → ORANGE -->
           <div style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px;">
             <button class="selection-bar-btn disabled">Fertig</button>
             <span class="selection-bar-hint">Mind. 5 Fotos auswählen</span>
           </div>
         </div>
-
-        <!-- Photo Grid -->
         <div class="scroll-area" style="background: var(--white);">
           <div class="photo-grid">
-            <!-- Selected photo -->
             <div class="photo-grid-item">
               <img src="flyer/foto.jpg" alt="">
               <div class="photo-grid-check">
                 <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M20 6L9 17l-5-5" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
               </div>
             </div>
-            <!-- FIX #8: Unselected photos show empty circle -->
             <div class="photo-grid-item">
               <img src="app-repo/assets/images/happy-family-fake-image.png" alt="">
               <div class="photo-grid-uncheck"></div>
             </div>
-            <!-- Selected photo -->
             <div class="photo-grid-item">
               <img src="flyer/foto.jpg" alt="" style="filter: hue-rotate(40deg);">
               <div class="photo-grid-check">
@@ -806,7 +488,6 @@
               <img src="flyer/foto.jpg" alt="" style="filter: hue-rotate(120deg);">
               <div class="photo-grid-uncheck"></div>
             </div>
-            <!-- Selected photo -->
             <div class="photo-grid-item">
               <img src="app-repo/assets/images/happy-family-fake-image.png" alt="" style="filter: brightness(1.1);">
               <div class="photo-grid-check">
@@ -827,19 +508,15 @@
             </div>
           </div>
         </div>
-
         <div class="safe-bottom"></div>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 4 — Magazin-Vorschau (Preview before Print) -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- ═══ SCREEN 4 — Magazin-Vorschau ═══ -->
     <div id="screen-4">
       <div class="screen-label">4 &middot; Magazin-Vorschau</div>
       <div class="phone">
         <div class="status-bar"></div>
-
         <div class="section-back">
           <div class="section-back-arrow">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -848,34 +525,24 @@
           </div>
           <span class="section-back-title">Vorschau</span>
         </div>
-
         <div class="scroll-area">
-
           <!-- Title Section -->
           <div style="padding: 20px 20px 0;">
             <div style="font-size: 20px; font-weight: 800; color: var(--navy); line-height: 1.3;">Vorschau: März 2026</div>
             <div style="font-size: 14px; color: var(--dark-gray); margin-top: 4px;">Prüfe dein Heft bevor es in den Druck geht.</div>
           </div>
-
           <!-- Magazine Spread Preview -->
           <div style="padding: 20px 16px;">
-
-            <!-- Open book mock -->
             <div style="background: var(--light-gray); border-radius: 12px; padding: 16px 12px; position: relative;">
-
-              <!-- Page spread (two pages side by side) -->
               <div style="display: flex; gap: 4px; position: relative;">
-
                 <!-- Left Arrow -->
                 <div style="position: absolute; left: -6px; top: 50%; transform: translateY(-50%); z-index: 2; width: 32px; height: 32px; border-radius: 50%; background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: center; cursor: pointer;">
                   <svg viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
                 </div>
-
                 <!-- Right Arrow -->
                 <div style="position: absolute; right: -6px; top: 50%; transform: translateY(-50%); z-index: 2; width: 32px; height: 32px; border-radius: 50%; background: var(--white); box-shadow: 0 2px 8px rgba(0,0,0,0.12); display: flex; align-items: center; justify-content: center; cursor: pointer;">
                   <svg viewBox="0 0 24 24" fill="none" width="16" height="16" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>
                 </div>
-
                 <!-- Left Page -->
                 <div style="flex: 1; background: var(--white); border-radius: 4px 0 0 4px; aspect-ratio: 210/297; display: flex; flex-direction: column; overflow: hidden; box-shadow: -2px 2px 8px rgba(0,0,0,0.06);">
                   <div style="flex: 1; background: linear-gradient(135deg, var(--blue-light) 0%, var(--turquoise-light) 100%); margin: 10px 10px 6px; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
@@ -885,10 +552,8 @@
                     <div style="font-size: 11px; font-weight: 600; color: var(--mid-gray);">Seite 2</div>
                   </div>
                 </div>
-
                 <!-- Spine line -->
                 <div style="width: 2px; background: var(--border); flex-shrink: 0;"></div>
-
                 <!-- Right Page -->
                 <div style="flex: 1; background: var(--white); border-radius: 0 4px 4px 0; aspect-ratio: 210/297; display: flex; flex-direction: column; overflow: hidden; box-shadow: 2px 2px 8px rgba(0,0,0,0.06);">
                   <div style="flex: 1; background: linear-gradient(135deg, var(--turquoise-light) 0%, var(--blue-light) 100%); margin: 10px 10px 6px; border-radius: 6px; display: flex; align-items: center; justify-content: center;">
@@ -898,49 +563,33 @@
                     <div style="font-size: 11px; font-weight: 600; color: var(--mid-gray);">Seite 3</div>
                   </div>
                 </div>
-
               </div>
-
-              <!-- Page Indicator -->
               <div style="text-align: center; margin-top: 12px; font-size: 12px; font-weight: 600; color: var(--dark-gray);">Seite 2–3 von 12</div>
-
             </div>
           </div>
-
           <!-- Status Card -->
           <div style="margin: 0 20px 16px; padding: 16px; background: var(--white); border: 1.5px solid var(--border); border-radius: 12px;">
             <div style="font-size: 14px; font-weight: 600; color: var(--navy);">12 Fotos · 6 Doppelseiten</div>
             <div style="font-size: 13px; font-weight: 700; color: var(--orange); margin-top: 4px;">Druckschluss: 5. März 2026</div>
           </div>
-
           <!-- Action Buttons -->
           <div style="padding: 0 20px 24px; display: flex; flex-direction: column; gap: 10px;">
             <button class="btn btn-primary" style="width: 100%;">Zum Druck freigeben</button>
             <button class="btn btn-outline" style="width: 100%;">Weiter bearbeiten</button>
           </div>
-
         </div>
-
         <div class="safe-bottom"></div>
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 5 — Erstes Magazin erstellt (Erfolg)   -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- ═══ SCREEN 5 — Erstes Magazin erstellt (Erfolg) ═══ -->
     <div id="screen-5">
       <div class="screen-label">5 &middot; Erstes Magazin erstellt (Erfolg)</div>
       <div class="phone" style="background: var(--white);">
-
         <div class="status-bar"></div>
-
-        <!-- Content centered -->
         <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 0 20px;">
-
-          <!-- Party / Confetti icon -->
           <div style="margin-bottom: 24px;">
             <svg width="64" height="64" viewBox="0 0 64 64" fill="none">
-              <!-- Confetti pieces -->
               <rect x="14" y="6" width="4" height="8" rx="2" fill="var(--orange)" transform="rotate(-15 16 10)"/>
               <rect x="46" y="8" width="4" height="8" rx="2" fill="var(--blue)" transform="rotate(20 48 12)"/>
               <rect x="30" y="2" width="4" height="8" rx="2" fill="var(--turquoise)" transform="rotate(5 32 6)"/>
@@ -948,9 +597,7 @@
               <circle cx="54" cy="22" r="3" fill="var(--orange)"/>
               <circle cx="22" cy="4" r="2.5" fill="var(--blue)"/>
               <circle cx="42" cy="3" r="2.5" fill="var(--orange)"/>
-              <!-- Star burst -->
               <path d="M32 16l2.5 7.5H42l-6 4.5 2.5 7.5-6-4.5-6 4.5 2.5-7.5-6-4.5h7.5z" fill="var(--orange)"/>
-              <!-- Popper cone -->
               <path d="M18 58L10 46l30-18" stroke="var(--navy)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
               <path d="M10 46l8 12 4-2-6-12z" fill="var(--navy)" opacity="0.15"/>
               <line x1="28" y1="36" x2="48" y2="18" stroke="var(--orange)" stroke-width="2" stroke-linecap="round"/>
@@ -958,40 +605,19 @@
               <line x1="20" y1="48" x2="44" y2="28" stroke="var(--turquoise)" stroke-width="2" stroke-linecap="round"/>
             </svg>
           </div>
-
-          <!-- Headline -->
-          <div style="font-weight: 800; font-size: 24px; color: var(--navy); text-align: center; margin-bottom: 8px;">
-            Geschafft!
-          </div>
-
-          <!-- Subheadline -->
-          <div style="font-weight: 600; font-size: 17px; color: var(--navy); text-align: center; margin-bottom: 16px;">
-            Dein erstes Fotoheft ist fertig!
-          </div>
-
-          <!-- Info text -->
-          <div style="font-size: 15px; color: var(--dark-gray); text-align: center; line-height: 1.55; font-weight: 500; max-width: 300px;">
-            Du kannst es bis zum Monatsende noch bearbeiten. Danach wird es automatisch gedruckt und verschickt.
-          </div>
-
+          <div style="font-weight: 800; font-size: 24px; color: var(--navy); text-align: center; margin-bottom: 8px;">Geschafft!</div>
+          <div style="font-weight: 600; font-size: 17px; color: var(--navy); text-align: center; margin-bottom: 16px;">Dein erstes Fotoheft ist fertig!</div>
+          <div style="font-size: 15px; color: var(--dark-gray); text-align: center; line-height: 1.55; font-weight: 500; max-width: 300px;">Du kannst es bis zum Monatsende noch bearbeiten. Danach wird es automatisch gedruckt und verschickt.</div>
         </div>
-
-        <!-- Bottom actions -->
         <div style="padding: 0 20px 40px; display: flex; flex-direction: column; align-items: center;">
-
-          <!-- Primary CTA -->
           <button class="btn btn-primary" style="margin-bottom: 8px;">Zur Startseite</button>
-
-          <!-- Secondary invite prompt -->
           <a class="btn-text" style="font-weight: 600; font-size: 14px; gap: 4px;">
             Jetzt Familie einladen
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <polyline points="9 18 15 12 9 6"/>
             </svg>
           </a>
-
         </div>
-
         <div class="safe-bottom"></div>
       </div>
     </div>

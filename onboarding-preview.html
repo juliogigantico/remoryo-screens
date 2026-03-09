@@ -30,294 +30,107 @@
     body {
       font-family: 'Inter', -apple-system, sans-serif;
       background: #F0F2F5;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      padding: 32px 20px;
-      gap: 20px;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 32px 20px; gap: 20px;
     }
 
-    h1 {
-      font-size: 13px;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color: var(--mid-gray);
-    }
-
-    .preview-row {
-      display: flex;
-      gap: 40px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
+    h1 { font-size: 13px; text-transform: uppercase; letter-spacing: 2px; color: var(--mid-gray); }
+    .preview-row { display: flex; gap: 40px; flex-wrap: wrap; justify-content: center; }
 
     .screen-label {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--mid-gray);
-      text-align: center;
-      margin-bottom: 6px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
+      font-size: 11px; font-weight: 700; color: var(--mid-gray);
+      text-align: center; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 1px;
     }
 
     /* ── Phone Frame ── */
     .phone {
-      width: 393px;
-      height: 852px;
-      background: var(--white);
-      border-radius: 48px;
-      overflow: hidden;
-      box-shadow:
-        0 0 0 1px rgba(0,0,0,0.05),
-        0 8px 30px rgba(0,0,0,0.08),
-        0 30px 70px rgba(0,0,0,0.12);
-      position: relative;
-      display: flex;
-      flex-direction: column;
+      width: 393px; height: 852px; background: var(--white);
+      border-radius: 48px; overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.05), 0 8px 30px rgba(0,0,0,0.08), 0 30px 70px rgba(0,0,0,0.12);
+      position: relative; display: flex; flex-direction: column;
     }
-
-    /* Dynamic Island */
     .phone::before {
-      content: '';
-      position: absolute;
-      top: 12px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 126px;
-      height: 36px;
-      background: #000;
-      border-radius: 20px;
-      z-index: 10;
+      content: ''; position: absolute; top: 12px; left: 50%; transform: translateX(-50%);
+      width: 126px; height: 36px; background: #000; border-radius: 20px; z-index: 10;
     }
 
-    /* ── Top Section (colored background for photo) ── */
+    /* ── Top Section ── */
     .top-section {
       padding: 64px 24px 0;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      position: relative;
-      z-index: 2;
-      flex-shrink: 0;
+      display: flex; flex-direction: column; align-items: center;
+      position: relative; z-index: 2; flex-shrink: 0;
     }
-
-    .top-section--blue {
-      background: linear-gradient(180deg, var(--blue-soft) 0%, var(--blue-light) 75%, var(--white) 100%);
-    }
-
-    .top-section--turquoise {
-      background: linear-gradient(180deg, var(--turquoise) 0%, var(--turquoise-light) 75%, var(--white) 100%);
-    }
+    .top-section--blue { background: linear-gradient(180deg, var(--blue-soft) 0%, var(--blue-light) 75%, var(--white) 100%); }
+    .top-section--turquoise { background: linear-gradient(180deg, var(--turquoise) 0%, var(--turquoise-light) 75%, var(--white) 100%); }
 
     /* ── Logo ── */
-    .logo {
-      width: 36px;
-      height: auto;
-      margin-bottom: 14px;
-    }
+    .logo { width: 36px; height: auto; margin-bottom: 14px; }
 
-    /* ── Hero Photo (Screen 1) — overlaps into white area ── */
+    /* ── Photos ── */
     .hero-photo {
-      width: 300px;
-      height: 220px;
-      object-fit: cover;
-      border-radius: 20px;
-      box-shadow:
-        0 20px 50px rgba(27, 44, 67, 0.24),
-        0 8px 20px rgba(27, 44, 67, 0.12);
+      width: 300px; height: 220px; object-fit: cover; border-radius: 20px;
+      box-shadow: 0 20px 50px rgba(27, 44, 67, 0.24), 0 8px 20px rgba(27, 44, 67, 0.12);
       border: 4px solid rgba(255,255,255,0.85);
-      margin-bottom: -48px;
-      position: relative;
-      z-index: 3;
+      margin-bottom: -48px; position: relative; z-index: 3;
     }
-
-    /* ── Family Photo (Screen 2) — overlaps into white area ── */
     .family-photo {
-      width: 290px;
-      height: 260px;
-      object-fit: cover;
-      object-position: center 30%;
+      width: 290px; height: 260px; object-fit: cover; object-position: center 30%;
       border-radius: 20px;
-      box-shadow:
-        0 20px 50px rgba(27, 44, 67, 0.24),
-        0 8px 20px rgba(27, 44, 67, 0.12);
+      box-shadow: 0 20px 50px rgba(27, 44, 67, 0.24), 0 8px 20px rgba(27, 44, 67, 0.12);
       border: 4px solid rgba(255,255,255,0.85);
-      margin-bottom: -48px;
-      position: relative;
-      z-index: 3;
+      margin-bottom: -48px; position: relative; z-index: 3;
     }
 
     /* ── Bottom Content ── */
     .bottom {
-      flex: 1;
-      padding: 56px 20px 8px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: flex-end;
-      gap: 16px;
-      position: relative;
-      z-index: 1;
+      flex: 1; padding: 56px 20px 8px;
+      display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+      gap: 16px; position: relative; z-index: 1;
     }
 
-    /* ── Back Arrow (Screen 2) ── */
+    /* ── Back Arrow ── */
     .back-arrow {
-      position: absolute;
-      top: 54px;
-      left: 20px;
-      width: 44px;
-      height: 44px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      padding: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 11;
+      position: absolute; top: 54px; left: 20px;
+      width: 44px; height: 44px; background: none; border: none;
+      cursor: pointer; padding: 10px;
+      display: flex; align-items: center; justify-content: center; z-index: 11;
     }
 
-    /* ── Steps Row (in content area, with line connectors) ── */
-    .steps {
-      display: flex;
-      align-items: flex-start;
-      justify-content: center;
-      margin-bottom: 24px;
-    }
-
-    .step {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      width: 80px;
-    }
-
-    .step-icon {
-      margin-bottom: 8px;
-    }
-
-    .step-text {
-      font-weight: 700;
-      font-size: 12px;
-      color: var(--navy);
-      text-align: center;
-      letter-spacing: 0.2px;
-    }
-
-    .step-chevron {
-      margin-top: 12px;
-      flex-shrink: 0;
-    }
+    /* ── Steps Row ── */
+    .steps { display: flex; align-items: flex-start; justify-content: center; margin-bottom: 24px; }
+    .step { display: flex; flex-direction: column; align-items: center; width: 80px; }
+    .step-icon { margin-bottom: 8px; }
+    .step-text { font-weight: 700; font-size: 12px; color: var(--navy); text-align: center; letter-spacing: 0.2px; }
+    .step-chevron { margin-top: 12px; flex-shrink: 0; }
 
     /* ── Text ── */
-    .bottom-text {
-      text-align: center;
-    }
-
-    .headline {
-      font-weight: 800;
-      font-size: 28px;
-      color: var(--navy);
-      text-align: center;
-      line-height: 1.3;
-      margin-bottom: 10px;
-    }
-
-    .sub {
-      font-weight: 500;
-      font-size: 15px;
-      color: var(--dark-gray);
-      text-align: center;
-      line-height: 1.55;
-    }
-
-    .benefit {
-      font-weight: 500;
-      font-size: 13px;
-      color: var(--mid-gray);
-      text-align: center;
-      line-height: 1.5;
-      margin-top: 8px;
-    }
+    .bottom-text { text-align: center; }
+    .headline { font-weight: 800; font-size: 28px; color: var(--navy); text-align: center; line-height: 1.3; margin-bottom: 10px; }
+    .sub { font-weight: 500; font-size: 15px; color: var(--dark-gray); text-align: center; line-height: 1.55; }
+    .benefit { font-weight: 500; font-size: 13px; color: var(--mid-gray); text-align: center; line-height: 1.5; margin-top: 8px; }
 
     /* ── Actions ── */
-    .bottom-actions {
-      margin-top: 24px;
-      width: 100%;
-    }
-
+    .bottom-actions { margin-top: 24px; width: 100%; }
     .btn {
-      width: 100%;
-      padding: 16px;
-      border-radius: var(--btn-radius);
-      font-weight: 700;
-      font-size: 16px;
-      border: none;
-      cursor: pointer;
-      text-align: center;
-      min-height: 48px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      width: 100%; padding: 16px; border-radius: var(--btn-radius);
+      font-weight: 700; font-size: 16px; border: none; cursor: pointer; text-align: center;
+      min-height: 48px; display: flex; align-items: center; justify-content: center;
     }
-
-    .btn-primary {
-      background: var(--orange);
-      color: var(--white);
-    }
-
-    .btn-stack {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      width: 100%;
-    }
-
+    .btn-primary { background: var(--orange); color: var(--white); }
+    .btn-stack { display: flex; flex-direction: column; gap: 12px; width: 100%; }
     .skip {
-      font-weight: 500;
-      font-size: 14px;
-      color: var(--mid-gray);
-      padding: 14px;
-      background: none;
-      border: none;
-      cursor: pointer;
-      width: 100%;
-      text-align: center;
+      font-weight: 500; font-size: 14px; color: var(--mid-gray);
+      padding: 14px; background: none; border: none; cursor: pointer;
+      width: 100%; text-align: center;
     }
 
     /* ── Page Dots ── */
-    .dots {
-      display: flex;
-      gap: 8px;
-      justify-content: center;
-      padding: 10px 0 28px;
-    }
+    .dots { display: flex; gap: 8px; justify-content: center; padding: 10px 0 28px; }
+    .dot { width: 8px; height: 8px; border-radius: 4px; background: #D8DDE3; }
+    .dot.on { width: 24px; background: var(--orange); }
+    .dot.done { background: var(--navy); opacity: 0.4; }
 
-    .dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 4px;
-      background: #D8DDE3;
-    }
-
-    .dot.on {
-      width: 24px;
-      background: var(--orange);
-    }
-
-    .dot.done {
-      background: var(--navy);
-      opacity: 0.4;
-    }
-
-    .footer-note {
-      font-size: 11px;
-      color: #A0A0A0;
-      font-weight: 500;
-      text-align: center;
-    }
-
+    .footer-note { font-size: 11px; color: #A0A0A0; font-weight: 500; text-align: center; }
     [id^="screen-"] { scroll-margin-top: 20px; }
   </style>
 </head>
@@ -327,23 +140,15 @@
 
   <div class="preview-row">
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 1 — So funktioniert's                   -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- ═══ SCREEN 1 — So funktioniert's ═══ -->
     <div id="screen-1">
       <div class="screen-label">Screen 1 — So funktioniert's</div>
       <div class="phone">
-
-        <!-- Colored area: just logo + photo (photo overlaps into white) -->
         <div class="top-section top-section--blue">
           <img class="logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo">
           <img class="hero-photo" src="flyer/foto.jpg" alt="Oma liest das remoryo Fotoheft">
         </div>
-
-        <!-- White content area -->
         <div class="bottom">
-
-          <!-- Steps: narrative bridge between photo and text -->
           <div class="steps">
             <div class="step">
               <svg class="step-icon" width="56" height="56" viewBox="0 0 56 56" fill="none">
@@ -394,59 +199,41 @@
               <div class="step-text">Versenden</div>
             </div>
           </div>
-
-          <!-- Text -->
           <div class="bottom-text">
             <div class="headline">Dein Fotoheft<br>für Oma & Opa</div>
             <div class="sub">Jeden Monat ein gedrucktes Fotoheft —<br>direkt per Post zu deinen Liebsten</div>
           </div>
-
-          <!-- Actions (pushed to bottom) -->
           <div class="bottom-actions">
             <button class="btn btn-primary">Weiter</button>
             <button class="skip">Überspringen <svg width="14" height="14" viewBox="0 0 14 14" fill="none" style="vertical-align: middle; margin-left: 2px;"><path d="M1 7H13M13 7L8 2M13 7L8 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
           </div>
         </div>
-
         <div class="dots">
           <div class="dot on"></div>
           <div class="dot"></div>
         </div>
-
       </div>
     </div>
 
-    <!-- ══════════════════════════════════════════════ -->
-    <!-- SCREEN 2 — Familie einladen                    -->
-    <!-- ══════════════════════════════════════════════ -->
+    <!-- ═══ SCREEN 2 — Familie einladen ═══ -->
     <div id="screen-2">
       <div class="screen-label">Screen 2 — Familie einladen</div>
       <div class="phone">
-
-        <!-- Colored area: just logo + photo (photo overlaps into white) -->
         <div class="top-section top-section--turquoise">
           <img class="logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo">
           <img class="family-photo" src="app-repo/assets/images/happy-family-fake-image.png" alt="Familie">
         </div>
-
-        <!-- Back arrow — positioned inside .phone, below Dynamic Island -->
         <button class="back-arrow" aria-label="Zurück">
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
             <path d="M15 18L9 12L15 6" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </button>
-
-        <!-- White content area — same layout as Screen 1: flex-end aligned -->
         <div class="bottom">
-
-          <!-- Text -->
           <div class="bottom-text">
             <div class="headline">Lade deine<br>Familie ein</div>
             <div class="sub">Lade deine Liebsten ein und sammelt<br>eure schönsten Momente</div>
             <div class="benefit">Mehr Fotos von allen — für ein volleres Heft für Oma & Opa</div>
           </div>
-
-          <!-- Actions -->
           <div class="bottom-actions">
             <div class="btn-stack">
               <button class="btn btn-primary">Jetzt einladen</button>
@@ -454,12 +241,10 @@
             </div>
           </div>
         </div>
-
         <div class="dots">
           <div class="dot done"></div>
           <div class="dot on"></div>
         </div>
-
       </div>
     </div>
 
