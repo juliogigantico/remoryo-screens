@@ -236,7 +236,6 @@ body{
 .thumb-header-month{font-size:6px;font-weight:800;color:var(--orange)}
 .thumb-content{flex:1;display:flex;flex-direction:column;gap:2px;padding:0 4px;min-height:0}
 .thumb-footer{height:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
-.thumb-footer-heart{color:var(--blue);font-size:5px;line-height:1}
 .thumb-footer-num{font-size:4px;color:var(--mid-gray)}
 .bottom-action-bar{
   padding:14px 20px;border-top:1px solid var(--border);
@@ -258,16 +257,16 @@ body{
   background-image:url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='.02'/%3E%3C/svg%3E");
 }
 .wysiwyg-header{
-  height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  flex-shrink:0;padding:8px 14px 4px;
+  height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  flex-shrink:0;padding:10px 17px 4px;
 }
 .wysiwyg-family{font-size:10px;font-weight:800;color:var(--navy);letter-spacing:.4px}
 .wysiwyg-month{font-size:17px;font-weight:800;color:var(--orange)}
-.wysiwyg-content{flex:1;padding:0 14px;display:flex;flex-direction:column;gap:6px;min-height:0}
+.wysiwyg-content{flex:1;padding:0 17px;display:flex;flex-direction:column;gap:6px;min-height:0}
 .wysiwyg-footer{
-  height:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;gap:1px;
+  height:21px;display:flex;align-items:center;justify-content:center;flex-shrink:0;gap:4px;
 }
-.wysiwyg-footer-heart{color:var(--blue);font-size:10px;line-height:1}
+.wysiwyg-footer .heart-sm{width:10px;height:10px;fill:var(--blue)}
 .wysiwyg-footer-page{font-size:7px;color:var(--mid-gray);font-weight:500}
 
 /* Editor slots */
@@ -525,7 +524,7 @@ body{
 /* ═══════════════════════════════════════════════════════════
    BACK PAGE EDITOR
    ═══════════════════════════════════════════════════════════ */
-.back-variant-bar{display:flex;gap:6px;padding:6px 14px}
+.editor-variant-bar{display:flex;gap:8px;padding:8px 20px;background:var(--white);border-bottom:1px solid var(--border)}
 .back-variant-btn{flex:1;padding:8px 6px;border-radius:10px;border:2px solid var(--border);text-align:center;cursor:pointer;font-size:10px;font-weight:600;color:var(--navy);transition:border-color .15s,background .15s;-webkit-tap-highlight-color:transparent}
 .back-variant-btn:active{transform:scale(.97)}
 .back-variant-btn--sel{border-color:var(--orange);background:var(--soft-orange)}
@@ -544,7 +543,6 @@ body{
 .back-bday-name{font-weight:700;color:var(--blue)}
 .back-bday-date{opacity:.6}
 .back-footer{padding:6px 14px;text-align:center}
-.back-footer-heart{font-size:14px;margin-bottom:2px}
 .back-footer-url{font-size:7px;color:var(--navy);opacity:.25;font-weight:600}
 .back-manage-link{font-size:10px;color:var(--blue);font-weight:600;cursor:pointer;padding:4px;text-align:center}
 .back-manage-link:hover{text-decoration:underline}
@@ -563,6 +561,12 @@ body{
 </style>
 </head>
 <body>
+
+<svg style="display:none">
+  <symbol id="logo-heart" viewBox="260 130 140 130">
+    <path d="M344.4,160.9c0,0-42.8-45-74.1-26s13.7,83.4,13.7,83.4s21.2,35.4,41,35.4c19.8,0,75.1-59.7,63.7-92.9 C381.5,140,344.4,160.9,344.4,160.9z"/>
+  </symbol>
+</svg>
 
 <div class="phone" id="phone">
   <div id="statusBar"></div>
@@ -923,7 +927,7 @@ function renderThumb(page,idx){
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="1.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
       </div>`:'<div style="flex:1"></div>'}
       <div style="padding:5px 6px;background:${hasPhoto?'linear-gradient(transparent,rgba(27,44,67,.65))':'none'}">
-        <div style="font-size:4px;color:${hasPhoto?'rgba(255,255,255,.7)':'var(--blue)'};font-weight:700;display:flex;align-items:center;gap:2px"><span style="color:${hasPhoto?'rgba(255,255,255,.7)':'var(--blue)'}">♥</span> remoryo</div>
+        <div style="font-size:4px;color:${hasPhoto?'rgba(255,255,255,.7)':'var(--navy)'};font-weight:700;display:flex;align-items:center;gap:2px"><svg style="width:5px;height:5px;fill:${hasPhoto?'rgba(255,255,255,.7)':'var(--blue)'}"><use href="#logo-heart"/></svg> remoryo</div>
         <div style="font-size:7px;color:${hasPhoto?'white':'var(--navy)'};font-weight:800;line-height:1.2;margin-top:1px">${esc(S.mag.title)}</div>
         <div style="font-size:4px;color:${hasPhoto?'rgba(255,255,255,.55)':'var(--mid-gray)'};margin-top:1px">${S.mag.month} · ${S.mag.family}</div>
       </div>
@@ -937,7 +941,7 @@ function renderThumb(page,idx){
       ${isEmotional?`<div style="font-size:3.5px;font-style:italic;color:var(--dark-gray);text-align:center;padding:0 3px;line-height:1.4">${esc(page.quote||'').substring(0,50)}...</div>`:''}
       ${!isEmotional&&page.backSlot?.content?`<div style="flex:1;width:90%;background:${page.backSlot.content.type==='photo'?GRADIENTS[page.backSlot.content.photoId%15]:'var(--turquoise-light)'};border-radius:2px;min-height:16px;margin:2px 0"></div>`:''}
       <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:1px">
-        <div style="font-size:5px;color:var(--blue);line-height:1">♥</div>
+        <svg style="width:6px;height:6px;fill:var(--blue)"><use href="#logo-heart"/></svg>
         <div style="font-size:3.5px;color:var(--mid-gray)">· 12 ·</div>
       </div>
     </div>`;
@@ -983,7 +987,7 @@ function renderThumb(page,idx){
     </div>
     <div class="thumb-content">${slotsHtml}</div>
     <div class="thumb-footer">
-      <div class="thumb-footer-heart">♥</div>
+      <svg style="width:6px;height:6px;fill:var(--blue)"><use href="#logo-heart"/></svg>
       <div class="thumb-footer-num">· ${pageNum} ·</div>
     </div>
   </div>`;
@@ -1006,6 +1010,10 @@ function renderOverview(){
     </div>`;
   });
   return `<div class="screen-content fade-in">
+    <div class="sec-header">
+      <div class="sec-back" onclick="nav('mode-selection')">${IC.back}</div>
+      <div class="sec-title">Fotoheft</div>
+    </div>
     <div class="overview-header">
       <div class="overview-month">${S.mag.month}</div>
       <div class="overview-title-row">
@@ -1042,13 +1050,25 @@ function renderEditor(){
   else pageHtml=renderContentPage(pg,idx);
 
   const canLayout=pg.type==='content';
+  const isBack=pg.type==='back';
+  const isEmotional=isBack&&pg.variant==='emotional';
   const dots=S.mag.pages.map((p,pi)=>{
     const cur=pi===idx;
     const filled=pi===0||pi===11||(p.slots&&p.slots.some(s=>s.content))||(p.backSlot&&p.backSlot.content);
     return `<div class="toolbar-dot ${cur?'toolbar-dot--active':''} ${filled&&!cur?'toolbar-dot--filled':''}" onclick="S.editor.pageIdx=${pi};render()"></div>`;
   }).join('');
 
+  const variantBar=isBack?`<div class="editor-variant-bar">
+    <div class="back-variant-btn ${isEmotional?'back-variant-btn--sel':''}" onclick="setBackVariant('emotional')">💬 Emotional</div>
+    <div class="back-variant-btn ${!isEmotional?'back-variant-btn--sel':''}" onclick="setBackVariant('foto')">📸 Foto-Rückseite</div>
+  </div>`:'';
+
   return `<div class="editor-wrap fade-in">
+    <div class="sec-header">
+      <div class="sec-back" onclick="goBack()">${IC.back}</div>
+      <div class="sec-title">Seite bearbeiten</div>
+    </div>
+    ${variantBar}
     <div class="editor-page-area">
       <div class="wysiwyg-page">${pageHtml}</div>
     </div>
@@ -1095,7 +1115,7 @@ function renderCoverPage(pg){
   return `<div class="cover-photo-area" style="background:${bg}" onclick="onSlotTap(0)">
     <div class="slot-edit-badge">${IC.edit}</div>
     <div class="cover-overlay">
-      <div class="cover-logo">♥ remoryo</div>
+      <div class="cover-logo"><svg style="width:10px;height:10px;fill:rgba(255,255,255,.8);vertical-align:middle;margin-right:2px"><use href="#logo-heart"/></svg>remoryo</div>
       <div class="cover-title" onclick="event.stopPropagation();editCoverTitle()">${esc(S.mag.title)}</div>
       <div class="cover-date">${S.mag.month} · ${S.mag.family}</div>
     </div>
@@ -1112,11 +1132,6 @@ function renderBackPage(){
   const bgStyle=isEmotional?'background:linear-gradient(175deg,#FFFFFF 0%,#F8F6F4 50%,#EDE7DF 100%)':'background:var(--white)';
 
   let contentHtml='';
-  // Variant toggle
-  contentHtml+=`<div class="back-variant-bar">
-    <div class="back-variant-btn ${isEmotional?'back-variant-btn--sel':''}" onclick="setBackVariant('emotional')">💬 Emotional</div>
-    <div class="back-variant-btn ${!isEmotional?'back-variant-btn--sel':''}" onclick="setBackVariant('foto')">📸 Foto-Rückseite</div>
-  </div>`;
   // Wordmark
   contentHtml+=`<div class="back-section" style="padding-top:10px"><div class="back-wordmark">remoryo</div></div>`;
   // Authors
@@ -1159,7 +1174,7 @@ function renderBackPage(){
   // Manage link
   contentHtml+=`<div class="back-manage-link" onclick="showMemberManager()">Mitglieder verwalten</div>`;
   // Footer
-  contentHtml+=`<div class="back-footer"><div class="back-footer-heart">♥</div><div class="back-footer-url">www.remoryo.de</div></div>`;
+  contentHtml+=`<div class="back-footer"><svg style="width:12px;height:12px;fill:var(--blue)"><use href="#logo-heart"/></svg><div class="back-footer-url">www.remoryo.de</div></div>`;
 
   return `<div style="flex:1;display:flex;flex-direction:column;${bgStyle}">
     ${contentHtml}
@@ -1180,7 +1195,7 @@ function renderContentPage(pg,pageIdx){
   </div>
   <div class="wysiwyg-content">${slotsHtml}</div>
   <div class="wysiwyg-footer">
-    <div class="wysiwyg-footer-heart">♥</div>
+    <svg class="heart-sm"><use href="#logo-heart"/></svg>
     <div class="wysiwyg-footer-page">· ${pageNum} ·</div>
   </div>`;
 }
