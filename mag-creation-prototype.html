@@ -642,7 +642,7 @@ const S = {
   mode:null,
   selectedPhotos:[],
   mag:{title:'Unser Familienmonat',month:'März 2026',family:'Familie Müller',pages:[]},
-  editor:{pageIdx:0},
+  editor:{pageIdx:0,pendingPhotoLayout:null},
   members:MEMBERS_DEFAULT.map(m=>({...m})),
 };
 
@@ -1196,7 +1196,14 @@ function showElementTypePicker(si){
     </div>
   `);
 }
-function pickPhoto(si){hideSheet();setTimeout(()=>showPhotoPicker(si),200)}
+function pickPhoto(si){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  if(pg.layout==='2-slots'){
+    hideSheet();setTimeout(()=>showPhotoLayoutPicker(si,true),200);
+  } else {
+    hideSheet();setTimeout(()=>showPhotoPicker(si),200);
+  }
+}
 function pickEntertainment(si){hideSheet();setTimeout(()=>showEntCategoryPicker(si),200)}
 function pickFreetext(si){
   const pg=S.mag.pages[S.editor.pageIdx];
@@ -1298,26 +1305,23 @@ function showPhotoPicker(si){
 function selectPhotoForSlot(si,photoId){
   const pg=S.mag.pages[S.editor.pageIdx];
   if(!pg.slots[si]) pg.slots[si]={content:null};
+  const pending=S.editor.pendingPhotoLayout;
   const orient=PHOTOS[photoId]?.orientation||'landscape';
-  const defaultLayout=orient==='portrait'?'side-left':'stacked';
-  pg.slots[si].content={type:'photo',photoId,caption:CAPTIONS[photoId%CAPTIONS.length],pos:{x:0,y:0,z:1},photoLayout:defaultLayout};
-  hideSheet();
-  if(pg.layout==='2-slots'){
-    setTimeout(()=>showPhotoLayoutPicker(si),200);
-  } else {
-    render();
-  }
+  const pLayout=pending||(orient==='portrait'?'side-left':'stacked');
+  pg.slots[si].content={type:'photo',photoId,caption:CAPTIONS[photoId%CAPTIONS.length],pos:{x:0,y:0,z:1},photoLayout:pLayout};
+  S.editor.pendingPhotoLayout=null;
+  hideSheet();render();
 }
-function showPhotoLayoutPicker(si){
+function showPhotoLayoutPicker(si,preSelect){
   const pg=S.mag.pages[S.editor.pageIdx];
   const slot=pg.slots[si];
-  if(!slot?.content||slot.content.type!=='photo') return;
-  const current=slot.content.photoLayout||'stacked';
+  const current=preSelect?'stacked':(slot?.content?.photoLayout||'stacked');
+  const action=preSelect?'preSelectPhotoLayout':'setPhotoLayout';
   const chk=`<div style="position:absolute;top:4px;right:4px;width:18px;height:18px;border-radius:9px;background:var(--orange);display:flex;align-items:center;justify-content:center">${IC.check}</div>`;
   const camMini='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="1.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>';
   function lc(id,label,inner){
     const sel=current===id;
-    return `<div class="layout-opt ${sel?'layout-opt--sel':''}" style="flex:1;padding:10px;cursor:pointer" onclick="setPhotoLayout(${si},'${id}')">
+    return `<div class="layout-opt ${sel?'layout-opt--sel':''}" style="flex:1;padding:10px;cursor:pointer" onclick="${action}(${si},'${id}')">
       ${sel?chk:''}
       <div style="aspect-ratio:210/148;border-radius:5px;overflow:hidden;display:flex;background:var(--light-gray);padding:3px;gap:2px">${inner}</div>
       <div class="layout-label" style="margin-top:6px;font-size:11px">${label}</div>
@@ -1332,7 +1336,7 @@ function showPhotoLayoutPicker(si){
     <div style="flex:1;background:var(--blue-light);border-radius:3px;display:flex;align-items:center;justify-content:center">${camMini}</div>`);
   showSheet(`
     <div class="sheet-title">Foto-Layout</div>
-    <div class="sheet-sub">Wie soll das Foto auf der halben Seite aussehen?</div>
+    <div class="sheet-sub">${preSelect?'Wähle zuerst das Layout, dann das Foto':'Wie soll das Foto auf der halben Seite aussehen?'}</div>
     <div style="display:flex;gap:10px;margin:14px 0">${stacked}${sideL}${sideR}</div>
   `);
 }
@@ -1340,6 +1344,10 @@ function setPhotoLayout(si,layout){
   const pg=S.mag.pages[S.editor.pageIdx];
   if(pg.slots[si]?.content?.type==='photo') pg.slots[si].content.photoLayout=layout;
   hideSheet();render();
+}
+function preSelectPhotoLayout(si,layout){
+  S.editor.pendingPhotoLayout=layout;
+  hideSheet();setTimeout(()=>showPhotoPicker(si),200);
 }
 
 /* ═══════════════════════════════════════════════════════════
