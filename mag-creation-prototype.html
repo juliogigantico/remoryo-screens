@@ -194,10 +194,11 @@ body{
 /* ═══════════════════════════════════════════════════════════
    S14 — PAGES OVERVIEW
    ═══════════════════════════════════════════════════════════ */
-.overview-header{padding:16px 20px 8px}
-.overview-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
-.overview-title{font-size:18px;font-weight:800}
-.overview-date{font-size:13px;color:var(--mid-gray)}
+.overview-header{padding:20px 20px 8px}
+.overview-month{font-size:26px;font-weight:800;line-height:1.15;margin-bottom:2px}
+.overview-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.overview-title{font-size:14px;font-weight:600;color:var(--dark-gray)}
+.overview-family{font-size:13px;color:var(--mid-gray)}
 .progress-section{margin-top:10px}
 .progress-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
 .progress-label{font-size:14px;font-weight:700}
@@ -311,23 +312,34 @@ body{
 /* Editor toolbar */
 .editor-toolbar{
   display:flex;align-items:center;justify-content:space-between;
-  padding:10px 16px;background:var(--white);border-top:1px solid var(--border);flex-shrink:0;
+  padding:8px 14px 10px;flex-shrink:0;
+  background:rgba(255,255,255,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  box-shadow:0 -1px 0 rgba(27,44,67,.06),0 -8px 24px rgba(27,44,67,.04);
 }
 .toolbar-btn{
-  width:44px;height:44px;border-radius:12px;border:none;background:var(--light-gray);
+  width:44px;height:44px;border-radius:22px;border:none;background:none;
   display:flex;align-items:center;justify-content:center;cursor:pointer;
-  -webkit-tap-highlight-color:transparent;transition:background .15s;
+  -webkit-tap-highlight-color:transparent;transition:background .15s,transform .1s;
+  color:var(--dark-gray);
 }
-.toolbar-btn:active{background:var(--border)}
-.toolbar-nav{display:flex;align-items:center;gap:12px}
-.toolbar-nav-label{font-size:14px;font-weight:700;min-width:80px;text-align:center}
+.toolbar-btn:active{background:rgba(130,183,216,.15);transform:scale(.92)}
+.toolbar-nav{
+  display:flex;align-items:center;gap:2px;
+  background:var(--light-gray);border-radius:22px;padding:3px;
+}
+.toolbar-nav-label{
+  font-size:13px;font-weight:700;min-width:68px;text-align:center;
+  padding:0 6px;color:var(--navy);user-select:none;
+}
 .toolbar-arrow{
-  width:36px;height:36px;border-radius:18px;border:none;background:none;
+  width:34px;height:34px;border-radius:17px;border:none;background:var(--white);
   display:flex;align-items:center;justify-content:center;cursor:pointer;
   -webkit-tap-highlight-color:transparent;color:var(--navy);
+  box-shadow:0 1px 3px rgba(27,44,67,.08);
+  transition:background .12s,transform .1s;
 }
-.toolbar-arrow:active{background:var(--light-gray)}
-.toolbar-arrow:disabled{opacity:.3;cursor:not-allowed}
+.toolbar-arrow:active{transform:scale(.9);background:var(--blue-light)}
+.toolbar-arrow:disabled{opacity:.2;cursor:not-allowed;box-shadow:none;transform:none}
 
 /* ═══════════════════════════════════════════════════════════
    COVER PAGE SPECIAL
@@ -937,9 +949,10 @@ function renderOverview(){
   });
   return `<div class="screen-content fade-in">
     <div class="overview-header">
+      <div class="overview-month">${S.mag.month}</div>
       <div class="overview-title-row">
         <div class="overview-title">${esc(S.mag.title)}</div>
-        <div class="overview-date">${S.mag.month}</div>
+        <div class="overview-family">${S.mag.family}</div>
       </div>
       <div class="progress-section">
         <div class="progress-row">
