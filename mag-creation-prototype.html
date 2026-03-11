@@ -18,7 +18,7 @@
   --border:#E4DDD5;--border-alt:#D6CEC4;
   --red:#E74C3C;--soft-red:#FFF0EE;--soft-green:#EBF5EC;
   --soft-orange:#FFF3DC;--soft-orange-bg:#FFF8F0;
-  --green-text:#1D8348;--caption-warm:#F5F1ED;
+  --green-text:#1D8348;--caption-warm:#F8F6F4;
   --radius:14px;--radius-sm:12px;
   --font:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
   --sheet-ease:cubic-bezier(.32,.72,0,1);
@@ -257,9 +257,9 @@ body{
 }
 .wysiwyg-header{
   height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  flex-shrink:0;padding:10px 17px 4px;
+  flex-shrink:0;padding:10px 17px 5px;gap:2px;
 }
-.wysiwyg-family{font-size:12px;font-weight:800;color:var(--navy);letter-spacing:.4px}
+.wysiwyg-family{font-size:12px;font-weight:900;color:var(--navy);letter-spacing:.4px}
 .wysiwyg-month{font-size:20px;font-weight:800;color:var(--orange)}
 .wysiwyg-content{flex:1;padding:0 17px;display:flex;flex-direction:column;gap:15px;min-height:0}
 .wysiwyg-footer{
@@ -284,23 +284,34 @@ body{
   display:flex;align-items:center;justify-content:center;
 }
 .slot-empty-text{font-size:12px;color:var(--mid-gray);font-weight:500}
-.slot-photo{display:flex;flex-direction:column}
+.slot-photo{display:flex;flex-direction:column;border:1.3px solid var(--navy);border-radius:7px}
 .slot-photo-area{flex:1;display:flex;align-items:center;justify-content:center;position:relative;min-height:0}
 .slot-caption{
-  background:var(--caption-warm);padding:8px 12px;
-  display:flex;align-items:center;gap:10px;min-height:46px;
+  background:var(--caption-warm);
+  display:flex;flex-direction:row;align-items:stretch;min-height:46px;
+}
+.slot-caption-left{
+  width:20%;flex-shrink:0;display:flex;flex-direction:column;align-items:center;
+  gap:2px;padding:5px 3px;position:relative;
 }
 .slot-caption-circle{
   width:24px;height:24px;border-radius:12px;background:var(--blue);
   display:flex;align-items:center;justify-content:center;
   font-size:8px;font-weight:700;color:var(--white);flex-shrink:0;
+  margin-top:-20px;margin-bottom:2px;z-index:2;
+  border:1.3px solid var(--blue);box-shadow:0 1px 4px rgba(27,44,67,.12);
 }
-.slot-caption-text{font-size:10px;color:var(--navy);line-height:1.3;flex:1;min-width:0}
-.slot-caption-name{font-weight:700;color:var(--blue);font-size:8px}
-.slot-caption-date{color:var(--orange);font-size:8px}
+.slot-caption-right{
+  flex:1;display:flex;align-items:center;padding:7px 10px 7px 8px;
+  min-width:0;border-left:1px solid rgba(27,44,67,.06);
+}
+.slot-caption-text{font-size:10px;color:var(--navy);line-height:1.5;flex:1;min-width:0}
+.slot-caption-name{font-weight:700;color:var(--blue);font-size:6px;text-align:center;line-height:1.2}
+.slot-caption-date{color:var(--orange);font-size:6px;text-align:center}
 .slot-ent{
   background:var(--turquoise-light);display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:4px;
+  border:1.3px solid var(--navy);border-radius:7px;
 }
 .slot-ent-icon{font-size:24px}
 .slot-ent-label{font-size:12px;font-weight:600;color:var(--dark-gray)}
@@ -311,9 +322,13 @@ body{
 .slot-text-content{font-size:11px;color:var(--dark-gray);text-align:center;line-height:1.4}
 .slot-photo--side{flex-direction:row}
 .slot-caption-side{
-  width:45%;background:var(--caption-warm);display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:6px;padding:10px;text-align:center;
+  flex:0 0 45%;background:var(--caption-warm);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:4px;padding:10px 8px;text-align:center;
 }
+.slot-caption-side .slot-caption-circle{
+  width:26px;height:26px;border-radius:13px;font-size:9px;margin-top:0;margin-bottom:3px;
+}
+.slot-photo--side .slot-photo-area{flex:0 0 55%}
 .slot-edit-badge{
   position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:11px;
   background:rgba(255,255,255,.9);box-shadow:0 1px 4px rgba(0,0,0,.12);
@@ -1123,15 +1138,18 @@ function renderBackPage(){
   function fmtBday(b){const[mm,dd]=b.split('-');return `${parseInt(dd)}. ${MONTHS_DE[parseInt(mm)-1]}`}
   const bgStyle=isEmotional?'background:linear-gradient(175deg,#FFFFFF 0%,#F8F6F4 50%,#EDE7DF 100%)':'background:var(--white)';
 
+  const sep=`<div style="display:flex;align-items:center;gap:7px;margin:5px 0"><div style="width:56px;height:1px;background:var(--blue);opacity:.45"></div><img src="assets/logo_heart_blue.png" style="width:9px;height:auto;opacity:.6"><div style="width:56px;height:1px;background:var(--blue);opacity:.45"></div></div>`;
   let contentHtml='';
   // Wordmark
-  contentHtml+=`<div class="back-section"><div class="back-wordmark">remoryo</div></div>`;
+  contentHtml+=`<div class="back-section" style="margin-bottom:16px"><div class="back-wordmark">remoryo</div></div>`;
   // Authors
   contentHtml+=`<div class="back-section"><div class="back-label">Gestaltet von</div></div>`;
   contentHtml+=`<div class="back-authors">${authors.map(m=>`<div class="back-author" onclick="showMemberManager()">
     <div class="back-author-circle" style="background:${m.color}">${m.initial}</div>
     <div class="back-author-name">${esc(m.name)}</div>
   </div>`).join('')}</div>`;
+  // Separator
+  contentHtml+=sep;
   if(isEmotional){
     // Quote
     contentHtml+=`<div class="back-quote" onclick="editBackQuote()">${esc(pg.quote||'Tippe hier für einen Spruch...')}</div>`;
@@ -1155,6 +1173,7 @@ function renderBackPage(){
   }
   // Birthdays
   if(bdayMembers.length>0){
+    contentHtml+=sep;
     contentHtml+=`<div class="back-bdays">
       <div class="back-bday-title">🎂 Bald Geburtstag</div>
       ${isEmotional?
@@ -1184,7 +1203,7 @@ function renderContentPage(pg,pageIdx){
   });
   return `<div class="wysiwyg-header">
     <div class="wysiwyg-family">${S.mag.family}</div>
-    <div class="wysiwyg-month">${S.mag.month.split(' ')[0]}</div>
+    <div class="wysiwyg-month">${S.mag.month}</div>
   </div>
   <div class="wysiwyg-content">${slotsHtml}</div>
   <div class="wysiwyg-footer">
@@ -1210,24 +1229,27 @@ function renderSlot(slot,si,pageLayout){
     const camSvg='<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>';
     // Side layout (portrait variants) — only in 2-slot pages
     if((pLayout==='side-left'||pLayout==='side-right')&&pageLayout==='2-slots'){
-      const photoEl=`<div class="slot-photo-area" style="flex:1;background:${bg}">${camSvg}<div class="slot-edit-badge">${IC.edit}</div></div>`;
+      const photoEl=`<div class="slot-photo-area" style="background:${bg}">${camSvg}<div class="slot-edit-badge">${IC.edit}</div></div>`;
       const captionEl=`<div class="slot-caption-side" onclick="event.stopPropagation();editCaption(${si})">
-        <div class="slot-caption-circle">${authorInitial}</div>
-        <div class="slot-caption-name" style="text-align:center">${authorName}</div>
-        <div class="slot-caption-date">5. März</div>
-        <div class="slot-caption-text" style="text-align:center;margin-top:2px;${hasCaption?'':'opacity:.5;font-style:italic'}">${captionText}</div>
+        <div class="slot-caption-circle" style="margin-top:0;border:1.3px solid var(--blue);box-shadow:0 1px 4px rgba(27,44,67,.12)">${authorInitial}</div>
+        <div class="slot-caption-name" style="font-size:6.5px">${authorName}</div>
+        <div class="slot-caption-date" style="font-size:6px">5. März</div>
+        <div class="slot-caption-text" style="text-align:center;margin-top:3px;font-size:10px;line-height:1.5;${hasCaption?'':'opacity:.5;font-style:italic'}">${captionText}</div>
       </div>`;
       return `<div class="slot slot-photo slot-photo--side" style="height:100%" onclick="onFilledSlot(${si})">
         ${pLayout==='side-left'?photoEl+captionEl:captionEl+photoEl}
       </div>`;
     }
-    // Default stacked layout (landscape)
+    // Default stacked layout (landscape) — 2-column caption matching print reference
     return `<div class="slot slot-photo" style="height:100%" onclick="onFilledSlot(${si})">
       <div class="slot-photo-area" style="background:${bg}">${camSvg}<div class="slot-edit-badge">${IC.edit}</div></div>
       <div class="slot-caption" onclick="event.stopPropagation();editCaption(${si})">
-        <div class="slot-caption-circle">${authorInitial}</div>
-        <div>
-          <div class="slot-caption-name">${authorName} <span class="slot-caption-date">· 5. März</span></div>
+        <div class="slot-caption-left">
+          <div class="slot-caption-circle">${authorInitial}</div>
+          <div class="slot-caption-name">${authorName}</div>
+          <div class="slot-caption-date">5. März</div>
+        </div>
+        <div class="slot-caption-right">
           <div class="slot-caption-text" style="${hasCaption?'':'opacity:.5;font-style:italic'}">${captionText}</div>
         </div>
       </div>
