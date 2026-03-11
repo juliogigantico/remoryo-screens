@@ -1682,10 +1682,13 @@ function editFreetext(si){
   const slot=pg.slots[si];
   if(!slot?.content) return;
   const current=slot.content.text||'';
+  const isHalf=pg.layout==='2-slots';
+  const maxLen=isHalf?250:500;
   showSheet(`
     <div class="sheet-title">Freitext bearbeiten</div>
-    <textarea class="caption-input" id="freetextInput" maxlength="500" placeholder="Schreibe eine Nachricht, einen Brief, oder was dir einfällt..." style="min-height:120px">${current}</textarea>
-    <div class="char-counter"><span id="ftCount">${current.length}</span>/500</div>
+    <div style="font-size:12px;color:var(--mid-gray);margin-bottom:8px">${isHalf?'Halbe Seite — kürzerer Text':'Ganze Seite — mehr Platz für Text'}</div>
+    <textarea class="caption-input" id="freetextInput" maxlength="${maxLen}" placeholder="Schreibe eine Nachricht, einen Brief, oder was dir einfällt..." style="min-height:120px">${current}</textarea>
+    <div class="char-counter"><span id="ftCount">${current.length}</span>/${maxLen}</div>
     <div class="btn btn-primary" style="margin-top:12px" onclick="saveFreetext(${si})">Übernehmen</div>
   `);
   setTimeout(()=>{
