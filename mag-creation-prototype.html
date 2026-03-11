@@ -305,7 +305,7 @@ body{
   flex:1;display:flex;align-items:center;padding:7px 10px 7px 8px;
   min-width:0;border-left:1px solid rgba(27,44,67,.06);
 }
-.slot-caption-text{font-size:10px;color:var(--navy);line-height:1.5;flex:1;min-width:0}
+.slot-caption-text{font-size:10px;color:var(--navy);line-height:1.5;flex:1;min-width:0;word-break:break-word}
 .slot-caption-name{font-weight:700;color:var(--blue);font-size:6px;text-align:center;line-height:1.2}
 .slot-caption-date{color:var(--orange);font-size:6px;text-align:center}
 .slot-ent{
@@ -319,7 +319,7 @@ body{
   background:var(--soft-orange-bg);display:flex;align-items:center;justify-content:center;
   padding:10px;
 }
-.slot-text-content{font-size:11px;color:var(--dark-gray);text-align:center;line-height:1.4}
+.slot-text-content{font-size:11px;color:var(--dark-gray);text-align:center;line-height:1.4;word-break:break-word;overflow:hidden}
 .slot-photo--side{flex-direction:row}
 .slot-caption-side{
   flex:0 0 45%;background:var(--caption-warm);display:flex;flex-direction:column;
@@ -396,6 +396,7 @@ body{
 .cover-title{
   font-size:16px;font-weight:800;color:var(--navy);line-height:1.2;
   margin-top:14px;text-align:center;letter-spacing:.5px;cursor:pointer;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;
 }
 .cover-month{
   font-size:24px;font-weight:800;color:var(--orange);
@@ -557,8 +558,8 @@ body{
 .back-authors{display:flex;gap:19px;justify-content:center;flex-wrap:wrap;padding:8px 17px}
 .back-author{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer}
 .back-author-circle{width:41px;height:41px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--white);border:2px solid var(--blue);box-shadow:0 2px 8px rgba(130,183,216,.25)}
-.back-author-name{font-size:8px;color:var(--blue);font-weight:700;letter-spacing:.3px}
-.back-quote{font-size:12px;color:var(--navy);text-align:center;padding:8px 20px;line-height:1.8;cursor:pointer;font-style:italic;border-radius:8px;transition:background .15s;max-width:224px;margin:0 auto}
+.back-author-name{font-size:8px;color:var(--blue);font-weight:700;letter-spacing:.3px;max-width:60px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;text-align:center}
+.back-quote{font-size:12px;color:var(--navy);text-align:center;padding:8px 20px;line-height:1.8;cursor:pointer;font-style:italic;border-radius:8px;transition:background .15s;max-width:224px;margin:0 auto;word-break:break-word;overflow:hidden}
 .back-quote:hover{background:var(--light-gray)}
 .back-bdays{padding:6px 17px;text-align:center}
 .back-bday-title{font-size:10px;font-weight:800;color:var(--orange);text-transform:uppercase;margin-bottom:6px;letter-spacing:1.3px}
@@ -1683,8 +1684,8 @@ function editFreetext(si){
   const current=slot.content.text||'';
   showSheet(`
     <div class="sheet-title">Freitext bearbeiten</div>
-    <textarea class="caption-input" id="freetextInput" maxlength="300" placeholder="Schreibe eine Nachricht, einen Brief, oder was dir einfällt..." style="min-height:120px">${current}</textarea>
-    <div class="char-counter"><span id="ftCount">${current.length}</span>/300</div>
+    <textarea class="caption-input" id="freetextInput" maxlength="500" placeholder="Schreibe eine Nachricht, einen Brief, oder was dir einfällt..." style="min-height:120px">${current}</textarea>
+    <div class="char-counter"><span id="ftCount">${current.length}</span>/500</div>
     <div class="btn btn-primary" style="margin-top:12px" onclick="saveFreetext(${si})">Übernehmen</div>
   `);
   setTimeout(()=>{
@@ -1700,10 +1701,11 @@ function saveFreetext(si){
 function editCoverTitle(){
   showSheet(`
     <div class="sheet-title">Magazin-Titel</div>
-    <input class="caption-input" id="titleInput" style="min-height:auto;height:48px" maxlength="40" value="${esc(S.mag.title)}" placeholder="Titel eingeben...">
+    <input class="caption-input" id="titleInput" style="min-height:auto;height:48px" maxlength="30" value="${esc(S.mag.title)}" placeholder="Titel eingeben...">
+    <div class="char-counter"><span id="titleCount">${S.mag.title.length}</span>/30</div>
     <div class="btn btn-primary" style="margin-top:12px" onclick="saveCoverTitle()">Übernehmen</div>
   `);
-  setTimeout(()=>{const inp=document.getElementById('titleInput');if(inp) inp.focus()},300);
+  setTimeout(()=>{const inp=document.getElementById('titleInput');if(inp){inp.focus();inp.addEventListener('input',()=>{document.getElementById('titleCount').textContent=inp.value.length})}},300);
 }
 function saveCoverTitle(){
   const inp=document.getElementById('titleInput');
@@ -1841,16 +1843,18 @@ function editMember(idx){
       <div class="sheet-title">${esc(m.name)} bearbeiten</div>
       <div style="margin-bottom:12px">
         <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px">Name</label>
-        <input class="caption-input" id="memName" style="min-height:auto;height:44px" value="${esc(m.name)}">
+        <input class="caption-input" id="memName" style="min-height:auto;height:44px" maxlength="20" value="${esc(m.name)}">
+        <div class="char-counter"><span id="memNameCount">${m.name.length}</span>/20</div>
       </div>
       <div style="margin-bottom:12px">
         <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px">Geburtstag (TT.MM)</label>
-        <input class="caption-input" id="memBday" style="min-height:auto;height:44px" placeholder="z.B. 15.03" value="${m.birthday?m.birthday.split('-').reverse().join('.'):''}">
+        <input class="caption-input" id="memBday" style="min-height:auto;height:44px" maxlength="5" placeholder="z.B. 15.03" value="${m.birthday?m.birthday.split('-').reverse().join('.'):''}">
       </div>
       <div class="btn btn-primary" onclick="saveMember(${idx})">Speichern</div>
       ${!m.isApp?`<div class="btn btn-text" style="color:var(--red);margin-top:8px" onclick="removeMember(${idx})">Entfernen</div>`:''}
       <div class="btn btn-text-gray" style="margin-top:4px" onclick="hideSheet();setTimeout(()=>showMemberManager(),200)">Abbrechen</div>
     `);
+    setTimeout(()=>{const inp=document.getElementById('memName');if(inp) inp.addEventListener('input',()=>{document.getElementById('memNameCount').textContent=inp.value.length})},100);
   },200);
 }
 function saveMember(idx){
