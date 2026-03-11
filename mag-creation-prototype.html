@@ -1,0 +1,1516 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+<title>Remoryo — Magazin-Erstellung</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════
+   RESET + TOKENS
+   ═══════════════════════════════════════════════════════════ */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --blue:#82B7D8;--blue-light:#EAF3F9;--blue-soft:#D4E8F2;
+  --turquoise:#B8E0E0;--turquoise-light:#E2F3F3;
+  --navy:#1B2C43;--orange:#FFA631;--white:#FFFFFF;--beige:#E8DDD1;
+  --dark-gray:#5A6B7A;--mid-gray:#94A3B3;--light-gray:#F5F6F8;
+  --border:#E2E6EB;--border-alt:#D0D5DB;
+  --red:#E74C3C;--soft-red:#FFF0EE;--soft-green:#E6F7EE;
+  --soft-orange:#FFF3DC;--soft-orange-bg:#FFF8F0;
+  --green-text:#1D8348;--caption-warm:#F8F6F4;
+  --radius:14px;--radius-sm:12px;
+  --font:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
+  --sheet-ease:cubic-bezier(.32,.72,0,1);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BODY + PHONE FRAME
+   ═══════════════════════════════════════════════════════════ */
+html{-webkit-text-size-adjust:100%;height:100%}
+body{
+  font-family:var(--font);color:var(--navy);
+  background:#E8E6E1;
+  display:flex;align-items:center;justify-content:center;
+  min-height:100vh;padding:24px;
+  -webkit-font-smoothing:antialiased;
+}
+.phone{
+  width:393px;height:852px;background:var(--white);
+  border-radius:48px;overflow:hidden;position:relative;
+  display:flex;flex-direction:column;
+  box-shadow:0 0 0 1px rgba(0,0,0,.04),0 12px 40px rgba(27,44,67,.12),0 40px 80px rgba(27,44,67,.08);
+}
+.phone::before{
+  content:'';position:absolute;top:12px;left:50%;transform:translateX(-50%);
+  width:126px;height:36px;background:#000;border-radius:20px;z-index:100;
+}
+#statusBar{height:59px;flex-shrink:0}
+#screen{flex:1;overflow-y:auto;overflow-x:hidden;position:relative;display:flex;flex-direction:column}
+#screen::-webkit-scrollbar{display:none}
+#screen{scrollbar-width:none}
+.safe-bottom{height:20px;flex-shrink:0}
+
+/* ═══════════════════════════════════════════════════════════
+   RESPONSIVE — Mobile fullscreen
+   ═══════════════════════════════════════════════════════════ */
+@media(max-width:499px){
+  body{padding:0;background:var(--white)}
+  .phone{width:100vw;height:100dvh;border-radius:0;box-shadow:none}
+  .phone::before{display:none}
+  #statusBar{height:env(safe-area-inset-top,44px)}
+}
+
+/* ═══════════════════════════════════════════════════════════
+   OVERLAY CONTAINERS (Bottom Sheet + Modal)
+   ═══════════════════════════════════════════════════════════ */
+#sheetBackdrop,#modalBackdrop{
+  position:absolute;inset:0;z-index:50;
+  background:rgba(27,44,67,.45);backdrop-filter:blur(2px);
+  opacity:0;pointer-events:none;transition:opacity .3s var(--sheet-ease);
+}
+#sheetBackdrop.show,#modalBackdrop.show{opacity:1;pointer-events:auto}
+#sheetContainer{
+  position:absolute;bottom:0;left:0;right:0;z-index:51;
+  background:var(--white);border-radius:24px 24px 0 0;
+  padding:8px 20px 28px;
+  transform:translateY(100%);transition:transform .38s var(--sheet-ease);
+  max-height:80%;overflow-y:auto;
+}
+#sheetContainer.show{transform:translateY(0)}
+#sheetContainer::-webkit-scrollbar{display:none}
+#modalContainer{
+  position:absolute;top:50%;left:50%;z-index:51;
+  transform:translate(-50%,-50%) scale(.92);opacity:0;
+  background:var(--white);border-radius:24px;padding:28px;
+  width:calc(100% - 48px);max-width:340px;
+  transition:transform .3s var(--sheet-ease),opacity .3s;
+  pointer-events:none;
+}
+#modalContainer.show{transform:translate(-50%,-50%) scale(1);opacity:1;pointer-events:auto}
+
+/* ═══════════════════════════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════════════════════════ */
+.headline{font-weight:800;font-size:26px;line-height:1.2;text-align:center}
+.sub{font-weight:500;font-size:15px;color:var(--dark-gray);text-align:center;line-height:1.5}
+
+/* ═══════════════════════════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════════════════════════ */
+.btn{
+  width:100%;padding:14px 24px;border-radius:var(--radius);
+  font-weight:700;font-size:16px;border:none;cursor:pointer;
+  font-family:var(--font);min-height:48px;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:transform .12s,opacity .12s;-webkit-tap-highlight-color:transparent;
+}
+.btn:active{transform:scale(.97);opacity:.85}
+.btn-primary{background:var(--orange);color:var(--white)}
+.btn-primary.disabled{opacity:.4;cursor:not-allowed;pointer-events:none}
+.btn-outline{background:var(--white);color:var(--navy);border:1.5px solid var(--navy)}
+.btn-text{background:none;border:none;font-weight:600;font-size:14px;color:var(--navy);padding:12px}
+.btn-text-gray{background:none;border:none;font-weight:500;font-size:14px;color:var(--mid-gray);padding:12px}
+.btn-sm{padding:10px 20px;font-size:14px;min-height:40px;width:auto}
+.btn-stack{display:flex;flex-direction:column;gap:12px;width:100%}
+
+/* ═══════════════════════════════════════════════════════════
+   SECTION HEADER
+   ═══════════════════════════════════════════════════════════ */
+.sec-header{
+  display:flex;align-items:center;gap:10px;
+  padding:10px 16px;border-bottom:1px solid var(--border);flex-shrink:0;
+}
+.sec-back{
+  width:44px;height:44px;display:flex;align-items:center;justify-content:center;
+  cursor:pointer;flex-shrink:0;-webkit-tap-highlight-color:transparent;
+  border-radius:22px;transition:background .15s;
+}
+.sec-back:active{background:var(--light-gray)}
+.sec-title{font-weight:700;font-size:17px}
+
+/* ═══════════════════════════════════════════════════════════
+   S1 — MODE SELECTION
+   ═══════════════════════════════════════════════════════════ */
+.mode-hero{padding:32px 24px 20px;text-align:center}
+.mode-hero .headline{margin-bottom:8px}
+.entry-card{
+  border-radius:20px;padding:24px;margin:0 20px 14px;cursor:pointer;
+  transition:transform .15s,box-shadow .15s;-webkit-tap-highlight-color:transparent;
+  position:relative;overflow:hidden;
+}
+.entry-card:active{transform:scale(.98)}
+.entry-card--auto{
+  background:linear-gradient(135deg,#D4E8F2 0%,var(--white) 100%);
+  border:1.5px solid var(--blue-soft);
+}
+.entry-card--manual{background:var(--light-gray);border:1.5px solid var(--border)}
+.entry-card-icon{font-size:32px;margin-bottom:10px}
+.entry-card-title{font-weight:700;font-size:18px;margin-bottom:6px}
+.entry-card-desc{font-size:14px;color:var(--dark-gray);line-height:1.5;margin-bottom:14px}
+.entry-card .btn{font-size:15px;padding:12px 20px}
+.info-note{font-size:12px;color:var(--mid-gray);text-align:center;padding:8px 24px;display:flex;align-items:center;justify-content:center;gap:5px}
+
+/* ═══════════════════════════════════════════════════════════
+   S2 — PHOTO SELECTION
+   ═══════════════════════════════════════════════════════════ */
+.selection-bar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;border-bottom:1px solid var(--border)}
+.selection-count{font-size:15px;font-weight:700}
+.photo-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px;padding:3px}
+.photo-cell{
+  position:relative;aspect-ratio:1;overflow:hidden;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;transition:transform .1s;
+}
+.photo-cell:active{transform:scale(.96)}
+.photo-cell-inner{width:100%;height:100%;display:flex;align-items:center;justify-content:center}
+.photo-check{
+  position:absolute;top:8px;right:8px;width:24px;height:24px;border-radius:12px;
+  display:flex;align-items:center;justify-content:center;
+  transition:transform .2s var(--sheet-ease);
+}
+.photo-check--on{background:var(--orange);transform:scale(1)}
+.photo-check--off{border:2px solid rgba(255,255,255,.6);background:rgba(255,255,255,.15)}
+.photo-cell--sel{outline:3px solid var(--orange);outline-offset:-3px}
+.info-banner{
+  background:var(--soft-orange-bg);border-left:3px solid var(--orange);
+  border-radius:12px;margin:12px 16px;padding:14px 16px;font-size:13px;
+  color:var(--dark-gray);line-height:1.5;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   S3 — LOADING
+   ═══════════════════════════════════════════════════════════ */
+.loading-screen{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:linear-gradient(180deg,var(--blue-light) 0%,var(--white) 100%);gap:20px;padding:40px;
+}
+.loading-icon{animation:pulse 2s ease-in-out infinite;font-size:48px}
+.loading-title{font-size:20px;font-weight:700;text-align:center}
+.loading-sub{font-size:14px;color:var(--mid-gray);text-align:center}
+.progress-track{width:240px;height:6px;border-radius:3px;background:var(--border);overflow:hidden}
+.progress-fill{height:100%;border-radius:3px;background:var(--orange);width:0%;transition:width 3s ease-out}
+@keyframes pulse{0%,100%{transform:scale(.95);opacity:.7}50%{transform:scale(1.05);opacity:1}}
+
+/* ═══════════════════════════════════════════════════════════
+   S14 — PAGES OVERVIEW
+   ═══════════════════════════════════════════════════════════ */
+.overview-header{padding:16px 20px 8px}
+.overview-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:4px}
+.overview-title{font-size:18px;font-weight:800}
+.overview-date{font-size:13px;color:var(--mid-gray)}
+.progress-section{margin-top:10px}
+.progress-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.progress-label{font-size:14px;font-weight:700}
+.progress-bar{height:6px;border-radius:3px;background:var(--border);overflow:hidden}
+.progress-bar-fill{height:100%;border-radius:3px;background:var(--orange);transition:width .4s}
+.progress-hint{font-size:12px;color:var(--orange);font-weight:600;margin-top:4px}
+.page-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 16px 16px}
+.page-thumb{
+  aspect-ratio:210/297;border-radius:10px;border:2px solid var(--border);
+  position:relative;overflow:hidden;background:var(--white);cursor:pointer;
+  transition:transform .12s,border-color .15s;-webkit-tap-highlight-color:transparent;
+}
+.page-thumb:active{transform:scale(.97)}
+.page-thumb:hover{border-color:var(--blue-soft)}
+.page-thumb--empty{border:2px dashed var(--border-alt);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px}
+.page-thumb-add{width:32px;height:32px;border-radius:16px;background:var(--blue-light);display:flex;align-items:center;justify-content:center}
+.page-number{
+  position:absolute;bottom:4px;right:4px;background:rgba(27,44,67,.55);
+  color:var(--white);font-size:10px;font-weight:600;border-radius:6px;padding:2px 6px;
+}
+.page-block{border-radius:3px;margin:3px}
+.page-block--photo{background:var(--blue-light)}
+.page-block--ent{background:var(--turquoise-light);display:flex;align-items:center;justify-content:center}
+.page-block--text{background:var(--soft-orange-bg);display:flex;align-items:center;justify-content:center}
+.page-block--empty{background:var(--light-gray);border:1px dashed var(--border-alt)}
+.bottom-action-bar{
+  padding:14px 20px;border-top:1px solid var(--border);
+  display:flex;gap:10px;flex-shrink:0;background:var(--white);
+}
+.bottom-action-bar .btn{font-size:14px;padding:12px 8px}
+
+/* ═══════════════════════════════════════════════════════════
+   S4-S8 — WYSIWYG EDITOR
+   ═══════════════════════════════════════════════════════════ */
+.editor-wrap{flex:1;display:flex;flex-direction:column;background:var(--light-gray)}
+.editor-page-area{flex:1;display:flex;align-items:center;justify-content:center;padding:12px 16px}
+.wysiwyg-page{
+  width:361px;height:510px;background:#FBF9F6;border-radius:6px;position:relative;
+  box-shadow:0 2px 12px rgba(27,44,67,.08),0 0 0 1px rgba(27,44,67,.06);
+  display:flex;flex-direction:column;overflow:hidden;
+  /* subtle paper texture */
+  background-image:url("data:image/svg+xml,%3Csvg width='100' height='100' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100' height='100' filter='url(%23n)' opacity='.02'/%3E%3C/svg%3E");
+}
+.wysiwyg-header{
+  height:48px;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  flex-shrink:0;padding:8px 14px 4px;
+}
+.wysiwyg-family{font-size:10px;font-weight:800;color:var(--navy);letter-spacing:.4px}
+.wysiwyg-month{font-size:17px;font-weight:800;color:var(--orange)}
+.wysiwyg-content{flex:1;padding:0 14px;display:flex;flex-direction:column;gap:6px;min-height:0}
+.wysiwyg-footer{
+  height:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+}
+.wysiwyg-footer span{font-size:8px;color:var(--mid-gray)}
+
+/* Editor slots */
+.slot{
+  position:relative;border-radius:6px;overflow:hidden;cursor:pointer;
+  transition:box-shadow .15s,transform .1s;-webkit-tap-highlight-color:transparent;
+  display:flex;flex-direction:column;
+}
+.slot:hover{box-shadow:0 0 0 2px var(--blue)}
+.slot:active{transform:scale(.99)}
+.slot--empty{
+  border:2px dashed var(--border-alt);background:var(--light-gray);
+  align-items:center;justify-content:center;gap:6px;
+}
+.slot-empty-icon{
+  width:36px;height:36px;border-radius:18px;background:var(--blue-light);
+  display:flex;align-items:center;justify-content:center;
+}
+.slot-empty-text{font-size:11px;color:var(--mid-gray);font-weight:500}
+.slot-photo{display:flex;flex-direction:column}
+.slot-photo-area{flex:1;display:flex;align-items:center;justify-content:center;position:relative;min-height:0}
+.slot-caption{
+  background:var(--caption-warm);padding:6px 8px;
+  display:flex;align-items:center;gap:6px;min-height:28px;
+}
+.slot-caption-circle{
+  width:18px;height:18px;border-radius:9px;background:var(--blue);
+  display:flex;align-items:center;justify-content:center;
+  font-size:6px;font-weight:700;color:var(--white);flex-shrink:0;
+}
+.slot-caption-text{font-size:8px;color:var(--navy);line-height:1.3;flex:1;min-width:0}
+.slot-caption-name{font-weight:700;color:var(--blue);font-size:7px}
+.slot-caption-date{color:var(--orange);font-size:7px}
+.slot-ent{
+  background:var(--turquoise-light);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:4px;
+}
+.slot-ent-icon{font-size:20px}
+.slot-ent-label{font-size:10px;font-weight:600;color:var(--dark-gray)}
+.slot-text{
+  background:var(--soft-orange-bg);display:flex;align-items:center;justify-content:center;
+  padding:10px;
+}
+.slot-text-content{font-size:9px;color:var(--dark-gray);text-align:center;line-height:1.4}
+.slot-edit-badge{
+  position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:11px;
+  background:rgba(255,255,255,.9);box-shadow:0 1px 4px rgba(0,0,0,.12);
+  display:flex;align-items:center;justify-content:center;z-index:2;
+}
+
+/* Editor toolbar */
+.editor-toolbar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:10px 16px;background:var(--white);border-top:1px solid var(--border);flex-shrink:0;
+}
+.toolbar-btn{
+  width:44px;height:44px;border-radius:12px;border:none;background:var(--light-gray);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;transition:background .15s;
+}
+.toolbar-btn:active{background:var(--border)}
+.toolbar-nav{display:flex;align-items:center;gap:12px}
+.toolbar-nav-label{font-size:14px;font-weight:700;min-width:80px;text-align:center}
+.toolbar-arrow{
+  width:36px;height:36px;border-radius:18px;border:none;background:none;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  -webkit-tap-highlight-color:transparent;color:var(--navy);
+}
+.toolbar-arrow:active{background:var(--light-gray)}
+.toolbar-arrow:disabled{opacity:.3;cursor:not-allowed}
+
+/* ═══════════════════════════════════════════════════════════
+   COVER PAGE SPECIAL
+   ═══════════════════════════════════════════════════════════ */
+.cover-photo-area{
+  flex:1;position:relative;display:flex;align-items:flex-end;
+}
+.cover-overlay{
+  position:absolute;bottom:0;left:0;right:0;padding:14px;
+  background:linear-gradient(transparent,rgba(27,44,67,.75));
+}
+.cover-logo{font-size:10px;color:rgba(255,255,255,.8);font-weight:700;margin-bottom:4px}
+.cover-title{font-size:16px;font-weight:800;color:var(--white);line-height:1.2}
+.cover-date{font-size:9px;color:rgba(255,255,255,.65);margin-top:2px}
+
+/* ═══════════════════════════════════════════════════════════
+   BOTTOM SHEET CONTENT
+   ═══════════════════════════════════════════════════════════ */
+.drag-handle{width:40px;height:4px;border-radius:2px;background:var(--border-alt);margin:0 auto 14px}
+.sheet-title{font-size:17px;font-weight:700;margin-bottom:4px}
+.sheet-sub{font-size:13px;color:var(--mid-gray);margin-bottom:14px}
+
+/* Layout picker */
+.layout-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:16px}
+.layout-opt{
+  border:2px solid var(--border);border-radius:12px;padding:10px;cursor:pointer;
+  text-align:center;transition:border-color .15s;-webkit-tap-highlight-color:transparent;
+}
+.layout-opt:active{transform:scale(.97)}
+.layout-opt--sel{border-color:var(--orange)}
+.layout-preview{display:flex;flex-direction:column;gap:3px;min-height:70px}
+.layout-block{border-radius:3px;flex:1;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--mid-gray);font-weight:600}
+.layout-block--p{background:var(--blue-light)}
+.layout-block--e{background:var(--turquoise-light)}
+.layout-label{font-size:11px;font-weight:600;color:var(--navy);margin-top:6px}
+
+/* Entertainment list */
+.ent-list{max-height:380px;overflow-y:auto;margin:0 -20px;padding:0 20px}
+.ent-row{
+  display:flex;align-items:center;padding:14px 0;border-bottom:1px solid var(--border);
+  gap:14px;cursor:pointer;-webkit-tap-highlight-color:transparent;
+}
+.ent-row:last-child{border-bottom:none}
+.ent-row:active{opacity:.7}
+.ent-icon{
+  width:44px;height:44px;border-radius:14px;display:flex;align-items:center;
+  justify-content:center;font-size:22px;flex-shrink:0;
+}
+.ent-info{flex:1}
+.ent-name{font-size:15px;font-weight:600}
+.ent-desc{font-size:12px;color:var(--mid-gray);margin-top:1px}
+.ent-preview-card{
+  background:var(--turquoise-light);border-radius:16px;padding:20px;
+  margin-bottom:16px;text-align:center;min-height:120px;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;
+}
+.ent-preview-title{font-size:15px;font-weight:700}
+.ent-preview-text{font-size:14px;color:var(--dark-gray);line-height:1.5}
+.ent-preview-meta{font-size:12px;color:var(--mid-gray);margin-top:8px}
+
+/* Element type picker */
+.type-cards{display:flex;flex-direction:column;gap:10px}
+.type-card{
+  display:flex;align-items:center;gap:14px;padding:16px;border-radius:16px;
+  border:1.5px solid var(--border);cursor:pointer;transition:border-color .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.type-card:active{border-color:var(--blue);transform:scale(.98)}
+.type-card-icon{
+  width:48px;height:48px;border-radius:14px;display:flex;align-items:center;
+  justify-content:center;font-size:24px;flex-shrink:0;
+}
+.type-card-info{flex:1}
+.type-card-title{font-size:15px;font-weight:700}
+.type-card-desc{font-size:12px;color:var(--mid-gray);margin-top:2px}
+
+/* Slot actions */
+.action-list{display:flex;flex-direction:column;gap:2px}
+.action-row{
+  display:flex;align-items:center;gap:14px;padding:14px 4px;
+  border-bottom:1px solid var(--border);cursor:pointer;
+  -webkit-tap-highlight-color:transparent;
+}
+.action-row:last-child{border-bottom:none}
+.action-row:active{opacity:.7}
+.action-row--danger .action-label{color:var(--red)}
+.action-icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:18px;flex-shrink:0}
+.action-label{font-size:15px;font-weight:600}
+.action-desc{font-size:12px;color:var(--mid-gray)}
+
+/* ═══════════════════════════════════════════════════════════
+   S12c — PAN / CROP OVERLAY
+   ═══════════════════════════════════════════════════════════ */
+.crop-overlay{
+  position:absolute;inset:0;z-index:60;background:rgba(27,44,67,.92);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+}
+.crop-frame{
+  width:280px;height:200px;border:2px solid var(--white);border-radius:8px;
+  overflow:hidden;position:relative;cursor:grab;touch-action:none;
+}
+.crop-frame:active{cursor:grabbing}
+.crop-image{
+  position:absolute;width:400px;height:300px;
+  transition:none;
+}
+.crop-controls{display:flex;align-items:center;gap:16px;margin-top:20px}
+.crop-btn{
+  width:44px;height:44px;border-radius:22px;border:none;
+  background:rgba(255,255,255,.15);color:var(--white);font-size:20px;font-weight:700;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+}
+.crop-btn:active{background:rgba(255,255,255,.3)}
+.crop-actions{display:flex;gap:12px;margin-top:24px}
+.crop-actions .btn{width:auto;min-width:130px}
+
+/* ═══════════════════════════════════════════════════════════
+   S15 — REORDER
+   ═══════════════════════════════════════════════════════════ */
+.reorder-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 16px 16px}
+.reorder-thumb{
+  aspect-ratio:210/297;border-radius:10px;border:2px solid var(--border);
+  position:relative;overflow:hidden;cursor:pointer;
+  transition:transform .2s,box-shadow .2s,border-color .2s;
+  -webkit-tap-highlight-color:transparent;
+}
+.reorder-thumb--picked{border-color:var(--orange);transform:scale(1.04);box-shadow:0 8px 24px rgba(255,166,49,.25)}
+.reorder-thumb--target{border:2px dashed var(--blue);background:var(--blue-light)}
+.reorder-thumb--locked{opacity:.4;pointer-events:none}
+
+/* ═══════════════════════════════════════════════════════════
+   S17 — SAVE SUCCESS
+   ═══════════════════════════════════════════════════════════ */
+.success-screen{
+  flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:40px;gap:16px;text-align:center;
+  background:linear-gradient(180deg,var(--soft-green) 0%,var(--white) 60%);
+}
+.success-icon{font-size:56px;animation:successPop .5s var(--sheet-ease)}
+@keyframes successPop{0%{transform:scale(0)}60%{transform:scale(1.2)}100%{transform:scale(1)}}
+.success-title{font-size:24px;font-weight:800}
+.success-sub{font-size:15px;color:var(--dark-gray);line-height:1.5}
+
+/* ═══════════════════════════════════════════════════════════
+   S18 — MAGAZINE VIEWER
+   ═══════════════════════════════════════════════════════════ */
+.viewer-wrap{flex:1;display:flex;flex-direction:column}
+.viewer-area{flex:1;display:flex;align-items:center;justify-content:center;padding:20px 12px;background:var(--light-gray)}
+.spread{display:flex;gap:2px;align-items:stretch}
+.spread-page{
+  flex:1;background:var(--white);aspect-ratio:210/297;
+  box-shadow:0 1px 4px rgba(0,0,0,.08);overflow:hidden;
+  display:flex;flex-direction:column;max-height:340px;
+}
+.spread-page--l{border-radius:4px 0 0 4px}
+.spread-page--r{border-radius:0 4px 4px 0}
+.spread-spine{width:2px;background:var(--border);flex-shrink:0}
+.viewer-nav{display:flex;align-items:center;justify-content:center;gap:16px;padding:12px}
+.viewer-indicator{font-size:13px;font-weight:600;color:var(--dark-gray)}
+
+.caption-input{
+  width:100%;padding:12px 14px;border-radius:var(--radius-sm);
+  border:1.5px solid var(--border);font-size:15px;font-weight:500;
+  color:var(--navy);font-family:var(--font);outline:none;resize:none;
+  min-height:80px;
+}
+.caption-input:focus{border-color:var(--blue)}
+.char-counter{font-size:12px;color:var(--mid-gray);text-align:right;margin-top:4px}
+
+/* ═══════════════════════════════════════════════════════════
+   MODAL CONTENT
+   ═══════════════════════════════════════════════════════════ */
+.modal-icon{
+  width:48px;height:48px;border-radius:24px;margin:0 auto 12px;
+  display:flex;align-items:center;justify-content:center;font-size:24px;
+}
+.modal-title{font-size:20px;font-weight:800;text-align:center;margin-bottom:8px}
+.modal-desc{font-size:14px;color:var(--dark-gray);text-align:center;line-height:1.5;margin-bottom:16px}
+
+/* ═══════════════════════════════════════════════════════════
+   TRANSITIONS + UTILITIES
+   ═══════════════════════════════════════════════════════════ */
+.toolbar-btn.disabled{opacity:.3;pointer-events:none}
+.fade-in{animation:fadeIn .3s ease}
+@keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+.screen-content{display:flex;flex-direction:column;flex:1}
+@media(max-width:499px){
+  .bottom-action-bar,.editor-toolbar{padding-bottom:calc(14px + env(safe-area-inset-bottom,0px))}
+}
+</style>
+</head>
+<body>
+
+<div class="phone" id="phone">
+  <div id="statusBar"></div>
+  <div id="screen"></div>
+  <div id="sheetBackdrop" onclick="hideSheet()"></div>
+  <div id="sheetContainer"></div>
+  <div id="modalBackdrop" onclick="hideModal()"></div>
+  <div id="modalContainer"></div>
+</div>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   CONSTANTS
+   ═══════════════════════════════════════════════════════════ */
+const GRADIENTS = [
+  'linear-gradient(135deg,#dde8f0,#a8c8dc 50%,#d4c5b5)',
+  'linear-gradient(160deg,#c8dbe8,#e8d5c2 60%,#b8cdd8)',
+  'linear-gradient(200deg,#d4c5b5,#a8c8dc 60%,#dde8f0)',
+  'linear-gradient(140deg,#8ab87a,#c8dbe8 40%,#e8ddd1)',
+  'linear-gradient(120deg,#e8d5c2,#f0c8a0 50%,#d4c5b5)',
+  'linear-gradient(180deg,#b8a8c8,#dde8f0 60%,#e8ddd1)',
+  'linear-gradient(110deg,#c8b8a0,#dde8f0 50%,#c8dbe8)',
+  'linear-gradient(145deg,#f0d8b8,#d8c8b0 50%,#c8dbe8)',
+  'linear-gradient(170deg,#d8e8c8,#b8d8a8 50%,#e8ddd1)',
+  'linear-gradient(130deg,#e8c8d8,#d4b8c8 50%,#dde8f0)',
+  'linear-gradient(155deg,#c8d8e8,#b8c8d8 50%,#e8d5c2)',
+  'linear-gradient(190deg,#d8c8a8,#e8ddd1 50%,#c8dbe8)',
+  'linear-gradient(125deg,#b8d8d8,#c8e8e0 50%,#dde8f0)',
+  'linear-gradient(175deg,#e8d8c8,#d8c8b8 50%,#c8b8a0)',
+  'linear-gradient(150deg,#c8c8e8,#d8d8f0 50%,#e8ddd1)',
+];
+
+const NAMES = ['Mama','Papa','Tante Lisa','Onkel Tom','Sarah','Max','Oma Hilde','Julia'];
+const CAPTIONS = [
+  'Schöner Nachmittag im Park 🌳','Familienessen am Sonntag','Ausflug zum See',
+  'Besuch bei Tante Lisa','Unser Garten im Frühling','Spaziergang am Fluss',
+  'Geburtstag feiern! 🎂','Spielplatz-Abenteuer','Backen mit den Kindern',
+  'Kuschelnachmittag','Erster Schnee!','Sonntagsbrunch',
+];
+
+const ENT_CATS = [
+  {id:'crossword',icon:'✏️',title:'Kreuzworträtsel',desc:'Klassische Kreuzworträtsel',bg:'#E2F3F3',
+   items:[{t:'Frühlings-Rätsel',txt:'10 Wörter rund um den Frühling'},{t:'Tier-ABC',txt:'Finde 8 versteckte Tiernamen'},{t:'Küchen-Rätsel',txt:'12 Begriffe aus der Küche'}]},
+  {id:'numbers',icon:'🔢',title:'Zahlenrätsel',desc:'Sudoku & Zahlenspiele',bg:'#EAF3F9',
+   items:[{t:'Leichtes Sudoku',txt:'4×4 Sudoku zum Einstieg'},{t:'Zahlenreihe',txt:'Welche Zahl fehlt?'},{t:'Rechenpuzzle',txt:'Einfache Rechenaufgaben'}]},
+  {id:'words',icon:'🔤',title:'Worträtsel',desc:'Wörtersuche & Buchstabenspiele',bg:'#E2F3F3',
+   items:[{t:'Wörtersuche: Blumen',txt:'8 Blumennamen im Gitter finden'},{t:'Buchstabensalat',txt:'Wörter aus Buchstaben bilden'},{t:'Silbenrätsel',txt:'Silben richtig zusammensetzen'}]},
+  {id:'jokes',icon:'😄',title:'Witze',desc:'Humor für gute Laune',bg:'#FFF8F0',
+   items:[{t:'Der Arztbesuch',txt:'"Herr Doktor, ich habe das Gefühl, niemand nimmt mich ernst." — "Sie scherzen!"'},{t:'Im Restaurant',txt:'"Herr Ober, der Kaffee war ja gestern viel besser!" — "Das wundert mich, er ist aus derselben Kanne."'},{t:'Beim Bäcker',txt:'"Ich hätte gerne ein Brot." — "Weißes?" — "Nein, ich möchte es mitnehmen."'}]},
+  {id:'motivation',icon:'💫',title:'Motivation & Zitate',desc:'Inspirierende Worte',bg:'#FFF3DC',
+   items:[{t:'Albert Schweitzer',txt:'"Das Glück ist das Einzige, das sich verdoppelt, wenn man es teilt."'},{t:'Konfuzius',txt:'"Der Weg ist das Ziel."'},{t:'Mark Twain',txt:'"Gib jedem Tag die Chance, der schönste deines Lebens zu werden."'}]},
+  {id:'songs',icon:'🎵',title:'Lieder',desc:'Bekannte Liedtexte zum Mitsingen',bg:'#EAF3F9',
+   items:[{t:'Hoch auf dem gelben Wagen',txt:'Hoch auf dem gelben Wagen sitz ich beim Schwager vorn...'},{t:'Kein schöner Land',txt:'Kein schöner Land in dieser Zeit, als hier das unsre weit und breit...'},{t:'Am Brunnen vor dem Tore',txt:'Am Brunnen vor dem Tore, da steht ein Lindenbaum...'}]},
+  {id:'quiz',icon:'❓',title:'Wissensquiz',desc:'Quizfragen zum Knobeln',bg:'#E2F3F3',
+   items:[{t:'Geographie',txt:'Wie heißt der längste Fluss Deutschlands?'},{t:'Geschichte',txt:'In welchem Jahr fiel die Berliner Mauer?'},{t:'Natur',txt:'Welcher Baum verliert als letzter seine Blätter?'}]},
+  {id:'poems',icon:'📜',title:'Gedichte',desc:'Klassische & moderne Gedichte',bg:'#FFF8F0',
+   items:[{t:'Abendlied (Claudius)',txt:'Der Mond ist aufgegangen,\ndie goldnen Sternlein prangen\nam Himmel hell und klar...'},{t:'Wandrers Nachtlied',txt:'Über allen Gipfeln\nist Ruh,\nin allen Wipfeln\nspürest du\nkaum einen Hauch...'},{t:'Erlkönig (Goethe)',txt:'Wer reitet so spät\ndurch Nacht und Wind?\nEs ist der Vater\nmit seinem Kind...'}]},
+];
+
+const LAYOUTS = [
+  {id:'full',name:'Ganzseitig',slots:[{h:1}],desc:'1 Element'},
+  {id:'half',name:'Zwei Hälften',slots:[{h:.5},{h:.5}],desc:'2 Elemente'},
+  {id:'two-one',name:'⅔ + ⅓',slots:[{h:.65},{h:.35}],desc:'Groß + Klein'},
+  {id:'one-two',name:'⅓ + ⅔',slots:[{h:.35},{h:.65}],desc:'Klein + Groß'},
+];
+
+/* ═══════════════════════════════════════════════════════════
+   SVG ICONS
+   ═══════════════════════════════════════════════════════════ */
+const IC = {
+  back:'<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>',
+  chevL:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>',
+  chevR:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 6 15 12 9 18"/></svg>',
+  grid:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg>',
+  layout:'<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="8" rx="2"/><rect x="3" y="14" width="8" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>',
+  plus:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>',
+  edit:'<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>',
+  check:'<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+  cam:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>',
+  trash:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>',
+  swap:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>',
+  crop:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.13 1L6 16a2 2 0 002 2h15"/><path d="M1 6.13L16 6a2 2 0 012 2v15"/></svg>',
+  save:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>',
+  eye:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
+  reorder:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/><circle cx="8" cy="6" r="1.5" fill="currentColor"/><circle cx="8" cy="12" r="1.5" fill="currentColor"/><circle cx="8" cy="18" r="1.5" fill="currentColor"/></svg>',
+  x:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+};
+
+/* ═══════════════════════════════════════════════════════════
+   HELPERS
+   ═══════════════════════════════════════════════════════════ */
+function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+
+/* ═══════════════════════════════════════════════════════════
+   STATE
+   ═══════════════════════════════════════════════════════════ */
+const S = {
+  screen:'mode-selection',
+  navStack:[],
+  mode:null,
+  selectedPhotos:[],
+  mag:{title:'Unser Familienmonat',month:'März 2026',family:'Familie Müller',pages:[]},
+  editor:{pageIdx:0},
+  reorder:{picked:null},
+  viewer:{spread:0},
+};
+
+/* ═══════════════════════════════════════════════════════════
+   NAVIGATION
+   ═══════════════════════════════════════════════════════════ */
+function nav(screen,pushCurrent=true){
+  if(pushCurrent&&S.screen) S.navStack.push(S.screen);
+  S.screen=screen;
+  render();
+}
+function goBack(){
+  if(S.navStack.length){S.screen=S.navStack.pop();render()}
+}
+function render(){
+  const el=document.getElementById('screen');
+  hideSheet();hideModal();
+  switch(S.screen){
+    case 'mode-selection':el.innerHTML=renderModeSelection();break;
+    case 'photo-selection':el.innerHTML=renderPhotoSelection();break;
+    case 'loading':el.innerHTML=renderLoading();startLoading();break;
+    case 'editor':el.innerHTML=renderEditor();break;
+    case 'overview':el.innerHTML=renderOverview();break;
+    case 'reorder':el.innerHTML=renderReorder();break;
+    case 'viewer':el.innerHTML=renderViewer();break;
+    case 'save-success':el.innerHTML=renderSaveSuccess();break;
+  }
+  document.getElementById('screen').scrollTop=0;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   BOTTOM SHEET + MODAL
+   ═══════════════════════════════════════════════════════════ */
+function showSheet(html){
+  document.getElementById('sheetContainer').innerHTML='<div class="drag-handle"></div>'+html;
+  requestAnimationFrame(()=>{
+    document.getElementById('sheetBackdrop').classList.add('show');
+    document.getElementById('sheetContainer').classList.add('show');
+  });
+}
+function hideSheet(){
+  document.getElementById('sheetBackdrop').classList.remove('show');
+  document.getElementById('sheetContainer').classList.remove('show');
+}
+function showModal(html){
+  document.getElementById('modalContainer').innerHTML=html;
+  requestAnimationFrame(()=>{
+    document.getElementById('modalBackdrop').classList.add('show');
+    document.getElementById('modalContainer').classList.add('show');
+  });
+}
+function hideModal(){
+  document.getElementById('modalBackdrop').classList.remove('show');
+  document.getElementById('modalContainer').classList.remove('show');
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MAGAZINE INIT
+   ═══════════════════════════════════════════════════════════ */
+function initMagazine(mode){
+  S.mode=mode;
+  S.mag.pages=[];
+  // Photos to distribute (selected or all 15)
+  const photos=S.selectedPhotos.length?[...S.selectedPhotos]:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
+  let photoIdx=0;
+  function nextPhoto(){
+    if(photoIdx>=photos.length) return null;
+    const pid=photos[photoIdx++];
+    return {type:'photo',photoId:pid,caption:CAPTIONS[pid%CAPTIONS.length],pos:{x:0,y:0,z:1}};
+  }
+  // Entertainment rotation for auto
+  const entCatIds=['crossword','jokes','songs','motivation','poems','quiz','words','numbers'];
+  let entIdx=0;
+  // Page 0 = Cover
+  const coverPhoto=mode==='auto'?nextPhoto():null;
+  S.mag.pages.push({type:'cover',layout:'full',slots:[{content:coverPhoto}]});
+  // Pages 1-10 = Content
+  for(let i=1;i<=10;i++){
+    const useEnt=mode==='auto'&&(i%4===0); // every 4th page gets entertainment
+    const layout=useEnt?'half':'full';
+    const layoutDef=LAYOUTS.find(l=>l.id===layout);
+    const slots=layoutDef.slots.map((_,si)=>{
+      if(mode!=='auto') return {content:null};
+      if(useEnt&&si===1){
+        const catId=entCatIds[entIdx%entCatIds.length];
+        entIdx++;
+        return {content:{type:'entertainment',catId,itemIdx:0}};
+      }
+      const p=nextPhoto();
+      return {content:p};
+    });
+    S.mag.pages.push({type:'content',layout,slots});
+  }
+  // Page 11 = Back
+  S.mag.pages.push({type:'back',layout:'full',slots:[]});
+}
+
+function getFilledCount(){
+  let c=0;
+  S.mag.pages.forEach((p,i)=>{
+    if(i===0||i===11) return;
+    p.slots.forEach(s=>{if(s.content) c++});
+  });
+  return c;
+}
+function getTotalSlots(){
+  let c=0;
+  S.mag.pages.forEach((p,i)=>{if(i>0&&i<11) c+=p.slots.length});
+  return c;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   S1 — MODE SELECTION
+   ═══════════════════════════════════════════════════════════ */
+function renderModeSelection(){
+  return `<div class="screen-content fade-in">
+    <div class="mode-hero">
+      <div style="font-size:40px;margin-bottom:12px">📖</div>
+      <div class="headline">Neues Fotoheft</div>
+      <div class="sub">Erstelle ein Magazin für deine Liebsten</div>
+    </div>
+    <div class="entry-card entry-card--auto" onclick="startAuto()">
+      <div class="entry-card-icon">📸</div>
+      <div class="entry-card-title">Fotos auswählen</div>
+      <div class="entry-card-desc">Wähle Fotos aus und wir erstellen automatisch ein schönes Heft daraus. Du kannst danach alles anpassen.</div>
+      <div class="btn btn-primary btn-sm" style="width:auto;align-self:flex-start">Fotos auswählen</div>
+    </div>
+    <div class="entry-card entry-card--manual" onclick="startManual()">
+      <div class="entry-card-icon">✨</div>
+      <div class="entry-card-title">Leeres Heft starten</div>
+      <div class="entry-card-desc">Starte mit einem leeren Magazin und gestalte jede Seite selbst — Fotos, Rätsel, Texte.</div>
+      <div class="btn btn-outline btn-sm" style="width:auto;align-self:flex-start">Leeres Heft</div>
+    </div>
+    <div class="info-note">ℹ️ 12 Seiten · Gedruckt & als PDF</div>
+  </div>`;
+}
+function startAuto(){S.selectedPhotos=[];nav('photo-selection')}
+function startManual(){S.selectedPhotos=[];initMagazine('manual');S.navStack=[];nav('overview',false)}
+
+/* ═══════════════════════════════════════════════════════════
+   S2 — PHOTO SELECTION
+   ═══════════════════════════════════════════════════════════ */
+function renderPhotoSelection(){
+  const selCount=S.selectedPhotos.length;
+  let grid='';
+  for(let i=0;i<15;i++){
+    const sel=S.selectedPhotos.includes(i);
+    grid+=`<div class="photo-cell ${sel?'photo-cell--sel':''}" onclick="togglePhoto(${i})">
+      <div class="photo-cell-inner" style="background:${GRADIENTS[i]}">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      </div>
+      <div class="photo-check ${sel?'photo-check--on':'photo-check--off'}">${sel?IC.check:''}</div>
+    </div>`;
+  }
+  return `<div class="screen-content fade-in">
+    <div class="sec-header">
+      <div class="sec-back" onclick="goBack()">${IC.back}</div>
+      <div class="sec-title">Fotos auswählen</div>
+    </div>
+    <div class="info-banner">💡 Wähle 8–15 Fotos für dein Heft. Je mehr Fotos, desto voller die Seiten.</div>
+    <div class="selection-bar">
+      <div class="selection-count">${selCount} / 15 ausgewählt</div>
+      <div class="btn btn-primary btn-sm ${selCount<1?'disabled':''}" onclick="${selCount>=1?'submitPhotos()':''}">Weiter</div>
+    </div>
+    <div class="photo-grid">${grid}</div>
+    <div style="height:20px"></div>
+  </div>`;
+}
+function togglePhoto(id){
+  const idx=S.selectedPhotos.indexOf(id);
+  if(idx>=0) S.selectedPhotos.splice(idx,1);
+  else if(S.selectedPhotos.length<15) S.selectedPhotos.push(id);
+  render();
+}
+function submitPhotos(){initMagazine('auto');nav('loading')}
+
+/* ═══════════════════════════════════════════════════════════
+   S3 — LOADING
+   ═══════════════════════════════════════════════════════════ */
+function renderLoading(){
+  return `<div class="loading-screen fade-in">
+    <div class="loading-icon">📖</div>
+    <div class="loading-title">Dein Heft wird erstellt...</div>
+    <div class="loading-sub">Fotos werden platziert und Seiten gestaltet</div>
+    <div class="progress-track"><div class="progress-fill" id="loadingBar"></div></div>
+  </div>`;
+}
+function startLoading(){
+  requestAnimationFrame(()=>{
+    const bar=document.getElementById('loadingBar');
+    if(bar) bar.style.width='100%';
+  });
+  setTimeout(()=>{S.navStack=[];nav('overview',false)},3200);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SHARED: PAGE THUMBNAIL RENDERER
+   ═══════════════════════════════════════════════════════════ */
+function renderThumb(page,idx){
+  if(page.type==='cover'){
+    const bg=page.slots[0]?.content?.type==='photo'?GRADIENTS[page.slots[0].content.photoId%15]:'var(--light-gray)';
+    return `<div style="width:100%;height:100%;background:${bg};position:relative;display:flex;align-items:flex-end">
+      <div style="position:absolute;bottom:0;left:0;right:0;padding:6px;background:linear-gradient(transparent,rgba(27,44,67,.6))">
+        <div style="font-size:5px;color:rgba(255,255,255,.7);font-weight:700">remoryo</div>
+        <div style="font-size:7px;color:white;font-weight:800">${esc(S.mag.title)}</div>
+        <div style="font-size:5px;color:rgba(255,255,255,.6)">${S.mag.month}</div>
+      </div>
+    </div>`;
+  }
+  if(page.type==='back'){
+    return `<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--light-gray)">
+      <div style="font-size:7px;font-weight:700;color:var(--mid-gray)">Rückseite</div>
+      <div style="font-size:6px;color:var(--mid-gray)">Auto-generiert</div>
+    </div>`;
+  }
+  const layout=LAYOUTS.find(l=>l.id===page.layout)||LAYOUTS[0];
+  let slotsHtml='';
+  layout.slots.forEach((ls,si)=>{
+    const slot=page.slots[si];
+    const h=(ls.h*100)+'%';
+    if(!slot||!slot.content){
+      slotsHtml+=`<div class="page-block page-block--empty" style="height:${h}"></div>`;
+    } else if(slot.content.type==='photo'){
+      slotsHtml+=`<div class="page-block page-block--photo" style="height:${h};background:${GRADIENTS[slot.content.photoId%15]}"></div>`;
+    } else if(slot.content.type==='entertainment'){
+      const cat=ENT_CATS.find(c=>c.id===slot.content.catId);
+      slotsHtml+=`<div class="page-block page-block--ent" style="height:${h}"><span style="font-size:10px">${cat?cat.icon:'🧩'}</span></div>`;
+    } else if(slot.content.type==='freetext'){
+      slotsHtml+=`<div class="page-block page-block--text" style="height:${h}"><span style="font-size:6px;color:var(--mid-gray)">Aa</span></div>`;
+    }
+  });
+  return `<div style="width:100%;height:100%;display:flex;flex-direction:column;padding:3px;gap:2px">${slotsHtml}</div>`;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   S14 — PAGES OVERVIEW
+   ═══════════════════════════════════════════════════════════ */
+function renderOverview(){
+  const filled=getFilledCount();
+  const total=getTotalSlots();
+  const pct=total>0?Math.round(filled/total*100):0;
+  let grid='';
+  S.mag.pages.forEach((p,i)=>{
+    const label=i===0?'Cover':i===11?'S.12':`S.${i+1}`;
+    const isEmpty=p.type==='content'&&p.slots.every(s=>!s.content);
+    const isBack=p.type==='back';
+    grid+=`<div class="page-thumb ${isEmpty?'page-thumb--empty':''}" style="${isBack?'opacity:.7;cursor:default':''}" onclick="${isBack?'':(`openEditor(${i})`)}">
+      ${renderThumb(p,i)}
+      <div class="page-number">${label}</div>
+    </div>`;
+  });
+  return `<div class="screen-content fade-in">
+    <div class="overview-header">
+      <div class="overview-title-row">
+        <div class="overview-title">${esc(S.mag.title)}</div>
+        <div class="overview-date">${S.mag.month}</div>
+      </div>
+      <div class="progress-section">
+        <div class="progress-row">
+          <div class="progress-label">Fortschritt</div>
+          <span style="font-size:13px;font-weight:600;color:var(--dark-gray)">${filled}/${total} Slots</span>
+        </div>
+        <div class="progress-bar"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
+        ${pct<100?'<div class="progress-hint">Noch '+( total-filled)+' Slots zu füllen</div>':''}
+      </div>
+    </div>
+    <div class="page-grid">${grid}</div>
+    <div class="bottom-action-bar">
+      <div class="btn btn-outline" onclick="nav('reorder')" style="flex:1">${IC.reorder} Umsortieren</div>
+      <div class="btn btn-outline" onclick="openViewer()" style="flex:1">${IC.eye} Vorschau</div>
+      <div class="btn btn-primary" onclick="trySave()" style="flex:1.2">${IC.save} Speichern</div>
+    </div>
+    <div style="height:4px"></div>
+  </div>`;
+}
+function openEditor(idx){S.editor.pageIdx=idx;nav('editor')}
+function openViewer(){S.viewer.spread=0;nav('viewer')}
+
+/* ═══════════════════════════════════════════════════════════
+   S4-S8 — WYSIWYG EDITOR
+   ═══════════════════════════════════════════════════════════ */
+function renderEditor(){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  const idx=S.editor.pageIdx;
+  const total=S.mag.pages.length;
+  let pageHtml='';
+  if(pg.type==='cover') pageHtml=renderCoverPage(pg);
+  else if(pg.type==='back') pageHtml=renderBackPage();
+  else pageHtml=renderContentPage(pg);
+
+  const canLayout=pg.type==='content';
+  const pageLabel=idx===0?'Cover':idx===11?'S.12':`S.${idx+1}`;
+
+  return `<div class="editor-wrap fade-in">
+    <div class="editor-page-area">
+      <div class="wysiwyg-page">${pageHtml}</div>
+    </div>
+    <div class="editor-toolbar">
+      <div class="toolbar-btn ${canLayout?'':'disabled'}" onclick="${canLayout?'showLayoutPicker()':''}" title="Layout ändern">${IC.layout}</div>
+      <div class="toolbar-nav">
+        <button class="toolbar-arrow" ${idx<=0?'disabled':''} onclick="editorNav(-1)">${IC.chevL}</button>
+        <div class="toolbar-nav-label">${pageLabel}</div>
+        <button class="toolbar-arrow" ${idx>=total-1?'disabled':''} onclick="editorNav(1)">${IC.chevR}</button>
+      </div>
+      <div class="toolbar-btn" onclick="goBack()" title="Übersicht">${IC.grid}</div>
+    </div>
+  </div>`;
+}
+function editorNav(dir){
+  const next=S.editor.pageIdx+dir;
+  if(next>=0&&next<S.mag.pages.length){S.editor.pageIdx=next;render()}
+}
+
+function renderCoverPage(pg){
+  const slot=pg.slots[0];
+  const hasPhoto=slot?.content?.type==='photo';
+  const bg=hasPhoto?GRADIENTS[slot.content.photoId%15]:'var(--light-gray)';
+  if(!hasPhoto){
+    return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;background:var(--light-gray)" onclick="onSlotTap(0)">
+      <div class="slot-empty-icon" style="width:48px;height:48px;border-radius:24px">${IC.cam}</div>
+      <div style="font-size:13px;font-weight:600;color:var(--dark-gray)">Cover-Foto wählen</div>
+      <div style="font-size:11px;color:var(--mid-gray)">Tippen zum Hinzufügen</div>
+    </div>
+    <div style="padding:12px 14px;text-align:center;border-top:1px solid var(--border)">
+      <div style="font-size:14px;font-weight:800;color:var(--navy);cursor:pointer" onclick="editCoverTitle()">${esc(S.mag.title)}</div>
+      <div style="font-size:9px;color:var(--mid-gray);margin-top:2px">${S.mag.month} · ${S.mag.family}</div>
+    </div>`;
+  }
+  return `<div class="cover-photo-area" style="background:${bg}" onclick="onSlotTap(0)">
+    <div class="slot-edit-badge">${IC.edit}</div>
+    <div class="cover-overlay">
+      <div class="cover-logo">♥ remoryo</div>
+      <div class="cover-title" onclick="event.stopPropagation();editCoverTitle()">${esc(S.mag.title)}</div>
+      <div class="cover-date">${S.mag.month} · ${S.mag.family}</div>
+    </div>
+  </div>`;
+}
+
+function renderBackPage(){
+  return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center">
+    <div style="font-size:24px;margin-bottom:8px">♥</div>
+    <div style="font-size:12px;font-weight:800;color:var(--navy);margin-bottom:4px">remoryo</div>
+    <div style="font-size:8px;color:var(--mid-gray);margin-bottom:16px">Fotoheft für die Familie</div>
+    <div style="font-size:9px;font-weight:700;color:var(--navy);margin-bottom:6px">Autoren dieses Hefts</div>
+    <div style="display:flex;gap:12px;margin-bottom:16px">
+      ${['M','P','S'].map((l,i)=>`<div style="display:flex;flex-direction:column;align-items:center;gap:2px">
+        <div style="width:24px;height:24px;border-radius:12px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:white">${l}</div>
+        <div style="font-size:7px;color:var(--dark-gray)">${NAMES[i]}</div>
+      </div>`).join('')}
+    </div>
+    <div style="font-size:8px;color:var(--mid-gray)">Automatisch generierte Seite</div>
+  </div>`;
+}
+
+function renderContentPage(pg){
+  const layout=LAYOUTS.find(l=>l.id===pg.layout)||LAYOUTS[0];
+  let slotsHtml='';
+  layout.slots.forEach((ls,si)=>{
+    const slot=pg.slots[si]||{content:null};
+    const flexVal=ls.h;
+    slotsHtml+=`<div style="flex:${flexVal};min-height:0">${renderSlot(slot,si)}</div>`;
+  });
+  return `<div class="wysiwyg-header">
+    <div class="wysiwyg-family">${S.mag.family}</div>
+    <div class="wysiwyg-month">${S.mag.month.split(' ')[0]}</div>
+  </div>
+  <div class="wysiwyg-content">${slotsHtml}</div>
+  <div class="wysiwyg-footer"><span>♥ remoryo</span></div>`;
+}
+
+function renderSlot(slot,si){
+  if(!slot.content){
+    return `<div class="slot slot--empty" style="height:100%" onclick="onEmptySlot(${si})">
+      <div class="slot-empty-icon">${IC.plus}</div>
+      <div class="slot-empty-text">Inhalt hinzufügen</div>
+    </div>`;
+  }
+  const c=slot.content;
+  if(c.type==='photo'){
+    const bg=GRADIENTS[c.photoId%15];
+    const captionText=c.caption?esc(c.caption):'Bildunterschrift hinzufügen...';
+    const hasCaption=!!c.caption;
+    return `<div class="slot slot-photo" style="height:100%" onclick="onFilledSlot(${si})">
+      <div class="slot-photo-area" style="background:${bg}">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <div class="slot-edit-badge">${IC.edit}</div>
+      </div>
+      <div class="slot-caption" onclick="event.stopPropagation();editCaption(${si})">
+        <div class="slot-caption-circle">${NAMES[c.photoId%NAMES.length][0]}</div>
+        <div>
+          <div class="slot-caption-name">${NAMES[c.photoId%NAMES.length]} <span class="slot-caption-date">· 5. März</span></div>
+          <div class="slot-caption-text" style="${hasCaption?'':'opacity:.5;font-style:italic'}">${captionText}</div>
+        </div>
+      </div>
+    </div>`;
+  }
+  if(c.type==='entertainment'){
+    const cat=ENT_CATS.find(ct=>ct.id===c.catId)||ENT_CATS[0];
+    const item=cat.items[c.itemIdx%cat.items.length];
+    return `<div class="slot slot-ent" style="height:100%" onclick="onFilledSlot(${si})">
+      <div class="slot-edit-badge">${IC.edit}</div>
+      <div class="slot-ent-icon">${cat.icon}</div>
+      <div class="slot-ent-label">${cat.title}</div>
+      <div style="font-size:8px;color:var(--mid-gray);margin-top:2px">${item.t||item}</div>
+    </div>`;
+  }
+  if(c.type==='freetext'){
+    return `<div class="slot slot-text" style="height:100%" onclick="onFilledSlot(${si})">
+      <div class="slot-edit-badge">${IC.edit}</div>
+      <div class="slot-text-content">${c.text?esc(c.text):'Tippe hier, um Text einzugeben...'}</div>
+    </div>`;
+  }
+  return '';
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SLOT INTERACTION HANDLERS
+   ═══════════════════════════════════════════════════════════ */
+function onEmptySlot(si){showElementTypePicker(si)}
+function onFilledSlot(si){showSlotActions(si)}
+function onSlotTap(si){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  const slot=pg.slots[si];
+  if(!slot||!slot.content) onEmptySlot(si);
+  else onFilledSlot(si);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   S12 — ELEMENT TYPE PICKER (empty slots)
+   ═══════════════════════════════════════════════════════════ */
+function showElementTypePicker(si){
+  showSheet(`
+    <div class="sheet-title">Inhalt hinzufügen</div>
+    <div class="sheet-sub">Was soll auf diesen Slot?</div>
+    <div class="type-cards">
+      <div class="type-card" onclick="pickPhoto(${si})">
+        <div class="type-card-icon" style="background:var(--blue-light)">${IC.cam}</div>
+        <div class="type-card-info"><div class="type-card-title">Foto</div><div class="type-card-desc">Ein Foto mit Bildunterschrift</div></div>
+      </div>
+      <div class="type-card" onclick="pickEntertainment(${si})">
+        <div class="type-card-icon" style="background:var(--turquoise-light)">🧩</div>
+        <div class="type-card-info"><div class="type-card-title">Rätsel & Unterhaltung</div><div class="type-card-desc">Kreuzworträtsel, Witze, Lieder...</div></div>
+      </div>
+      <div class="type-card" onclick="pickFreetext(${si})">
+        <div class="type-card-icon" style="background:var(--soft-orange)">✍️</div>
+        <div class="type-card-info"><div class="type-card-title">Freitext</div><div class="type-card-desc">Eigener Text, Brief, Nachricht</div></div>
+      </div>
+    </div>
+  `);
+}
+function pickPhoto(si){hideSheet();setTimeout(()=>showPhotoPicker(si),200)}
+function pickEntertainment(si){hideSheet();setTimeout(()=>showEntCategoryPicker(si),200)}
+function pickFreetext(si){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  if(!pg.slots[si]) pg.slots[si]={content:null};
+  pg.slots[si].content={type:'freetext',text:''};
+  hideSheet();render();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   S12a — SLOT ACTIONS (filled slots)
+   ═══════════════════════════════════════════════════════════ */
+function showSlotActions(si){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  const slot=pg.slots[si];
+  if(!slot||!slot.content) return showElementTypePicker(si);
+  const t=slot.content.type;
+  let editLabel='Bearbeiten';
+  let editAction='';
+  if(t==='photo'){editLabel='Foto bearbeiten';editAction=`showPhotoActions(${si})`}
+  else if(t==='entertainment'){editLabel='Unterhaltung ändern';editAction=`pickEntertainment(${si})`}
+  else if(t==='freetext'){editLabel='Text bearbeiten';editAction=`editFreetext(${si})`}
+  showSheet(`
+    <div class="sheet-title">Slot bearbeiten</div>
+    <div class="sheet-sub">${t==='photo'?'Foto':t==='entertainment'?'Unterhaltung':'Freitext'}</div>
+    <div class="action-list">
+      <div class="action-row" onclick="hideSheet();setTimeout(()=>${editAction},200)">
+        <div class="action-icon" style="background:var(--blue-light)">✏️</div>
+        <div><div class="action-label">${editLabel}</div></div>
+      </div>
+      <div class="action-row" onclick="hideSheet();setTimeout(()=>showReplaceType(${si}),200)">
+        <div class="action-icon" style="background:var(--soft-orange)">🔄</div>
+        <div><div class="action-label">Element-Typ wechseln</div><div class="action-desc">Durch Foto, Rätsel oder Text ersetzen</div></div>
+      </div>
+      <div class="action-row action-row--danger" onclick="removeSlotContent(${si})">
+        <div class="action-icon" style="background:var(--soft-red)">🗑️</div>
+        <div><div class="action-label">Entfernen</div></div>
+      </div>
+    </div>
+  `);
+}
+function removeSlotContent(si){
+  S.mag.pages[S.editor.pageIdx].slots[si].content=null;
+  hideSheet();render();
+}
+function showReplaceType(si){showElementTypePicker(si)}
+
+/* ═══════════════════════════════════════════════════════════
+   S12b — PHOTO ACTIONS
+   ═══════════════════════════════════════════════════════════ */
+function showPhotoActions(si){
+  showSheet(`
+    <div class="sheet-title">Foto bearbeiten</div>
+    <div class="action-list">
+      <div class="action-row" onclick="hideSheet();setTimeout(()=>showCropOverlay(${si}),200)">
+        <div class="action-icon" style="background:var(--blue-light)">${IC.crop}</div>
+        <div><div class="action-label">Ausschnitt anpassen</div><div class="action-desc">Bild im Rahmen verschieben & zoomen</div></div>
+      </div>
+      <div class="action-row" onclick="hideSheet();setTimeout(()=>showPhotoPicker(${si}),200)">
+        <div class="action-icon" style="background:var(--soft-orange)">${IC.swap}</div>
+        <div><div class="action-label">Foto tauschen</div><div class="action-desc">Anderes Foto auswählen</div></div>
+      </div>
+      <div class="action-row action-row--danger" onclick="removeSlotContent(${si})">
+        <div class="action-icon" style="background:var(--soft-red)">${IC.trash}</div>
+        <div><div class="action-label">Foto entfernen</div></div>
+      </div>
+    </div>
+  `);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   S10 — PHOTO PICKER (Bottom Sheet)
+   ═══════════════════════════════════════════════════════════ */
+function showPhotoPicker(si){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  const currentPhotoId=pg.slots[si]?.content?.type==='photo'?pg.slots[si].content.photoId:-1;
+  let grid='';
+  for(let i=0;i<15;i++){
+    const isCurrent=i===currentPhotoId;
+    grid+=`<div class="photo-cell ${isCurrent?'photo-cell--sel':''}" style="border-radius:8px" onclick="selectPhotoForSlot(${si},${i})">
+      <div class="photo-cell-inner" style="background:${GRADIENTS[i]};border-radius:8px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      </div>
+      ${isCurrent?'<div class="photo-check photo-check--on">'+IC.check+'</div>':''}
+    </div>`;
+  }
+  showSheet(`
+    <div class="sheet-title">Foto auswählen</div>
+    <div class="sheet-sub">${currentPhotoId>=0?'Aktuelles Foto ist markiert':'Tippe auf ein Foto'}</div>
+    <div class="photo-grid" style="border-radius:12px;overflow:hidden">${grid}</div>
+  `);
+}
+function selectPhotoForSlot(si,photoId){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  if(!pg.slots[si]) pg.slots[si]={content:null};
+  pg.slots[si].content={type:'photo',photoId,caption:CAPTIONS[photoId%CAPTIONS.length],pos:{x:0,y:0,z:1}};
+  hideSheet();render();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   S11a — ENTERTAINMENT CATEGORY PICKER
+   ═══════════════════════════════════════════════════════════ */
+function showEntCategoryPicker(si){
+  let rows='';
+  ENT_CATS.forEach(cat=>{
+    rows+=`<div class="ent-row" onclick="hideSheet();setTimeout(()=>showEntPreview(${si},'${cat.id}',0),200)">
+      <div class="ent-icon" style="background:${cat.bg}">${cat.icon}</div>
+      <div class="ent-info"><div class="ent-name">${cat.title}</div><div class="ent-desc">${cat.desc}</div></div>
+      <div style="color:var(--mid-gray)">${IC.chevR}</div>
+    </div>`;
+  });
+  showSheet(`
+    <div class="sheet-title">Unterhaltung wählen</div>
+    <div class="sheet-sub">Wähle eine Kategorie</div>
+    <div class="ent-list">${rows}</div>
+  `);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   S11b — ENTERTAINMENT CONTENT PREVIEW
+   ═══════════════════════════════════════════════════════════ */
+function showEntPreview(si,catId,itemIdx){
+  const cat=ENT_CATS.find(c=>c.id===catId);
+  if(!cat) return;
+  const item=cat.items[itemIdx%cat.items.length];
+  const title=item.t||item;
+  const txt=item.txt||'';
+  const nextIdx=(itemIdx+1)%cat.items.length;
+  showSheet(`
+    <div class="sheet-title">${cat.icon} ${cat.title}</div>
+    <div class="ent-preview-card">
+      <div class="ent-preview-title">${title}</div>
+      ${txt?`<div class="ent-preview-text">${txt.replace(/\n/g,'<br>')}</div>`:''}
+    </div>
+    <div class="ent-preview-meta">Passt auf: Halbe Seite / Ganze Seite</div>
+    <div class="btn-stack" style="margin-top:12px">
+      <div class="btn btn-primary" onclick="selectEntForSlot(${si},'${catId}',${itemIdx})">Übernehmen</div>
+      <div class="btn btn-outline" onclick="hideSheet();setTimeout(()=>showEntPreview(${si},'${catId}',${nextIdx}),200)">Anderes laden</div>
+      <div class="btn btn-text" onclick="hideSheet();setTimeout(()=>showEntCategoryPicker(${si}),200)">← Zurück zur Auswahl</div>
+    </div>
+  `);
+}
+function selectEntForSlot(si,catId,itemIdx){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  if(!pg.slots[si]) pg.slots[si]={content:null};
+  pg.slots[si].content={type:'entertainment',catId,itemIdx};
+  hideSheet();render();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   S9 — LAYOUT PICKER
+   ═══════════════════════════════════════════════════════════ */
+function showLayoutPicker(){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  if(pg.type!=='content') return;
+  let opts='';
+  LAYOUTS.forEach(l=>{
+    const sel=pg.layout===l.id;
+    let blocks='';
+    l.slots.forEach(s=>{blocks+=`<div class="layout-block layout-block--p" style="flex:${s.h}"></div>`});
+    opts+=`<div class="layout-opt ${sel?'layout-opt--sel':''}" onclick="changeLayout('${l.id}')">
+      <div class="layout-preview">${blocks}</div>
+      <div class="layout-label">${l.name}</div>
+    </div>`;
+  });
+  showSheet(`
+    <div class="sheet-title">Layout ändern</div>
+    <div class="sheet-sub">${pg.layout?'Aktuell: '+LAYOUTS.find(l=>l.id===pg.layout)?.name:''}</div>
+    <div class="layout-grid">${opts}</div>
+    <div class="btn btn-text-gray" onclick="hideSheet()">Abbrechen</div>
+  `);
+}
+function changeLayout(layoutId){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  const newLayout=LAYOUTS.find(l=>l.id===layoutId);
+  if(!newLayout) return;
+  const oldSlots=pg.slots;
+  pg.layout=layoutId;
+  pg.slots=newLayout.slots.map((_,i)=>oldSlots[i]||{content:null});
+  hideSheet();render();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   S12c — PAN / CROP OVERLAY
+   ═══════════════════════════════════════════════════════════ */
+function showCropOverlay(si){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  const slot=pg.slots[si];
+  if(!slot?.content||slot.content.type!=='photo') return;
+  const bg=GRADIENTS[slot.content.photoId%15];
+  const pos=slot.content.pos||{x:0,y:0,z:1};
+
+  const overlay=document.createElement('div');
+  overlay.className='crop-overlay';
+  overlay.id='cropOverlay';
+  let cx=pos.x,cy=pos.y,cz=pos.z;
+  let dragging=false,sx=0,sy=0;
+
+  overlay.innerHTML=`
+    <div style="font-size:15px;font-weight:700;color:white;margin-bottom:16px">Ausschnitt anpassen</div>
+    <div class="crop-frame" id="cropFrame">
+      <div class="crop-image" id="cropImg" style="background:${bg};left:${cx}px;top:${cy}px;transform:scale(${cz})">
+        <div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center">
+          <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.3)" stroke-width="1"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="crop-controls">
+      <div class="crop-btn" onclick="cropZoom(-0.1)">−</div>
+      <div style="color:white;font-size:13px;font-weight:600;min-width:50px;text-align:center" id="cropZoomLabel">${Math.round(cz*100)}%</div>
+      <div class="crop-btn" onclick="cropZoom(0.1)">+</div>
+    </div>
+    <div class="crop-actions">
+      <div class="btn btn-outline" style="background:rgba(255,255,255,.1);color:white;border-color:rgba(255,255,255,.3)" onclick="closeCrop()">Abbrechen</div>
+      <div class="btn btn-primary" onclick="applyCrop(${si})">Übernehmen</div>
+    </div>
+  `;
+  document.getElementById('phone').appendChild(overlay);
+
+  const frame=document.getElementById('cropFrame');
+  const img=document.getElementById('cropImg');
+
+  function onStart(e){
+    dragging=true;
+    const pt=e.touches?e.touches[0]:e;
+    sx=pt.clientX-cx;sy=pt.clientY-cy;
+  }
+  function onMove(e){
+    if(!dragging) return;
+    e.preventDefault();
+    const pt=e.touches?e.touches[0]:e;
+    cx=pt.clientX-sx;cy=pt.clientY-sy;
+    img.style.left=cx+'px';img.style.top=cy+'px';
+  }
+  function onEnd(){dragging=false}
+  frame.addEventListener('mousedown',onStart);
+  frame.addEventListener('touchstart',onStart,{passive:true});
+  window.addEventListener('mousemove',onMove);
+  window.addEventListener('touchmove',onMove,{passive:false});
+  window.addEventListener('mouseup',onEnd);
+  window.addEventListener('touchend',onEnd);
+
+  window._cropState={cz,img,cleanup:()=>{
+    window.removeEventListener('mousemove',onMove);
+    window.removeEventListener('touchmove',onMove);
+    window.removeEventListener('mouseup',onEnd);
+    window.removeEventListener('touchend',onEnd);
+  }};
+}
+function cropZoom(delta){
+  if(!window._cropState) return;
+  const s=window._cropState;
+  s.cz=Math.max(0.5,Math.min(2,s.cz+delta));
+  s.img.style.transform=`scale(${s.cz})`;
+  document.getElementById('cropZoomLabel').textContent=Math.round(s.cz*100)+'%';
+}
+function closeCrop(){
+  if(window._cropState) window._cropState.cleanup();
+  const el=document.getElementById('cropOverlay');
+  if(el) el.remove();
+}
+function applyCrop(si){
+  if(window._cropState){
+    const s=window._cropState;
+    const pg=S.mag.pages[S.editor.pageIdx];
+    pg.slots[si].content.pos={x:parseInt(s.img.style.left),y:parseInt(s.img.style.top),z:s.cz};
+    s.cleanup();
+  }
+  const el=document.getElementById('cropOverlay');
+  if(el) el.remove();
+  render();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   S13 — CAPTION / TEXT EDITING
+   ═══════════════════════════════════════════════════════════ */
+function editCaption(si){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  const slot=pg.slots[si];
+  if(!slot?.content||slot.content.type!=='photo') return;
+  const current=slot.content.caption||'';
+  showSheet(`
+    <div class="sheet-title">Bildunterschrift</div>
+    <textarea class="caption-input" id="captionInput" maxlength="120" placeholder="Was passiert auf diesem Foto?">${current}</textarea>
+    <div class="char-counter"><span id="captionCount">${current.length}</span>/120</div>
+    <div class="btn btn-primary" style="margin-top:12px" onclick="saveCaption(${si})">Übernehmen</div>
+  `);
+  setTimeout(()=>{
+    const inp=document.getElementById('captionInput');
+    if(inp){inp.focus();inp.addEventListener('input',()=>{document.getElementById('captionCount').textContent=inp.value.length})}
+  },300);
+}
+function saveCaption(si){
+  const inp=document.getElementById('captionInput');
+  if(inp) S.mag.pages[S.editor.pageIdx].slots[si].content.caption=inp.value;
+  hideSheet();render();
+}
+function editFreetext(si){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  const slot=pg.slots[si];
+  if(!slot?.content) return;
+  const current=slot.content.text||'';
+  showSheet(`
+    <div class="sheet-title">Freitext bearbeiten</div>
+    <textarea class="caption-input" id="freetextInput" maxlength="300" placeholder="Schreibe eine Nachricht, einen Brief, oder was dir einfällt..." style="min-height:120px">${current}</textarea>
+    <div class="char-counter"><span id="ftCount">${current.length}</span>/300</div>
+    <div class="btn btn-primary" style="margin-top:12px" onclick="saveFreetext(${si})">Übernehmen</div>
+  `);
+  setTimeout(()=>{
+    const inp=document.getElementById('freetextInput');
+    if(inp){inp.focus();inp.addEventListener('input',()=>{document.getElementById('ftCount').textContent=inp.value.length})}
+  },300);
+}
+function saveFreetext(si){
+  const inp=document.getElementById('freetextInput');
+  if(inp) S.mag.pages[S.editor.pageIdx].slots[si].content.text=inp.value;
+  hideSheet();render();
+}
+function editCoverTitle(){
+  showSheet(`
+    <div class="sheet-title">Magazin-Titel</div>
+    <input class="caption-input" id="titleInput" style="min-height:auto;height:48px" maxlength="40" value="${esc(S.mag.title)}" placeholder="Titel eingeben...">
+    <div class="btn btn-primary" style="margin-top:12px" onclick="saveCoverTitle()">Übernehmen</div>
+  `);
+  setTimeout(()=>{const inp=document.getElementById('titleInput');if(inp) inp.focus()},300);
+}
+function saveCoverTitle(){
+  const inp=document.getElementById('titleInput');
+  if(inp) S.mag.title=inp.value||'Unser Familienmonat';
+  hideSheet();render();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   S15 — REORDER
+   ═══════════════════════════════════════════════════════════ */
+function renderReorder(){
+  let grid='';
+  S.mag.pages.forEach((p,i)=>{
+    const locked=i===0||i===11;
+    const picked=S.reorder.picked===i;
+    const isTarget=S.reorder.picked!==null&&S.reorder.picked!==i&&!locked;
+    const label=i===0?'Cover':i===11?'S.12':`S.${i+1}`;
+    grid+=`<div class="reorder-thumb ${locked?'reorder-thumb--locked':''} ${picked?'reorder-thumb--picked':''} ${isTarget?'reorder-thumb--target':''}"
+      onclick="${locked?'':`reorderTap(${i})`}">
+      ${renderThumb(p,i)}
+      <div class="page-number">${label}</div>
+    </div>`;
+  });
+  return `<div class="screen-content fade-in">
+    <div class="sec-header">
+      <div class="sec-back" onclick="S.reorder.picked=null;goBack()">${IC.back}</div>
+      <div class="sec-title">Seiten umsortieren</div>
+    </div>
+    <div style="padding:12px 20px;font-size:13px;color:var(--dark-gray)">
+      ${S.reorder.picked!==null?'<b>Tippe auf die Zielposition</b>':'Tippe auf eine Seite, dann auf die Zielposition'}
+    </div>
+    <div class="reorder-grid">${grid}</div>
+    <div style="height:20px"></div>
+  </div>`;
+}
+function reorderTap(i){
+  if(S.reorder.picked===null){S.reorder.picked=i;render();return}
+  if(S.reorder.picked===i){S.reorder.picked=null;render();return}
+  // swap pages
+  const pages=S.mag.pages;
+  const temp=pages[S.reorder.picked];
+  pages[S.reorder.picked]=pages[i];
+  pages[i]=temp;
+  S.reorder.picked=null;
+  render();
+}
+
+/* ═══════════════════════════════════════════════════════════
+   S16 / S17 — SAVE FLOW
+   ═══════════════════════════════════════════════════════════ */
+function trySave(){
+  const filled=getFilledCount();
+  const total=getTotalSlots();
+  if(filled<total){
+    showModal(`
+      <div class="modal-icon" style="background:var(--soft-orange)">⚠️</div>
+      <div class="modal-title">Noch nicht fertig</div>
+      <div class="modal-desc">${total-filled} von ${total} Slots sind noch leer. Du kannst trotzdem speichern und später weitermachen.</div>
+      <div class="btn-stack" style="margin-top:16px">
+        <div class="btn btn-primary" onclick="hideModal();doSave()">Speichern & später</div>
+        <div class="btn btn-text" onclick="hideModal()">Weiter bearbeiten</div>
+      </div>
+    `);
+  } else {
+    doSave();
+  }
+}
+function doSave(){nav('save-success')}
+function renderSaveSuccess(){
+  return `<div class="success-screen fade-in">
+    <div class="success-icon">✅</div>
+    <div class="success-title">Gespeichert!</div>
+    <div class="success-sub">Dein Fotoheft „${esc(S.mag.title)}" wurde erfolgreich gespeichert.</div>
+    <div style="margin-top:8px;font-size:14px;color:var(--mid-gray)">Du kannst es jederzeit weiterbearbeiten oder zur Bestellung abschicken.</div>
+    <div class="btn-stack" style="margin-top:24px;max-width:300px">
+      <div class="btn btn-primary" onclick="S.navStack=[];nav('overview',false)">Zur Übersicht</div>
+      <div class="btn btn-outline" onclick="S.navStack=[];nav('mode-selection',false)">Neues Heft starten</div>
+    </div>
+  </div>`;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   S18 — MAGAZINE VIEWER
+   ═══════════════════════════════════════════════════════════ */
+function renderViewer(){
+  const sp=S.viewer.spread;
+  const maxSp=Math.ceil(S.mag.pages.length/2)-1;
+  const leftIdx=sp*2;
+  const rightIdx=sp*2+1;
+  const leftPage=S.mag.pages[leftIdx];
+  const rightPage=S.mag.pages[rightIdx];
+
+  return `<div class="viewer-wrap fade-in">
+    <div class="sec-header">
+      <div class="sec-back" onclick="goBack()">${IC.back}</div>
+      <div class="sec-title">Magazin-Vorschau</div>
+    </div>
+    <div class="viewer-area">
+      <div class="spread">
+        <div class="spread-page spread-page--l" style="min-height:200px;max-width:170px">${renderThumb(leftPage,leftIdx)}</div>
+        <div class="spread-spine"></div>
+        ${rightPage?`<div class="spread-page spread-page--r" style="min-height:200px;max-width:170px">${renderThumb(rightPage,rightIdx)}</div>`:''}
+      </div>
+    </div>
+    <div class="viewer-nav">
+      <button class="toolbar-arrow" ${sp<=0?'disabled':''} onclick="S.viewer.spread--;render()">${IC.chevL}</button>
+      <div class="viewer-indicator">Seite ${leftIdx+1}${rightPage?'–'+(rightIdx+1):''} von ${S.mag.pages.length}</div>
+      <button class="toolbar-arrow" ${sp>=maxSp?'disabled':''} onclick="S.viewer.spread++;render()">${IC.chevR}</button>
+    </div>
+    <div class="bottom-action-bar" style="justify-content:center">
+      <div class="btn btn-outline" onclick="goBack()" style="max-width:200px">Zurück zur Übersicht</div>
+    </div>
+  </div>`;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════════════════════ */
+nav('mode-selection',false);
+</script>
+</body>
+</html>
