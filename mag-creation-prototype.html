@@ -226,7 +226,7 @@ body{
 .page-block--caption-dot{width:5px;height:5px;border-radius:3px;background:var(--blue);flex-shrink:0}
 .page-block--caption-line{flex:1;height:2px;border-radius:1px;background:var(--border)}
 .page-block--side{display:flex;flex-direction:row;gap:1px}
-.page-block--side-caption{width:30%;background:var(--caption-warm);border-radius:2px;display:flex;align-items:center;justify-content:center}
+.page-block--side-caption{width:40%;background:var(--caption-warm);border-radius:2px;display:flex;align-items:center;justify-content:center}
 .page-block--ent{background:var(--turquoise-light);display:flex;align-items:center;justify-content:center;border-radius:2px}
 .page-block--text{background:var(--soft-orange-bg);display:flex;align-items:center;justify-content:center;border-radius:2px}
 .page-block--empty{background:var(--light-gray);border:1px dashed var(--border-alt);border-radius:2px}
@@ -259,13 +259,13 @@ body{
   height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;
   flex-shrink:0;padding:10px 17px 4px;
 }
-.wysiwyg-family{font-size:10px;font-weight:800;color:var(--navy);letter-spacing:.4px}
-.wysiwyg-month{font-size:17px;font-weight:800;color:var(--orange)}
-.wysiwyg-content{flex:1;padding:0 17px;display:flex;flex-direction:column;gap:6px;min-height:0}
+.wysiwyg-family{font-size:12px;font-weight:800;color:var(--navy);letter-spacing:.4px}
+.wysiwyg-month{font-size:20px;font-weight:800;color:var(--orange)}
+.wysiwyg-content{flex:1;padding:0 17px;display:flex;flex-direction:column;gap:15px;min-height:0}
 .wysiwyg-footer{
   height:21px;display:flex;align-items:center;justify-content:center;flex-shrink:0;gap:4px;
 }
-.wysiwyg-footer img{height:10px;width:auto}
+.wysiwyg-footer img{width:14px;height:auto}
 
 /* Editor slots */
 .slot{
@@ -280,39 +280,39 @@ body{
   align-items:center;justify-content:center;gap:6px;
 }
 .slot-empty-icon{
-  width:36px;height:36px;border-radius:18px;background:var(--blue-light);
+  width:40px;height:40px;border-radius:20px;background:var(--blue-light);
   display:flex;align-items:center;justify-content:center;
 }
-.slot-empty-text{font-size:11px;color:var(--mid-gray);font-weight:500}
+.slot-empty-text{font-size:12px;color:var(--mid-gray);font-weight:500}
 .slot-photo{display:flex;flex-direction:column}
 .slot-photo-area{flex:1;display:flex;align-items:center;justify-content:center;position:relative;min-height:0}
 .slot-caption{
-  background:var(--caption-warm);padding:6px 8px;
-  display:flex;align-items:center;gap:6px;min-height:28px;
+  background:var(--caption-warm);padding:8px 12px;
+  display:flex;align-items:center;gap:10px;min-height:46px;
 }
 .slot-caption-circle{
-  width:18px;height:18px;border-radius:9px;background:var(--blue);
+  width:24px;height:24px;border-radius:12px;background:var(--blue);
   display:flex;align-items:center;justify-content:center;
-  font-size:6px;font-weight:700;color:var(--white);flex-shrink:0;
+  font-size:8px;font-weight:700;color:var(--white);flex-shrink:0;
 }
-.slot-caption-text{font-size:8px;color:var(--navy);line-height:1.3;flex:1;min-width:0}
-.slot-caption-name{font-weight:700;color:var(--blue);font-size:7px}
-.slot-caption-date{color:var(--orange);font-size:7px}
+.slot-caption-text{font-size:10px;color:var(--navy);line-height:1.3;flex:1;min-width:0}
+.slot-caption-name{font-weight:700;color:var(--blue);font-size:8px}
+.slot-caption-date{color:var(--orange);font-size:8px}
 .slot-ent{
   background:var(--turquoise-light);display:flex;flex-direction:column;
   align-items:center;justify-content:center;gap:4px;
 }
-.slot-ent-icon{font-size:20px}
-.slot-ent-label{font-size:10px;font-weight:600;color:var(--dark-gray)}
+.slot-ent-icon{font-size:24px}
+.slot-ent-label{font-size:12px;font-weight:600;color:var(--dark-gray)}
 .slot-text{
   background:var(--soft-orange-bg);display:flex;align-items:center;justify-content:center;
   padding:10px;
 }
-.slot-text-content{font-size:9px;color:var(--dark-gray);text-align:center;line-height:1.4}
+.slot-text-content{font-size:11px;color:var(--dark-gray);text-align:center;line-height:1.4}
 .slot-photo--side{flex-direction:row}
 .slot-caption-side{
-  width:35%;background:var(--caption-warm);display:flex;flex-direction:column;
-  align-items:center;justify-content:center;gap:4px;padding:6px;text-align:center;
+  width:45%;background:var(--caption-warm);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;padding:10px;text-align:center;
 }
 .slot-edit-badge{
   position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:11px;
@@ -370,12 +370,13 @@ body{
   flex:1;position:relative;display:flex;align-items:flex-end;
 }
 .cover-overlay{
-  position:absolute;bottom:0;left:0;right:0;padding:14px;
+  position:absolute;bottom:0;left:0;right:0;padding:17px;
   background:linear-gradient(transparent,rgba(27,44,67,.75));
 }
-.cover-logo{font-size:10px;color:rgba(255,255,255,.8);font-weight:700;margin-bottom:4px}
+.cover-logo img{width:28px;height:auto;filter:brightness(10);opacity:.8}
+.cover-logo{margin-bottom:6px}
 .cover-title{font-size:16px;font-weight:800;color:var(--white);line-height:1.2}
-.cover-date{font-size:9px;color:rgba(255,255,255,.65);margin-top:2px}
+.cover-date{font-size:12px;color:rgba(255,255,255,.7);margin-top:3px;font-weight:600}
 
 /* ═══════════════════════════════════════════════════════════
    BOTTOM SHEET CONTENT
@@ -526,25 +527,25 @@ body{
 .back-variant-btn{flex:1;padding:8px 6px;border-radius:10px;border:2px solid var(--border);text-align:center;cursor:pointer;font-size:10px;font-weight:600;color:var(--navy);transition:border-color .15s,background .15s;-webkit-tap-highlight-color:transparent}
 .back-variant-btn:active{transform:scale(.97)}
 .back-variant-btn--sel{border-color:var(--orange);background:var(--soft-orange)}
-.back-section{text-align:center;padding:4px 14px}
-.back-wordmark{font-size:13px;font-weight:800;color:var(--navy);letter-spacing:1px}
-.back-label{font-size:8px;font-weight:600;color:var(--dark-gray);opacity:.6}
-.back-authors{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;padding:6px 14px}
-.back-author{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer}
-.back-author-circle{width:26px;height:26px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--white)}
-.back-author-name{font-size:7px;color:var(--navy);font-weight:600}
-.back-quote{font-size:9px;color:var(--navy);text-align:center;padding:6px 16px;line-height:1.5;cursor:pointer;font-style:italic;border-radius:8px;transition:background .15s}
+.back-section{text-align:center;padding:6px 17px}
+.back-wordmark{font-size:13px;font-weight:800;color:var(--navy);letter-spacing:1.7px}
+.back-label{font-size:10px;font-weight:600;color:var(--dark-gray);opacity:.6;letter-spacing:1.3px;text-transform:uppercase}
+.back-authors{display:flex;gap:19px;justify-content:center;flex-wrap:wrap;padding:8px 17px}
+.back-author{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer}
+.back-author-circle{width:41px;height:41px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--white);border:2px solid var(--blue);box-shadow:0 2px 8px rgba(130,183,216,.25)}
+.back-author-name{font-size:8px;color:var(--blue);font-weight:700;letter-spacing:.3px}
+.back-quote{font-size:12px;color:var(--navy);text-align:center;padding:8px 20px;line-height:1.8;cursor:pointer;font-style:italic;border-radius:8px;transition:background .15s;max-width:224px;margin:0 auto}
 .back-quote:hover{background:var(--light-gray)}
-.back-bdays{padding:4px 14px;text-align:center}
-.back-bday-title{font-size:8px;font-weight:800;color:var(--orange);text-transform:uppercase;margin-bottom:4px}
-.back-bday-entry{font-size:8px;color:var(--navy);margin-bottom:2px}
+.back-bdays{padding:6px 17px;text-align:center}
+.back-bday-title{font-size:10px;font-weight:800;color:var(--orange);text-transform:uppercase;margin-bottom:6px;letter-spacing:1.3px}
+.back-bday-entry{font-size:9px;color:var(--navy);margin-bottom:3px}
 .back-bday-name{font-weight:700;color:var(--blue)}
 .back-bday-date{opacity:.6}
-.back-footer{padding:6px 14px;text-align:center}
-.back-footer-url{font-size:7px;color:var(--navy);opacity:.25;font-weight:600}
+.back-footer{padding:8px 17px;text-align:center}
+.back-footer-url{font-size:7px;color:var(--navy);opacity:.25;font-weight:600;letter-spacing:2px}
 .back-manage-link{font-size:10px;color:var(--blue);font-weight:600;cursor:pointer;padding:4px;text-align:center}
 .back-manage-link:hover{text-decoration:underline}
-.back-photo-slot{min-height:80px;border-radius:6px;overflow:hidden;cursor:pointer;display:flex;align-items:center;justify-content:center;margin:4px 14px;position:relative}
+.back-photo-slot{min-height:100px;border-radius:6px;overflow:hidden;cursor:pointer;display:flex;align-items:center;justify-content:center;margin:6px 17px;position:relative}
 
 /* MEMBER MANAGEMENT */
 .member-list{max-height:320px;overflow-y:auto}
@@ -1109,7 +1110,7 @@ function renderCoverPage(pg){
   return `<div class="cover-photo-area" style="background:${bg}" onclick="onSlotTap(0)">
     <div class="slot-edit-badge">${IC.edit}</div>
     <div class="cover-overlay">
-      <div class="cover-logo"><img src="assets/logo_heart_beige.png" style="height:10px;width:auto;vertical-align:middle;margin-right:2px">remoryo</div>
+      <div class="cover-logo"><img src="assets/logo_heart_beige.png"></div>
       <div class="cover-title" onclick="event.stopPropagation();editCoverTitle()">${esc(S.mag.title)}</div>
       <div class="cover-date">${S.mag.month} · ${S.mag.family}</div>
     </div>
@@ -1127,7 +1128,7 @@ function renderBackPage(){
 
   let contentHtml='';
   // Wordmark
-  contentHtml+=`<div class="back-section" style="padding-top:10px"><div class="back-wordmark">remoryo</div></div>`;
+  contentHtml+=`<div class="back-section" style="padding-top:16px"><img src="assets/logo_heart_blue.png" style="width:29px;height:auto;margin-bottom:7px"><div class="back-wordmark">remoryo</div></div>`;
   // Authors
   contentHtml+=`<div class="back-section"><div class="back-label">Gestaltet von</div></div>`;
   contentHtml+=`<div class="back-authors">${authors.map(m=>`<div class="back-author" onclick="showMemberManager()">
@@ -1150,7 +1151,7 @@ function renderBackPage(){
       contentHtml+=`<div class="back-photo-slot" style="background:var(--light-gray);border:2px dashed var(--border-alt);flex:1" onclick="onBackSlotTap()">
         <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
           <div class="slot-empty-icon">${IC.plus}</div>
-          <div style="font-size:9px;color:var(--mid-gray)">Foto hinzufügen</div>
+          <div style="font-size:11px;color:var(--mid-gray)">Foto hinzufügen</div>
         </div>
       </div>`;
     }
@@ -1168,7 +1169,7 @@ function renderBackPage(){
   // Manage link
   contentHtml+=`<div class="back-manage-link" onclick="showMemberManager()">Mitglieder verwalten</div>`;
   // Footer
-  contentHtml+=`<div class="back-footer"><img src="assets/logo_heart_blue.png" style="height:12px;width:auto"><div class="back-footer-url">www.remoryo.de</div></div>`;
+  contentHtml+=`<div class="back-footer"><img src="assets/logo_heart_blue.png" style="width:29px;height:auto;margin-bottom:4px"><div class="back-footer-url">www.remoryo.de</div></div>`;
 
   return `<div style="flex:1;display:flex;flex-direction:column;${bgStyle}">
     ${contentHtml}
@@ -1240,7 +1241,7 @@ function renderSlot(slot,si,pageLayout){
       <div class="slot-edit-badge">${IC.edit}</div>
       <div class="slot-ent-icon">${cat.icon}</div>
       <div class="slot-ent-label">${cat.title}</div>
-      <div style="font-size:8px;color:var(--mid-gray);margin-top:2px">${item.t||item}</div>
+      <div style="font-size:10px;color:var(--mid-gray);margin-top:2px">${item.t||item}</div>
     </div>`;
   }
   if(c.type==='freetext'){
