@@ -356,7 +356,7 @@ body{
 .layout-preview{display:flex;flex-direction:column;gap:3px;min-height:70px}
 .layout-block{border-radius:3px;flex:1;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--mid-gray);font-weight:600}
 .layout-block--p{background:var(--blue-light)}
-.layout-block--e{background:var(--turquoise-light)}
+/* layout-block--e removed — unified slot types */
 .layout-label{font-size:11px;font-weight:600;color:var(--navy);margin-top:6px}
 
 /* Entertainment list */
@@ -526,13 +526,7 @@ body{
 .back-manage-link:hover{text-decoration:underline}
 .back-photo-slot{min-height:80px;border-radius:6px;overflow:hidden;cursor:pointer;display:flex;align-items:center;justify-content:center;margin:4px 14px;position:relative}
 
-/* 3-FOTOS GRID */
-.slot-grid3{display:grid;grid-template-columns:1fr 1fr;gap:4px;height:100%}
-.slot-grid3>:first-child{grid-column:1/-1}
-
-/* LAYOUT PICKER IMPROVEMENTS */
-.layout-opt--wide{grid-column:1/-1}
-.layout-preview--row{flex-direction:row}
+/* (3-fotos grid removed — only 1/2 element layouts) */
 
 /* MEMBER MANAGEMENT */
 .member-list{max-height:320px;overflow-y:auto}
@@ -623,13 +617,8 @@ const ENT_CATS = [
 ];
 
 const LAYOUTS = [
-  {id:'1-foto',name:'1 Foto',slots:[{h:1,accepts:'photo'}]},
-  {id:'2-fotos',name:'2 Fotos',slots:[{h:.5,accepts:'photo'},{h:.5,accepts:'photo'}]},
-  {id:'foto-ent',name:'Foto + Rätsel',slots:[{h:.5,accepts:'photo'},{h:.5,accepts:'entertainment'}]},
-  {id:'ent-foto',name:'Rätsel + Foto',slots:[{h:.5,accepts:'entertainment'},{h:.5,accepts:'photo'}]},
-  {id:'1-ent',name:'1 Rätsel',slots:[{h:1,accepts:'entertainment'}]},
-  {id:'2-ent',name:'2 Rätsel',slots:[{h:.5,accepts:'entertainment'},{h:.5,accepts:'entertainment'}]},
-  {id:'3-fotos',name:'3 Fotos',grid:true,slots:[{h:.5,w:1,accepts:'photo'},{h:.5,w:.5,accepts:'photo'},{h:.5,w:.5,accepts:'photo'}]},
+  {id:'1-slot',name:'1 Element',slots:[{h:1}]},
+  {id:'2-slots',name:'2 Elemente',slots:[{h:.5},{h:.5}]},
 ];
 
 /* ═══════════════════════════════════════════════════════════
@@ -746,42 +735,31 @@ function initMagazine(mode){
     return {type:'entertainment',catId,itemIdx:0};
   }
   // Page 0 = Cover
-  S.mag.pages.push({type:'cover',layout:'full',slots:[{content:mode==='auto'?takePhoto():null}]});
+  S.mag.pages.push({type:'cover',layout:'1-slot',slots:[{content:mode==='auto'?takePhoto():null}]});
   if(mode==='auto'){
-    // Smart layout sequence — adapts to photo count
-    const sequence=['1-foto','2-fotos','1-foto','foto-ent','2-fotos','3-fotos','ent-foto','1-foto','2-fotos','1-foto'];
+    // Sequence of 1-slot and 2-slots — adapts to photo count
+    const sequence=['1-slot','2-slots','1-slot','2-slots','1-slot','2-slots','2-slots','1-slot','2-slots','1-slot'];
     for(let i=0;i<10;i++){
       let lid=sequence[i];
+      // Downgrade 2-slots if not enough photos
+      if(lid==='2-slots'&&pq.length<2) lid='1-slot';
       const ldef=LAYOUTS.find(l=>l.id===lid);
-      const photoNeeded=ldef.slots.filter(s=>s.accepts==='photo').length;
-      // Downgrade if not enough photos
-      if(pq.length<photoNeeded){
-        if(pq.length>=1) lid='1-foto';
-        else lid='1-ent';
-      }
-      const finalL=LAYOUTS.find(l=>l.id===lid);
-      const slots=finalL.slots.map(s=>{
-        if(s.accepts==='photo'){
-          const p=takePhoto();
-          return {content:p||takeEnt()};
-        }
-        return {content:takeEnt()};
+      const slots=ldef.slots.map(()=>{
+        const p=takePhoto();
+        return {content:p||takeEnt()};
       });
       S.mag.pages.push({type:'content',layout:lid,slots});
     }
     // Ensure at least 1 entertainment
     const hasEnt=S.mag.pages.some(p=>p.type==='content'&&p.slots.some(s=>s.content?.type==='entertainment'));
     if(!hasEnt){
-      const p4=S.mag.pages[4];
-      if(p4&&p4.type==='content'){
-        const oldFirst=p4.slots[0]?.content;
-        p4.layout='foto-ent';
-        p4.slots=[{content:oldFirst},{content:takeEnt()}];
-      }
+      // Replace second slot of first 2-slot page with entertainment
+      const twoSlot=S.mag.pages.find(p=>p.type==='content'&&p.layout==='2-slots');
+      if(twoSlot) twoSlot.slots[1]={content:takeEnt()};
     }
   } else {
     for(let i=0;i<10;i++){
-      S.mag.pages.push({type:'content',layout:'1-foto',slots:[{content:null}]});
+      S.mag.pages.push({type:'content',layout:'1-slot',slots:[{content:null}]});
     }
   }
   // Page 11 = Back
@@ -950,14 +928,6 @@ function renderThumb(page,idx){
       return `<div class="page-block page-block--text" style="height:${h}"><span style="font-size:6px;color:var(--mid-gray)">Aa</span></div>`;
     }
     return '';
-  }
-  if(layout.grid){
-    // 3-fotos: top full-width + bottom two half-width
-    return `<div style="width:100%;height:100%;display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:3px">
-      <div class="page-block ${page.slots[0]?.content?'page-block--photo':'page-block--empty'}" style="grid-column:1/-1;${page.slots[0]?.content?.type==='photo'?'background:'+GRADIENTS[page.slots[0].content.photoId%15]:''}"></div>
-      <div class="page-block ${page.slots[1]?.content?'page-block--photo':'page-block--empty'}" style="${page.slots[1]?.content?.type==='photo'?'background:'+GRADIENTS[page.slots[1].content.photoId%15]:''}"></div>
-      <div class="page-block ${page.slots[2]?.content?'page-block--photo':'page-block--empty'}" style="${page.slots[2]?.content?.type==='photo'?'background:'+GRADIENTS[page.slots[2].content.photoId%15]:''}"></div>
-    </div>`;
   }
   let slotsHtml='';
   layout.slots.forEach((ls,si)=>{slotsHtml+=thumbSlot(page.slots[si],ls)});
@@ -1131,19 +1101,10 @@ function renderBackPage(){
 function renderContentPage(pg){
   const layout=LAYOUTS.find(l=>l.id===pg.layout)||LAYOUTS[0];
   let slotsHtml='';
-  if(layout.grid){
-    // 3-fotos: CSS grid layout
-    slotsHtml=`<div class="slot-grid3">
-      <div style="min-height:0">${renderSlot(pg.slots[0]||{content:null},0)}</div>
-      <div style="min-height:0">${renderSlot(pg.slots[1]||{content:null},1)}</div>
-      <div style="min-height:0">${renderSlot(pg.slots[2]||{content:null},2)}</div>
-    </div>`;
-  } else {
-    layout.slots.forEach((ls,si)=>{
-      const slot=pg.slots[si]||{content:null};
-      slotsHtml+=`<div style="flex:${ls.h};min-height:0">${renderSlot(slot,si)}</div>`;
-    });
-  }
+  layout.slots.forEach((ls,si)=>{
+    const slot=pg.slots[si]||{content:null};
+    slotsHtml+=`<div style="flex:${ls.h};min-height:0">${renderSlot(slot,si)}</div>`;
+  });
   return `<div class="wysiwyg-header">
     <div class="wysiwyg-family">${S.mag.family}</div>
     <div class="wysiwyg-month">${S.mag.month.split(' ')[0]}</div>
@@ -1387,57 +1348,31 @@ function selectEntForSlot(si,catId,itemIdx){
 function showLayoutPicker(){
   const pg=S.mag.pages[S.editor.pageIdx];
   if(pg.type!=='content') return;
-  const puzzleIcon='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h7v7"/></svg>';
-  function layoutPreview(l){
-    if(l.grid){
-      return `<div class="layout-preview layout-preview--row" style="min-height:50px;flex-wrap:wrap;gap:2px">
-        <div class="layout-block layout-block--p" style="flex:1 1 100%"></div>
-        <div class="layout-block layout-block--p" style="flex:1 1 45%"></div>
-        <div class="layout-block layout-block--p" style="flex:1 1 45%"></div>
-      </div>`;
-    }
-    let blocks='';
-    l.slots.forEach(s=>{
-      const cls=s.accepts==='entertainment'?'layout-block--e':'layout-block--p';
-      const icon=s.accepts==='entertainment'?puzzleIcon:'';
-      blocks+=`<div class="layout-block ${cls}" style="flex:${s.h}">${icon}</div>`;
-    });
-    return `<div class="layout-preview">${blocks}</div>`;
-  }
-  let opts='';
-  LAYOUTS.forEach(l=>{
-    const sel=pg.layout===l.id;
-    const wide=l.grid?'layout-opt--wide':'';
-    opts+=`<div class="layout-opt ${sel?'layout-opt--sel':''} ${wide}" onclick="changeLayout('${l.id}')">
-      ${sel?`<div style="position:absolute;top:6px;right:6px;width:18px;height:18px;border-radius:9px;background:var(--orange);display:flex;align-items:center;justify-content:center">${IC.check}</div>`:''}
-      ${layoutPreview(l)}
-      <div class="layout-label">${l.name}</div>
-    </div>`;
-  });
+  const is1=pg.layout==='1-slot';
   showSheet(`
-    <div class="sheet-title">Layout wählen</div>
-    <div class="sheet-sub">Seite ${S.editor.pageIdx+1} · ${LAYOUTS.find(l=>l.id===pg.layout)?.name||''}</div>
-    <div class="layout-grid">${opts}</div>
-    <div class="btn btn-text-gray" onclick="hideSheet()">Abbrechen</div>
+    <div class="sheet-title">Seitenaufteilung</div>
+    <div class="sheet-sub">Wie viele Elemente soll diese Seite haben?</div>
+    <div style="display:flex;gap:12px;margin:16px 0">
+      <div class="layout-opt ${is1?'layout-opt--sel':''}" style="flex:1" onclick="changeLayout('1-slot')">
+        ${is1?`<div style="position:absolute;top:6px;right:6px;width:18px;height:18px;border-radius:9px;background:var(--orange);display:flex;align-items:center;justify-content:center">${IC.check}</div>`:''}
+        <div class="layout-preview" style="min-height:80px"><div class="layout-block layout-block--p" style="flex:1"></div></div>
+        <div class="layout-label">1 Element</div>
+      </div>
+      <div class="layout-opt ${!is1?'layout-opt--sel':''}" style="flex:1" onclick="changeLayout('2-slots')">
+        ${!is1?`<div style="position:absolute;top:6px;right:6px;width:18px;height:18px;border-radius:9px;background:var(--orange);display:flex;align-items:center;justify-content:center">${IC.check}</div>`:''}
+        <div class="layout-preview" style="min-height:80px"><div class="layout-block layout-block--p" style="flex:1"></div><div class="layout-block layout-block--p" style="flex:1"></div></div>
+        <div class="layout-label">2 Elemente</div>
+      </div>
+    </div>
   `);
 }
 function changeLayout(layoutId){
   const pg=S.mag.pages[S.editor.pageIdx];
   const newLayout=LAYOUTS.find(l=>l.id===layoutId);
   if(!newLayout) return;
-  // Preserve existing slot contents where possible
-  const oldContents=pg.slots.map(s=>s?.content||null);
+  const oldSlots=pg.slots;
   pg.layout=layoutId;
-  pg.slots=newLayout.slots.map((s,i)=>{
-    // Try to reuse old content, matching by type preference
-    const old=oldContents[i];
-    if(old&&((s.accepts==='photo'&&old.type==='photo')||(s.accepts==='entertainment'&&old.type==='entertainment')||old.type==='freetext')){
-      return {content:old};
-    }
-    // Fallback: just carry forward whatever was there
-    if(old&&i<oldContents.length) return {content:old};
-    return {content:null};
-  });
+  pg.slots=newLayout.slots.map((_,i)=>oldSlots[i]||{content:null});
   hideSheet();render();
 }
 
