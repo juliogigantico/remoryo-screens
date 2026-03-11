@@ -12,13 +12,13 @@
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
   --blue:#82B7D8;--blue-light:#EAF3F9;--blue-soft:#D4E8F2;
-  --turquoise:#B8E0E0;--turquoise-light:#E2F3F3;
+  --turquoise:#C7DDDA;--turquoise-light:#E8F0EE;
   --navy:#1B2C43;--orange:#FFA631;--white:#FFFFFF;--beige:#E8DDD1;
-  --dark-gray:#5A6B7A;--mid-gray:#94A3B3;--light-gray:#F5F6F8;
-  --border:#E2E6EB;--border-alt:#D0D5DB;
-  --red:#E74C3C;--soft-red:#FFF0EE;--soft-green:#E6F7EE;
+  --dark-gray:#635B52;--mid-gray:#9B9388;--light-gray:#F5F2EE;
+  --border:#E4DDD5;--border-alt:#D6CEC4;
+  --red:#E74C3C;--soft-red:#FFF0EE;--soft-green:#EBF5EC;
   --soft-orange:#FFF3DC;--soft-orange-bg:#FFF8F0;
-  --green-text:#1D8348;--caption-warm:#F8F6F4;
+  --green-text:#1D8348;--caption-warm:#F5F1ED;
   --radius:14px;--radius-sm:12px;
   --font:'Plus Jakarta Sans',-apple-system,BlinkMacSystemFont,sans-serif;
   --sheet-ease:cubic-bezier(.32,.72,0,1);
@@ -30,7 +30,7 @@
 html{-webkit-text-size-adjust:100%;height:100%}
 body{
   font-family:var(--font);color:var(--navy);
-  background:#E8E6E1;
+  background:#E5DCD2;
   display:flex;align-items:center;justify-content:center;
   min-height:100vh;padding:24px;
   -webkit-font-smoothing:antialiased;
@@ -311,35 +311,46 @@ body{
 
 /* Editor toolbar */
 .editor-toolbar{
-  display:flex;align-items:center;justify-content:space-between;
-  padding:8px 14px 10px;flex-shrink:0;
-  background:rgba(255,255,255,.88);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
-  box-shadow:0 -1px 0 rgba(27,44,67,.06),0 -8px 24px rgba(27,44,67,.04);
+  flex-shrink:0;background:var(--white);
+  border-top:1px solid var(--border);
+  padding:10px 16px 12px;
+  display:flex;flex-direction:column;gap:10px;
 }
-.toolbar-btn{
-  width:44px;height:44px;border-radius:22px;border:none;background:none;
-  display:flex;align-items:center;justify-content:center;cursor:pointer;
-  -webkit-tap-highlight-color:transparent;transition:background .15s,transform .1s;
-  color:var(--dark-gray);
+.toolbar-row{display:flex;align-items:center;justify-content:space-between}
+.toolbar-action{
+  display:flex;flex-direction:column;align-items:center;gap:2px;
+  cursor:pointer;-webkit-tap-highlight-color:transparent;
+  padding:4px 10px;border-radius:10px;transition:background .12s;
+  color:var(--dark-gray);min-width:58px;
 }
-.toolbar-btn:active{background:rgba(130,183,216,.15);transform:scale(.92)}
-.toolbar-nav{
-  display:flex;align-items:center;gap:2px;
-  background:var(--light-gray);border-radius:22px;padding:3px;
+.toolbar-action span{font-size:10px;font-weight:600;letter-spacing:.2px}
+.toolbar-action svg{width:20px;height:20px}
+.toolbar-action:active{background:var(--light-gray)}
+.toolbar-action--disabled{opacity:.25;pointer-events:none}
+.toolbar-pager{display:flex;align-items:center;gap:8px}
+.toolbar-page-num{
+  font-size:20px;font-weight:800;color:var(--navy);line-height:1;
+  min-width:56px;text-align:center;user-select:none;
 }
-.toolbar-nav-label{
-  font-size:13px;font-weight:700;min-width:68px;text-align:center;
-  padding:0 6px;color:var(--navy);user-select:none;
-}
+.toolbar-page-of{font-size:13px;font-weight:500;color:var(--mid-gray)}
 .toolbar-arrow{
-  width:34px;height:34px;border-radius:17px;border:none;background:var(--white);
+  width:36px;height:36px;border-radius:18px;border:1.5px solid var(--border);
+  background:var(--white);
   display:flex;align-items:center;justify-content:center;cursor:pointer;
   -webkit-tap-highlight-color:transparent;color:var(--navy);
-  box-shadow:0 1px 3px rgba(27,44,67,.08);
-  transition:background .12s,transform .1s;
+  transition:border-color .12s,background .12s,transform .08s;
 }
-.toolbar-arrow:active{transform:scale(.9);background:var(--blue-light)}
-.toolbar-arrow:disabled{opacity:.2;cursor:not-allowed;box-shadow:none;transform:none}
+.toolbar-arrow:active{background:var(--blue-light);border-color:var(--blue);transform:scale(.92)}
+.toolbar-arrow:disabled{opacity:.2;cursor:not-allowed;transform:none}
+.toolbar-dots{display:flex;justify-content:center;gap:5px}
+.toolbar-dot{
+  width:8px;height:8px;border-radius:4px;background:var(--border);
+  cursor:pointer;transition:background .2s,transform .15s;
+  -webkit-tap-highlight-color:transparent;
+}
+.toolbar-dot:active{transform:scale(1.4)}
+.toolbar-dot--filled{background:var(--navy)}
+.toolbar-dot--active{background:var(--orange);transform:scale(1.3)}
 
 /* ═══════════════════════════════════════════════════════════
    COVER PAGE SPECIAL
@@ -490,7 +501,6 @@ body{
 /* ═══════════════════════════════════════════════════════════
    TRANSITIONS + UTILITIES
    ═══════════════════════════════════════════════════════════ */
-.toolbar-btn.disabled{opacity:.3;pointer-events:none}
 .fade-in{animation:fadeIn .3s ease}
 @keyframes fadeIn{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
 .screen-content{display:flex;flex-direction:column;flex:1}
@@ -578,11 +588,11 @@ const PHOTOS = GRADIENTS.map((g,i)=>({
 
 const MEMBERS_DEFAULT = [
   {id:0,name:'Mama',initial:'M',color:'#82B7D8',birthday:null,isApp:true},
-  {id:1,name:'Papa',initial:'P',color:'#B8E0E0',birthday:null,isApp:true},
+  {id:1,name:'Papa',initial:'P',color:'#C7DDDA',birthday:null,isApp:true},
   {id:2,name:'Tante Lisa',initial:'L',color:'#E8DDD1',birthday:'04-22',isApp:true},
   {id:3,name:'Sarah',initial:'S',color:'#FFA631',birthday:'07-10',isApp:true},
   {id:4,name:'Oma Hilde',initial:'H',color:'#D4E8F2',birthday:'03-15',isApp:false},
-  {id:5,name:'Opa Werner',initial:'W',color:'#94A3B3',birthday:'11-28',isApp:false},
+  {id:5,name:'Opa Werner',initial:'W',color:'#9B9388',birthday:'11-28',isApp:false},
 ];
 
 const MONTHS_DE=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
@@ -596,11 +606,11 @@ const CAPTIONS = [
 ];
 
 const ENT_CATS = [
-  {id:'crossword',icon:'✏️',title:'Kreuzworträtsel',desc:'Klassische Kreuzworträtsel',bg:'#E2F3F3',
+  {id:'crossword',icon:'✏️',title:'Kreuzworträtsel',desc:'Klassische Kreuzworträtsel',bg:'#E8F0EE',
    items:[{t:'Frühlings-Rätsel',txt:'10 Wörter rund um den Frühling'},{t:'Tier-ABC',txt:'Finde 8 versteckte Tiernamen'},{t:'Küchen-Rätsel',txt:'12 Begriffe aus der Küche'}]},
   {id:'numbers',icon:'🔢',title:'Zahlenrätsel',desc:'Sudoku & Zahlenspiele',bg:'#EAF3F9',
    items:[{t:'Leichtes Sudoku',txt:'4×4 Sudoku zum Einstieg'},{t:'Zahlenreihe',txt:'Welche Zahl fehlt?'},{t:'Rechenpuzzle',txt:'Einfache Rechenaufgaben'}]},
-  {id:'words',icon:'🔤',title:'Worträtsel',desc:'Wörtersuche & Buchstabenspiele',bg:'#E2F3F3',
+  {id:'words',icon:'🔤',title:'Worträtsel',desc:'Wörtersuche & Buchstabenspiele',bg:'#E8F0EE',
    items:[{t:'Wörtersuche: Blumen',txt:'8 Blumennamen im Gitter finden'},{t:'Buchstabensalat',txt:'Wörter aus Buchstaben bilden'},{t:'Silbenrätsel',txt:'Silben richtig zusammensetzen'}]},
   {id:'jokes',icon:'😄',title:'Witze',desc:'Humor für gute Laune',bg:'#FFF8F0',
    items:[{t:'Der Arztbesuch',txt:'"Herr Doktor, ich habe das Gefühl, niemand nimmt mich ernst." — "Sie scherzen!"'},{t:'Im Restaurant',txt:'"Herr Ober, der Kaffee war ja gestern viel besser!" — "Das wundert mich, er ist aus derselben Kanne."'},{t:'Beim Bäcker',txt:'"Ich hätte gerne ein Brot." — "Weißes?" — "Nein, ich möchte es mitnehmen."'}]},
@@ -608,7 +618,7 @@ const ENT_CATS = [
    items:[{t:'Albert Schweitzer',txt:'"Das Glück ist das Einzige, das sich verdoppelt, wenn man es teilt."'},{t:'Konfuzius',txt:'"Der Weg ist das Ziel."'},{t:'Mark Twain',txt:'"Gib jedem Tag die Chance, der schönste deines Lebens zu werden."'}]},
   {id:'songs',icon:'🎵',title:'Lieder',desc:'Bekannte Liedtexte zum Mitsingen',bg:'#EAF3F9',
    items:[{t:'Hoch auf dem gelben Wagen',txt:'Hoch auf dem gelben Wagen sitz ich beim Schwager vorn...'},{t:'Kein schöner Land',txt:'Kein schöner Land in dieser Zeit, als hier das unsre weit und breit...'},{t:'Am Brunnen vor dem Tore',txt:'Am Brunnen vor dem Tore, da steht ein Lindenbaum...'}]},
-  {id:'quiz',icon:'❓',title:'Wissensquiz',desc:'Quizfragen zum Knobeln',bg:'#E2F3F3',
+  {id:'quiz',icon:'❓',title:'Wissensquiz',desc:'Quizfragen zum Knobeln',bg:'#E8F0EE',
    items:[{t:'Geographie',txt:'Wie heißt der längste Fluss Deutschlands?'},{t:'Geschichte',txt:'In welchem Jahr fiel die Berliner Mauer?'},{t:'Natur',txt:'Welcher Baum verliert als letzter seine Blätter?'}]},
   {id:'poems',icon:'📜',title:'Gedichte',desc:'Klassische & moderne Gedichte',bg:'#FFF8F0',
    items:[{t:'Abendlied (Claudius)',txt:'Der Mond ist aufgegangen,\ndie goldnen Sternlein prangen\nam Himmel hell und klar...'},{t:'Wandrers Nachtlied',txt:'Über allen Gipfeln\nist Ruh,\nin allen Wipfeln\nspürest du\nkaum einen Hauch...'},{t:'Erlkönig (Goethe)',txt:'Wer reitet so spät\ndurch Nacht und Wind?\nEs ist der Vater\nmit seinem Kind...'}]},
@@ -984,20 +994,33 @@ function renderEditor(){
   else pageHtml=renderContentPage(pg,idx);
 
   const canLayout=pg.type==='content';
-  const pageLabel=idx===0?'Cover':idx===11?'S.12':`S.${idx+1}`;
+  const dots=S.mag.pages.map((p,pi)=>{
+    const cur=pi===idx;
+    const filled=pi===0||pi===11||(p.slots&&p.slots.some(s=>s.content))||(p.backSlot&&p.backSlot.content);
+    return `<div class="toolbar-dot ${cur?'toolbar-dot--active':''} ${filled&&!cur?'toolbar-dot--filled':''}" onclick="S.editor.pageIdx=${pi};render()"></div>`;
+  }).join('');
 
   return `<div class="editor-wrap fade-in">
     <div class="editor-page-area">
       <div class="wysiwyg-page">${pageHtml}</div>
     </div>
     <div class="editor-toolbar">
-      <div class="toolbar-btn ${canLayout?'':'disabled'}" onclick="${canLayout?'showLayoutPicker()':''}" title="Layout ändern">${IC.layout}</div>
-      <div class="toolbar-nav">
-        <button class="toolbar-arrow" ${idx<=0?'disabled':''} onclick="editorNav(-1)">${IC.chevL}</button>
-        <div class="toolbar-nav-label">${pageLabel}</div>
-        <button class="toolbar-arrow" ${idx>=total-1?'disabled':''} onclick="editorNav(1)">${IC.chevR}</button>
+      <div class="toolbar-row">
+        <div class="toolbar-action ${canLayout?'':'toolbar-action--disabled'}" onclick="${canLayout?'showLayoutPicker()':''}">
+          ${IC.layout}
+          <span>Layout</span>
+        </div>
+        <div class="toolbar-pager">
+          <button class="toolbar-arrow" ${idx<=0?'disabled':''} onclick="editorNav(-1)">${IC.chevL}</button>
+          <div class="toolbar-page-num">${idx+1} <span class="toolbar-page-of">/ ${total}</span></div>
+          <button class="toolbar-arrow" ${idx>=total-1?'disabled':''} onclick="editorNav(1)">${IC.chevR}</button>
+        </div>
+        <div class="toolbar-action" onclick="goBack()">
+          ${IC.grid}
+          <span>Alle Seiten</span>
+        </div>
       </div>
-      <div class="toolbar-btn" onclick="goBack()" title="Übersicht">${IC.grid}</div>
+      <div class="toolbar-dots">${dots}</div>
     </div>
   </div>`;
 }
@@ -1767,7 +1790,7 @@ function saveMember(idx){
   hideSheet();setTimeout(()=>showMemberManager(),200);
 }
 function addMember(){
-  const colors=['#82B7D8','#B8E0E0','#E8DDD1','#FFA631','#D4E8F2','#94A3B3','#E8C8D8','#B8D8D8'];
+  const colors=['#82B7D8','#C7DDDA','#E8DDD1','#FFA631','#D4E8F2','#9B9388','#D8C4B8','#B8CCC8'];
   const newId=S.members.length;
   S.members.push({id:newId,name:'Neues Mitglied',initial:'N',color:colors[newId%colors.length],birthday:null,isApp:false});
   hideSheet();setTimeout(()=>editMember(newId),200);
