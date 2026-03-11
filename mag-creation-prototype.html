@@ -366,17 +366,26 @@ body{
 /* ═══════════════════════════════════════════════════════════
    COVER PAGE SPECIAL
    ═══════════════════════════════════════════════════════════ */
-.cover-photo-area{
-  flex:1;position:relative;display:flex;align-items:flex-end;
+.cover-inner{
+  flex:1;display:flex;flex-direction:column;align-items:center;
+  justify-content:center;padding:20px 17px 24px;gap:0;
 }
-.cover-overlay{
-  position:absolute;bottom:0;left:0;right:0;padding:17px;
-  background:linear-gradient(transparent,rgba(27,44,67,.75));
+.cover-logo{margin-bottom:12px;display:flex;align-items:center;justify-content:center}
+.cover-logo img{width:28px;height:auto}
+.cover-foto{
+  width:calc(100% - 14px);flex:0 0 55%;
+  border:1.5px solid var(--navy);border-radius:7px;overflow:hidden;
+  display:flex;align-items:center;justify-content:center;
+  position:relative;cursor:pointer;
 }
-.cover-logo img{width:28px;height:auto;filter:brightness(10);opacity:.8}
-.cover-logo{margin-bottom:6px}
-.cover-title{font-size:16px;font-weight:800;color:var(--white);line-height:1.2}
-.cover-date{font-size:12px;color:rgba(255,255,255,.7);margin-top:3px;font-weight:600}
+.cover-title{
+  font-size:16px;font-weight:800;color:var(--navy);line-height:1.2;
+  margin-top:14px;text-align:center;letter-spacing:.5px;cursor:pointer;
+}
+.cover-month{
+  font-size:24px;font-weight:800;color:var(--orange);
+  margin-top:3px;text-align:center;
+}
 
 /* ═══════════════════════════════════════════════════════════
    BOTTOM SHEET CONTENT
@@ -918,17 +927,12 @@ function startLoading(){
    ═══════════════════════════════════════════════════════════ */
 function renderThumb(page,idx){
   if(page.type==='cover'){
-    const bg=page.slots[0]?.content?.type==='photo'?GRADIENTS[page.slots[0].content.photoId%15]:'var(--light-gray)';
-    const hasPhoto=page.slots[0]?.content?.type==='photo';
-    return `<div style="width:100%;height:100%;background:${bg};position:relative;display:flex;flex-direction:column">
-      ${!hasPhoto?`<div style="flex:1;display:flex;align-items:center;justify-content:center">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="1.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
-      </div>`:'<div style="flex:1"></div>'}
-      <div style="padding:5px 6px;background:${hasPhoto?'linear-gradient(transparent,rgba(27,44,67,.65))':'none'}">
-        <div style="font-size:4px;color:${hasPhoto?'rgba(255,255,255,.7)':'var(--navy)'};font-weight:700;display:flex;align-items:center;gap:2px"><img src="assets/logo_heart_${hasPhoto?'beige':'blue'}.png" style="height:5px;width:auto"> remoryo</div>
-        <div style="font-size:7px;color:${hasPhoto?'white':'var(--navy)'};font-weight:800;line-height:1.2;margin-top:1px">${esc(S.mag.title)}</div>
-        <div style="font-size:4px;color:${hasPhoto?'rgba(255,255,255,.55)':'var(--mid-gray)'};margin-top:1px">${S.mag.month} · ${S.mag.family}</div>
-      </div>
+    const bg=page.slots[0]?.content?.type==='photo'?GRADIENTS[page.slots[0].content.photoId%15]:'linear-gradient(150deg,#a8c8dc,#e8d5c2 40%,#c8dbe8 70%,#d4c5b5)';
+    return `<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:4px;background:#FBF9F6;gap:0">
+      <img src="assets/logo_heart_blue.png" style="width:8px;height:auto;margin-bottom:3px">
+      <div style="width:85%;flex:0 0 52%;border-radius:2px;overflow:hidden;background:${bg};border:1px solid var(--navy);margin-bottom:3px"></div>
+      <div style="font-size:5px;font-weight:800;color:var(--navy);text-align:center;line-height:1.2">${esc(S.mag.title)}</div>
+      <div style="font-size:7px;font-weight:800;color:var(--orange);text-align:center;margin-top:1px">${S.mag.month.split(' ')[0]}</div>
     </div>`;
   }
   if(page.type==='back'){
@@ -1095,25 +1099,18 @@ function editorNav(dir){
 function renderCoverPage(pg){
   const slot=pg.slots[0];
   const hasPhoto=slot?.content?.type==='photo';
-  const bg=hasPhoto?GRADIENTS[slot.content.photoId%15]:'var(--light-gray)';
-  if(!hasPhoto){
-    return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;background:var(--light-gray)" onclick="onSlotTap(0)">
-      <div class="slot-empty-icon" style="width:48px;height:48px;border-radius:24px">${IC.cam}</div>
-      <div style="font-size:13px;font-weight:600;color:var(--dark-gray)">Cover-Foto wählen</div>
-      <div style="font-size:11px;color:var(--mid-gray)">Tippen zum Hinzufügen</div>
+  const bg=hasPhoto?GRADIENTS[slot.content.photoId%15]:'linear-gradient(150deg,#a8c8dc,#e8d5c2 40%,#c8dbe8 70%,#d4c5b5)';
+  const camSvg='<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(27,44,67,.15)" stroke-width="1.2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>';
+  const photoContent=hasPhoto
+    ?`<div class="slot-edit-badge">${IC.edit}</div>`
+    :`${camSvg}<div style="font-size:10px;color:var(--navy);opacity:.15;font-weight:700;text-transform:uppercase;letter-spacing:3px;margin-top:4px">Titelfoto</div>`;
+  return `<div class="cover-inner">
+    <div class="cover-logo"><img src="assets/logo_heart_blue.png"></div>
+    <div class="cover-foto" style="background:${bg}" onclick="onSlotTap(0)">
+      ${photoContent}
     </div>
-    <div style="padding:12px 14px;text-align:center;border-top:1px solid var(--border)">
-      <div style="font-size:14px;font-weight:800;color:var(--navy);cursor:pointer" onclick="editCoverTitle()">${esc(S.mag.title)}</div>
-      <div style="font-size:9px;color:var(--mid-gray);margin-top:2px">${S.mag.month} · ${S.mag.family}</div>
-    </div>`;
-  }
-  return `<div class="cover-photo-area" style="background:${bg}" onclick="onSlotTap(0)">
-    <div class="slot-edit-badge">${IC.edit}</div>
-    <div class="cover-overlay">
-      <div class="cover-logo"><img src="assets/logo_heart_beige.png"></div>
-      <div class="cover-title" onclick="event.stopPropagation();editCoverTitle()">${esc(S.mag.title)}</div>
-      <div class="cover-date">${S.mag.month} · ${S.mag.family}</div>
-    </div>
+    <div class="cover-title" onclick="editCoverTitle()">${esc(S.mag.title)}</div>
+    <div class="cover-month">${S.mag.month}</div>
   </div>`;
 }
 
@@ -1128,7 +1125,7 @@ function renderBackPage(){
 
   let contentHtml='';
   // Wordmark
-  contentHtml+=`<div class="back-section" style="padding-top:16px"><div class="back-wordmark">remoryo</div></div>`;
+  contentHtml+=`<div class="back-section"><div class="back-wordmark">remoryo</div></div>`;
   // Authors
   contentHtml+=`<div class="back-section"><div class="back-label">Gestaltet von</div></div>`;
   contentHtml+=`<div class="back-authors">${authors.map(m=>`<div class="back-author" onclick="showMemberManager()">
@@ -1143,12 +1140,12 @@ function renderBackPage(){
     const bs=pg.backSlot;
     if(bs&&bs.content&&bs.content.type==='photo'){
       const bg=GRADIENTS[bs.content.photoId%15];
-      contentHtml+=`<div class="back-photo-slot" style="background:${bg};flex:1" onclick="onBackSlotTap()">
+      contentHtml+=`<div class="back-photo-slot" style="background:${bg};min-height:120px" onclick="onBackSlotTap()">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
         <div class="slot-edit-badge">${IC.edit}</div>
       </div>`;
     } else {
-      contentHtml+=`<div class="back-photo-slot" style="background:var(--light-gray);border:2px dashed var(--border-alt);flex:1" onclick="onBackSlotTap()">
+      contentHtml+=`<div class="back-photo-slot" style="background:var(--light-gray);border:2px dashed var(--border-alt);min-height:120px" onclick="onBackSlotTap()">
         <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
           <div class="slot-empty-icon">${IC.plus}</div>
           <div style="font-size:11px;color:var(--mid-gray)">Foto hinzufügen</div>
@@ -1171,8 +1168,10 @@ function renderBackPage(){
   // Footer
   contentHtml+=`<div class="back-footer"><img src="assets/logo_heart_blue.png" style="width:29px;height:auto;margin-bottom:4px"><div class="back-footer-url">www.remoryo.de</div></div>`;
 
-  return `<div style="flex:1;display:flex;flex-direction:column;${bgStyle}">
+  return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;${bgStyle};padding:17px">
+    <div style="display:flex;flex-direction:column;align-items:center;width:100%">
     ${contentHtml}
+    </div>
   </div>`;
 }
 
