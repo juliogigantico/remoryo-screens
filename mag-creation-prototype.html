@@ -753,8 +753,30 @@ function renderModeSelection(){
     <div class="info-note">ℹ️ 12 Seiten · Gedruckt & als PDF</div>
   </div>`;
 }
-function startAuto(){S.selectedPhotos=[];nav('photo-selection')}
-function startManual(){S.selectedPhotos=[];initMagazine('manual');S.navStack=[];nav('overview',false)}
+function checkExistingMag(onNew){
+  if(S.mag.pages.length>0){
+    showModal(`
+      <div class="modal-icon" style="background:var(--soft-orange)">📖</div>
+      <div class="modal-title">Heft für ${S.mag.month} existiert</div>
+      <div class="modal-desc">Du hast bereits ein Fotoheft für diesen Monat. Pro Monat ist nur ein Heft möglich.</div>
+      <div class="btn-stack" style="margin-top:16px">
+        <div class="btn btn-primary" onclick="hideModal();S.navStack=[];nav('overview',false)">Weiterbearbeiten</div>
+        <div class="btn btn-outline" style="color:var(--red);border-color:var(--red)" onclick="hideModal();S.mag.pages=[];${onNew}">Neu starten</div>
+        <div class="btn btn-text-gray" onclick="hideModal()">Abbrechen</div>
+      </div>
+    `);
+    return true;
+  }
+  return false;
+}
+function startAuto(){
+  if(checkExistingMag("S.selectedPhotos=[];nav('photo-selection')")) return;
+  S.selectedPhotos=[];nav('photo-selection');
+}
+function startManual(){
+  if(checkExistingMag("S.selectedPhotos=[];initMagazine('manual');S.navStack=[];nav('overview',false)")) return;
+  S.selectedPhotos=[];initMagazine('manual');S.navStack=[];nav('overview',false);
+}
 
 /* ═══════════════════════════════════════════════════════════
    S2 — PHOTO SELECTION
@@ -1026,7 +1048,7 @@ function renderSlot(slot,si){
   if(c.type==='freetext'){
     return `<div class="slot slot-text" style="height:100%" onclick="onFilledSlot(${si})">
       <div class="slot-edit-badge">${IC.edit}</div>
-      <div class="slot-text-content">${c.text?esc(c.text):'Tippe hier, um Text einzugeben...'}</div>
+      <div class="slot-text-content">${c.text?esc(c.text).replace(/\n/g,'<br>'):'Tippe hier, um Text einzugeben...'}</div>
     </div>`;
   }
   return '';
