@@ -706,16 +706,21 @@ function render(noScroll){
 /* ═══════════════════════════════════════════════════════════
    BOTTOM SHEET + MODAL
    ═══════════════════════════════════════════════════════════ */
+let _sheetRaf=0;
 function showSheet(html){
+  cancelAnimationFrame(_sheetRaf);
   document.getElementById('sheetContainer').innerHTML='<div class="drag-handle"></div>'+html;
-  requestAnimationFrame(()=>{
+  _sheetRaf=requestAnimationFrame(()=>{
     document.getElementById('sheetBackdrop').classList.add('show');
     document.getElementById('sheetContainer').classList.add('show');
   });
 }
 function hideSheet(){
+  cancelAnimationFrame(_sheetRaf);
   document.getElementById('sheetBackdrop').classList.remove('show');
-  document.getElementById('sheetContainer').classList.remove('show');
+  const sc=document.getElementById('sheetContainer');
+  sc.classList.remove('show');
+  setTimeout(()=>{if(!sc.classList.contains('show')) sc.innerHTML=''},400);
 }
 function showModal(html){
   document.getElementById('modalContainer').innerHTML=html;
