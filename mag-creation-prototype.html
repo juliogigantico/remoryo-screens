@@ -236,7 +236,6 @@ body{
 .thumb-header-month{font-size:6px;font-weight:800;color:var(--orange)}
 .thumb-content{flex:1;display:flex;flex-direction:column;gap:2px;padding:0 4px;min-height:0}
 .thumb-footer{height:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0}
-.thumb-footer-num{font-size:4px;color:var(--mid-gray)}
 .bottom-action-bar{
   padding:14px 20px;border-top:1px solid var(--border);
   display:flex;gap:10px;flex-shrink:0;background:var(--white);
@@ -267,7 +266,6 @@ body{
   height:21px;display:flex;align-items:center;justify-content:center;flex-shrink:0;gap:4px;
 }
 .wysiwyg-footer img{height:10px;width:auto}
-.wysiwyg-footer-page{font-size:7px;color:var(--mid-gray);font-weight:500}
 
 /* Editor slots */
 .slot{
@@ -936,7 +934,6 @@ function renderThumb(page,idx){
       ${!isEmotional&&page.backSlot?.content?`<div style="flex:1;width:90%;background:${page.backSlot.content.type==='photo'?GRADIENTS[page.backSlot.content.photoId%15]:'var(--turquoise-light)'};border-radius:2px;min-height:16px;margin:2px 0"></div>`:''}
       <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:1px">
         <img src="assets/logo_heart_blue.png" style="height:6px;width:auto">
-        <div style="font-size:3.5px;color:var(--mid-gray)">· 12 ·</div>
       </div>
     </div>`;
   }
@@ -973,7 +970,6 @@ function renderThumb(page,idx){
   }
   let slotsHtml='';
   layout.slots.forEach((ls,si)=>{slotsHtml+=thumbSlot(page.slots[si],ls,page.layout)});
-  const pageNum=idx+1;
   return `<div class="thumb-page">
     <div class="thumb-header">
       <div class="thumb-header-family">${S.mag.family}</div>
@@ -982,7 +978,6 @@ function renderThumb(page,idx){
     <div class="thumb-content">${slotsHtml}</div>
     <div class="thumb-footer">
       <img src="assets/logo_heart_blue.png" style="height:6px;width:auto">
-      <div class="thumb-footer-num">· ${pageNum} ·</div>
     </div>
   </div>`;
 }
@@ -1182,7 +1177,6 @@ function renderContentPage(pg,pageIdx){
     const slot=pg.slots[si]||{content:null};
     slotsHtml+=`<div style="flex:${ls.h};min-height:0">${renderSlot(slot,si,pg.layout)}</div>`;
   });
-  const pageNum=pageIdx!==undefined?pageIdx+1:'';
   return `<div class="wysiwyg-header">
     <div class="wysiwyg-family">${S.mag.family}</div>
     <div class="wysiwyg-month">${S.mag.month.split(' ')[0]}</div>
@@ -1190,7 +1184,6 @@ function renderContentPage(pg,pageIdx){
   <div class="wysiwyg-content">${slotsHtml}</div>
   <div class="wysiwyg-footer">
     <img src="assets/logo_heart_blue.png">
-    <div class="wysiwyg-footer-page">· ${pageNum} ·</div>
   </div>`;
 }
 
