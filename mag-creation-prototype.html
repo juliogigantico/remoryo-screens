@@ -226,6 +226,7 @@ body{
 .bottom-action-bar{
   padding:14px 20px;border-top:1px solid var(--border);
   display:flex;gap:10px;flex-shrink:0;background:var(--white);
+  position:sticky;bottom:0;z-index:10;
 }
 .bottom-action-bar .btn{font-size:14px;padding:12px 8px}
 
@@ -348,6 +349,7 @@ body{
 .layout-opt{
   border:2px solid var(--border);border-radius:12px;padding:10px;cursor:pointer;
   text-align:center;transition:border-color .15s;-webkit-tap-highlight-color:transparent;
+  position:relative;
 }
 .layout-opt:active{transform:scale(.97)}
 .layout-opt--sel{border-color:var(--orange)}
@@ -464,22 +466,7 @@ body{
 .success-title{font-size:24px;font-weight:800}
 .success-sub{font-size:15px;color:var(--dark-gray);line-height:1.5}
 
-/* ═══════════════════════════════════════════════════════════
-   S18 — MAGAZINE VIEWER
-   ═══════════════════════════════════════════════════════════ */
-.viewer-wrap{flex:1;display:flex;flex-direction:column}
-.viewer-area{flex:1;display:flex;align-items:center;justify-content:center;padding:20px 12px;background:var(--light-gray)}
-.spread{display:flex;gap:2px;align-items:stretch}
-.spread-page{
-  flex:1;background:var(--white);aspect-ratio:210/297;
-  box-shadow:0 1px 4px rgba(0,0,0,.08);overflow:hidden;
-  display:flex;flex-direction:column;max-height:340px;
-}
-.spread-page--l{border-radius:4px 0 0 4px}
-.spread-page--r{border-radius:0 4px 4px 0}
-.spread-spine{width:2px;background:var(--border);flex-shrink:0}
-.viewer-nav{display:flex;align-items:center;justify-content:center;gap:16px;padding:12px}
-.viewer-indicator{font-size:13px;font-weight:600;color:var(--dark-gray)}
+/* Viewer styles removed — overview IS the preview */
 
 .caption-input{
   width:100%;padding:12px 14px;border-radius:var(--radius-sm);
@@ -510,6 +497,53 @@ body{
 @media(max-width:499px){
   .bottom-action-bar,.editor-toolbar{padding-bottom:calc(14px + env(safe-area-inset-bottom,0px))}
 }
+
+/* ═══════════════════════════════════════════════════════════
+   BACK PAGE EDITOR
+   ═══════════════════════════════════════════════════════════ */
+.back-variant-bar{display:flex;gap:6px;padding:6px 14px}
+.back-variant-btn{flex:1;padding:8px 6px;border-radius:10px;border:2px solid var(--border);text-align:center;cursor:pointer;font-size:10px;font-weight:600;color:var(--navy);transition:border-color .15s,background .15s;-webkit-tap-highlight-color:transparent}
+.back-variant-btn:active{transform:scale(.97)}
+.back-variant-btn--sel{border-color:var(--orange);background:var(--soft-orange)}
+.back-section{text-align:center;padding:4px 14px}
+.back-wordmark{font-size:13px;font-weight:800;color:var(--navy);letter-spacing:1px}
+.back-label{font-size:8px;font-weight:600;color:var(--dark-gray);opacity:.6}
+.back-authors{display:flex;gap:12px;justify-content:center;flex-wrap:wrap;padding:6px 14px}
+.back-author{display:flex;flex-direction:column;align-items:center;gap:2px;cursor:pointer}
+.back-author-circle{width:26px;height:26px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:var(--white)}
+.back-author-name{font-size:7px;color:var(--navy);font-weight:600}
+.back-quote{font-size:9px;color:var(--navy);text-align:center;padding:6px 16px;line-height:1.5;cursor:pointer;font-style:italic;border-radius:8px;transition:background .15s}
+.back-quote:hover{background:var(--light-gray)}
+.back-bdays{padding:4px 14px;text-align:center}
+.back-bday-title{font-size:8px;font-weight:800;color:var(--orange);text-transform:uppercase;margin-bottom:4px}
+.back-bday-entry{font-size:8px;color:var(--navy);margin-bottom:2px}
+.back-bday-name{font-weight:700;color:var(--blue)}
+.back-bday-date{opacity:.6}
+.back-footer{padding:6px 14px;text-align:center}
+.back-footer-heart{font-size:14px;margin-bottom:2px}
+.back-footer-url{font-size:7px;color:var(--navy);opacity:.25;font-weight:600}
+.back-manage-link{font-size:10px;color:var(--blue);font-weight:600;cursor:pointer;padding:4px;text-align:center}
+.back-manage-link:hover{text-decoration:underline}
+.back-photo-slot{min-height:80px;border-radius:6px;overflow:hidden;cursor:pointer;display:flex;align-items:center;justify-content:center;margin:4px 14px;position:relative}
+
+/* 3-FOTOS GRID */
+.slot-grid3{display:grid;grid-template-columns:1fr 1fr;gap:4px;height:100%}
+.slot-grid3>:first-child{grid-column:1/-1}
+
+/* LAYOUT PICKER IMPROVEMENTS */
+.layout-opt--wide{grid-column:1/-1}
+.layout-preview--row{flex-direction:row}
+
+/* MEMBER MANAGEMENT */
+.member-list{max-height:320px;overflow-y:auto}
+.member-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
+.member-row:last-child{border-bottom:none}
+.member-circle{width:36px;height:36px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:700;color:var(--white);flex-shrink:0}
+.member-info{flex:1;min-width:0}
+.member-name{font-size:14px;font-weight:600}
+.member-meta{font-size:12px;color:var(--mid-gray)}
+.member-badge{font-size:10px;padding:2px 8px;border-radius:6px;background:var(--blue-light);color:var(--blue);font-weight:600}
+.member-badge--ext{background:var(--soft-orange);color:var(--orange)}
 </style>
 </head>
 <body>
@@ -545,6 +579,22 @@ const GRADIENTS = [
   'linear-gradient(150deg,#c8c8e8,#d8d8f0 50%,#e8ddd1)',
 ];
 
+const PHOTOS = GRADIENTS.map((g,i)=>({
+  id:i, gradient:g,
+  orientation:[0,3,7,10,13].includes(i)?'portrait':'landscape'
+}));
+
+const MEMBERS_DEFAULT = [
+  {id:0,name:'Mama',initial:'M',color:'#82B7D8',birthday:null,isApp:true},
+  {id:1,name:'Papa',initial:'P',color:'#B8E0E0',birthday:null,isApp:true},
+  {id:2,name:'Tante Lisa',initial:'L',color:'#E8DDD1',birthday:'04-22',isApp:true},
+  {id:3,name:'Sarah',initial:'S',color:'#FFA631',birthday:'07-10',isApp:true},
+  {id:4,name:'Oma Hilde',initial:'H',color:'#D4E8F2',birthday:'03-15',isApp:false},
+  {id:5,name:'Opa Werner',initial:'W',color:'#94A3B3',birthday:'11-28',isApp:false},
+];
+
+const MONTHS_DE=['Januar','Februar','März','April','Mai','Juni','Juli','August','September','Oktober','November','Dezember'];
+
 const NAMES = ['Mama','Papa','Tante Lisa','Onkel Tom','Sarah','Max','Oma Hilde','Julia'];
 const CAPTIONS = [
   'Schöner Nachmittag im Park 🌳','Familienessen am Sonntag','Ausflug zum See',
@@ -573,10 +623,13 @@ const ENT_CATS = [
 ];
 
 const LAYOUTS = [
-  {id:'full',name:'Ganzseitig',slots:[{h:1}],desc:'1 Element'},
-  {id:'half',name:'Zwei Hälften',slots:[{h:.5},{h:.5}],desc:'2 Elemente'},
-  {id:'two-one',name:'⅔ + ⅓',slots:[{h:.65},{h:.35}],desc:'Groß + Klein'},
-  {id:'one-two',name:'⅓ + ⅔',slots:[{h:.35},{h:.65}],desc:'Klein + Groß'},
+  {id:'1-foto',name:'1 Foto',slots:[{h:1,accepts:'photo'}]},
+  {id:'2-fotos',name:'2 Fotos',slots:[{h:.5,accepts:'photo'},{h:.5,accepts:'photo'}]},
+  {id:'foto-ent',name:'Foto + Rätsel',slots:[{h:.5,accepts:'photo'},{h:.5,accepts:'entertainment'}]},
+  {id:'ent-foto',name:'Rätsel + Foto',slots:[{h:.5,accepts:'entertainment'},{h:.5,accepts:'photo'}]},
+  {id:'1-ent',name:'1 Rätsel',slots:[{h:1,accepts:'entertainment'}]},
+  {id:'2-ent',name:'2 Rätsel',slots:[{h:.5,accepts:'entertainment'},{h:.5,accepts:'entertainment'}]},
+  {id:'3-fotos',name:'3 Fotos',grid:true,slots:[{h:.5,w:1,accepts:'photo'},{h:.5,w:.5,accepts:'photo'},{h:.5,w:.5,accepts:'photo'}]},
 ];
 
 /* ═══════════════════════════════════════════════════════════
@@ -617,7 +670,7 @@ const S = {
   mag:{title:'Unser Familienmonat',month:'März 2026',family:'Familie Müller',pages:[]},
   editor:{pageIdx:0},
   reorder:{picked:null},
-  viewer:{spread:0},
+  members:MEMBERS_DEFAULT.map(m=>({...m})),
 };
 
 /* ═══════════════════════════════════════════════════════════
@@ -631,7 +684,7 @@ function nav(screen,pushCurrent=true){
 function goBack(){
   if(S.navStack.length){S.screen=S.navStack.pop();render()}
 }
-function render(){
+function render(noScroll){
   const el=document.getElementById('screen');
   hideSheet();hideModal();
   switch(S.screen){
@@ -641,10 +694,9 @@ function render(){
     case 'editor':el.innerHTML=renderEditor();break;
     case 'overview':el.innerHTML=renderOverview();break;
     case 'reorder':el.innerHTML=renderReorder();break;
-    case 'viewer':el.innerHTML=renderViewer();break;
     case 'save-success':el.innerHTML=renderSaveSuccess();break;
   }
-  document.getElementById('screen').scrollTop=0;
+  if(!noScroll) el.scrollTop=0;
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -679,39 +731,65 @@ function hideModal(){
 function initMagazine(mode){
   S.mode=mode;
   S.mag.pages=[];
-  // Photos to distribute (selected or all 15)
-  const photos=S.selectedPhotos.length?[...S.selectedPhotos]:[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14];
-  let photoIdx=0;
-  function nextPhoto(){
-    if(photoIdx>=photos.length) return null;
-    const pid=photos[photoIdx++];
+  const photoIds=S.selectedPhotos.length?[...S.selectedPhotos]:[...Array(15).keys()];
+  let pq=[...photoIds];
+  const entRotation=['crossword','jokes','motivation','songs','quiz','poems','words','numbers'];
+  let entIdx=0;
+  function takePhoto(){
+    if(!pq.length) return null;
+    const pid=pq.shift();
     return {type:'photo',photoId:pid,caption:CAPTIONS[pid%CAPTIONS.length],pos:{x:0,y:0,z:1}};
   }
-  // Entertainment rotation for auto
-  const entCatIds=['crossword','jokes','songs','motivation','poems','quiz','words','numbers'];
-  let entIdx=0;
+  function takeEnt(){
+    const catId=entRotation[entIdx%entRotation.length];
+    entIdx++;
+    return {type:'entertainment',catId,itemIdx:0};
+  }
   // Page 0 = Cover
-  const coverPhoto=mode==='auto'?nextPhoto():null;
-  S.mag.pages.push({type:'cover',layout:'full',slots:[{content:coverPhoto}]});
-  // Pages 1-10 = Content
-  for(let i=1;i<=10;i++){
-    const useEnt=mode==='auto'&&(i%4===0); // every 4th page gets entertainment
-    const layout=useEnt?'half':'full';
-    const layoutDef=LAYOUTS.find(l=>l.id===layout);
-    const slots=layoutDef.slots.map((_,si)=>{
-      if(mode!=='auto') return {content:null};
-      if(useEnt&&si===1){
-        const catId=entCatIds[entIdx%entCatIds.length];
-        entIdx++;
-        return {content:{type:'entertainment',catId,itemIdx:0}};
+  S.mag.pages.push({type:'cover',layout:'full',slots:[{content:mode==='auto'?takePhoto():null}]});
+  if(mode==='auto'){
+    // Smart layout sequence — adapts to photo count
+    const sequence=['1-foto','2-fotos','1-foto','foto-ent','2-fotos','3-fotos','ent-foto','1-foto','2-fotos','1-foto'];
+    for(let i=0;i<10;i++){
+      let lid=sequence[i];
+      const ldef=LAYOUTS.find(l=>l.id===lid);
+      const photoNeeded=ldef.slots.filter(s=>s.accepts==='photo').length;
+      // Downgrade if not enough photos
+      if(pq.length<photoNeeded){
+        if(pq.length>=1) lid='1-foto';
+        else lid='1-ent';
       }
-      const p=nextPhoto();
-      return {content:p};
-    });
-    S.mag.pages.push({type:'content',layout,slots});
+      const finalL=LAYOUTS.find(l=>l.id===lid);
+      const slots=finalL.slots.map(s=>{
+        if(s.accepts==='photo'){
+          const p=takePhoto();
+          return {content:p||takeEnt()};
+        }
+        return {content:takeEnt()};
+      });
+      S.mag.pages.push({type:'content',layout:lid,slots});
+    }
+    // Ensure at least 1 entertainment
+    const hasEnt=S.mag.pages.some(p=>p.type==='content'&&p.slots.some(s=>s.content?.type==='entertainment'));
+    if(!hasEnt){
+      const p4=S.mag.pages[4];
+      if(p4&&p4.type==='content'){
+        const oldFirst=p4.slots[0]?.content;
+        p4.layout='foto-ent';
+        p4.slots=[{content:oldFirst},{content:takeEnt()}];
+      }
+    }
+  } else {
+    for(let i=0;i<10;i++){
+      S.mag.pages.push({type:'content',layout:'1-foto',slots:[{content:null}]});
+    }
   }
   // Page 11 = Back
-  S.mag.pages.push({type:'back',layout:'full',slots:[]});
+  S.mag.pages.push({
+    type:'back',variant:'emotional',
+    quote:'\u201eFamilie ist, wo das Leben seinen Anfang nimmt und die Liebe niemals endet.\u201c',
+    backSlot:{content:null}
+  });
 }
 
 function getFilledCount(){
@@ -849,27 +927,40 @@ function renderThumb(page,idx){
     </div>`;
   }
   if(page.type==='back'){
-    return `<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;background:var(--light-gray)">
-      <div style="font-size:7px;font-weight:700;color:var(--mid-gray)">Rückseite</div>
-      <div style="font-size:6px;color:var(--mid-gray)">Auto-generiert</div>
+    const isEmotional=page.variant==='emotional';
+    return `<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px;${isEmotional?'background:linear-gradient(175deg,#FBF9F6,#EDE7DF)':'background:var(--white)'}">
+      <div style="font-size:6px;font-weight:800;color:var(--navy);letter-spacing:.5px">remoryo</div>
+      <div style="display:flex;gap:4px">${S.members.slice(0,3).map(m=>`<div style="width:10px;height:10px;border-radius:5px;background:${m.color};display:flex;align-items:center;justify-content:center;font-size:4px;font-weight:700;color:white">${m.initial}</div>`).join('')}</div>
+      ${isEmotional?`<div style="font-size:4px;font-style:italic;color:var(--navy);text-align:center;padding:0 4px">${esc(page.quote||'').substring(0,40)}...</div>`:''}
+      ${!isEmotional&&page.backSlot?.content?`<div style="flex:1;width:100%;background:${page.backSlot.content.type==='photo'?GRADIENTS[page.backSlot.content.photoId%15]:'var(--turquoise-light)'};border-radius:2px;min-height:20px"></div>`:''}
+      <div style="font-size:4px;color:var(--mid-gray)">♥ remoryo.de</div>
     </div>`;
   }
   const layout=LAYOUTS.find(l=>l.id===page.layout)||LAYOUTS[0];
-  let slotsHtml='';
-  layout.slots.forEach((ls,si)=>{
-    const slot=page.slots[si];
+  function thumbSlot(slot,ls){
     const h=(ls.h*100)+'%';
     if(!slot||!slot.content){
-      slotsHtml+=`<div class="page-block page-block--empty" style="height:${h}"></div>`;
+      return `<div class="page-block page-block--empty" style="height:${h}"></div>`;
     } else if(slot.content.type==='photo'){
-      slotsHtml+=`<div class="page-block page-block--photo" style="height:${h};background:${GRADIENTS[slot.content.photoId%15]}"></div>`;
+      return `<div class="page-block page-block--photo" style="height:${h};background:${GRADIENTS[slot.content.photoId%15]}"></div>`;
     } else if(slot.content.type==='entertainment'){
       const cat=ENT_CATS.find(c=>c.id===slot.content.catId);
-      slotsHtml+=`<div class="page-block page-block--ent" style="height:${h}"><span style="font-size:10px">${cat?cat.icon:'🧩'}</span></div>`;
+      return `<div class="page-block page-block--ent" style="height:${h}"><span style="font-size:10px">${cat?cat.icon:'🧩'}</span></div>`;
     } else if(slot.content.type==='freetext'){
-      slotsHtml+=`<div class="page-block page-block--text" style="height:${h}"><span style="font-size:6px;color:var(--mid-gray)">Aa</span></div>`;
+      return `<div class="page-block page-block--text" style="height:${h}"><span style="font-size:6px;color:var(--mid-gray)">Aa</span></div>`;
     }
-  });
+    return '';
+  }
+  if(layout.grid){
+    // 3-fotos: top full-width + bottom two half-width
+    return `<div style="width:100%;height:100%;display:grid;grid-template-columns:1fr 1fr;gap:2px;padding:3px">
+      <div class="page-block ${page.slots[0]?.content?'page-block--photo':'page-block--empty'}" style="grid-column:1/-1;${page.slots[0]?.content?.type==='photo'?'background:'+GRADIENTS[page.slots[0].content.photoId%15]:''}"></div>
+      <div class="page-block ${page.slots[1]?.content?'page-block--photo':'page-block--empty'}" style="${page.slots[1]?.content?.type==='photo'?'background:'+GRADIENTS[page.slots[1].content.photoId%15]:''}"></div>
+      <div class="page-block ${page.slots[2]?.content?'page-block--photo':'page-block--empty'}" style="${page.slots[2]?.content?.type==='photo'?'background:'+GRADIENTS[page.slots[2].content.photoId%15]:''}"></div>
+    </div>`;
+  }
+  let slotsHtml='';
+  layout.slots.forEach((ls,si)=>{slotsHtml+=thumbSlot(page.slots[si],ls)});
   return `<div style="width:100%;height:100%;display:flex;flex-direction:column;padding:3px;gap:2px">${slotsHtml}</div>`;
 }
 
@@ -884,8 +975,7 @@ function renderOverview(){
   S.mag.pages.forEach((p,i)=>{
     const label=i===0?'Cover':i===11?'S.12':`S.${i+1}`;
     const isEmpty=p.type==='content'&&p.slots.every(s=>!s.content);
-    const isBack=p.type==='back';
-    grid+=`<div class="page-thumb ${isEmpty?'page-thumb--empty':''}" style="${isBack?'opacity:.7;cursor:default':''}" onclick="${isBack?'':(`openEditor(${i})`)}">
+    grid+=`<div class="page-thumb ${isEmpty?'page-thumb--empty':''}" onclick="openEditor(${i})">
       ${renderThumb(p,i)}
       <div class="page-number">${label}</div>
     </div>`;
@@ -902,20 +992,17 @@ function renderOverview(){
           <span style="font-size:13px;font-weight:600;color:var(--dark-gray)">${filled}/${total} Slots</span>
         </div>
         <div class="progress-bar"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
-        ${pct<100?'<div class="progress-hint">Noch '+( total-filled)+' Slots zu füllen</div>':''}
+        ${pct<100?'<div class="progress-hint">Noch '+(total-filled)+' Slots zu füllen</div>':''}
       </div>
     </div>
     <div class="page-grid">${grid}</div>
     <div class="bottom-action-bar">
       <div class="btn btn-outline" onclick="nav('reorder')" style="flex:1">${IC.reorder} Umsortieren</div>
-      <div class="btn btn-outline" onclick="openViewer()" style="flex:1">${IC.eye} Vorschau</div>
       <div class="btn btn-primary" onclick="trySave()" style="flex:1.2">${IC.save} Speichern</div>
     </div>
-    <div style="height:4px"></div>
   </div>`;
 }
 function openEditor(idx){S.editor.pageIdx=idx;nav('editor')}
-function openViewer(){S.viewer.spread=0;nav('viewer')}
 
 /* ═══════════════════════════════════════════════════════════
    S4-S8 — WYSIWYG EDITOR
@@ -978,29 +1065,85 @@ function renderCoverPage(pg){
 }
 
 function renderBackPage(){
-  return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center">
-    <div style="font-size:24px;margin-bottom:8px">♥</div>
-    <div style="font-size:12px;font-weight:800;color:var(--navy);margin-bottom:4px">remoryo</div>
-    <div style="font-size:8px;color:var(--mid-gray);margin-bottom:16px">Fotoheft für die Familie</div>
-    <div style="font-size:9px;font-weight:700;color:var(--navy);margin-bottom:6px">Autoren dieses Hefts</div>
-    <div style="display:flex;gap:12px;margin-bottom:16px">
-      ${['M','P','S'].map((l,i)=>`<div style="display:flex;flex-direction:column;align-items:center;gap:2px">
-        <div style="width:24px;height:24px;border-radius:12px;background:var(--blue);display:flex;align-items:center;justify-content:center;font-size:9px;font-weight:700;color:white">${l}</div>
-        <div style="font-size:7px;color:var(--dark-gray)">${NAMES[i]}</div>
-      </div>`).join('')}
-    </div>
-    <div style="font-size:8px;color:var(--mid-gray)">Automatisch generierte Seite</div>
+  const pg=S.mag.pages[S.editor.pageIdx];
+  const isEmotional=pg.variant==='emotional';
+  const authors=S.members.filter(m=>m.isApp);
+  const allMembers=S.members;
+  const bdayMembers=allMembers.filter(m=>m.birthday);
+  function fmtBday(b){const[mm,dd]=b.split('-');return `${parseInt(dd)}. ${MONTHS_DE[parseInt(mm)-1]}`}
+  const bgStyle=isEmotional?'background:linear-gradient(175deg,#FFFFFF 0%,#F8F6F4 50%,#EDE7DF 100%)':'background:var(--white)';
+
+  let contentHtml='';
+  // Variant toggle
+  contentHtml+=`<div class="back-variant-bar">
+    <div class="back-variant-btn ${isEmotional?'back-variant-btn--sel':''}" onclick="setBackVariant('emotional')">💬 Emotional</div>
+    <div class="back-variant-btn ${!isEmotional?'back-variant-btn--sel':''}" onclick="setBackVariant('foto')">📸 Foto-Rückseite</div>
+  </div>`;
+  // Wordmark
+  contentHtml+=`<div class="back-section" style="padding-top:10px"><div class="back-wordmark">remoryo</div></div>`;
+  // Authors
+  contentHtml+=`<div class="back-section"><div class="back-label">Gestaltet von</div></div>`;
+  contentHtml+=`<div class="back-authors">${authors.map(m=>`<div class="back-author" onclick="showMemberManager()">
+    <div class="back-author-circle" style="background:${m.color}">${m.initial}</div>
+    <div class="back-author-name">${esc(m.name)}</div>
+  </div>`).join('')}</div>`;
+  if(isEmotional){
+    // Quote
+    contentHtml+=`<div class="back-quote" onclick="editBackQuote()">${esc(pg.quote||'Tippe hier für einen Spruch...')}</div>`;
+  } else {
+    // Photo slot
+    const bs=pg.backSlot;
+    if(bs&&bs.content&&bs.content.type==='photo'){
+      const bg=GRADIENTS[bs.content.photoId%15];
+      contentHtml+=`<div class="back-photo-slot" style="background:${bg};flex:1" onclick="onBackSlotTap()">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+        <div class="slot-edit-badge">${IC.edit}</div>
+      </div>`;
+    } else {
+      contentHtml+=`<div class="back-photo-slot" style="background:var(--light-gray);border:2px dashed var(--border-alt);flex:1" onclick="onBackSlotTap()">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:4px">
+          <div class="slot-empty-icon">${IC.plus}</div>
+          <div style="font-size:9px;color:var(--mid-gray)">Foto hinzufügen</div>
+        </div>
+      </div>`;
+    }
+  }
+  // Birthdays
+  if(bdayMembers.length>0){
+    contentHtml+=`<div class="back-bdays">
+      <div class="back-bday-title">🎂 Bald Geburtstag</div>
+      ${isEmotional?
+        bdayMembers.slice(0,3).map(m=>`<div class="back-bday-entry"><span class="back-bday-name">${esc(m.name)}</span> — <span class="back-bday-date">${fmtBday(m.birthday)}</span></div>`).join('')
+        :`<div class="back-bday-entry">${bdayMembers.slice(0,3).map(m=>`<span class="back-bday-name">${esc(m.name)}</span> ${fmtBday(m.birthday)}`).join(' · ')}</div>`
+      }
+    </div>`;
+  }
+  // Manage link
+  contentHtml+=`<div class="back-manage-link" onclick="showMemberManager()">Mitglieder verwalten</div>`;
+  // Footer
+  contentHtml+=`<div class="back-footer"><div class="back-footer-heart">♥</div><div class="back-footer-url">www.remoryo.de</div></div>`;
+
+  return `<div style="flex:1;display:flex;flex-direction:column;${bgStyle}">
+    ${contentHtml}
   </div>`;
 }
 
 function renderContentPage(pg){
   const layout=LAYOUTS.find(l=>l.id===pg.layout)||LAYOUTS[0];
   let slotsHtml='';
-  layout.slots.forEach((ls,si)=>{
-    const slot=pg.slots[si]||{content:null};
-    const flexVal=ls.h;
-    slotsHtml+=`<div style="flex:${flexVal};min-height:0">${renderSlot(slot,si)}</div>`;
-  });
+  if(layout.grid){
+    // 3-fotos: CSS grid layout
+    slotsHtml=`<div class="slot-grid3">
+      <div style="min-height:0">${renderSlot(pg.slots[0]||{content:null},0)}</div>
+      <div style="min-height:0">${renderSlot(pg.slots[1]||{content:null},1)}</div>
+      <div style="min-height:0">${renderSlot(pg.slots[2]||{content:null},2)}</div>
+    </div>`;
+  } else {
+    layout.slots.forEach((ls,si)=>{
+      const slot=pg.slots[si]||{content:null};
+      slotsHtml+=`<div style="flex:${ls.h};min-height:0">${renderSlot(slot,si)}</div>`;
+    });
+  }
   return `<div class="wysiwyg-header">
     <div class="wysiwyg-family">${S.mag.family}</div>
     <div class="wysiwyg-month">${S.mag.month.split(' ')[0]}</div>
@@ -1244,19 +1387,36 @@ function selectEntForSlot(si,catId,itemIdx){
 function showLayoutPicker(){
   const pg=S.mag.pages[S.editor.pageIdx];
   if(pg.type!=='content') return;
+  const puzzleIcon='<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--dark-gray)" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h7v7"/></svg>';
+  function layoutPreview(l){
+    if(l.grid){
+      return `<div class="layout-preview layout-preview--row" style="min-height:50px;flex-wrap:wrap;gap:2px">
+        <div class="layout-block layout-block--p" style="flex:1 1 100%"></div>
+        <div class="layout-block layout-block--p" style="flex:1 1 45%"></div>
+        <div class="layout-block layout-block--p" style="flex:1 1 45%"></div>
+      </div>`;
+    }
+    let blocks='';
+    l.slots.forEach(s=>{
+      const cls=s.accepts==='entertainment'?'layout-block--e':'layout-block--p';
+      const icon=s.accepts==='entertainment'?puzzleIcon:'';
+      blocks+=`<div class="layout-block ${cls}" style="flex:${s.h}">${icon}</div>`;
+    });
+    return `<div class="layout-preview">${blocks}</div>`;
+  }
   let opts='';
   LAYOUTS.forEach(l=>{
     const sel=pg.layout===l.id;
-    let blocks='';
-    l.slots.forEach(s=>{blocks+=`<div class="layout-block layout-block--p" style="flex:${s.h}"></div>`});
-    opts+=`<div class="layout-opt ${sel?'layout-opt--sel':''}" onclick="changeLayout('${l.id}')">
-      <div class="layout-preview">${blocks}</div>
+    const wide=l.grid?'layout-opt--wide':'';
+    opts+=`<div class="layout-opt ${sel?'layout-opt--sel':''} ${wide}" onclick="changeLayout('${l.id}')">
+      ${sel?`<div style="position:absolute;top:6px;right:6px;width:18px;height:18px;border-radius:9px;background:var(--orange);display:flex;align-items:center;justify-content:center">${IC.check}</div>`:''}
+      ${layoutPreview(l)}
       <div class="layout-label">${l.name}</div>
     </div>`;
   });
   showSheet(`
-    <div class="sheet-title">Layout ändern</div>
-    <div class="sheet-sub">${pg.layout?'Aktuell: '+LAYOUTS.find(l=>l.id===pg.layout)?.name:''}</div>
+    <div class="sheet-title">Layout wählen</div>
+    <div class="sheet-sub">Seite ${S.editor.pageIdx+1} · ${LAYOUTS.find(l=>l.id===pg.layout)?.name||''}</div>
     <div class="layout-grid">${opts}</div>
     <div class="btn btn-text-gray" onclick="hideSheet()">Abbrechen</div>
   `);
@@ -1265,9 +1425,19 @@ function changeLayout(layoutId){
   const pg=S.mag.pages[S.editor.pageIdx];
   const newLayout=LAYOUTS.find(l=>l.id===layoutId);
   if(!newLayout) return;
-  const oldSlots=pg.slots;
+  // Preserve existing slot contents where possible
+  const oldContents=pg.slots.map(s=>s?.content||null);
   pg.layout=layoutId;
-  pg.slots=newLayout.slots.map((_,i)=>oldSlots[i]||{content:null});
+  pg.slots=newLayout.slots.map((s,i)=>{
+    // Try to reuse old content, matching by type preference
+    const old=oldContents[i];
+    if(old&&((s.accepts==='photo'&&old.type==='photo')||(s.accepts==='entertainment'&&old.type==='entertainment')||old.type==='freetext')){
+      return {content:old};
+    }
+    // Fallback: just carry forward whatever was there
+    if(old&&i<oldContents.length) return {content:old};
+    return {content:null};
+  });
   hideSheet();render();
 }
 
@@ -1450,15 +1620,15 @@ function renderReorder(){
   </div>`;
 }
 function reorderTap(i){
-  if(S.reorder.picked===null){S.reorder.picked=i;render();return}
-  if(S.reorder.picked===i){S.reorder.picked=null;render();return}
+  if(S.reorder.picked===null){S.reorder.picked=i;render(true);return}
+  if(S.reorder.picked===i){S.reorder.picked=null;render(true);return}
   // swap pages
   const pages=S.mag.pages;
   const temp=pages[S.reorder.picked];
   pages[S.reorder.picked]=pages[i];
   pages[i]=temp;
   S.reorder.picked=null;
-  render();
+  render(true);
 }
 
 /* ═══════════════════════════════════════════════════════════
@@ -1496,37 +1666,135 @@ function renderSaveSuccess(){
 }
 
 /* ═══════════════════════════════════════════════════════════
-   S18 — MAGAZINE VIEWER
+   BACK PAGE EDITOR FUNCTIONS
    ═══════════════════════════════════════════════════════════ */
-function renderViewer(){
-  const sp=S.viewer.spread;
-  const maxSp=Math.ceil(S.mag.pages.length/2)-1;
-  const leftIdx=sp*2;
-  const rightIdx=sp*2+1;
-  const leftPage=S.mag.pages[leftIdx];
-  const rightPage=S.mag.pages[rightIdx];
-
-  return `<div class="viewer-wrap fade-in">
-    <div class="sec-header">
-      <div class="sec-back" onclick="goBack()">${IC.back}</div>
-      <div class="sec-title">Magazin-Vorschau</div>
-    </div>
-    <div class="viewer-area">
-      <div class="spread">
-        <div class="spread-page spread-page--l" style="min-height:200px;max-width:170px">${renderThumb(leftPage,leftIdx)}</div>
-        <div class="spread-spine"></div>
-        ${rightPage?`<div class="spread-page spread-page--r" style="min-height:200px;max-width:170px">${renderThumb(rightPage,rightIdx)}</div>`:''}
+function setBackVariant(v){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  pg.variant=v;
+  render();
+}
+function editBackQuote(){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  showSheet(`
+    <div class="sheet-title">Spruch bearbeiten</div>
+    <textarea class="caption-input" id="quoteInput" maxlength="150" placeholder="Ein Spruch oder eine Nachricht..." style="min-height:100px">${esc(pg.quote||'')}</textarea>
+    <div class="char-counter"><span id="quoteCount">${(pg.quote||'').length}</span>/150</div>
+    <div class="btn btn-primary" style="margin-top:12px" onclick="saveBackQuote()">Übernehmen</div>
+  `);
+  setTimeout(()=>{const inp=document.getElementById('quoteInput');if(inp){inp.focus();inp.addEventListener('input',()=>{document.getElementById('quoteCount').textContent=inp.value.length})}},300);
+}
+function saveBackQuote(){
+  const inp=document.getElementById('quoteInput');
+  if(inp) S.mag.pages[S.editor.pageIdx].quote=inp.value;
+  hideSheet();render();
+}
+function onBackSlotTap(){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  if(pg.backSlot&&pg.backSlot.content){
+    showSheet(`
+      <div class="sheet-title">Foto bearbeiten</div>
+      <div class="action-list">
+        <div class="action-row" onclick="hideSheet();setTimeout(()=>showBackPhotoPicker(),200)">
+          <div class="action-icon" style="background:var(--soft-orange)">${IC.swap}</div>
+          <div><div class="action-label">Foto tauschen</div></div>
+        </div>
+        <div class="action-row action-row--danger" onclick="S.mag.pages[S.editor.pageIdx].backSlot={content:null};hideSheet();render()">
+          <div class="action-icon" style="background:var(--soft-red)">${IC.trash}</div>
+          <div><div class="action-label">Foto entfernen</div></div>
+        </div>
       </div>
-    </div>
-    <div class="viewer-nav">
-      <button class="toolbar-arrow" ${sp<=0?'disabled':''} onclick="S.viewer.spread--;render()">${IC.chevL}</button>
-      <div class="viewer-indicator">Seite ${leftIdx+1}${rightPage?'–'+(rightIdx+1):''} von ${S.mag.pages.length}</div>
-      <button class="toolbar-arrow" ${sp>=maxSp?'disabled':''} onclick="S.viewer.spread++;render()">${IC.chevR}</button>
-    </div>
-    <div class="bottom-action-bar" style="justify-content:center">
-      <div class="btn btn-outline" onclick="goBack()" style="max-width:200px">Zurück zur Übersicht</div>
-    </div>
-  </div>`;
+    `);
+  } else {
+    showBackPhotoPicker();
+  }
+}
+function showBackPhotoPicker(){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  const currentId=pg.backSlot?.content?.photoId??-1;
+  let grid='';
+  for(let i=0;i<15;i++){
+    const isCur=i===currentId;
+    grid+=`<div class="photo-cell ${isCur?'photo-cell--sel':''}" style="border-radius:8px" onclick="selectBackPhoto(${i})">
+      <div class="photo-cell-inner" style="background:${GRADIENTS[i]};border-radius:8px">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+      </div>
+      ${isCur?'<div class="photo-check photo-check--on">'+IC.check+'</div>':''}
+    </div>`;
+  }
+  showSheet(`
+    <div class="sheet-title">Foto wählen</div>
+    <div class="photo-grid" style="border-radius:12px;overflow:hidden">${grid}</div>
+  `);
+}
+function selectBackPhoto(pid){
+  S.mag.pages[S.editor.pageIdx].backSlot={content:{type:'photo',photoId:pid,caption:'',pos:{x:0,y:0,z:1}}};
+  hideSheet();render();
+}
+function showMemberManager(){
+  let rows='';
+  S.members.forEach((m,i)=>{
+    const bdayStr=m.birthday?fmtBdayFull(m.birthday):'—';
+    const badge=m.isApp?'<span class="member-badge">App</span>':'<span class="member-badge member-badge--ext">Extern</span>';
+    rows+=`<div class="member-row">
+      <div class="member-circle" style="background:${m.color}">${m.initial}</div>
+      <div class="member-info">
+        <div class="member-name">${esc(m.name)}</div>
+        <div class="member-meta">🎂 ${bdayStr} · ${badge}</div>
+      </div>
+      <div style="cursor:pointer;padding:8px" onclick="editMember(${i})">${IC.edit}</div>
+    </div>`;
+  });
+  showSheet(`
+    <div class="sheet-title">Familienmitglieder</div>
+    <div class="sheet-sub">Verwalte Namen, Geburtstage und externe Mitglieder</div>
+    <div class="member-list">${rows}</div>
+    <div class="btn btn-outline" style="margin-top:12px" onclick="addMember()">+ Mitglied hinzufügen</div>
+    <div class="btn btn-text-gray" style="margin-top:8px" onclick="hideSheet();render()">Fertig</div>
+  `);
+}
+function fmtBdayFull(b){if(!b)return'—';const[mm,dd]=b.split('-');return `${parseInt(dd)}. ${MONTHS_DE[parseInt(mm)-1]}`}
+function editMember(idx){
+  const m=S.members[idx];
+  hideSheet();
+  setTimeout(()=>{
+    showSheet(`
+      <div class="sheet-title">${esc(m.name)} bearbeiten</div>
+      <div style="margin-bottom:12px">
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px">Name</label>
+        <input class="caption-input" id="memName" style="min-height:auto;height:44px" value="${esc(m.name)}">
+      </div>
+      <div style="margin-bottom:12px">
+        <label style="font-size:13px;font-weight:600;display:block;margin-bottom:4px">Geburtstag (TT.MM)</label>
+        <input class="caption-input" id="memBday" style="min-height:auto;height:44px" placeholder="z.B. 15.03" value="${m.birthday?m.birthday.split('-').reverse().join('.'):''}">
+      </div>
+      <div class="btn btn-primary" onclick="saveMember(${idx})">Speichern</div>
+      ${!m.isApp?`<div class="btn btn-text" style="color:var(--red);margin-top:8px" onclick="removeMember(${idx})">Entfernen</div>`:''}
+      <div class="btn btn-text-gray" style="margin-top:4px" onclick="hideSheet();setTimeout(()=>showMemberManager(),200)">Abbrechen</div>
+    `);
+  },200);
+}
+function saveMember(idx){
+  const name=document.getElementById('memName')?.value||S.members[idx].name;
+  const bdayRaw=document.getElementById('memBday')?.value||'';
+  S.members[idx].name=name;
+  S.members[idx].initial=name[0]?.toUpperCase()||'?';
+  if(bdayRaw){
+    const parts=bdayRaw.split('.');
+    if(parts.length===2) S.members[idx].birthday=parts[1].padStart(2,'0')+'-'+parts[0].padStart(2,'0');
+  } else {
+    S.members[idx].birthday=null;
+  }
+  hideSheet();setTimeout(()=>showMemberManager(),200);
+}
+function addMember(){
+  const colors=['#82B7D8','#B8E0E0','#E8DDD1','#FFA631','#D4E8F2','#94A3B3','#E8C8D8','#B8D8D8'];
+  const newId=S.members.length;
+  S.members.push({id:newId,name:'Neues Mitglied',initial:'N',color:colors[newId%colors.length],birthday:null,isApp:false});
+  hideSheet();setTimeout(()=>editMember(newId),200);
+}
+function removeMember(idx){
+  S.members.splice(idx,1);
+  hideSheet();setTimeout(()=>showMemberManager(),200);
 }
 
 /* ═══════════════════════════════════════════════════════════
