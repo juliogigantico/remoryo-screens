@@ -250,9 +250,10 @@ body{
 .wysiwyg-month{font-size:17px;font-weight:800;color:var(--orange)}
 .wysiwyg-content{flex:1;padding:0 14px;display:flex;flex-direction:column;gap:6px;min-height:0}
 .wysiwyg-footer{
-  height:22px;display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  height:30px;display:flex;flex-direction:column;align-items:center;justify-content:center;flex-shrink:0;gap:1px;
 }
-.wysiwyg-footer span{font-size:8px;color:var(--mid-gray)}
+.wysiwyg-footer-heart{color:var(--blue);font-size:10px;line-height:1}
+.wysiwyg-footer-page{font-size:7px;color:var(--mid-gray);font-weight:500}
 
 /* Editor slots */
 .slot{
@@ -296,6 +297,11 @@ body{
   padding:10px;
 }
 .slot-text-content{font-size:9px;color:var(--dark-gray);text-align:center;line-height:1.4}
+.slot-photo--side{flex-direction:row}
+.slot-caption-side{
+  width:35%;background:var(--caption-warm);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:4px;padding:6px;text-align:center;
+}
 .slot-edit-badge{
   position:absolute;top:4px;right:4px;width:22px;height:22px;border-radius:11px;
   background:rgba(255,255,255,.9);box-shadow:0 1px 4px rgba(0,0,0,.12);
@@ -436,20 +442,6 @@ body{
 .crop-btn:active{background:rgba(255,255,255,.3)}
 .crop-actions{display:flex;gap:12px;margin-top:24px}
 .crop-actions .btn{width:auto;min-width:130px}
-
-/* ═══════════════════════════════════════════════════════════
-   S15 — REORDER
-   ═══════════════════════════════════════════════════════════ */
-.reorder-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 16px 16px}
-.reorder-thumb{
-  aspect-ratio:210/297;border-radius:10px;border:2px solid var(--border);
-  position:relative;overflow:hidden;cursor:pointer;
-  transition:transform .2s,box-shadow .2s,border-color .2s;
-  -webkit-tap-highlight-color:transparent;
-}
-.reorder-thumb--picked{border-color:var(--orange);transform:scale(1.04);box-shadow:0 8px 24px rgba(255,166,49,.25)}
-.reorder-thumb--target{border:2px dashed var(--blue);background:var(--blue-light)}
-.reorder-thumb--locked{opacity:.4;pointer-events:none}
 
 /* ═══════════════════════════════════════════════════════════
    S17 — SAVE SUCCESS
@@ -633,7 +625,6 @@ const IC = {
   crop:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6.13 1L6 16a2 2 0 002 2h15"/><path d="M1 6.13L16 6a2 2 0 012 2v15"/></svg>',
   save:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>',
   eye:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
-  reorder:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/><circle cx="8" cy="6" r="1.5" fill="currentColor"/><circle cx="8" cy="12" r="1.5" fill="currentColor"/><circle cx="8" cy="18" r="1.5" fill="currentColor"/></svg>',
   x:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
 };
 
@@ -652,7 +643,6 @@ const S = {
   selectedPhotos:[],
   mag:{title:'Unser Familienmonat',month:'März 2026',family:'Familie Müller',pages:[]},
   editor:{pageIdx:0},
-  reorder:{picked:null},
   members:MEMBERS_DEFAULT.map(m=>({...m})),
 };
 
@@ -676,7 +666,6 @@ function render(noScroll){
     case 'loading':el.innerHTML=renderLoading();startLoading();break;
     case 'editor':el.innerHTML=renderEditor();break;
     case 'overview':el.innerHTML=renderOverview();break;
-    case 'reorder':el.innerHTML=renderReorder();break;
     case 'save-success':el.innerHTML=renderSaveSuccess();break;
   }
   if(!noScroll) el.scrollTop=0;
@@ -721,7 +710,9 @@ function initMagazine(mode){
   function takePhoto(){
     if(!pq.length) return null;
     const pid=pq.shift();
-    return {type:'photo',photoId:pid,caption:CAPTIONS[pid%CAPTIONS.length],pos:{x:0,y:0,z:1}};
+    const orient=PHOTOS[pid]?.orientation||'landscape';
+    const pLayout=orient==='portrait'?'side-left':'stacked';
+    return {type:'photo',photoId:pid,caption:CAPTIONS[pid%CAPTIONS.length],pos:{x:0,y:0,z:1},photoLayout:pLayout};
   }
   function takeEnt(){
     const catId=entRotation[entIdx%entRotation.length];
@@ -953,16 +944,15 @@ function renderOverview(){
       <div class="progress-section">
         <div class="progress-row">
           <div class="progress-label">Fortschritt</div>
-          <span style="font-size:13px;font-weight:600;color:var(--dark-gray)">${filled}/${total} Slots</span>
+          <span style="font-size:13px;font-weight:600;color:var(--dark-gray)">${filled}/${total} Inhalte</span>
         </div>
         <div class="progress-bar"><div class="progress-bar-fill" style="width:${pct}%"></div></div>
-        ${pct<100?'<div class="progress-hint">Noch '+(total-filled)+' Slots zu füllen</div>':''}
+        ${pct<100?'<div class="progress-hint">Noch '+(total-filled)+' Inhalte zu füllen</div>':''}
       </div>
     </div>
     <div class="page-grid">${grid}</div>
-    <div class="bottom-action-bar">
-      <div class="btn btn-outline" onclick="nav('reorder')" style="flex:1">${IC.reorder} Umsortieren</div>
-      <div class="btn btn-primary" onclick="trySave()" style="flex:1.2">${IC.save} Speichern</div>
+    <div class="bottom-action-bar" style="justify-content:center">
+      <div class="btn btn-primary" onclick="trySave()" style="max-width:280px">${IC.save} Speichern</div>
     </div>
   </div>`;
 }
@@ -978,7 +968,7 @@ function renderEditor(){
   let pageHtml='';
   if(pg.type==='cover') pageHtml=renderCoverPage(pg);
   else if(pg.type==='back') pageHtml=renderBackPage();
-  else pageHtml=renderContentPage(pg);
+  else pageHtml=renderContentPage(pg,idx);
 
   const canLayout=pg.type==='content';
   const pageLabel=idx===0?'Cover':idx===11?'S.12':`S.${idx+1}`;
@@ -1092,22 +1082,26 @@ function renderBackPage(){
   </div>`;
 }
 
-function renderContentPage(pg){
+function renderContentPage(pg,pageIdx){
   const layout=LAYOUTS.find(l=>l.id===pg.layout)||LAYOUTS[0];
   let slotsHtml='';
   layout.slots.forEach((ls,si)=>{
     const slot=pg.slots[si]||{content:null};
-    slotsHtml+=`<div style="flex:${ls.h};min-height:0">${renderSlot(slot,si)}</div>`;
+    slotsHtml+=`<div style="flex:${ls.h};min-height:0">${renderSlot(slot,si,pg.layout)}</div>`;
   });
+  const pageNum=pageIdx!==undefined?pageIdx+1:'';
   return `<div class="wysiwyg-header">
     <div class="wysiwyg-family">${S.mag.family}</div>
     <div class="wysiwyg-month">${S.mag.month.split(' ')[0]}</div>
   </div>
   <div class="wysiwyg-content">${slotsHtml}</div>
-  <div class="wysiwyg-footer"><span>♥ remoryo</span></div>`;
+  <div class="wysiwyg-footer">
+    <div class="wysiwyg-footer-heart">♥</div>
+    <div class="wysiwyg-footer-page">· ${pageNum} ·</div>
+  </div>`;
 }
 
-function renderSlot(slot,si){
+function renderSlot(slot,si,pageLayout){
   if(!slot.content){
     return `<div class="slot slot--empty" style="height:100%" onclick="onEmptySlot(${si})">
       <div class="slot-empty-icon">${IC.plus}</div>
@@ -1119,15 +1113,30 @@ function renderSlot(slot,si){
     const bg=GRADIENTS[c.photoId%15];
     const captionText=c.caption?esc(c.caption):'Bildunterschrift hinzufügen...';
     const hasCaption=!!c.caption;
+    const authorName=NAMES[c.photoId%NAMES.length];
+    const authorInitial=authorName[0];
+    const pLayout=c.photoLayout||'stacked';
+    const camSvg='<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>';
+    // Side layout (portrait variants) — only in 2-slot pages
+    if((pLayout==='side-left'||pLayout==='side-right')&&pageLayout==='2-slots'){
+      const photoEl=`<div class="slot-photo-area" style="flex:1;background:${bg}">${camSvg}<div class="slot-edit-badge">${IC.edit}</div></div>`;
+      const captionEl=`<div class="slot-caption-side" onclick="event.stopPropagation();editCaption(${si})">
+        <div class="slot-caption-circle">${authorInitial}</div>
+        <div class="slot-caption-name" style="text-align:center">${authorName}</div>
+        <div class="slot-caption-date">5. März</div>
+        <div class="slot-caption-text" style="text-align:center;margin-top:2px;${hasCaption?'':'opacity:.5;font-style:italic'}">${captionText}</div>
+      </div>`;
+      return `<div class="slot slot-photo slot-photo--side" style="height:100%" onclick="onFilledSlot(${si})">
+        ${pLayout==='side-left'?photoEl+captionEl:captionEl+photoEl}
+      </div>`;
+    }
+    // Default stacked layout (landscape)
     return `<div class="slot slot-photo" style="height:100%" onclick="onFilledSlot(${si})">
-      <div class="slot-photo-area" style="background:${bg}">
-        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
-        <div class="slot-edit-badge">${IC.edit}</div>
-      </div>
+      <div class="slot-photo-area" style="background:${bg}">${camSvg}<div class="slot-edit-badge">${IC.edit}</div></div>
       <div class="slot-caption" onclick="event.stopPropagation();editCaption(${si})">
-        <div class="slot-caption-circle">${NAMES[c.photoId%NAMES.length][0]}</div>
+        <div class="slot-caption-circle">${authorInitial}</div>
         <div>
-          <div class="slot-caption-name">${NAMES[c.photoId%NAMES.length]} <span class="slot-caption-date">· 5. März</span></div>
+          <div class="slot-caption-name">${authorName} <span class="slot-caption-date">· 5. März</span></div>
           <div class="slot-caption-text" style="${hasCaption?'':'opacity:.5;font-style:italic'}">${captionText}</div>
         </div>
       </div>
@@ -1170,7 +1179,7 @@ function onSlotTap(si){
 function showElementTypePicker(si){
   showSheet(`
     <div class="sheet-title">Inhalt hinzufügen</div>
-    <div class="sheet-sub">Was soll auf diesen Slot?</div>
+    <div class="sheet-sub">Was möchtest du hinzufügen?</div>
     <div class="type-cards">
       <div class="type-card" onclick="pickPhoto(${si})">
         <div class="type-card-icon" style="background:var(--blue-light)">${IC.cam}</div>
@@ -1210,7 +1219,7 @@ function showSlotActions(si){
   else if(t==='entertainment'){editLabel='Unterhaltung ändern';editAction=`pickEntertainment(${si})`}
   else if(t==='freetext'){editLabel='Text bearbeiten';editAction=`editFreetext(${si})`}
   showSheet(`
-    <div class="sheet-title">Slot bearbeiten</div>
+    <div class="sheet-title">Inhalt bearbeiten</div>
     <div class="sheet-sub">${t==='photo'?'Foto':t==='entertainment'?'Unterhaltung':'Freitext'}</div>
     <div class="action-list">
       <div class="action-row" onclick="hideSheet();setTimeout(()=>${editAction},200)">
@@ -1238,6 +1247,12 @@ function showReplaceType(si){showElementTypePicker(si)}
    S12b — PHOTO ACTIONS
    ═══════════════════════════════════════════════════════════ */
 function showPhotoActions(si){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  const is2=pg.layout==='2-slots';
+  const layoutRow=is2?`<div class="action-row" onclick="hideSheet();setTimeout(()=>showPhotoLayoutPicker(${si}),200)">
+        <div class="action-icon" style="background:var(--turquoise-light)">${IC.layout}</div>
+        <div><div class="action-label">Layout ändern</div><div class="action-desc">Gestapelt, Foto links oder rechts</div></div>
+      </div>`:'';
   showSheet(`
     <div class="sheet-title">Foto bearbeiten</div>
     <div class="action-list">
@@ -1245,6 +1260,7 @@ function showPhotoActions(si){
         <div class="action-icon" style="background:var(--blue-light)">${IC.crop}</div>
         <div><div class="action-label">Ausschnitt anpassen</div><div class="action-desc">Bild im Rahmen verschieben & zoomen</div></div>
       </div>
+      ${layoutRow}
       <div class="action-row" onclick="hideSheet();setTimeout(()=>showPhotoPicker(${si}),200)">
         <div class="action-icon" style="background:var(--soft-orange)">${IC.swap}</div>
         <div><div class="action-label">Foto tauschen</div><div class="action-desc">Anderes Foto auswählen</div></div>
@@ -1282,7 +1298,47 @@ function showPhotoPicker(si){
 function selectPhotoForSlot(si,photoId){
   const pg=S.mag.pages[S.editor.pageIdx];
   if(!pg.slots[si]) pg.slots[si]={content:null};
-  pg.slots[si].content={type:'photo',photoId,caption:CAPTIONS[photoId%CAPTIONS.length],pos:{x:0,y:0,z:1}};
+  const orient=PHOTOS[photoId]?.orientation||'landscape';
+  const defaultLayout=orient==='portrait'?'side-left':'stacked';
+  pg.slots[si].content={type:'photo',photoId,caption:CAPTIONS[photoId%CAPTIONS.length],pos:{x:0,y:0,z:1},photoLayout:defaultLayout};
+  hideSheet();
+  if(pg.layout==='2-slots'){
+    setTimeout(()=>showPhotoLayoutPicker(si),200);
+  } else {
+    render();
+  }
+}
+function showPhotoLayoutPicker(si){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  const slot=pg.slots[si];
+  if(!slot?.content||slot.content.type!=='photo') return;
+  const current=slot.content.photoLayout||'stacked';
+  const chk=`<div style="position:absolute;top:4px;right:4px;width:18px;height:18px;border-radius:9px;background:var(--orange);display:flex;align-items:center;justify-content:center">${IC.check}</div>`;
+  const camMini='<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="1.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>';
+  function lc(id,label,inner){
+    const sel=current===id;
+    return `<div class="layout-opt ${sel?'layout-opt--sel':''}" style="flex:1;padding:10px;cursor:pointer" onclick="setPhotoLayout(${si},'${id}')">
+      ${sel?chk:''}
+      <div style="aspect-ratio:210/148;border-radius:5px;overflow:hidden;display:flex;background:var(--light-gray);padding:3px;gap:2px">${inner}</div>
+      <div class="layout-label" style="margin-top:6px;font-size:11px">${label}</div>
+    </div>`;
+  }
+  const stacked=lc('stacked','Gestapelt',`<div style="flex:1;display:flex;flex-direction:column;gap:2px;width:100%">
+    <div style="flex:1;background:var(--blue-light);border-radius:3px;display:flex;align-items:center;justify-content:center">${camMini}</div>
+    <div style="height:12px;background:var(--caption-warm);border-radius:2px"></div></div>`);
+  const sideL=lc('side-left','Foto links',`<div style="flex:1;background:var(--blue-light);border-radius:3px;display:flex;align-items:center;justify-content:center">${camMini}</div>
+    <div style="width:35%;background:var(--caption-warm);border-radius:3px"></div>`);
+  const sideR=lc('side-right','Foto rechts',`<div style="width:35%;background:var(--caption-warm);border-radius:3px"></div>
+    <div style="flex:1;background:var(--blue-light);border-radius:3px;display:flex;align-items:center;justify-content:center">${camMini}</div>`);
+  showSheet(`
+    <div class="sheet-title">Foto-Layout</div>
+    <div class="sheet-sub">Wie soll das Foto auf der halben Seite aussehen?</div>
+    <div style="display:flex;gap:10px;margin:14px 0">${stacked}${sideL}${sideR}</div>
+  `);
+}
+function setPhotoLayout(si,layout){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  if(pg.slots[si]?.content?.type==='photo') pg.slots[si].content.photoLayout=layout;
   hideSheet();render();
 }
 
@@ -1343,19 +1399,33 @@ function showLayoutPicker(){
   const pg=S.mag.pages[S.editor.pageIdx];
   if(pg.type!=='content') return;
   const is1=pg.layout==='1-slot';
+  const checkBadge=`<div style="position:absolute;top:6px;right:6px;width:20px;height:20px;border-radius:10px;background:var(--orange);display:flex;align-items:center;justify-content:center">${IC.check}</div>`;
   showSheet(`
     <div class="sheet-title">Seitenaufteilung</div>
-    <div class="sheet-sub">Wie viele Elemente soll diese Seite haben?</div>
-    <div style="display:flex;gap:12px;margin:16px 0">
-      <div class="layout-opt ${is1?'layout-opt--sel':''}" style="flex:1" onclick="changeLayout('1-slot')">
-        ${is1?`<div style="position:absolute;top:6px;right:6px;width:18px;height:18px;border-radius:9px;background:var(--orange);display:flex;align-items:center;justify-content:center">${IC.check}</div>`:''}
-        <div class="layout-preview" style="min-height:80px"><div class="layout-block layout-block--p" style="flex:1"></div></div>
-        <div class="layout-label">1 Element</div>
+    <div class="sheet-sub">Wie viele Inhalte soll diese Seite haben?</div>
+    <div style="display:flex;gap:14px;margin:16px 0">
+      <div class="layout-opt ${is1?'layout-opt--sel':''}" style="flex:1;padding:12px" onclick="changeLayout('1-slot')">
+        ${is1?checkBadge:''}
+        <div style="aspect-ratio:210/297;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;gap:3px;background:var(--light-gray);padding:4px">
+          <div style="flex:1;border-radius:4px;background:var(--blue-light);display:flex;align-items:center;justify-content:center">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="1.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          </div>
+          <div style="height:8px;border-radius:2px;background:var(--caption-warm)"></div>
+        </div>
+        <div class="layout-label" style="margin-top:8px">1 Element</div>
       </div>
-      <div class="layout-opt ${!is1?'layout-opt--sel':''}" style="flex:1" onclick="changeLayout('2-slots')">
-        ${!is1?`<div style="position:absolute;top:6px;right:6px;width:18px;height:18px;border-radius:9px;background:var(--orange);display:flex;align-items:center;justify-content:center">${IC.check}</div>`:''}
-        <div class="layout-preview" style="min-height:80px"><div class="layout-block layout-block--p" style="flex:1"></div><div class="layout-block layout-block--p" style="flex:1"></div></div>
-        <div class="layout-label">2 Elemente</div>
+      <div class="layout-opt ${!is1?'layout-opt--sel':''}" style="flex:1;padding:12px" onclick="changeLayout('2-slots')">
+        ${!is1?checkBadge:''}
+        <div style="aspect-ratio:210/297;border-radius:6px;overflow:hidden;display:flex;flex-direction:column;gap:3px;background:var(--light-gray);padding:4px">
+          <div style="flex:1;border-radius:4px;background:var(--blue-light);display:flex;align-items:center;justify-content:center">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="1.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>
+          </div>
+          <div style="height:6px;border-radius:2px;background:var(--caption-warm)"></div>
+          <div style="flex:1;border-radius:4px;background:var(--turquoise-light);display:flex;align-items:center;justify-content:center">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="1.5"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h7v7"/></svg>
+          </div>
+        </div>
+        <div class="layout-label" style="margin-top:8px">2 Elemente</div>
       </div>
     </div>
   `);
@@ -1521,46 +1591,6 @@ function saveCoverTitle(){
 }
 
 /* ═══════════════════════════════════════════════════════════
-   S15 — REORDER
-   ═══════════════════════════════════════════════════════════ */
-function renderReorder(){
-  let grid='';
-  S.mag.pages.forEach((p,i)=>{
-    const locked=i===0||i===11;
-    const picked=S.reorder.picked===i;
-    const isTarget=S.reorder.picked!==null&&S.reorder.picked!==i&&!locked;
-    const label=i===0?'Cover':i===11?'S.12':`S.${i+1}`;
-    grid+=`<div class="reorder-thumb ${locked?'reorder-thumb--locked':''} ${picked?'reorder-thumb--picked':''} ${isTarget?'reorder-thumb--target':''}"
-      onclick="${locked?'':`reorderTap(${i})`}">
-      ${renderThumb(p,i)}
-      <div class="page-number">${label}</div>
-    </div>`;
-  });
-  return `<div class="screen-content fade-in">
-    <div class="sec-header">
-      <div class="sec-back" onclick="S.reorder.picked=null;goBack()">${IC.back}</div>
-      <div class="sec-title">Seiten umsortieren</div>
-    </div>
-    <div style="padding:12px 20px;font-size:13px;color:var(--dark-gray)">
-      ${S.reorder.picked!==null?'<b>Tippe auf die Zielposition</b>':'Tippe auf eine Seite, dann auf die Zielposition'}
-    </div>
-    <div class="reorder-grid">${grid}</div>
-    <div style="height:20px"></div>
-  </div>`;
-}
-function reorderTap(i){
-  if(S.reorder.picked===null){S.reorder.picked=i;render(true);return}
-  if(S.reorder.picked===i){S.reorder.picked=null;render(true);return}
-  // swap pages
-  const pages=S.mag.pages;
-  const temp=pages[S.reorder.picked];
-  pages[S.reorder.picked]=pages[i];
-  pages[i]=temp;
-  S.reorder.picked=null;
-  render(true);
-}
-
-/* ═══════════════════════════════════════════════════════════
    S16 / S17 — SAVE FLOW
    ═══════════════════════════════════════════════════════════ */
 function trySave(){
@@ -1570,7 +1600,7 @@ function trySave(){
     showModal(`
       <div class="modal-icon" style="background:var(--soft-orange)">⚠️</div>
       <div class="modal-title">Noch nicht fertig</div>
-      <div class="modal-desc">${total-filled} von ${total} Slots sind noch leer. Du kannst trotzdem speichern und später weitermachen.</div>
+      <div class="modal-desc">${total-filled} von ${total} Inhalte sind noch leer. Du kannst trotzdem speichern und später weitermachen.</div>
       <div class="btn-stack" style="margin-top:16px">
         <div class="btn btn-primary" onclick="hideModal();doSave()">Speichern & später</div>
         <div class="btn btn-text" onclick="hideModal()">Weiter bearbeiten</div>
