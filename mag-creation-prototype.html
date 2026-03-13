@@ -197,7 +197,7 @@ body{
 .overview-header{padding:20px 20px 8px}
 .overview-month{font-size:26px;font-weight:800;line-height:1.15;margin-bottom:2px}
 .overview-title-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
-.overview-title{font-size:14px;font-weight:600;color:var(--dark-gray)}
+.overview-title{font-size:14px;font-weight:600;color:var(--dark-gray);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0}
 .overview-family{font-size:13px;color:var(--mid-gray)}
 .progress-section{margin-top:10px}
 .progress-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
@@ -317,7 +317,7 @@ body{
 .slot-ent-label{font-size:12px;font-weight:600;color:var(--dark-gray)}
 .slot-text{
   background:var(--soft-orange-bg);display:flex;align-items:center;justify-content:center;
-  padding:10px;
+  padding:10px;border:1.3px solid var(--navy);border-radius:7px;
 }
 .slot-text-content{font-size:11px;color:var(--dark-gray);text-align:center;line-height:1.4;word-break:break-word;overflow:hidden}
 .slot-photo--side{flex-direction:row}
@@ -360,20 +360,24 @@ body{
 }
 .toolbar-page-of{font-size:13px;font-weight:500;color:var(--mid-gray)}
 .toolbar-arrow{
+  position:relative;
   width:36px;height:36px;border-radius:18px;border:1.5px solid var(--border);
   background:var(--white);
   display:flex;align-items:center;justify-content:center;cursor:pointer;
   -webkit-tap-highlight-color:transparent;color:var(--navy);
   transition:border-color .12s,background .12s,transform .08s;
 }
+.toolbar-arrow::before{content:'';position:absolute;inset:-4px}
 .toolbar-arrow:active{background:var(--blue-light);border-color:var(--blue);transform:scale(.92)}
 .toolbar-arrow:disabled{opacity:.2;cursor:not-allowed;transform:none}
 .toolbar-dots{display:flex;justify-content:center;gap:5px}
 .toolbar-dot{
+  position:relative;
   width:8px;height:8px;border-radius:4px;background:var(--border);
   cursor:pointer;transition:background .2s,transform .15s;
   -webkit-tap-highlight-color:transparent;
 }
+.toolbar-dot::before{content:'';position:absolute;inset:-8px}
 .toolbar-dot:active{transform:scale(1.4)}
 .toolbar-dot--filled{background:var(--navy)}
 .toolbar-dot--active{background:var(--orange);transform:scale(1.3)}
@@ -397,7 +401,9 @@ body{
   font-size:16px;font-weight:800;color:var(--navy);line-height:1.2;
   margin-top:14px;text-align:center;letter-spacing:.5px;cursor:pointer;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:100%;
+  border-radius:8px;padding:4px 8px;transition:background .15s;
 }
+.cover-title:hover{background:var(--light-gray)}
 .cover-month{
   font-size:24px;font-weight:800;color:var(--orange);
   margin-top:3px;text-align:center;
@@ -481,6 +487,7 @@ body{
    S12c — PAN / CROP OVERLAY
    ═══════════════════════════════════════════════════════════ */
 .crop-overlay{
+  animation:fadeIn .25s ease;
   position:absolute;inset:0;z-index:60;background:rgba(27,44,67,.92);
   display:flex;flex-direction:column;align-items:center;justify-content:center;
 }
@@ -523,7 +530,9 @@ body{
   min-height:80px;
 }
 .caption-input:focus{border-color:var(--blue)}
-.char-counter{font-size:12px;color:var(--mid-gray);text-align:right;margin-top:4px}
+.char-counter{font-size:12px;color:var(--mid-gray);text-align:right;margin-top:4px;transition:color .2s}
+.char-counter--warn{color:var(--orange)}
+.char-counter--limit{color:var(--red)}
 
 /* ═══════════════════════════════════════════════════════════
    MODAL CONTENT
@@ -549,7 +558,7 @@ body{
    BACK PAGE EDITOR
    ═══════════════════════════════════════════════════════════ */
 .editor-variant-bar{display:flex;gap:8px;padding:8px 20px;background:var(--white);border-bottom:1px solid var(--border)}
-.back-variant-btn{flex:1;padding:8px 6px;border-radius:10px;border:2px solid var(--border);text-align:center;cursor:pointer;font-size:10px;font-weight:600;color:var(--navy);transition:border-color .15s,background .15s;-webkit-tap-highlight-color:transparent}
+.back-variant-btn{flex:1;padding:10px 6px;border-radius:10px;border:2px solid var(--border);text-align:center;cursor:pointer;font-size:12px;min-height:44px;font-weight:600;color:var(--navy);transition:border-color .15s,background .15s;-webkit-tap-highlight-color:transparent}
 .back-variant-btn:active{transform:scale(.97)}
 .back-variant-btn--sel{border-color:var(--orange);background:var(--soft-orange)}
 .back-section{text-align:center;padding:6px 17px}
@@ -568,7 +577,7 @@ body{
 .back-bday-date{opacity:.6}
 .back-footer{padding:8px 17px;text-align:center}
 .back-footer-url{font-size:7px;color:var(--navy);opacity:.25;font-weight:600;letter-spacing:2px}
-.back-manage-link{font-size:10px;color:var(--blue);font-weight:600;cursor:pointer;padding:4px;text-align:center}
+.back-manage-link{font-size:12px;color:var(--blue);font-weight:600;cursor:pointer;padding:12px 4px;text-align:center;min-height:44px;display:flex;align-items:center;justify-content:center}
 .back-manage-link:hover{text-decoration:underline}
 .back-photo-slot{min-height:100px;border-radius:6px;overflow:hidden;cursor:pointer;display:flex;align-items:center;justify-content:center;margin:6px 17px;position:relative}
 
@@ -690,6 +699,12 @@ const IC = {
    HELPERS
    ═══════════════════════════════════════════════════════════ */
 function esc(s){return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+function updateCharCounter(countEl, counterEl, maxLen) {
+  const len = parseInt(countEl.textContent);
+  counterEl.classList.remove('char-counter--warn','char-counter--limit');
+  if(len >= maxLen) counterEl.classList.add('char-counter--limit');
+  else if(len >= maxLen * 0.85) counterEl.classList.add('char-counter--warn');
+}
 
 /* ═══════════════════════════════════════════════════════════
    STATE
@@ -899,7 +914,7 @@ function renderPhotoSelection(){
   }
   return `<div class="screen-content fade-in">
     <div class="sec-header">
-      <div class="sec-back" onclick="goBack()">${IC.back}</div>
+      <div class="sec-back" role="button" aria-label="Zurück" onclick="goBack()">${IC.back}</div>
       <div class="sec-title">Fotos auswählen</div>
     </div>
     <div class="info-banner">💡 Wähle 8–15 Fotos für dein Heft. Je mehr Fotos, desto voller die Seiten.</div>
@@ -915,7 +930,7 @@ function togglePhoto(id){
   const idx=S.selectedPhotos.indexOf(id);
   if(idx>=0) S.selectedPhotos.splice(idx,1);
   else if(S.selectedPhotos.length<15) S.selectedPhotos.push(id);
-  render();
+  render(true);
 }
 function submitPhotos(){initMagazine('auto');nav('loading')}
 
@@ -1026,7 +1041,7 @@ function renderOverview(){
   });
   return `<div class="screen-content fade-in">
     <div class="sec-header">
-      <div class="sec-back" onclick="nav('mode-selection')">${IC.back}</div>
+      <div class="sec-back" role="button" aria-label="Zurück" onclick="nav('mode-selection')">${IC.back}</div>
       <div class="sec-title">Fotoheft</div>
     </div>
     <div class="overview-header">
@@ -1094,9 +1109,9 @@ function renderEditor(){
           <span>Layout</span>
         </div>
         <div class="toolbar-pager">
-          <button class="toolbar-arrow" ${idx<=0?'disabled':''} onclick="editorNav(-1)">${IC.chevL}</button>
+          <button class="toolbar-arrow" aria-label="Vorherige Seite" ${idx<=0?'disabled':''} onclick="editorNav(-1)">${IC.chevL}</button>
           <div class="toolbar-page-num">${idx+1} <span class="toolbar-page-of">/ ${total}</span></div>
-          <button class="toolbar-arrow" ${idx>=total-1?'disabled':''} onclick="editorNav(1)">${IC.chevR}</button>
+          <button class="toolbar-arrow" aria-label="Nächste Seite" ${idx>=total-1?'disabled':''} onclick="editorNav(1)">${IC.chevR}</button>
         </div>
         <div class="toolbar-action" onclick="goBack()">
           ${IC.grid}
@@ -1497,7 +1512,7 @@ function showEntPreview(si,catId,itemIdx){
     <div class="sheet-title">${cat.icon} ${cat.title}</div>
     <div class="ent-preview-card">
       <div class="ent-preview-title">${title}</div>
-      ${txt?`<div class="ent-preview-text">${txt.replace(/\n/g,'<br>')}</div>`:''}
+      ${txt?`<div class="ent-preview-text">${esc(txt).replace(/\n/g,'<br>')}</div>`:''}
     </div>
     <div class="ent-preview-meta">Passt auf: Halbe Seite / Ganze Seite</div>
     <div class="btn-stack" style="margin-top:12px">
@@ -1669,7 +1684,7 @@ function editCaption(si){
   `);
   setTimeout(()=>{
     const inp=document.getElementById('captionInput');
-    if(inp){inp.focus();inp.addEventListener('input',()=>{document.getElementById('captionCount').textContent=inp.value.length})}
+    if(inp){inp.focus();inp.addEventListener('input',()=>{const ce=document.getElementById('captionCount');ce.textContent=inp.value.length;updateCharCounter(ce,ce.parentElement,120)})}
   },300);
 }
 function saveCaption(si){
@@ -1693,7 +1708,7 @@ function editFreetext(si){
   `);
   setTimeout(()=>{
     const inp=document.getElementById('freetextInput');
-    if(inp){inp.focus();inp.addEventListener('input',()=>{document.getElementById('ftCount').textContent=inp.value.length})}
+    if(inp){inp.focus();inp.addEventListener('input',()=>{const ce=document.getElementById('ftCount');ce.textContent=inp.value.length;updateCharCounter(ce,ce.parentElement,maxLen)})}
   },300);
 }
 function saveFreetext(si){
@@ -1708,7 +1723,7 @@ function editCoverTitle(){
     <div class="char-counter"><span id="titleCount">${S.mag.title.length}</span>/30</div>
     <div class="btn btn-primary" style="margin-top:12px" onclick="saveCoverTitle()">Übernehmen</div>
   `);
-  setTimeout(()=>{const inp=document.getElementById('titleInput');if(inp){inp.focus();inp.addEventListener('input',()=>{document.getElementById('titleCount').textContent=inp.value.length})}},300);
+  setTimeout(()=>{const inp=document.getElementById('titleInput');if(inp){inp.focus();inp.addEventListener('input',()=>{const ce=document.getElementById('titleCount');ce.textContent=inp.value.length;updateCharCounter(ce,ce.parentElement,30)})}},300);
 }
 function saveCoverTitle(){
   const inp=document.getElementById('titleInput');
@@ -1766,7 +1781,7 @@ function editBackQuote(){
     <div class="char-counter"><span id="quoteCount">${(pg.quote||'').length}</span>/150</div>
     <div class="btn btn-primary" style="margin-top:12px" onclick="saveBackQuote()">Übernehmen</div>
   `);
-  setTimeout(()=>{const inp=document.getElementById('quoteInput');if(inp){inp.focus();inp.addEventListener('input',()=>{document.getElementById('quoteCount').textContent=inp.value.length})}},300);
+  setTimeout(()=>{const inp=document.getElementById('quoteInput');if(inp){inp.focus();inp.addEventListener('input',()=>{const ce=document.getElementById('quoteCount');ce.textContent=inp.value.length;updateCharCounter(ce,ce.parentElement,150)})}},300);
 }
 function saveBackQuote(){
   const inp=document.getElementById('quoteInput');
@@ -1826,7 +1841,7 @@ function showMemberManager(){
         <div class="member-name">${esc(m.name)}</div>
         <div class="member-meta">🎂 ${bdayStr} · ${badge}</div>
       </div>
-      <div style="cursor:pointer;padding:8px" onclick="editMember(${i})">${IC.edit}</div>
+      <div style="cursor:pointer;padding:8px" onclick="editMember(${i})" style="min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center" style="min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center">${IC.edit}</div>
     </div>`;
   });
   showSheet(`
@@ -1857,7 +1872,7 @@ function editMember(idx){
       ${!m.isApp?`<div class="btn btn-text" style="color:var(--red);margin-top:8px" onclick="removeMember(${idx})">Entfernen</div>`:''}
       <div class="btn btn-text-gray" style="margin-top:4px" onclick="hideSheet();setTimeout(()=>showMemberManager(),200)">Abbrechen</div>
     `);
-    setTimeout(()=>{const inp=document.getElementById('memName');if(inp) inp.addEventListener('input',()=>{document.getElementById('memNameCount').textContent=inp.value.length})},100);
+    setTimeout(()=>{const inp=document.getElementById('memName');if(inp) inp.addEventListener('input',()=>{const ce=document.getElementById('memNameCount');ce.textContent=inp.value.length;updateCharCounter(ce,ce.parentElement,20)})},100);
   },200);
 }
 function saveMember(idx){
