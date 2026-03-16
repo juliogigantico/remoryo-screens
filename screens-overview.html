@@ -371,9 +371,9 @@
       <span>Screen Overview</span>
     </div>
     <div class="sidebar-stats">
-      <div class="stat"><div class="stat-num">90</div><div class="stat-label">Screens</div></div>
+      <div class="stat"><div class="stat-num">95</div><div class="stat-label">Screens</div></div>
       <div class="stat"><div class="stat-num">8</div><div class="stat-label">Dateien</div></div>
-      <div class="stat"><div class="stat-num">5</div><div class="stat-label">Reviews</div></div>
+      <div class="stat"><div class="stat-num">6</div><div class="stat-label">Reviews</div></div>
     </div>
     <nav>
       <div class="nav-section">User Flow</div>
@@ -384,7 +384,7 @@
       <a href="#onboarding" class="nav-item"><span class="nav-icon">&#x1f680;</span>Onboarding<span class="nav-badge">2</span></a>
       <a href="#auth" class="nav-item"><span class="nav-icon">&#x1f510;</span>Authentifizierung<span class="nav-badge">6</span></a>
       <a href="#home" class="nav-item"><span class="nav-icon">&#x1f4f7;</span>Home &amp; Fotos<span class="nav-badge">12</span></a>
-      <a href="#magazine" class="nav-item"><span class="nav-icon">&#x1f4d6;</span>Magazin<span class="nav-badge">15</span></a>
+      <a href="#magazine" class="nav-item"><span class="nav-icon">&#x1f4d6;</span>Magazin<span class="nav-badge">20</span></a>
       <a href="#settings" class="nav-item"><span class="nav-icon">&#x2699;&#xfe0f;</span>Settings &amp; Account<span class="nav-badge">12</span></a>
       <a href="#abo" class="nav-item"><span class="nav-icon">&#x1f4b3;</span>Abo &amp; Payment<span class="nav-badge">10</span></a>
       <a href="#groups" class="nav-item"><span class="nav-icon">&#x1f46a;</span>Gruppen &amp; Einladungen<span class="nav-badge">16</span></a>
@@ -396,7 +396,7 @@
   <main class="main">
     <div class="page-header">
       <h2>remoryo App &mdash; UI Preview</h2>
-      <p>90 Screens &middot; 8 Dateien &middot; 5&times; UX-reviewed &middot; Stand M&auml;rz 2026<br>Klicke auf einen Screen um direkt dorthin zu springen, oder &laquo;Vollansicht&raquo; f&uuml;r die gesamte Preview.</p>
+      <p>95 Screens &middot; 8 Dateien &middot; 6&times; UX-reviewed &middot; Stand M&auml;rz 2026<br>Klicke auf einen Screen um direkt dorthin zu springen, oder &laquo;Vollansicht&raquo; f&uuml;r die gesamte Preview.</p>
     </div>
 
     <!-- ═══ FUNNEL ═══ -->
@@ -716,79 +716,141 @@
       <div class="section-header">
         <div class="section-icon icon-magazine">&#x1f4d6;</div>
         <h3>Magazin-Erstellung</h3>
-        <span class="section-badge">15 Screens</span>
+        <span class="section-badge">20 Screens</span>
         <a href="app-magazine-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
       </div>
-      <p class="section-desc">Einstieg (Auto/Manuell), Fotos ausw&auml;hlen, Auto-Erstellung, Seiten&uuml;bersicht, Seite bearbeiten, Layout w&auml;hlen, Foto w&auml;hlen, Entertainment tauschen, Titelseite Familie, Titelseite Pflegeheim, Letzte Seite, Vorschau, Gedruckt-Ansicht, Umsortieren, Unfertig speichern.</p>
-      <button class="preview-toggle" onclick="togglePreview(this, 'app-magazine-preview.html', 1510, 1500, 0.42)">&#x1f50d; Live Preview laden</button>
+      <p class="section-desc">Slot-basiertes WYSIWYG-Layout (1-Slot / 2-Slots). Einstieg, Fotos ausw&auml;hlen, Auto-Erstellung, Seiten&uuml;bersicht, Cover-Editor, 1-Slot &amp; 2-Slot Seiten, R&uuml;ckseite (Emotional / Foto), Layout- &amp; Foto-Layout-Picker, Inhalt hinzuf&uuml;gen, Entertainment, Bildunterschrift, Mitglieder verwalten, Umsortieren, Speichern.</p>
+
+      <!-- Prototype Banner -->
+      <div style="background:linear-gradient(135deg,#D4E8F2,#fff);border:1.5px solid var(--blue);border-radius:14px;padding:16px 20px;margin-bottom:14px;display:flex;align-items:center;gap:14px">
+        <div style="font-size:28px;flex-shrink:0">&#x1f579;&#xfe0f;</div>
+        <div style="flex:1;min-width:0">
+          <div style="font-weight:700;font-size:14px;color:var(--navy);margin-bottom:3px">Interaktiver Prototyp</div>
+          <div style="font-size:12px;color:var(--dark-gray);line-height:1.4">Klickbarer WYSIWYG-Editor mit Auto-Fill, Slot-System, Back-Page-Varianten &amp; Member-Management.</div>
+        </div>
+        <a href="mag-creation-prototype.html" target="_blank" style="background:var(--orange);color:white;border-radius:10px;padding:8px 16px;font-size:12px;font-weight:700;text-decoration:none;white-space:nowrap;flex-shrink:0">Prototyp &ouml;ffnen &nearr;</a>
+      </div>
+
+      <button class="preview-toggle" onclick="togglePreview(this, 'app-magazine-preview.html', 1510, 2400, 0.42)">&#x1f50d; Live Preview laden</button>
       <div class="live-preview"></div>
       <div class="phones-grid">
 
-        <a href="app-magazine-preview.html" target="_blank" class="phone-card phone--purple">
+        <a href="app-magazine-preview.html#screen-1" target="_blank" class="phone-card phone--purple">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x1f4da;</div>
-            <div class="phone-screen-title">Magazin-&Uuml;bersicht</div>
-            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect wire-rect--tall"></div><div class="wire-spacer"></div><div class="wire-rect wire-rect--tall" style="opacity:0.5"></div></div>
+            <div class="phone-screen-icon">&#x2728;</div>
+            <div class="phone-screen-title">Fotoheft erstellen</div>
+            <div class="phone-screen-sub">Auto / Manuell</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect wire-rect--tall" style="background:var(--blue-soft)"></div><div class="wire-spacer"></div><div class="wire-rect" style="opacity:.5"></div></div>
           </div></div>
-          <div class="phone-label">Magazin-&Uuml;bersicht</div>
+          <div class="phone-label">Einstieg</div>
         </a>
 
-        <a href="app-magazine-preview.html" target="_blank" class="phone-card phone--purple">
+        <a href="app-magazine-preview.html#screen-4" target="_blank" class="phone-card phone--purple">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
             <div class="phone-screen-icon">&#x1f4c4;</div>
             <div class="phone-screen-title">Seiten&uuml;bersicht</div>
-            <div class="phone-screen-sub">Editor</div>
+            <div class="phone-screen-sub">12-Seiten-Grid</div>
             <div class="wire"><div class="wire-spacer"></div>
-              <div class="wire-row" style="gap:6px;justify-content:center">
-                <div style="width:28px;height:38px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border)"></div>
-                <div style="width:28px;height:38px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border)"></div>
-                <div style="width:28px;height:38px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border)"></div>
+              <div class="wire-row" style="gap:4px;justify-content:center">
+                <div style="width:24px;height:34px;border-radius:2px;background:var(--light-gray);border:1px solid var(--border)"></div>
+                <div style="width:24px;height:34px;border-radius:2px;background:var(--light-gray);border:1px solid var(--border)"></div>
+                <div style="width:24px;height:34px;border-radius:2px;background:var(--light-gray);border:1px solid var(--border)"></div>
               </div>
-              <div class="wire-row" style="gap:6px;justify-content:center;margin-top:6px">
-                <div style="width:28px;height:38px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border)"></div>
-                <div style="width:28px;height:38px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border)"></div>
-                <div style="width:28px;height:38px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border)"></div>
+              <div class="wire-row" style="gap:4px;justify-content:center;margin-top:4px">
+                <div style="width:24px;height:34px;border-radius:2px;background:var(--light-gray);border:1px solid var(--border)"></div>
+                <div style="width:24px;height:34px;border-radius:2px;background:var(--light-gray);border:1px solid var(--border)"></div>
+                <div style="width:24px;height:34px;border-radius:2px;background:var(--light-gray);border:1px dashed var(--mid-gray)"></div>
               </div>
             </div>
           </div></div>
           <div class="phone-label">Seiten&uuml;bersicht</div>
         </a>
 
-        <a href="app-magazine-preview.html" target="_blank" class="phone-card phone--purple">
+        <a href="app-magazine-preview.html#screen-5" target="_blank" class="phone-card phone--purple">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x1f5bc;&#xfe0f;</div>
-            <div class="phone-screen-title">Foto ausw&auml;hlen</div>
-            <div class="phone-screen-sub">Multi-Select</div>
+            <div class="phone-screen-icon">&#x1f4d6;</div>
+            <div class="phone-screen-title">Cover-Editor</div>
+            <div class="phone-screen-sub">WYSIWYG</div>
             <div class="wire"><div class="wire-spacer"></div>
-              <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:3px;padding:0 4px">
-                <div style="height:24px;border-radius:3px;background:var(--light-gray);border:2px solid var(--orange)"></div>
-                <div style="height:24px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border)"></div>
-                <div style="height:24px;border-radius:3px;background:var(--light-gray);border:2px solid var(--orange)"></div>
-                <div style="height:24px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border)"></div>
-                <div style="height:24px;border-radius:3px;background:var(--light-gray);border:2px solid var(--orange)"></div>
-                <div style="height:24px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border)"></div>
+              <div style="width:50px;height:70px;border-radius:4px;background:#FBF9F6;border:1px solid var(--border);margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;padding:4px">
+                <div style="font-size:6px;color:var(--blue)">&#x2764;</div>
+                <div style="width:80%;height:28px;border-radius:2px;background:linear-gradient(135deg,#D4E8F2,#82B7D8);border:1px solid var(--navy)"></div>
+                <div style="font-size:5px;font-weight:700;color:var(--navy)">Titel</div>
+                <div style="font-size:6px;font-weight:800;color:var(--orange)">M&auml;rz</div>
               </div>
             </div>
           </div></div>
-          <div class="phone-label">Foto ausw&auml;hlen</div>
+          <div class="phone-label">Cover-Editor</div>
         </a>
 
-        <a href="app-magazine-preview.html" target="_blank" class="phone-card phone--purple">
+        <a href="app-magazine-preview.html#screen-6" target="_blank" class="phone-card phone--purple">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x1f440;</div>
-            <div class="phone-screen-title">Magazin-Vorschau</div>
-            <div class="wire"><div class="wire-spacer"></div><div style="width:40px;height:56px;border-radius:3px;background:var(--light-gray);border:1px solid var(--border);margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+            <div class="phone-screen-icon">&#x1f5bc;&#xfe0f;</div>
+            <div class="phone-screen-title">Seite 1-Slot</div>
+            <div class="phone-screen-sub">Foto + Caption</div>
+            <div class="wire"><div class="wire-spacer"></div>
+              <div style="width:50px;height:70px;border-radius:4px;background:#FBF9F6;border:1px solid var(--border);margin:0 auto;display:flex;flex-direction:column;padding:3px;gap:2px">
+                <div style="flex:1;border-radius:2px;background:linear-gradient(135deg,#D4E8F2,#82B7D8);border:1px solid var(--navy)"></div>
+                <div style="height:12px;background:#F8F6F4;border-radius:1px;display:flex;align-items:center;padding:0 3px"><div style="width:6px;height:6px;border-radius:3px;background:var(--blue)"></div></div>
+              </div>
+            </div>
           </div></div>
-          <div class="phone-label">Magazin-Vorschau</div>
+          <div class="phone-label">1-Slot Foto</div>
         </a>
 
-        <a href="app-magazine-preview.html" target="_blank" class="phone-card phone--orange">
+        <a href="app-magazine-preview.html#screen-7" target="_blank" class="phone-card phone--purple">
           <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
-            <div class="phone-screen-icon">&#x1f389;</div>
-            <div class="phone-screen-title">Erstes Magazin erstellt!</div>
-            <div class="wire"><div class="wire-spacer"></div><div style="font-size:20px;text-align:center">&#x1f38a;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+            <div class="phone-screen-icon">&#x1f9e9;</div>
+            <div class="phone-screen-title">2-Slots</div>
+            <div class="phone-screen-sub">Foto + Entertainment</div>
+            <div class="wire"><div class="wire-spacer"></div>
+              <div style="width:50px;height:70px;border-radius:4px;background:#FBF9F6;border:1px solid var(--border);margin:0 auto;display:flex;flex-direction:column;padding:3px;gap:2px">
+                <div style="flex:1;border-radius:2px;background:linear-gradient(135deg,#D4E8F2,#82B7D8);border:1px solid var(--navy)"></div>
+                <div style="flex:1;border-radius:2px;background:var(--turquoise-light);border:1px solid var(--navy);display:flex;align-items:center;justify-content:center"><div style="font-size:8px">&#x270f;</div></div>
+              </div>
+            </div>
           </div></div>
-          <div class="phone-label">Erstes Magazin<br><span style="color:var(--mid-gray);font-size:9px">erstellt</span></div>
+          <div class="phone-label">2-Slots</div>
+        </a>
+
+        <a href="app-magazine-preview.html#screen-9" target="_blank" class="phone-card phone--purple">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4d6;</div>
+            <div class="phone-screen-title">R&uuml;ckseite</div>
+            <div class="phone-screen-sub">Emotional / Foto</div>
+            <div class="wire"><div class="wire-spacer"></div>
+              <div style="width:50px;height:70px;border-radius:4px;background:linear-gradient(175deg,#FBF9F6,#EDE7DF);border:1px solid var(--border);margin:0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px">
+                <div style="font-size:4px;font-weight:800;letter-spacing:.5px;color:var(--navy)">remoryo</div>
+                <div style="display:flex;gap:2px"><div style="width:8px;height:8px;border-radius:50%;background:var(--blue)"></div><div style="width:8px;height:8px;border-radius:50%;background:var(--orange)"></div><div style="width:8px;height:8px;border-radius:50%;background:var(--turquoise)"></div></div>
+              </div>
+            </div>
+          </div></div>
+          <div class="phone-label">R&uuml;ckseite</div>
+        </a>
+
+        <a href="app-magazine-preview.html#screen-11" target="_blank" class="phone-card phone--purple">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4d0;</div>
+            <div class="phone-screen-title">Bottom Sheets</div>
+            <div class="phone-screen-sub">6 Interaktionen</div>
+            <div class="wire"><div class="wire-spacer"></div>
+              <div style="background:var(--light-gray);border-radius:8px 8px 0 0;padding:6px;margin-top:auto">
+                <div style="width:20px;height:3px;background:var(--border);border-radius:2px;margin:0 auto 4px"></div>
+                <div class="wire-bar" style="margin-bottom:4px"></div>
+                <div class="wire-bar wire-bar--medium"></div>
+              </div>
+            </div>
+          </div></div>
+          <div class="phone-label">Interaktionen</div>
+        </a>
+
+        <a href="app-magazine-preview.html#screen-20" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x2705;</div>
+            <div class="phone-screen-title">Gespeichert!</div>
+            <div class="wire"><div class="wire-spacer"></div><div style="width:24px;height:24px;border-radius:50%;background:var(--soft-green);border:2px solid #1D8348;margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Gespeichert!</div>
         </a>
 
       </div>
@@ -1372,7 +1434,7 @@
     </div>
 
     <div class="page-footer">
-      &hearts; remoryo &middot; N&auml;he, die ankommt. &middot; Stand 6. M&auml;rz 2026
+      &hearts; remoryo &middot; N&auml;he, die ankommt. &middot; Stand 16. M&auml;rz 2026
     </div>
 
   </main>
@@ -1439,7 +1501,7 @@
       onboarding: ['1','2'],
       auth: ['1','1b','2','4','5','6'],
       home: ['1','2','3','3b','4','6','7','8','9','10','11'],
-      magazine: ['1','2','3','4','5'],
+      magazine: null, /* hrefs already have #screen-N deep links */
       settings: ['1','2','3','4','5','6','7','8','10','9','11'],
       abo: ['1','2','3','4','5','6','7','8','9','10'],
       groups: ['1','2','3','4','5','6','7','8','9','10','11','12','13','14','15'],
