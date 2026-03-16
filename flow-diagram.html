@@ -1,0 +1,1412 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Remoryo — User Flow Diagram</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --blue: #82B7D8;
+      --blue-light: #EAF3F9;
+      --turquoise: #B8E0E0;
+      --turquoise-light: #E2F3F3;
+      --navy: #1B2C43;
+      --orange: #FFA631;
+      --white: #FFFFFF;
+      --dark-gray: #5A6B7A;
+      --mid-gray: #94A3B3;
+      --light-gray: #F5F6F8;
+      --border: #E2E6EB;
+      --red: #E74C3C;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #F0F2F5;
+      color: var(--navy);
+      padding: 32px;
+    }
+
+    h1 {
+      font-size: 24px;
+      font-weight: 800;
+      color: var(--navy);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 14px;
+      color: var(--dark-gray);
+      margin-bottom: 32px;
+    }
+
+    .legend {
+      display: flex;
+      gap: 24px;
+      justify-content: center;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--dark-gray);
+    }
+    .legend-dot {
+      width: 14px;
+      height: 14px;
+      border-radius: 4px;
+    }
+
+    /* ── Flow Section ── */
+    .flow-section {
+      margin-bottom: 40px;
+      background: var(--white);
+      border-radius: 20px;
+      padding: 28px;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    }
+
+    .flow-title {
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .flow-file {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--mid-gray);
+      background: var(--light-gray);
+      padding: 3px 10px;
+      border-radius: 6px;
+    }
+    .flow-desc {
+      font-size: 13px;
+      color: var(--dark-gray);
+      margin-bottom: 20px;
+    }
+
+    /* ── Flow Chain ── */
+    .flow-chain {
+      display: flex;
+      align-items: flex-start;
+      gap: 0;
+      overflow-x: auto;
+      padding: 8px 0 16px;
+    }
+
+    .flow-node {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex-shrink: 0;
+      min-width: 130px;
+      max-width: 150px;
+    }
+
+    .node-box {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 13px;
+      font-weight: 600;
+      line-height: 1.35;
+      position: relative;
+      cursor: default;
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+    .node-box:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+
+    .node-box--screen {
+      background: var(--blue-light);
+      color: var(--navy);
+      border: 1.5px solid var(--blue);
+    }
+    .node-box--action {
+      background: #FFF3DC;
+      color: var(--navy);
+      border: 1.5px solid var(--orange);
+    }
+    .node-box--success {
+      background: #E6F7EE;
+      color: #1A6B3C;
+      border: 1.5px solid #5CB85C;
+    }
+    .node-box--modal {
+      background: #FFF0EE;
+      color: var(--red);
+      border: 1.5px solid var(--red);
+    }
+    .node-box--external {
+      background: var(--light-gray);
+      color: var(--dark-gray);
+      border: 1.5px dashed var(--mid-gray);
+    }
+
+    .node-num {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--mid-gray);
+      margin-bottom: 4px;
+    }
+
+    .node-buttons {
+      margin-top: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+      width: 100%;
+    }
+    .node-btn {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 4px 8px;
+      border-radius: 6px;
+      background: rgba(255,255,255,0.7);
+      color: var(--navy);
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .node-btn--cta {
+      background: var(--orange);
+      color: white;
+    }
+    .node-btn--danger {
+      background: var(--red);
+      color: white;
+    }
+
+    /* ── Arrow ── */
+    .flow-arrow {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      padding: 0 4px;
+      min-height: 60px;
+    }
+    .arrow-label {
+      font-size: 9px;
+      font-weight: 600;
+      color: var(--mid-gray);
+      margin-bottom: 4px;
+      text-align: center;
+      max-width: 80px;
+      line-height: 1.2;
+    }
+    .arrow-line {
+      width: 36px;
+      height: 2px;
+      background: var(--border);
+      position: relative;
+    }
+    .arrow-line::after {
+      content: '';
+      position: absolute;
+      right: -1px;
+      top: -4px;
+      border: 5px solid transparent;
+      border-left: 6px solid var(--border);
+    }
+    .arrow-line--orange { background: var(--orange); }
+    .arrow-line--orange::after { border-left-color: var(--orange); }
+    .arrow-line--red { background: var(--red); }
+    .arrow-line--red::after { border-left-color: var(--red); }
+
+    /* ── Branch ── */
+    .flow-branch {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      padding-left: 20px;
+      border-left: 2px dashed var(--border);
+      margin-left: 8px;
+    }
+    .branch-label {
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--mid-gray);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 2px;
+    }
+    .branch-row {
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+
+    /* ── Multi-flow grid ── */
+    .flow-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 24px;
+    }
+
+    /* ── Cross-file reference ── */
+    .xref {
+      font-size: 10px;
+      font-weight: 600;
+      color: var(--blue);
+      margin-top: 4px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      body { padding: 16px; }
+      .flow-section { padding: 16px; }
+    }
+
+    /* ── Nav sidebar ── */
+    .nav-sidebar {
+      position: fixed;
+      right: 24px;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 100;
+    }
+    .nav-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 5px;
+      background: var(--border);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .nav-dot:hover {
+      background: var(--orange);
+      transform: scale(1.3);
+    }
+
+    @media (max-width: 1100px) {
+      .nav-sidebar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Remoryo User Flows</h1>
+  <p class="subtitle">Alle Screens und ihre Verbindungen &mdash; Stand: 7. M&auml;rz 2026 (66 Screens)</p>
+
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot" style="background: var(--blue-light); border: 1.5px solid var(--blue);"></div>Screen</div>
+    <div class="legend-item"><div class="legend-dot" style="background: #FFF3DC; border: 1.5px solid var(--orange);"></div>Aktion / Wizard-Step</div>
+    <div class="legend-item"><div class="legend-dot" style="background: #E6F7EE; border: 1.5px solid #5CB85C;"></div>Erfolg</div>
+    <div class="legend-item"><div class="legend-dot" style="background: #FFF0EE; border: 1.5px solid var(--red);"></div>Destruktiv / Warnung</div>
+    <div class="legend-item"><div class="legend-dot" style="background: var(--light-gray); border: 1.5px dashed var(--mid-gray);"></div>Extern / OS</div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- FLOW 1: Auth                                        -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="flow-section" id="auth">
+    <div class="flow-title">
+      1. Authentifizierung
+      <span class="flow-file">auth-preview.html</span>
+    </div>
+    <div class="flow-desc">Neuer User &amp; bestehender User &mdash; Login, Registrierung, Einladung</div>
+
+    <div class="flow-chain">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">AUTH-1</div>
+          Login
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Anmelden</div>
+            <div class="node-btn">Neues Konto &gt;</div>
+            <div class="node-btn">PW vergessen?</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">Anmelden</div>
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">HOME-1</div>
+          Fotos Tab
+          <div class="xref">&rarr; app-home</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size: 11px; font-weight: 700; color: var(--mid-gray); margin: 12px 0 8px; text-transform: uppercase; letter-spacing: 0.5px;">Registrierung (neuer User)</div>
+
+    <div class="flow-chain">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">AUTH-3</div>
+          Registrierung
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Konto erstellen</div>
+            <div class="node-btn">Social Login</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--action">
+          <div class="node-num">AUTH-6</div>
+          E-Mail Best&auml;tigung
+          <div class="node-buttons">
+            <div class="node-btn">Erneut senden</div>
+            <div class="node-btn">Weiter ohne</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">ONB-1</div>
+          So funktioniert's
+          <div class="xref">&rarr; onboarding</div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">Weiter</div>
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">ONB-2</div>
+          Familie einladen
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Jetzt einladen</div>
+            <div class="node-btn">Sp&auml;ter &gt;</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">HOME-1</div>
+          Fotos Tab
+          <div class="xref">&rarr; app-home</div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size: 11px; font-weight: 700; color: var(--mid-gray); margin: 12px 0 8px; text-transform: uppercase; letter-spacing: 0.5px;">Einladungs-Flow (via Link)</div>
+
+    <div class="flow-chain">
+      <div class="flow-node">
+        <div class="node-box node-box--external">
+          <div class="node-num">AUTH-4</div>
+          Web Landing
+          <div class="node-buttons">
+            <div class="node-btn">App Store</div>
+            <div class="node-btn">Play Store</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">Download</div>
+        <div class="arrow-line"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">AUTH-5</div>
+          In-App Welcome
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Konto erstellen</div>
+            <div class="node-btn">Schon ein Konto</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">AUTH-3</div>
+          Registrierung
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size: 11px; font-weight: 700; color: var(--mid-gray); margin: 12px 0 8px; text-transform: uppercase; letter-spacing: 0.5px;">Passwort vergessen</div>
+
+    <div class="flow-chain">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">SYS-1</div>
+          PW vergessen
+          <div class="xref">&rarr; app-system</div>
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Link senden</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--success">
+          <div class="node-num">SYS-3</div>
+          E-Mail gesendet
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">Link klicken</div>
+        <div class="arrow-line"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">SYS-2</div>
+          Neues PW setzen
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">PW speichern</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">AUTH-1</div>
+          Login
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- FLOW 2: Home / Fotos                                -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="flow-section" id="home">
+    <div class="flow-title">
+      2. Home &mdash; Fotos &amp; Magazine
+      <span class="flow-file">app-home-preview.html</span>
+    </div>
+    <div class="flow-desc">Foto-Upload, Kommentare, Vollansicht, L&ouml;schen</div>
+
+    <div class="flow-chain">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">HOME-2</div>
+          Fotos Empty
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Foto hochladen</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">HOME-9</div>
+          Foto-Zugriff
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Zugriff erlauben</div>
+            <div class="node-btn">Sp&auml;ter</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">OS Dialog</div>
+        <div class="arrow-line"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--external">
+          Foto-Picker
+          <div class="node-buttons">
+            <div class="node-btn">OS nativ</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--success">
+          <div class="node-num">HOME-8</div>
+          Upload-Best&auml;tigung
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">&Uuml;bersicht</div>
+            <div class="node-btn">Weitere Fotos</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">HOME-1</div>
+          Fotos Tab
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size: 11px; font-weight: 700; color: var(--mid-gray); margin: 12px 0 8px; text-transform: uppercase; letter-spacing: 0.5px;">Foto-Interaktion</div>
+
+    <div class="flow-chain">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">HOME-1</div>
+          Fotos Tab
+          <div class="node-buttons">
+            <div class="node-btn">Foto tippen</div>
+            <div class="node-btn">&#8943; Men&uuml;</div>
+            <div class="node-btn">Kommentar</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">Foto tippen</div>
+        <div class="arrow-line"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">HOME-6</div>
+          Foto-Vollansicht
+          <div class="node-buttons">
+            <div class="node-btn">&#10084; Like</div>
+            <div class="node-btn">Kommentar</div>
+            <div class="node-btn">Teilen</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">Kommentar</div>
+        <div class="arrow-line"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">HOME-5/7</div>
+          Kommentare
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-chain" style="margin-top: 12px;">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">HOME-1</div>
+          Fotos Tab
+          <div class="node-buttons">
+            <div class="node-btn">&#8943; Men&uuml; tippen</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">HOME-11</div>
+          Foto-Aktionen
+          <div class="node-buttons">
+            <div class="node-btn">Beschriftung</div>
+            <div class="node-btn">Im Heft</div>
+            <div class="node-btn">Teilen</div>
+            <div class="node-btn node-btn--danger">L&ouml;schen</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">L&ouml;schen</div>
+        <div class="arrow-line arrow-line--red"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--modal">
+          <div class="node-num">HOME-10</div>
+          Foto l&ouml;schen?
+          <div class="node-buttons">
+            <div class="node-btn node-btn--danger">L&ouml;schen</div>
+            <div class="node-btn">Abbrechen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size: 11px; font-weight: 700; color: var(--mid-gray); margin: 16px 0 8px; text-transform: uppercase; letter-spacing: 0.5px;">Tab-Navigation (global)</div>
+
+    <div class="flow-chain">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">HOME-1</div>
+          Fotos Tab
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">Tab &ldquo;Heft&rdquo;</div>
+        <div class="arrow-line"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">HOME-3</div>
+          Magazine Tab
+          <div class="xref">&rarr; app-home</div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">&#9881; Gear</div>
+        <div class="arrow-line"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">SET-1</div>
+          Einstellungen
+          <div class="xref">&rarr; app-settings</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- FLOW 3: Magazine                                    -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="flow-section" id="magazine">
+    <div class="flow-title">
+      3. Magazin erstellen
+      <span class="flow-file">mag-creation-prototype.html</span>
+    </div>
+    <div class="flow-desc">Erstellen, bearbeiten, Vorschau, Druck freigeben</div>
+
+    <div class="flow-chain">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">MAG-1</div>
+          Magazin-&Uuml;bersicht
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Bearbeiten</div>
+            <div class="node-btn">PDF</div>
+            <div class="node-btn node-btn--danger">L&ouml;schen</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">Bearbeiten</div>
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">MAG-2</div>
+          Seiten&uuml;bersicht
+          <div class="node-buttons">
+            <div class="node-btn">Seite tippen</div>
+            <div class="node-btn">+ Seite</div>
+            <div class="node-btn node-btn--cta">Speichern</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">Seite tippen</div>
+        <div class="arrow-line"></div>
+      </div>
+      <div class="flow-node" style="min-width: 140px;">
+        <div class="node-box node-box--action">
+          <div class="node-num">MAG-3</div>
+          Foto ausw&auml;hlen
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Fertig (5+)</div>
+            <div class="node-btn">Zur&uuml;ck</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">MAG-4</div>
+          Magazin-Vorschau
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Zum Druck</div>
+            <div class="node-btn">Bearbeiten</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">Freigeben</div>
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--success">
+          <div class="node-num">MAG-5</div>
+          Erstes Heft erstellt!
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Startseite</div>
+            <div class="node-btn">Familie einladen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- FLOW 4: Abo Checkout                                -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="flow-section" id="abo">
+    <div class="flow-title">
+      4. Abo &amp; Checkout
+      <span class="flow-file">app-abo-preview.html</span>
+    </div>
+    <div class="flow-desc">Plan ausw&auml;hlen, Checkout-Wizard (4 Schritte), Abo verwalten &amp; k&uuml;ndigen</div>
+
+    <div class="flow-chain">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">ABO-1</div>
+          Abo ausw&auml;hlen
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Abo aktivieren</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--action">
+          <div class="node-num">ABO-2</div>
+          1/4 Plan
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Weiter</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--action">
+          <div class="node-num">ABO-3</div>
+          2/4 Empf&auml;nger
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Weiter</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--action">
+          <div class="node-num">ABO-4</div>
+          3/4 Zahlung
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Weiter</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--action">
+          <div class="node-num">ABO-5</div>
+          4/4 Best&auml;tigung
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Jetzt starten</div>
+            <div class="node-btn">&Auml;ndern (je Step)</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--success">
+          <div class="node-num">ABO-6</div>
+          Abo aktiviert!
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Fotos hochladen</div>
+            <div class="node-btn">Startseite</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size: 11px; font-weight: 700; color: var(--mid-gray); margin: 12px 0 8px; text-transform: uppercase; letter-spacing: 0.5px;">Abo verwalten &amp; k&uuml;ndigen</div>
+
+    <div class="flow-chain">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">ABO-7</div>
+          Abo aktiv
+          <div class="node-buttons">
+            <div class="node-btn node-btn--danger">K&uuml;ndigen</div>
+            <div class="node-btn">Zahlungsmethode</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">K&uuml;ndigen</div>
+        <div class="arrow-line arrow-line--red"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--modal">
+          <div class="node-num">ABO-9</div>
+          Abo k&uuml;ndigen
+          <div class="node-buttons">
+            <div class="node-btn node-btn--danger">Endg&uuml;ltig</div>
+            <div class="node-btn">Doch nicht</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--red"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">ABO-8</div>
+          Kein Abo
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Abo aktivieren</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- FLOW 5: Settings                                    -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="flow-section" id="settings">
+    <div class="flow-title">
+      5. Einstellungen
+      <span class="flow-file">app-settings-preview.html</span>
+    </div>
+    <div class="flow-desc">Profil, Adresse, Zahlung, Fotoheft, Versand, Account l&ouml;schen</div>
+
+    <div class="flow-chain">
+      <div class="flow-node" style="min-width: 160px;">
+        <div class="node-box node-box--screen">
+          <div class="node-num">SET-1</div>
+          Einstellungen
+          <div class="node-buttons">
+            <div class="node-btn">Nutzerprofil</div>
+            <div class="node-btn">Familiengruppe</div>
+            <div class="node-btn">Fotoheft</div>
+            <div class="node-btn">Lieferadresse</div>
+            <div class="node-btn">Abonnement</div>
+            <div class="node-btn">Zahlung</div>
+            <div class="node-btn">Versandstatus</div>
+            <div class="node-btn node-btn--danger">Account l&ouml;schen</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line"></div>
+      </div>
+      <div class="flow-node">
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+          <div class="node-box node-box--screen" style="padding: 8px 10px; font-size: 12px;">
+            <div class="node-num">SET-2</div>Nutzerprofil
+          </div>
+          <div class="node-box node-box--screen" style="padding: 8px 10px; font-size: 12px;">
+            <div class="node-num">SET-5</div>Lieferadresse
+          </div>
+          <div class="node-box node-box--screen" style="padding: 8px 10px; font-size: 12px;">
+            <div class="node-num">SET-6/7</div>Zahlung
+          </div>
+          <div class="node-box node-box--screen" style="padding: 8px 10px; font-size: 12px;">
+            <div class="node-num">SET-10</div>Fotoheft
+          </div>
+          <div class="node-box node-box--screen" style="padding: 8px 10px; font-size: 12px;">
+            <div class="node-num">SET-9</div>Versandstatus
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size: 11px; font-weight: 700; color: var(--mid-gray); margin: 12px 0 8px; text-transform: uppercase; letter-spacing: 0.5px;">Profil-Tiefe</div>
+
+    <div class="flow-chain">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">SET-2</div>
+          Nutzerprofil
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Bearbeiten</div>
+            <div class="node-btn">PW &auml;ndern</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">SET-3</div>
+          Profil bearbeiten
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Speichern</div>
+            <div class="node-btn">PW &auml;ndern</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">SET-4</div>
+          Passwort &auml;ndern
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">PW &auml;ndern</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size: 11px; font-weight: 700; color: var(--mid-gray); margin: 12px 0 8px; text-transform: uppercase; letter-spacing: 0.5px;">Account l&ouml;schen &amp; Logout</div>
+
+    <div class="flow-chain">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">SET-1</div>
+          Einstellungen
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">Account l&ouml;schen</div>
+        <div class="arrow-line arrow-line--red"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--modal">
+          <div class="node-num">SET-8</div>
+          Account l&ouml;schen
+          <div class="node-buttons">
+            <div class="node-btn">&ldquo;L&Ouml;SCHEN&rdquo; tippen</div>
+            <div class="node-btn node-btn--danger">Account l&ouml;schen</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--red"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">AUTH-1</div>
+          Login
+          <div class="xref">&rarr; auth</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-chain" style="margin-top: 8px;">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">SET-1</div>
+          Einstellungen
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">Abmelden</div>
+        <div class="arrow-line arrow-line--red"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--modal">
+          <div class="node-num">SYS-5</div>
+          Logout-Best&auml;tigung
+          <div class="xref">&rarr; app-system</div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--red"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">AUTH-1</div>
+          Login
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- FLOW 6: Groups                                      -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="flow-section" id="groups">
+    <div class="flow-title">
+      6. Gruppen &amp; Einladungen
+      <span class="flow-file">app-groups-preview.html</span>
+    </div>
+    <div class="flow-desc">Gruppe erstellen, verwalten, Mitglieder einladen, Empf&auml;nger, L&ouml;schen</div>
+
+    <div class="flow-chain">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">GRP-1</div>
+          Mitglieder
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Einladen</div>
+            <div class="node-btn">&#8943; Men&uuml;</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">Einladen</div>
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">GRP-6</div>
+          Mitglied einladen
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Link erstellen</div>
+            <div class="node-btn">WhatsApp / SMS</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">Link &ouml;ffnen</div>
+        <div class="arrow-line"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">GRP-7</div>
+          Einladung annehmen
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Annehmen</div>
+            <div class="node-btn">Ablehnen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size: 11px; font-weight: 700; color: var(--mid-gray); margin: 12px 0 8px; text-transform: uppercase; letter-spacing: 0.5px;">Gruppe verwalten &amp; l&ouml;schen</div>
+
+    <div class="flow-chain">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">GRP-3</div>
+          Gruppe verwalten
+          <div class="node-buttons">
+            <div class="node-btn">Name &auml;ndern</div>
+            <div class="node-btn">Foto &auml;ndern</div>
+            <div class="node-btn node-btn--danger">L&ouml;schen</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">L&ouml;schen</div>
+        <div class="arrow-line arrow-line--red"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--modal">
+          <div class="node-num">GRP-4</div>
+          Gruppe l&ouml;schen
+          <div class="node-buttons">
+            <div class="node-btn">&ldquo;L&Ouml;SCHEN&rdquo; tippen</div>
+            <div class="node-btn node-btn--danger">L&ouml;schen</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--red"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">GRP-10</div>
+          Gruppe aufgel&ouml;st
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Neue Gruppe</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size: 11px; font-weight: 700; color: var(--mid-gray); margin: 12px 0 8px; text-transform: uppercase; letter-spacing: 0.5px;">Mitglied-Aktionen (Admin)</div>
+
+    <div class="flow-chain">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">GRP-1</div>
+          Mitglieder
+          <div class="node-buttons">
+            <div class="node-btn">&#8943; Men&uuml; tippen</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">GRP-11</div>
+          Mitglied-Aktionen
+          <div class="node-buttons">
+            <div class="node-btn">Zum Admin</div>
+            <div class="node-btn">Erneut einladen</div>
+            <div class="node-btn node-btn--danger">Entfernen</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">Entfernen</div>
+        <div class="arrow-line arrow-line--red"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--modal">
+          <div class="node-num">GRP-12</div>
+          Mitglied entfernen?
+          <div class="node-buttons">
+            <div class="node-btn node-btn--danger">Entfernen</div>
+            <div class="node-btn">Abbrechen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size: 11px; font-weight: 700; color: var(--mid-gray); margin: 12px 0 8px; text-transform: uppercase; letter-spacing: 0.5px;">Empf&auml;nger verwalten</div>
+
+    <div class="flow-chain">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">GRP-8</div>
+          Empf&auml;nger verwalten
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">+ Hinzuf&uuml;gen</div>
+            <div class="node-btn">Bearbeiten</div>
+            <div class="node-btn node-btn--danger">L&ouml;schen</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">Hinzuf&uuml;gen</div>
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">GRP-9</div>
+          Empf&auml;nger hinzuf&uuml;gen
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Speichern</div>
+            <div class="node-btn">Abbrechen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-chain" style="margin-top: 8px;">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">GRP-8</div>
+          Empf&auml;nger verwalten
+          <div class="node-buttons">
+            <div class="node-btn">Trash tippen</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--red"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--modal">
+          <div class="node-num">GRP-13</div>
+          Empf&auml;nger entfernen?
+          <div class="node-buttons">
+            <div class="node-btn node-btn--danger">Entfernen</div>
+            <div class="node-btn">Abbrechen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size: 11px; font-weight: 700; color: var(--mid-gray); margin: 12px 0 8px; text-transform: uppercase; letter-spacing: 0.5px;">Gruppe wechseln &amp; erstellen</div>
+
+    <div class="flow-chain">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">GRP-5</div>
+          Gruppen wechseln
+          <div class="node-buttons">
+            <div class="node-btn">Gruppe tippen</div>
+            <div class="node-btn node-btn--cta">+ Neue Gruppe</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">Neue Gruppe</div>
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">GRP-2</div>
+          Gruppe erstellen
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Erstellen</div>
+            <div class="node-btn">Abbrechen</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- FLOW 7: System                                      -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="flow-section" id="system">
+    <div class="flow-title">
+      7. System &amp; Benachrichtigungen
+      <span class="flow-file">app-system-preview.html</span>
+    </div>
+    <div class="flow-desc">Fehler, Hilfe, Notifications, Push Permission, Aktivit&auml;ten</div>
+
+    <div class="flow-chain">
+      <div class="flow-node">
+        <div class="node-box node-box--modal">
+          <div class="node-num">SYS-4</div>
+          Netzwerk-Fehler
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Erneut versuchen</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width: 20px; flex-shrink: 0;"></div>
+
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">SYS-6</div>
+          Hilfe &amp; Support
+          <div class="node-buttons">
+            <div class="node-btn">FAQ</div>
+            <div class="node-btn">E-Mail</div>
+            <div class="node-btn">Chat</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width: 20px; flex-shrink: 0;"></div>
+
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">SYS-8</div>
+          In-App Messages
+          <div class="node-buttons">
+            <div class="node-btn" style="background: #E6F7EE; color: #1A6B3C;">Success Toast</div>
+            <div class="node-btn" style="background: #FFF0EE; color: var(--red);">Error Banner</div>
+            <div class="node-btn" style="background: #FFF8EB; color: #8B6914;">Warning</div>
+            <div class="node-btn" style="background: var(--blue-light);">Info Modal</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="width: 20px; flex-shrink: 0;"></div>
+
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">SYS-10</div>
+          Benachrichtigungen
+          <div class="node-buttons">
+            <div class="node-btn">Aktivit&auml;tsfeed</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="font-size: 11px; font-weight: 700; color: var(--mid-gray); margin: 12px 0 8px; text-transform: uppercase; letter-spacing: 0.5px;">Push Permission (Onboarding)</div>
+
+    <div class="flow-chain">
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">SYS-9</div>
+          Push Permission
+          <div class="node-buttons">
+            <div class="node-btn node-btn--cta">Aktivieren</div>
+            <div class="node-btn">Sp&auml;ter</div>
+          </div>
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-label">OS Dialog</div>
+        <div class="arrow-line"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--external">
+          OS Push Dialog
+        </div>
+      </div>
+      <div class="flow-arrow">
+        <div class="arrow-line arrow-line--orange"></div>
+      </div>
+      <div class="flow-node">
+        <div class="node-box node-box--screen">
+          <div class="node-num">SYS-7</div>
+          Push Notifications
+          <div class="node-buttons">
+            <div class="node-btn">Lock Screen Preview</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════ -->
+  <!-- Summary Stats                                       -->
+  <!-- ═══════════════════════════════════════════════════ -->
+  <div class="flow-section" style="background: var(--navy); color: white;">
+    <div style="display: flex; gap: 32px; justify-content: center; flex-wrap: wrap; text-align: center;">
+      <div>
+        <div style="font-size: 32px; font-weight: 800; color: var(--orange);">66</div>
+        <div style="font-size: 12px; font-weight: 600; color: var(--mid-gray);">Screens gesamt</div>
+      </div>
+      <div>
+        <div style="font-size: 32px; font-weight: 800; color: var(--orange);">8</div>
+        <div style="font-size: 12px; font-weight: 600; color: var(--mid-gray);">HTML Dateien</div>
+      </div>
+      <div>
+        <div style="font-size: 32px; font-weight: 800; color: var(--orange);">7</div>
+        <div style="font-size: 12px; font-weight: 600; color: var(--mid-gray);">User Flows</div>
+      </div>
+      <div>
+        <div style="font-size: 32px; font-weight: 800; color: var(--orange);">0</div>
+        <div style="font-size: 12px; font-weight: 600; color: var(--mid-gray);">Fehlende Screens</div>
+      </div>
+    </div>
+  </div>
+
+  <p style="font-size: 11px; color: #A0A0A0; text-align: center; margin-top: 16px;">
+    Remoryo User Flow Diagram &mdash; generiert am 7. M&auml;rz 2026
+  </p>
+
+  <!-- Nav dots -->
+  <div class="nav-sidebar">
+    <a href="#auth"><div class="nav-dot" title="Auth"></div></a>
+    <a href="#home"><div class="nav-dot" title="Home"></div></a>
+    <a href="#magazine"><div class="nav-dot" title="Magazin"></div></a>
+    <a href="#abo"><div class="nav-dot" title="Abo"></div></a>
+    <a href="#settings"><div class="nav-dot" title="Settings"></div></a>
+    <a href="#groups"><div class="nav-dot" title="Gruppen"></div></a>
+    <a href="#system"><div class="nav-dot" title="System"></div></a>
+  </div>
+
+</body>
+</html>
