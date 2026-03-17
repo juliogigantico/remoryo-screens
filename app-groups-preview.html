@@ -315,10 +315,9 @@
     .fullpage-desc { font-size: 15px; color: var(--dark-gray); font-weight: 500; line-height: 1.55; margin-bottom: 24px; }
     .fullpage-actions { padding: 0 20px 40px; display: flex; flex-direction: column; gap: 8px; }
 
-    /* ── App Header (logo + name) ── */
-    .app-header { display: flex; align-items: center; padding: 8px 16px 12px; gap: 12px; }
+    /* ── App Header (centered logo, no gear on these screens) ── */
+    .app-header { display: flex; align-items: center; justify-content: center; padding: 8px 16px 12px; }
     .app-header-logo { height: 26px; }
-    .app-header-name { font-weight: 800; font-size: 16px; color: var(--navy); letter-spacing: -0.5px; }
 
     /* ── Share Option Icon ── */
     .share-icon { width: 48px; height: 48px; border-radius: 14px; display: flex; align-items: center; justify-content: center; }
@@ -1117,7 +1116,6 @@
 
         <div class="app-header">
           <img src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo Logo" class="app-header-logo">
-          <span class="app-header-name">remoryo</span>
         </div>
         <div class="fullpage-msg">
           <div class="fullpage-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="18" y1="8" x2="23" y2="13"/><line x1="23" y1="8" x2="18" y2="13"/></svg></div>
@@ -1321,7 +1319,6 @@
         <div class="status-bar"></div>
         <div class="app-header">
           <img src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo Logo" class="app-header-logo">
-          <span class="app-header-name">remoryo</span>
         </div>
         <div class="fullpage-msg">
           <div class="fullpage-icon"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="8.5" cy="7" r="4"/><line x1="18" y1="8" x2="23" y2="13"/><line x1="23" y1="8" x2="18" y2="13"/></svg></div>
