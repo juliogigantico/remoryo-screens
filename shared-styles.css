@@ -206,22 +206,16 @@ h1 {
 .app-header {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   padding: 8px 20px 12px;
   border-bottom: 1px solid var(--border);
   flex-shrink: 0;
+  position: relative;
 }
 
 .app-header-logo {
   height: 26px;
   width: auto;
-}
-
-.header-wordmark {
-  font-weight: 700;
-  font-size: 16px;
-  color: var(--navy);
-  letter-spacing: -0.3px;
 }
 
 .header-settings {
@@ -233,6 +227,8 @@ h1 {
   justify-content: center;
   cursor: pointer;
   -webkit-tap-highlight-color: transparent;
+  position: absolute;
+  right: 20px;
 }
 
 .header-settings svg {

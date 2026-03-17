@@ -290,113 +290,102 @@
     }
 
     /* ── Magazine Cards ── */
+    /* ── Magazine Card (horizontal: cover left, info right) ── */
     .mag-card {
-      margin: 16px 20px;
+      margin: 12px 16px;
       border-radius: 16px;
-      overflow: hidden;
-      position: relative;
       background: var(--white);
-      box-shadow: 0 4px 20px rgba(27,44,67,0.1);
+      box-shadow: 0 2px 12px rgba(27,44,67,0.08), 0 0 0 1px rgba(0,0,0,0.04);
     }
 
     .mag-card-inner {
+      display: flex;
+      gap: 16px;
+      padding: 16px;
       position: relative;
-      padding: 20px;
-      background: linear-gradient(145deg, var(--soft-orange-bg) 0%, #FFF 50%, #F0F8FF 100%);
-      border: 1px solid rgba(0,0,0,0.06);
-      border-radius: 16px;
+      overflow: hidden;
     }
 
-    .mag-accent-orange {
-      position: absolute;
-      top: -10px;
-      right: -10px;
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: rgba(255,166,49,0.15);
+    /* ── Mini Title Page (left column) ── */
+    .mag-titlepage {
+      width: 135px;
+      min-width: 135px;
+      aspect-ratio: 210/297;
+      background: #FBF9F6;
+      border-radius: 6px;
+      border: 1px solid rgba(27,44,67,0.08);
+      box-shadow: 1px 2px 8px rgba(27,44,67,0.10);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 8px 12px;
+      flex-shrink: 0;
     }
 
-    .mag-accent-turquoise {
-      position: absolute;
-      bottom: -15px;
-      left: -15px;
-      width: 60px;
-      height: 60px;
-      border-radius: 50%;
-      background: rgba(184,224,224,0.2);
+    .mag-titlepage-logo {
+      width: 14px;
+      height: auto;
+      margin-bottom: 6px;
     }
 
-    .mag-logo {
-      width: 100px;
-      height: 20px;
-      margin-bottom: 12px;
-      background: var(--blue-light);
-      border-radius: 4px;
+    .mag-titlepage-frame {
+      width: calc(100% - 6px);
+      flex: 0 0 55%;
+      border: 1px solid var(--navy);
+      border-radius: 3px;
+      overflow: hidden;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 9px;
-      font-weight: 700;
-      color: var(--blue);
-      letter-spacing: 1px;
     }
 
-    .mag-cover {
+    .mag-titlepage-frame img {
       width: 100%;
-      aspect-ratio: 16/10;
-      border-radius: 10px;
+      height: 100%;
       object-fit: cover;
-      margin-bottom: 14px;
     }
 
-    .mag-group-name {
-      font-weight: 600;
-      font-size: 12px;
-      color: var(--dark-gray);
-      letter-spacing: 0.3px;
-      text-transform: uppercase;
-      margin-bottom: 2px;
-    }
-
-    .mag-title {
-      font-weight: 700;
-      font-size: 18px;
+    .mag-titlepage-title {
+      font-size: 7.5px;
+      font-weight: 800;
       color: var(--navy);
-      margin-bottom: 4px;
-      line-height: 1.3;
+      margin-top: 6px;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 100%;
+      letter-spacing: 0.2px;
+      line-height: 1.2;
     }
 
-    .mag-date-row {
+    .mag-titlepage-month {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--orange);
+      text-align: center;
+      margin-top: 1px;
+    }
+
+    /* ── Card Info (right column) ── */
+    .mag-card-info {
+      flex: 1;
       display: flex;
-      justify-content: space-between;
-      align-items: baseline;
-    }
-
-    .mag-month {
-      font-weight: 600;
-      font-size: 13px;
-      color: var(--dark-gray);
-    }
-
-    .mag-year {
-      font-weight: 500;
-      font-size: 12px;
-      color: var(--mid-gray);
+      flex-direction: column;
+      min-width: 0;
     }
 
     .mag-status {
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      padding: 5px 12px;
+      gap: 5px;
+      padding: 4px 10px;
       border-radius: 100px;
       font-size: 11px;
       font-weight: 700;
-      position: absolute;
-      top: 12px;
-      right: 12px;
-      z-index: 2;
+      align-self: flex-start;
+      margin-bottom: 8px;
     }
 
     .mag-status--editing {
@@ -409,29 +398,48 @@
       color: var(--green-text);
     }
 
-    .mag-deadline {
-      position: absolute;
-      top: 38px;
-      right: 12px;
-      z-index: 2;
-      font-size: 12px;
+    .mag-card-title {
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--navy);
+      line-height: 1.3;
+      margin-bottom: 2px;
+    }
+
+    .mag-card-date {
+      font-size: 13px;
+      font-weight: 600;
       color: var(--dark-gray);
+      margin-bottom: 4px;
+    }
+
+    .mag-group-name {
+      font-weight: 500;
+      font-size: 12px;
+      color: var(--mid-gray);
+      margin-bottom: 4px;
+    }
+
+    .mag-deadline {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--dark-gray);
+      margin-bottom: 4px;
     }
 
     .mag-actions {
       display: flex;
-      gap: 10px;
-      margin-top: 14px;
-      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 8px;
     }
 
     .mag-action-btn {
       flex: 1;
-      min-width: 100px;
-      min-height: 48px;
-      padding: 10px 14px;
-      border-radius: 10px;
-      font-size: 12px;
+      min-height: 40px;
+      padding: 8px 14px;
+      border-radius: var(--btn-radius);
+      font-size: 13px;
       font-weight: 700;
       border: none;
       cursor: pointer;
@@ -439,6 +447,24 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
+      font-family: inherit;
+    }
+
+    .mag-delete-btn {
+      width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--mid-gray);
+      border-radius: 50%;
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      z-index: 2;
     }
 
     .mag-action-btn--primary {
@@ -447,7 +473,7 @@
     }
 
     .mag-action-btn--outline {
-      background: white;
+      background: var(--white);
       color: var(--navy);
       border: 1.5px solid var(--border);
     }
@@ -905,7 +931,7 @@
 
         <div class="app-header">
           <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
-          <span class="header-wordmark">remoryo</span>
+
           <div class="header-settings" aria-label="Einstellungen">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
           </div>
@@ -1037,7 +1063,7 @@
 
         <div class="app-header">
           <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
-          <span class="header-wordmark">remoryo</span>
+
           <div class="header-settings" aria-label="Einstellungen">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
           </div>
@@ -1102,7 +1128,7 @@
 
         <div class="app-header">
           <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
-          <span class="header-wordmark">remoryo</span>
+
           <div class="header-settings" aria-label="Einstellungen">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
           </div>
@@ -1116,53 +1142,61 @@
 
         <div class="scroll-area" style="background: var(--white);">
 
+          <!-- Card 1: Current month — In Bearbeitung -->
           <div class="mag-card">
             <div class="mag-card-inner">
-              <div class="mag-accent-orange"></div>
-              <div class="mag-accent-turquoise"></div>
-              <div class="mag-status mag-status--editing">
-                <svg viewBox="0 0 24 24" fill="none" width="12" height="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
-                In Bearbeitung
+              <button class="mag-delete-btn" aria-label="Löschen">
+                <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              </button>
+              <div class="mag-titlepage">
+                <img class="mag-titlepage-logo" src="../assets/logo_heart_blue.png" alt="">
+                <div class="mag-titlepage-frame">
+                  <img src="flyer/foto.jpg" alt="Titelfoto März 2026">
+                </div>
+                <div class="mag-titlepage-title">Frühlingsgefühle</div>
+                <div class="mag-titlepage-month">März 2026</div>
               </div>
-              <div class="mag-deadline">Änderbar bis 31. März 2026</div>
-              <div class="mag-logo">REMORYO</div>
-              <img class="mag-cover" src="flyer/foto.jpg" alt="Cover März 2026">
-              <div class="mag-group-name">Familie Blümel</div>
-              <div class="mag-title">Frühlingsgefühle</div>
-              <div class="mag-date-row">
-                <span class="mag-month">März</span>
-                <span class="mag-year">2026</span>
-              </div>
-              <div class="mag-actions">
-                <button class="mag-action-btn mag-action-btn--primary" style="flex: 1;">Bearbeiten</button>
-                <button style="background:none;border:none;cursor:pointer;color:var(--mid-gray);padding:6px;display:flex;align-items:center;justify-content:center;border-radius:8px;flex-shrink:0" aria-label="Löschen">
-                  <svg viewBox="0 0 24 24" fill="none" width="18" height="18"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                </button>
+              <div class="mag-card-info">
+                <div class="mag-status mag-status--editing">
+                  <svg viewBox="0 0 24 24" fill="none" width="12" height="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  In Bearbeitung
+                </div>
+                <div class="mag-card-title">Frühlingsgefühle</div>
+                <div class="mag-card-date">März 2026</div>
+                <div class="mag-group-name">Familie Blümel</div>
+                <div class="mag-deadline">Änderbar bis 31. März 2026</div>
+                <div class="mag-actions">
+                  <button class="mag-action-btn mag-action-btn--primary">Bearbeiten</button>
+                </div>
               </div>
             </div>
           </div>
 
+          <!-- Card 2: Past month — Gedruckt & Versendet -->
           <div class="mag-card">
             <div class="mag-card-inner">
-              <div class="mag-accent-orange"></div>
-              <div class="mag-accent-turquoise"></div>
-              <div class="mag-status mag-status--sent">
-                <svg viewBox="0 0 24 24" fill="none" width="12" height="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
-                Gedruckt &amp; Versendet
+              <div class="mag-titlepage">
+                <img class="mag-titlepage-logo" src="../assets/logo_heart_blue.png" alt="">
+                <div class="mag-titlepage-frame">
+                  <img src="app-repo/assets/images/happy-family-fake-image.png" alt="Titelfoto Feb 2026">
+                </div>
+                <div class="mag-titlepage-title">Winterzauber</div>
+                <div class="mag-titlepage-month">Februar 2026</div>
               </div>
-              <div class="mag-logo">REMORYO</div>
-              <img class="mag-cover" src="app-repo/assets/images/happy-family-fake-image.png" alt="Cover Feb 2026">
-              <div class="mag-group-name">Familie Blümel</div>
-              <div class="mag-title">Winterzauber</div>
-              <div class="mag-date-row">
-                <span class="mag-month">Februar</span>
-                <span class="mag-year">2026</span>
-              </div>
-              <div class="mag-actions">
-                <button class="mag-action-btn mag-action-btn--outline" style="flex: 1;">
-                  <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-                  PDF herunterladen
-                </button>
+              <div class="mag-card-info">
+                <div class="mag-status mag-status--sent">
+                  <svg viewBox="0 0 24 24" fill="none" width="12" height="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/></svg>
+                  Gedruckt &amp; Versendet
+                </div>
+                <div class="mag-card-title">Winterzauber</div>
+                <div class="mag-card-date">Februar 2026</div>
+                <div class="mag-group-name">Familie Blümel</div>
+                <div class="mag-actions">
+                  <button class="mag-action-btn mag-action-btn--outline">
+                    <svg viewBox="0 0 24 24" fill="none" width="14" height="14"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    PDF
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -1206,7 +1240,7 @@
 
         <div class="app-header">
           <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
-          <span class="header-wordmark">remoryo</span>
+
           <div class="header-settings" aria-label="Einstellungen">
             <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
           </div>
@@ -1256,6 +1290,80 @@
         </div>
 
         <div class="safe-bottom"></div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 3c — Magazine Delete Confirmation       -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div id="screen-3c">
+      <div class="screen-label">3c &middot; Heft l&ouml;schen &mdash; Best&auml;tigung</div>
+      <div class="phone">
+
+        <div class="status-bar"></div>
+
+        <div class="app-header">
+          <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
+
+          <div class="header-settings" aria-label="Einstellungen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </div>
+        </div>
+
+        <div class="group-pill-wrap" style="background: var(--white);">
+          <div class="group-indicator">
+            <span style="display: flex; align-items: center; gap: 4px;">Familie Blümel <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span>
+          </div>
+        </div>
+
+        <div class="scroll-area" style="background: var(--white);">
+          <!-- Card behind overlay (dimmed) -->
+          <div class="mag-card" style="opacity: 0.4;">
+            <div class="mag-card-inner">
+              <div class="mag-titlepage">
+                <img class="mag-titlepage-logo" src="../assets/logo_heart_blue.png" alt="">
+                <div class="mag-titlepage-frame">
+                  <img src="flyer/foto.jpg" alt="Titelfoto März 2026">
+                </div>
+                <div class="mag-titlepage-title">Frühlingsgefühle</div>
+                <div class="mag-titlepage-month">März 2026</div>
+              </div>
+              <div class="mag-card-info">
+                <div class="mag-status mag-status--editing">
+                  <svg viewBox="0 0 24 24" fill="none" width="12" height="12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H4a2 2 0 00-2 2v14a2 2 0 002 2h14a2 2 0 002-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 013 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+                  In Bearbeitung
+                </div>
+                <div class="mag-card-title">Frühlingsgefühle</div>
+                <div class="mag-card-date">März 2026</div>
+                <div class="mag-group-name">Familie Blümel</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dark overlay -->
+        <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.45); z-index: 5;"></div>
+
+        <!-- Bottom sheet confirmation -->
+        <div style="position: absolute; bottom: 0; left: 0; right: 0; background: var(--white); border-radius: 24px 24px 0 0; padding: 24px 24px 32px; z-index: 6; box-shadow: 0 -8px 30px rgba(0,0,0,0.12);">
+          <div style="width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 20px;"></div>
+
+          <!-- Warning icon -->
+          <div style="display: flex; justify-content: center; margin-bottom: 16px;">
+            <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--soft-red); display: flex; align-items: center; justify-content: center;">
+              <svg viewBox="0 0 24 24" fill="none" width="24" height="24" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14z"/></svg>
+            </div>
+          </div>
+
+          <div style="font-weight: 700; font-size: 20px; color: var(--navy); text-align: center; margin-bottom: 8px;">Fotoheft löschen?</div>
+          <div style="font-size: 14px; color: var(--dark-gray); text-align: center; line-height: 1.55; font-weight: 500; margin-bottom: 24px;">Das Heft <strong>„Frühlingsgefühle" (März 2026)</strong> wird unwiderruflich gelöscht. Alle Seiten und Einstellungen gehen verloren.</div>
+
+          <div style="display: flex; flex-direction: column; gap: 10px;">
+            <button class="btn-danger" style="width: 100%; padding: 14px; border-radius: var(--btn-radius); background: var(--red); color: var(--white); font-weight: 700; font-size: 16px; border: none; cursor: pointer; min-height: 48px;">Endgültig löschen</button>
+            <button class="btn-text" style="background: none; border: none; font-weight: 600; font-size: 15px; color: var(--navy); cursor: pointer; padding: 12px; text-align: center; width: 100%; font-family: inherit; min-height: 48px;">Abbrechen</button>
+          </div>
+        </div>
 
       </div>
     </div>
