@@ -316,8 +316,14 @@ body{
 .slot-ent-icon{font-size:24px}
 .slot-ent-label{font-size:12px;font-weight:600;color:var(--dark-gray)}
 .slot-text{
-  background:var(--soft-orange-bg);display:flex;align-items:center;justify-content:center;
+  background:var(--soft-orange-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;
   padding:10px;
+}
+.slot-text-author{
+  margin-top:auto;padding-top:6px;display:flex;flex-direction:column;align-items:center;gap:2px;
+}
+.slot-text-author-line{
+  margin-top:auto;padding-top:6px;font-size:7px;font-weight:700;color:var(--blue);text-align:center;
 }
 .slot-text-content{font-size:11px;color:var(--dark-gray);text-align:center;line-height:1.4;word-break:break-word;overflow:hidden}
 .slot-photo--side{flex-direction:row}
@@ -581,6 +587,31 @@ body{
 .back-manage-link:hover{text-decoration:underline}
 .back-photo-slot{min-height:100px;border-radius:6px;overflow:hidden;cursor:pointer;display:flex;align-items:center;justify-content:center;margin:6px 17px;position:relative}
 
+/* DECORATIVE BLOBS */
+.wysiwyg-blob{position:absolute;z-index:0;pointer-events:none}
+.wysiwyg-blob svg{display:block;overflow:visible}
+.wysiwyg-blob.b-ol{top:-5px;left:-7px}
+.wysiwyg-blob.b-or{top:-5px;right:-7px}
+.wysiwyg-blob.b-ul{bottom:-5px;left:-7px}
+.wysiwyg-blob.b-ur{bottom:-5px;right:-7px}
+.wysiwyg-blob svg.bs1{width:140px;height:70px}
+.wysiwyg-blob svg.bs2{width:95px;height:82px}
+.wysiwyg-blob svg.bs3{width:59px;height:118px}
+.wysiwyg-blob svg.bs4{width:72px;height:59px}
+.wysiwyg-blob svg.bs5{width:130px;height:55px}
+.wysiwyg-page>*:not(.wysiwyg-blob){position:relative;z-index:1}
+
+/* PB TOGGLE */
+.pb-toggle{display:flex;align-items:center;justify-content:space-between;padding:14px 0;border-bottom:1px solid var(--border)}
+.pb-toggle-label{font-size:15px;font-weight:600}
+.pb-toggle-desc{font-size:12px;color:var(--mid-gray);margin-top:2px}
+.pb-switch{width:48px;height:28px;border-radius:14px;cursor:pointer;position:relative;transition:background .2s;-webkit-tap-highlight-color:transparent}
+.pb-switch--on{background:var(--orange)}
+.pb-switch--off{background:var(--border-alt)}
+.pb-switch-knob{position:absolute;top:2px;width:24px;height:24px;border-radius:12px;background:white;box-shadow:0 1px 3px rgba(0,0,0,.15);transition:left .2s}
+.pb-switch--on .pb-switch-knob{left:22px}
+.pb-switch--off .pb-switch-knob{left:2px}
+
 /* MEMBER MANAGEMENT */
 .member-list{max-height:320px;overflow-y:auto}
 .member-row{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--border)}
@@ -594,6 +625,16 @@ body{
 </style>
 </head>
 <body>
+
+<svg xmlns="http://www.w3.org/2000/svg" style="position:absolute;width:0;height:0;overflow:hidden">
+<defs>
+<symbol id="blob-1" viewBox="0 0 841.3 687.1"><path fill="#82B7D8" d="M565.6,98.2C479.8,76.7,388.8,84.3,319.9,143c-51.6,43.9-90.1,99.2-145.3,139.3C107.9,330.9,50.1,414.5,54.7,500.6c2.9,54.4,42.2,94.9,98.1,91.2c66.4-4.4,119-51.6,163.3-96.9c77.9-79.6,164.8-97.2,272-110.2c63.7-7.7,160.6-24,177.4-98.5C788.7,183.7,643.4,117.7,565.6,98.2z"/></symbol>
+<symbol id="blob-2" viewBox="0 0 752.7 826.4"><path fill="#FFA631" d="M560.4,141.8c-79.9-66.5-230.4-31.1-291.7,44.7c-31.1,38.5-53.8,89.9-80.5,132.5c-37.9,60.6-86.9,123.9-91.9,196.9c-3.8,55.8,13.8,114,52.8,154.2c51.9,53.5,133.5,68.4,207.5,58.8c91.2-11.8,180-59.5,228.8-137.4C655.1,480.3,672.8,235.3,560.4,141.8z"/></symbol>
+<symbol id="blob-3" viewBox="0 0 724.5 826.4"><path fill="#1B2C43" d="M636.7,342c-6.6-13-15.4-26.1-26.6-39.1C509.1,186,331,132.7,182.2,166.7c-48.4,11.1-86.2,30.7-101.3,79.8c-14.7,47.7-9.6,100.5,7,147c17.6,49.4,48.1,89.2,77,132.1c36,53.3,56.7,138.1,124.2,160.7c88,29.5,196.8-61.6,260.1-113C625.8,511.1,680.1,427.9,636.7,342z"/></symbol>
+<symbol id="blob-4" viewBox="0 0 451.8 515.4"><path fill="#C7DDDA" d="M286.2,161.2c-36.7-15.6-77.7-18.5-117.5-16.6c-37.7,1.8-81.6,12.4-95.8,47.3c-7.8,19.2-4.2,41,0.3,61.2c7.5,33.5,17.6,66.9,35.4,96.2c17.9,29.3,44.4,54.4,76.9,65.2c37.9,12.5,80.4,4.4,115.2-15.1C409,338.7,397.4,208.5,286.2,161.2z"/></symbol>
+<symbol id="blob-5" viewBox="0 0 870.3 462.6"><path fill="#E8DDD1" d="M463.5,359.4c30.1,12.4,57.5,32.3,89.5,38.1c57.1,10.5,111.3-25.7,158.2-60.1c17.5-12.8,35.6-26.4,45.1-45.9c15.3-31.3,3.4-70.7-20.5-96.1s-57.5-39.2-90.8-49.4c-51.4-15.7-109.7-30.4-163.6-32.9c-52.1-2.4-103-20-155.9-21.7c-30.6-1-62.2,1.7-89.4,15.7S187,148.5,186.4,179c-0.5,26.6,14.6,50.9,31.4,71.6c27.4,33.6,63.3,63.6,105.8,75.1C369.7,338.2,418.8,341.1,463.5,359.4z"/></symbol>
+</defs>
+</svg>
 
 <div class="phone" id="phone">
   <div id="statusBar"></div>
@@ -674,6 +715,49 @@ const LAYOUTS = [
   {id:'2-slots',name:'2 Elemente',slots:[{h:.5},{h:.5}]},
 ];
 
+/* Blob system */
+const BLOB_SHAPES = [
+  {id:'blob-1',sc:'bs1',vb:'0 0 841.3 687.1'},{id:'blob-2',sc:'bs2',vb:'0 0 752.7 826.4'},{id:'blob-3',sc:'bs3',vb:'0 0 724.5 826.4'},{id:'blob-4',sc:'bs4',vb:'0 0 451.8 515.4'},{id:'blob-5',sc:'bs5',vb:'0 0 870.3 462.6'}
+];
+const BLOB_CORNERS = ['b-ol','b-or','b-ul','b-ur'];
+const BLOB_ROTS = [0,15,30,45,-20,-35,60];
+function generatePageBlobs(pages){
+  let lastShape=-1;
+  pages.forEach((pg,pi)=>{
+    const blobs=[];
+    const usedShapes=[];
+    function pickShape(){
+      const pool=[0,1,2,3,4].filter(s=>s!==lastShape&&!usedShapes.includes(s));
+      const s=pool[Math.floor(Math.random()*pool.length)]??0;
+      usedShapes.push(s);lastShape=s;return s;
+    }
+    function makeBlob(corner,scale,opacity){
+      const si=pickShape();
+      return {shapeIdx:si,corner,rot:BLOB_ROTS[Math.floor(Math.random()*BLOB_ROTS.length)],scale:scale||1,opacity:opacity||1};
+    }
+    if(pi===0){// Cover: OL + UR + element blob
+      blobs.push(makeBlob('b-ol',1.2,1));blobs.push(makeBlob('b-ur',1.2,1));blobs.push(makeBlob(['b-ol','b-or','b-ul','b-ur'][Math.floor(Math.random()*4)],.7,.8));
+    } else if(pi===11){// Back: OL + UR
+      blobs.push(makeBlob('b-ol',1,1));blobs.push(makeBlob('b-ur',1,1));
+    } else {// Content: 1 random corner, 70% chance of second
+      const c=BLOB_CORNERS[Math.floor(Math.random()*4)];
+      blobs.push(makeBlob(c,1,.85));
+      if(Math.random()<.7){
+        const opp=c==='b-ol'?'b-ur':c==='b-ur'?'b-ol':c==='b-or'?'b-ul':'b-or';
+        blobs.push(makeBlob(opp,.65,.7));
+      }
+    }
+    pg.blobs=blobs;
+  });
+}
+function renderBlobsHtml(pg){
+  if(!pg.blobs) return '';
+  return pg.blobs.map(b=>{
+    const sh=BLOB_SHAPES[b.shapeIdx];
+    return `<div class="wysiwyg-blob ${b.corner}" style="opacity:${b.opacity};transform:rotate(${b.rot}deg) scale(${b.scale})"><svg class="${sh.sc}" viewBox="${sh.vb}"><use href="#${sh.id}"/></svg></div>`;
+  }).join('');
+}
+
 /* ═══════════════════════════════════════════════════════════
    SVG ICONS
    ═══════════════════════════════════════════════════════════ */
@@ -693,6 +777,7 @@ const IC = {
   save:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>',
   eye:'<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>',
   x:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>',
+  gear:'<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 010 2.83 2 2 0 01-2.83 0l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83 0 2 2 0 010-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 112.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82V9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>',
 };
 
 /* ═══════════════════════════════════════════════════════════
@@ -714,7 +799,7 @@ const S = {
   navStack:[],
   mode:null,
   selectedPhotos:[],
-  mag:{title:'Unser Familienmonat',month:'März 2026',family:'Familie Müller',pages:[]},
+  mag:{title:'Unser Familienmonat',month:'März 2026',family:'Familie Müller',pages:[],pbEnabled:true},
   editor:{pageIdx:0,pendingPhotoLayout:null},
   members:MEMBERS_DEFAULT.map(m=>({...m})),
 };
@@ -831,6 +916,7 @@ function initMagazine(mode){
     quote:'\u201eFamilie ist, wo das Leben seinen Anfang nimmt und die Liebe niemals endet.\u201c',
     backSlot:{content:null}
   });
+  generatePageBlobs(S.mag.pages);
 }
 
 function getFilledCount(){
@@ -970,7 +1056,9 @@ function renderThumb(page,idx){
     const isEmotional=page.variant==='emotional';
     return `<div style="width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:6px;${isEmotional?'background:linear-gradient(175deg,#FBF9F6,#EDE7DF)':'background:#FBF9F6'}">
       <div style="font-size:5px;font-weight:800;color:var(--navy);letter-spacing:.3px">remoryo</div>
-      <div style="display:flex;gap:3px;margin:1px 0">${S.members.slice(0,4).map(m=>`<div style="width:8px;height:8px;border-radius:4px;background:${m.color};display:flex;align-items:center;justify-content:center;font-size:3px;font-weight:700;color:white">${m.initial}</div>`).join('')}</div>
+      ${S.mag.pbEnabled!==false
+        ?`<div style="display:flex;gap:3px;margin:1px 0">${S.members.slice(0,4).map(m=>`<div style="width:8px;height:8px;border-radius:4px;background:${m.color};display:flex;align-items:center;justify-content:center;font-size:3px;font-weight:700;color:white">${m.initial}</div>`).join('')}</div>`
+        :`<div style="font-size:3.5px;color:var(--navy);text-align:center;margin:1px 0">${S.members.filter(m=>m.isApp).slice(0,3).map(m=>esc(m.name)).join(' · ')}</div>`}
       ${isEmotional?`<div style="font-size:3.5px;font-style:italic;color:var(--dark-gray);text-align:center;padding:0 3px;line-height:1.4">${esc(page.quote||'').substring(0,50)}...</div>`:''}
       ${!isEmotional&&page.backSlot?.content?`<div style="flex:1;width:90%;background:${page.backSlot.content.type==='photo'?GRADIENTS[page.backSlot.content.photoId%15]:'var(--turquoise-light)'};border-radius:2px;min-height:16px;margin:2px 0"></div>`:''}
       <div style="margin-top:auto;display:flex;flex-direction:column;align-items:center;gap:1px">
@@ -989,12 +1077,12 @@ function renderThumb(page,idx){
       const camSvg='<svg width="8" height="8" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.4)" stroke-width="1.5"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>';
       if((pl==='side-left'||pl==='side-right')&&pageLayout==='2-slots'){
         const photoEl=`<div class="page-block--photo-area" style="flex:1;background:${bg}">${camSvg}</div>`;
-        const capEl=`<div class="page-block--side-caption"><div class="page-block--caption-dot" style="width:4px;height:4px"></div></div>`;
+        const capEl=`<div class="page-block--side-caption">${S.mag.pbEnabled!==false?'<div class="page-block--caption-dot" style="width:4px;height:4px"></div>':''}</div>`;
         return `<div class="page-block page-block--side" style="height:${h}">${pl==='side-left'?photoEl+capEl:capEl+photoEl}</div>`;
       }
       return `<div class="page-block page-block--photo" style="height:${h}">
         <div class="page-block--photo-area" style="background:${bg}">${camSvg}</div>
-        <div class="page-block--caption"><div class="page-block--caption-dot"></div><div class="page-block--caption-line"></div></div>
+        <div class="page-block--caption">${S.mag.pbEnabled!==false?'<div class="page-block--caption-dot"></div>':''}<div class="page-block--caption-line"></div></div>
       </div>`;
     } else if(slot.content.type==='entertainment'){
       const cat=ENT_CATS.find(c=>c.id===slot.content.catId);
@@ -1043,6 +1131,7 @@ function renderOverview(){
     <div class="sec-header">
       <div class="sec-back" role="button" aria-label="Zurück" onclick="nav('mode-selection')">${IC.back}</div>
       <div class="sec-title">Fotoheft</div>
+      <div style="margin-left:auto;cursor:pointer;padding:8px;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center" onclick="showMagSettings()">${IC.gear}</div>
     </div>
     <div class="overview-header">
       <div class="overview-month">${S.mag.month}</div>
@@ -1135,9 +1224,10 @@ function renderCoverPage(pg){
   const photoContent=hasPhoto
     ?`<div class="slot-edit-badge">${IC.edit}</div>`
     :`${camSvg}<div style="font-size:10px;color:var(--navy);opacity:.15;font-weight:700;text-transform:uppercase;letter-spacing:3px;margin-top:4px">Titelfoto</div>`;
-  return `<div class="cover-inner">
+  return `${renderBlobsHtml(pg)}
+  <div class="cover-inner">
     <div class="cover-logo"><img src="assets/logo_heart_blue.png"></div>
-    <div class="cover-foto" style="background:${bg}" onclick="onSlotTap(0)">
+    <div class="cover-foto" style="background:${bg}" onclick="onCoverPhotoTap()">
       ${photoContent}
     </div>
     <div class="cover-title" onclick="editCoverTitle()">${esc(S.mag.title)}</div>
@@ -1160,10 +1250,14 @@ function renderBackPage(){
   contentHtml+=`<div class="back-section" style="margin-bottom:16px"><div class="back-wordmark">remoryo</div></div>`;
   // Authors
   contentHtml+=`<div class="back-section"><div class="back-label">Gestaltet von</div></div>`;
-  contentHtml+=`<div class="back-authors">${authors.map(m=>`<div class="back-author" onclick="showMemberManager()">
-    <div class="back-author-circle" style="background:${m.color}">${m.initial}</div>
-    <div class="back-author-name">${esc(m.name)}</div>
-  </div>`).join('')}</div>`;
+  if(S.mag.pbEnabled!==false){
+    contentHtml+=`<div class="back-authors">${authors.map(m=>`<div class="back-author" onclick="showMemberManager()">
+      <div class="back-author-circle" style="background:${m.color}">${m.initial}</div>
+      <div class="back-author-name">${esc(m.name)}</div>
+    </div>`).join('')}</div>`;
+  } else {
+    contentHtml+=`<div style="text-align:center;padding:6px 17px;line-height:2;cursor:pointer" onclick="showMemberManager()">${authors.map(m=>`<span style="font-size:9px;font-weight:800;color:var(--navy)">${esc(m.name)}</span>`).join('<span style="color:var(--turquoise);margin:0 5px">·</span>')}</div>`;
+  }
   // Separator
   contentHtml+=sep;
   if(isEmotional){
@@ -1203,7 +1297,8 @@ function renderBackPage(){
   // Footer
   contentHtml+=`<div class="back-footer"><img src="assets/logo_heart_blue.png" style="width:14px;height:auto;margin-bottom:4px"><div class="back-footer-url">www.remoryo.de</div></div>`;
 
-  return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;${bgStyle};padding:17px">
+  return `${renderBlobsHtml(S.mag.pages[S.editor.pageIdx])}
+  <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;${bgStyle};padding:17px;position:relative;z-index:1">
     <div style="display:flex;flex-direction:column;align-items:center;width:100%">
     ${contentHtml}
     </div>
@@ -1217,7 +1312,8 @@ function renderContentPage(pg,pageIdx){
     const slot=pg.slots[si]||{content:null};
     slotsHtml+=`<div style="flex:${ls.h};min-height:0">${renderSlot(slot,si,pg.layout)}</div>`;
   });
-  return `<div class="wysiwyg-header">
+  return `${renderBlobsHtml(pg)}
+  <div class="wysiwyg-header">
     <div class="wysiwyg-family">${S.mag.family}</div>
     <div class="wysiwyg-month">${S.mag.month}</div>
   </div>
@@ -1243,12 +1339,13 @@ function renderSlot(slot,si,pageLayout){
     const authorInitial=authorName[0];
     const pLayout=c.photoLayout||'stacked';
     const camSvg='<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.35)" stroke-width="1.2"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/><circle cx="12" cy="13" r="4"/></svg>';
+    const pb=S.mag.pbEnabled!==false;
     // Side layout (portrait variants) — only in 2-slot pages
     if((pLayout==='side-left'||pLayout==='side-right')&&pageLayout==='2-slots'){
       const photoEl=`<div class="slot-photo-area" style="background:${bg}">${camSvg}<div class="slot-edit-badge">${IC.edit}</div></div>`;
       const captionEl=`<div class="slot-caption-side" onclick="event.stopPropagation();editCaption(${si})">
-        <div class="slot-caption-circle" style="margin-top:0;border:1.3px solid var(--blue);box-shadow:0 1px 4px rgba(27,44,67,.12)">${authorInitial}</div>
-        <div class="slot-caption-name" style="font-size:6.5px">${authorName}</div>
+        ${pb?`<div class="slot-caption-circle" style="margin-top:0;border:1.3px solid var(--blue);box-shadow:0 1px 4px rgba(27,44,67,.12)">${authorInitial}</div>
+        <div class="slot-caption-name" style="font-size:6.5px">${authorName}</div>`:''}
         <div class="slot-caption-date" style="font-size:6px">5. März</div>
         <div class="slot-caption-text" style="text-align:center;margin-top:3px;font-size:10px;line-height:1.5;${hasCaption?'':'opacity:.5;font-style:italic'}">${captionText}</div>
       </div>`;
@@ -1261,8 +1358,8 @@ function renderSlot(slot,si,pageLayout){
       <div class="slot-photo-area" style="background:${bg}">${camSvg}<div class="slot-edit-badge">${IC.edit}</div></div>
       <div class="slot-caption" onclick="event.stopPropagation();editCaption(${si})">
         <div class="slot-caption-left">
-          <div class="slot-caption-circle">${authorInitial}</div>
-          <div class="slot-caption-name">${authorName}</div>
+          ${pb?`<div class="slot-caption-circle">${authorInitial}</div>
+          <div class="slot-caption-name">${authorName}</div>`:''}
           <div class="slot-caption-date">5. März</div>
         </div>
         <div class="slot-caption-right">
@@ -1282,9 +1379,20 @@ function renderSlot(slot,si,pageLayout){
     </div>`;
   }
   if(c.type==='freetext'){
+    const ftAuthor=S.members[(si+S.editor.pageIdx*3)%S.members.length];
+    const ftDate=`${new Date().getDate()}. ${MONTHS_DE[new Date().getMonth()]}`;
+    const pb=S.mag.pbEnabled!==false;
+    const authorHtml=pb
+      ?`<div class="slot-text-author">
+          <div class="slot-caption-circle" style="width:24px;height:24px;border-radius:12px;margin-top:0;background:${ftAuthor.color}">${ftAuthor.initial}</div>
+          <div style="font-size:6px;font-weight:700;color:var(--blue)">${esc(ftAuthor.name)}</div>
+          <div style="font-size:5.5px;color:var(--orange)">am ${ftDate}</div>
+        </div>`
+      :`<div class="slot-text-author-line">— ${ftDate}</div>`;
     return `<div class="slot slot-text" style="height:100%" onclick="onFilledSlot(${si})">
       <div class="slot-edit-badge">${IC.edit}</div>
       <div class="slot-text-content">${c.text?esc(c.text).replace(/\n/g,'<br>'):'Tippe hier, um Text einzugeben...'}</div>
+      ${authorHtml}
     </div>`;
   }
   return '';
@@ -1897,6 +2005,57 @@ function addMember(){
 function removeMember(idx){
   S.members.splice(idx,1);
   hideSheet();setTimeout(()=>showMemberManager(),200);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MAGAZINE SETTINGS (PB Toggle)
+   ═══════════════════════════════════════════════════════════ */
+function showMagSettings(){
+  const pbOn=S.mag.pbEnabled!==false;
+  showSheet(`
+    <div class="sheet-title">Heft-Einstellungen</div>
+    <div class="sheet-sub">Einstellungen für das gesamte Magazin</div>
+    <div class="pb-toggle">
+      <div>
+        <div class="pb-toggle-label">Profilbilder anzeigen</div>
+        <div class="pb-toggle-desc">${pbOn?'Autorkreise werden in Captions und auf der Rückseite angezeigt':'Nur Datum wird angezeigt, keine Kreise'}</div>
+      </div>
+      <div class="pb-switch pb-switch--${pbOn?'on':'off'}" onclick="togglePB()">
+        <div class="pb-switch-knob"></div>
+      </div>
+    </div>
+    <div class="btn btn-text-gray" style="margin-top:12px" onclick="hideSheet()">Fertig</div>
+  `);
+}
+function togglePB(){
+  S.mag.pbEnabled=S.mag.pbEnabled===false?true:false;
+  showMagSettings();
+  setTimeout(()=>render(true),50);
+}
+
+/* ═══════════════════════════════════════════════════════════
+   COVER PHOTO ACTIONS
+   ═══════════════════════════════════════════════════════════ */
+function onCoverPhotoTap(){
+  const pg=S.mag.pages[S.editor.pageIdx];
+  const slot=pg.slots[0];
+  if(!slot?.content) return showPhotoPicker(0);
+  showCoverPhotoActions();
+}
+function showCoverPhotoActions(){
+  showSheet(`
+    <div class="sheet-title">Titelfoto bearbeiten</div>
+    <div class="action-list">
+      <div class="action-row" onclick="hideSheet();setTimeout(()=>showCropOverlay(0),200)">
+        <div class="action-icon" style="background:var(--blue-light)">${IC.crop}</div>
+        <div><div class="action-label">Ausschnitt anpassen</div><div class="action-desc">Bild im Rahmen verschieben & zoomen</div></div>
+      </div>
+      <div class="action-row" onclick="hideSheet();setTimeout(()=>showPhotoPicker(0),200)">
+        <div class="action-icon" style="background:var(--soft-orange)">${IC.swap}</div>
+        <div><div class="action-label">Foto tauschen</div><div class="action-desc">Anderes Foto für das Cover wählen</div></div>
+      </div>
+    </div>
+  `);
 }
 
 /* ═══════════════════════════════════════════════════════════
