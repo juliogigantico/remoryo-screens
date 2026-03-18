@@ -5,25 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>remoryo — Screen Overview</title>
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: Inter, -apple-system, sans-serif; background: #f5f5f5; color: #1B2C43; padding: 24px; }
-    h1 { font-size: 22px; font-weight: 700; }
-    .subtitle { font-size: 13px; color: #94A3B3; margin-bottom: 28px; }
+    body { font-family: Inter, -apple-system, sans-serif; background: #F0F2F5; color: #1B2C43; padding: 28px 32px 60px; }
+    h1 { font-size: 24px; font-weight: 800; letter-spacing: -0.5px; }
+    .subtitle { font-size: 13px; color: #94A3B3; margin-bottom: 8px; font-weight: 500; }
+    .overview-link { font-size: 13px; font-weight: 600; color: #FFA631; text-decoration: none; margin-bottom: 32px; display: inline-block; }
+    .overview-link:hover { text-decoration: underline; }
     .section { margin-bottom: 36px; }
     .section-title {
-      font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
+      font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px;
       color: #94A3B3; margin-bottom: 14px;
       border-left: 3px solid #FFA631; padding-left: 10px;
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
       gap: 14px;
     }
     .card {
       background: white; border-radius: 12px; overflow: hidden;
-      text-decoration: none; color: #1B2C43; border: 1px solid #eee;
+      text-decoration: none; color: #1B2C43; border: 1px solid #E2E6EB;
       transition: box-shadow 0.2s, transform 0.15s;
       display: flex; flex-direction: column;
     }
@@ -40,55 +42,83 @@
       padding: 8px 10px; font-size: 11px; font-weight: 600;
       text-align: center; border-top: 1px solid #f0f0f0;
     }
+    .prototype-banner {
+      background: linear-gradient(135deg, #D4E8F2, #fff);
+      border: 1.5px solid #82B7D8;
+      border-radius: 14px;
+      padding: 18px 24px;
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+    .prototype-banner .icon { font-size: 28px; flex-shrink: 0; }
+    .prototype-banner .text { flex: 1; }
+    .prototype-banner .text h3 { font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .prototype-banner .text p { font-size: 12px; color: #5A6B7A; line-height: 1.5; }
+    .prototype-banner a {
+      background: #FFA631; color: white; border-radius: 10px; padding: 10px 20px;
+      font-size: 13px; font-weight: 700; text-decoration: none; white-space: nowrap; flex-shrink: 0;
+    }
+    .prototype-banner a:hover { background: #e8951c; }
   </style>
 </head>
 <body>
   <h1>remoryo Screens</h1>
-  <p class="subtitle">51 Screens · 8 Kategorien · Stand März 2026</p>
+  <p class="subtitle">75 Screens &middot; 7 Dateien + Prototyp &middot; Stand M&auml;rz 2026</p>
+  <a href="screens-overview.html" class="overview-link">Vollst&auml;ndige &Uuml;bersicht mit Design System &nearr;</a>
 
-  <div class="section">
-    <div class="section-title">Auth & Registration (5)</div>
-    <div class="grid" id="grid-auth"></div>
-  </div>
   <div class="section">
     <div class="section-title">Onboarding (2)</div>
     <div class="grid" id="grid-onboarding"></div>
   </div>
   <div class="section">
-    <div class="section-title">Home / Fotos (5)</div>
+    <div class="section-title">Authentifizierung (6)</div>
+    <div class="grid" id="grid-auth"></div>
+  </div>
+  <div class="section">
+    <div class="section-title">Home &amp; Fotos (12)</div>
     <div class="grid" id="grid-home"></div>
   </div>
+
   <div class="section">
-    <div class="section-title">Magazin-Editor (4)</div>
-    <div class="grid" id="grid-magazine"></div>
+    <div class="section-title">Magazin-Erstellung (Prototyp)</div>
+    <div class="prototype-banner">
+      <div class="icon">&#x1f579;&#xfe0f;</div>
+      <div class="text">
+        <h3>Interaktiver Prototyp</h3>
+        <p>Klickbarer WYSIWYG-Editor mit Auto-Fill, Slot-System, Back-Page-Varianten &amp; Member-Management.</p>
+      </div>
+      <a href="mag-creation-prototype.html">Prototyp &ouml;ffnen &nearr;</a>
+    </div>
   </div>
+
   <div class="section">
-    <div class="section-title">Settings (4)</div>
+    <div class="section-title">Settings &amp; Account (12)</div>
     <div class="grid" id="grid-settings"></div>
   </div>
   <div class="section">
-    <div class="section-title">Settings Detail (9)</div>
-    <div class="grid" id="grid-settings-detail"></div>
+    <div class="section-title">Abo &amp; Payment (10)</div>
+    <div class="grid" id="grid-abo"></div>
   </div>
   <div class="section">
-    <div class="section-title">Utility & Flows (10)</div>
-    <div class="grid" id="grid-utility"></div>
+    <div class="section-title">Gruppen &amp; Einladungen (16)</div>
+    <div class="grid" id="grid-groups"></div>
   </div>
   <div class="section">
-    <div class="section-title">Zusätzliche Screens (12)</div>
-    <div class="grid" id="grid-additional"></div>
+    <div class="section-title">System &amp; Support (17)</div>
+    <div class="grid" id="grid-system"></div>
   </div>
 
 <script>
 const screens = {
-  'grid-auth': { file: 'auth-preview.html', screens: ['Login', 'Login Fehler', 'Registrierung', 'Web Landing', 'In-App Welcome'] },
   'grid-onboarding': { file: 'onboarding-preview.html', screens: ["So funktioniert's", 'Familie einladen'] },
-  'grid-home': { file: 'app-home-preview.html', screens: ['Fotos Tab', 'Empty State', 'Magazine Tab', 'Magazine Empty', 'Foto-Kommentare'] },
-  'grid-magazine': { file: 'app-magazine-preview.html', screens: ['Magazin-Übersicht', 'Seitenübersicht', 'Foto auswählen', 'Magazin-Vorschau'] },
-  'grid-settings': { file: 'app-settings-preview.html', screens: ['Einstellungen', 'Nutzerprofil', 'Abonnement (aktiv)', 'Abo-Auswahl'] },
-  'grid-settings-detail': { file: 'app-settings-detail-preview.html', screens: ['Lieferadresse', 'Zahlung (Verwalter)', 'Zahlung (Mitglied)', 'Gruppenmitglieder', 'Passwort ändern', 'Account löschen', 'Profil bearbeiten', 'Versandstatus', 'Benachrichtigungen'] },
-  'grid-utility': { file: 'app-utility-preview.html', screens: ['PW vergessen', 'PW Erfolg', 'Netzwerk-Fehler', 'Gruppen wechseln', 'Einladung annehmen', 'Erstes Magazin', 'Mitglied einladen', 'Abo kündigen', 'Logout', 'Hilfe & Support'] },
-  'grid-additional': { file: 'app-additional-preview.html', screens: ['Foto-Vollansicht', 'Kommentar schreiben', 'Upload-Bestätigung', 'Push Permission', 'Empfänger verwalten', 'Abo auswählen', 'Push Notifications', 'In-App Messages', 'Checkout: Plan', 'Checkout: Empfänger', 'Checkout: Zahlung', 'Checkout: Bestätigung'] }
+  'grid-auth': { file: 'auth-preview.html', screens: ['Login', 'Login Fehler', 'Registrierung 1/2', 'Registrierung 2/2', 'Web Landing', 'In-App Welcome'] },
+  'grid-home': { file: 'app-home-preview.html', screens: ['Fotos (mit Fotos)', 'Fotos (Empty)', 'Heft Tab', 'Heft (Empty)', 'Kommentare', 'Foto-Vollansicht', 'Kommentar schreiben', 'Upload Best\u00e4tigung', 'Foto-Zugriff', 'Foto l\u00f6schen', 'Foto-Aktionen', 'Keine Kommentare'] },
+  'grid-settings': { file: 'app-settings-preview.html', screens: ['Einstellungen', 'Nutzerprofil', 'Profil bearbeiten', 'Passwort \u00e4ndern', 'Lieferadresse', 'Zahlung (Verwalter)', 'Zahlung (Mitglied)', 'Account l\u00f6schen', 'Fotoheft Einst.', 'Versandstatus', 'Adress-Verifikation', 'Keine Empf\u00e4nger'] },
+  'grid-abo': { file: 'app-abo-preview.html', screens: ['Abo ausw\u00e4hlen', 'Checkout 1: Plan', 'Checkout 2: Empf.', 'Checkout 3: Zahlung', 'Checkout 4: Fertig', 'Abo aktiviert!', 'Abo aktiv', 'Kein Abo', 'Abo k\u00fcndigen', 'Meine Abonnements'] },
+  'grid-groups': { file: 'app-groups-preview.html', screens: ['Gruppenmitglieder', 'Gruppe erstellen', 'Keine Mitglieder', 'Gruppe l\u00f6schen', 'Gruppe verwalten', 'Einladung versenden', 'Einladung annehmen', 'Mitglied entfernen', 'Einladung (Link)', 'Einladung (QR)', 'Gruppen wechseln', 'Mitglied (Profil)', 'Rolle \u00e4ndern', 'Admin \u00fcbertragen', 'Gruppe verlassen', 'Keine Gruppen'] },
+  'grid-system': { file: 'app-system-preview.html', screens: ['PW vergessen', 'PW zur\u00fccksetzung', 'Netzwerk-Fehler', 'Logout', 'Hilfe & Support', 'Push Notifications', 'Push Einstell.', 'In-App Messages', 'App-Version', 'Wartungsmodus', 'Force Update', 'Fotos Loading', 'Heft Loading', 'Allg. Loading', 'Allg. Fehler', 'Laden fehlgeschl.', 'Keine Berechtigung'] }
 };
 
 Object.entries(screens).forEach(([gridId, data]) => {
@@ -99,7 +129,7 @@ Object.entries(screens).forEach(([gridId, data]) => {
     card.href = data.file;
     card.innerHTML = `
       <div class="card-preview" data-file="${data.file}" data-index="${i}">
-        <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#ccc;font-size:24px;">⏳</div>
+        <div style="display:flex;align-items:center;justify-content:center;height:100%;color:#ccc;font-size:24px;">&#x23F3;</div>
       </div>
       <div class="card-label">${name}</div>`;
     grid.appendChild(card);
