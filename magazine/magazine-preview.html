@@ -28,9 +28,6 @@
     --footer-h: 24px;
     --half-h: 224px;
     --gap-v: 18px;
-    --gap-h: 16px;
-    --quarter-w: 182px;
-    --quarter-h: 224px;
   }
 
   * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -591,41 +588,6 @@
   .slot-full { width: 100%; height: 100%; }
   .slot-half { width: 100%; height: var(--half-h); }
   .stack-layout { display: flex; flex-direction: column; gap: var(--gap-v); height: 100%; }
-  .grid-layout {
-    display: grid;
-    grid-template-columns: var(--quarter-w) var(--quarter-w);
-    grid-template-rows: var(--quarter-h) var(--quarter-h);
-    gap: var(--gap-v) var(--gap-h);
-    height: 100%;
-  }
-  .quarter-foto { border-radius: 8px; overflow: hidden; border: 1.5px solid var(--blau-dunkel); }
-  .quarter-foto .foto-area { width: 100%; height: 100%; }
-  /* --- VARIANTE C: Grid Caption Cell (4-GRID Q4) ---
-     Own vertical layout: PB → Text → Name → Date, all centered */
-  .quarter-caption {
-    background: var(--caption-warm);
-    border-radius: 8px;
-    border: none;
-    padding: 12px 10px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
-    height: 100%;
-    text-align: center;
-    position: relative;
-  }
-  .quarter-caption .pb-circle {
-    width: 30px; height: 30px;
-    font-size: 10px;
-    margin-bottom: 2px;
-  }
-  .quarter-caption .caption-text {
-    font-size: 12px;
-    text-align: center;
-    line-height: 1.5;
-    font-weight: 400;
-  }
-  .quarter-caption .caption-name { font-size: 7.5px; }
-  .quarter-caption .caption-date { font-size: 7px; }
-
   .safe-zone > * { position: relative; z-index: 1; }
 
   /* Freitext element — no border per spec 7.4 */
@@ -1420,42 +1382,6 @@
 
 </div>
 
-<h1 class="title" style="font-size:18px;margin-top:40px">4 Fotos — GRID-Layout</h1>
-<p class="subtitle">3 Fotos + 1 Caption-Feld im 2×2 Raster (8mm H-Gap, 9mm V-Gap).</p>
-<div class="pages" style="margin-top:16px">
-
-  <div class="page-wrap">
-    <div class="page-label">4-GRID (3 Fotos + Caption)</div>
-    <div class="page-outer">
-      <div class="page" data-blob="gerade">
-        <div class="safe-zone">
-          <div class="header">
-            <div class="familienname">Familie Müller</div>
-            <div class="monat">April 2025</div>
-          </div>
-          <div class="content-zone">
-            <div class="grid-layout">
-              <div class="quarter-foto"><div class="foto-area bg-5"><span class="ph" style="font-size:9px">Q1</span></div></div>
-              <div class="quarter-foto"><div class="foto-area bg-2"><span class="ph" style="font-size:9px">Q2</span></div></div>
-              <div class="quarter-foto"><div class="foto-area bg-4"><span class="ph" style="font-size:9px">Q3</span></div></div>
-              <div class="quarter-caption">
-                <div class="pb-circle">SM</div>
-                <div class="caption-text">Wochenende auf dem Bauernhof!</div>
-                <div class="caption-name">Silke</div>
-                <div class="caption-date">29.03.2025</div>
-              </div>
-            </div>
-          </div>
-          <div class="footer"><div class="heart"><img src="../assets/logo_heart_blue.png" alt="♥"></div></div>
-        </div>
-      </div>
-    </div>
-    <div class="page-config">Gerade → Blob UR (dynamisch) | 8mm H-Gap · 9mm V-Gap</div>
-  </div>
-
-
-</div>
-
 <h1 class="title" style="font-size:18px;margin-top:40px">Foto + Freitext — Kombinierte Layouts</h1>
 <p class="subtitle">Foto-Slot kombiniert mit persönlicher Textnachricht im HALF- oder FULL-Format.</p>
 <div class="pages" style="margin-top:16px">
@@ -1941,10 +1867,10 @@
   2. Basierend auf Anzahl + Orientierung der ausgewählten Fotos wird das passende Template vorgeschlagen<br>
   3. <strong>1 Foto:</strong> FULL-Layout (L oder P)<br>
   4. <strong>2 Fotos:</strong> STACK-Layout mit adaptiver HALF-Logik (L+L, L+P, P+L, P+P)<br>
-  5. <strong>3–4 Fotos:</strong> GRID-Layout (3 Fotos + Caption-Feld)<br>
   • <strong>Landscape-Foto</strong> → Stacked (Bild oben ~87mm, Caption unten ~25mm) — maximale Bildbreite<br>
   • <strong>Portrait-Foto</strong> → Side-by-side (Bild ~105mm, Caption ~85mm) — besseres Seitenverhältnis, weniger Crop<br>
-  Der Bildausschnitt ist per Pan vom User verschiebbar. Die Erkennung ist automatisch bei Magazin-Erstellung.
+  Der Bildausschnitt ist per Pan vom User verschiebbar. Die Erkennung ist automatisch bei Magazin-Erstellung.<br>
+  <strong>Slot-Konfigurationen:</strong> Nur 1-FULL und 2-STACK erlaubt. Kein Grid-Layout.
 </p>
 
 <p class="note">
