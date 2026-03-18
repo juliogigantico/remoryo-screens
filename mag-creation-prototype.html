@@ -317,7 +317,7 @@ body{
 .slot-ent-label{font-size:12px;font-weight:600;color:var(--dark-gray)}
 .slot-text{
   background:var(--soft-orange-bg);display:flex;align-items:center;justify-content:center;
-  padding:10px;border:1.3px solid var(--navy);border-radius:7px;
+  padding:10px;
 }
 .slot-text-content{font-size:11px;color:var(--dark-gray);text-align:center;line-height:1.4;word-break:break-word;overflow:hidden}
 .slot-photo--side{flex-direction:row}
@@ -393,7 +393,7 @@ body{
 .cover-logo img{width:28px;height:auto}
 .cover-foto{
   width:calc(100% - 14px);flex:0 0 55%;
-  border:1.5px solid var(--navy);border-radius:7px;overflow:hidden;
+  border:1.3px solid var(--navy);border-radius:7px;overflow:hidden;
   display:flex;align-items:center;justify-content:center;
   position:relative;cursor:pointer;
 }
@@ -562,8 +562,8 @@ body{
 .back-variant-btn:active{transform:scale(.97)}
 .back-variant-btn--sel{border-color:var(--orange);background:var(--soft-orange)}
 .back-section{text-align:center;padding:6px 17px}
-.back-wordmark{font-size:13px;font-weight:800;color:var(--navy);letter-spacing:1.7px}
-.back-label{font-size:10px;font-weight:600;color:var(--dark-gray);opacity:.6;letter-spacing:1.3px;text-transform:uppercase}
+.back-wordmark{font-size:17px;font-weight:800;color:var(--navy);letter-spacing:1.7px}
+.back-label{font-size:8px;font-weight:600;color:var(--dark-gray);opacity:.6;letter-spacing:1.3px;text-transform:uppercase}
 .back-authors{display:flex;gap:19px;justify-content:center;flex-wrap:wrap;padding:8px 17px}
 .back-author{display:flex;flex-direction:column;align-items:center;gap:5px;cursor:pointer}
 .back-author-circle{width:41px;height:41px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:700;color:var(--white);border:2px solid var(--blue);box-shadow:0 2px 8px rgba(130,183,216,.25)}
@@ -571,7 +571,7 @@ body{
 .back-quote{font-size:12px;color:var(--navy);text-align:center;padding:8px 20px;line-height:1.8;cursor:pointer;font-style:italic;border-radius:8px;transition:background .15s;max-width:224px;margin:0 auto;word-break:break-word;overflow:hidden}
 .back-quote:hover{background:var(--light-gray)}
 .back-bdays{padding:6px 17px;text-align:center}
-.back-bday-title{font-size:10px;font-weight:800;color:var(--orange);text-transform:uppercase;margin-bottom:6px;letter-spacing:1.3px}
+.back-bday-title{font-size:8px;font-weight:800;color:var(--orange);text-transform:uppercase;margin-bottom:6px;letter-spacing:1.3px}
 .back-bday-entry{font-size:9px;color:var(--navy);margin-bottom:3px}
 .back-bday-name{font-weight:700;color:var(--blue)}
 .back-bday-date{opacity:.6}
@@ -1201,7 +1201,7 @@ function renderBackPage(){
   // Manage link
   contentHtml+=`<div class="back-manage-link" onclick="showMemberManager()">Mitglieder verwalten</div>`;
   // Footer
-  contentHtml+=`<div class="back-footer"><img src="assets/logo_heart_blue.png" style="width:29px;height:auto;margin-bottom:4px"><div class="back-footer-url">www.remoryo.de</div></div>`;
+  contentHtml+=`<div class="back-footer"><img src="assets/logo_heart_blue.png" style="width:14px;height:auto;margin-bottom:4px"><div class="back-footer-url">www.remoryo.de</div></div>`;
 
   return `<div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;${bgStyle};padding:17px">
     <div style="display:flex;flex-direction:column;align-items:center;width:100%">
@@ -1841,7 +1841,7 @@ function showMemberManager(){
         <div class="member-name">${esc(m.name)}</div>
         <div class="member-meta">🎂 ${bdayStr} · ${badge}</div>
       </div>
-      <div style="cursor:pointer;padding:8px" onclick="editMember(${i})" style="min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center" style="min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center">${IC.edit}</div>
+      <div style="cursor:pointer;padding:8px;min-width:44px;min-height:44px;display:flex;align-items:center;justify-content:center" onclick="editMember(${i})">${IC.edit}</div>
     </div>`;
   });
   showSheet(`
