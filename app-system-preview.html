@@ -1311,6 +1311,101 @@
 
   </div>
 
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- SCREEN 21–23 — Zusätzliche System-States           -->
+  <!-- ══════════════════════════════════════════════════ -->
+
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <h1 style="white-space: nowrap;">Session &amp; Verbindung</h1>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="preview-row">
+
+    <!-- SCREEN 21 — Session abgelaufen (401) -->
+    <div id="screen-21">
+      <div class="screen-label">21 &middot; Session abgelaufen</div>
+      <div class="phone" style="background: var(--white);">
+        <div class="status-bar"></div>
+
+        <div style="flex: 1; position: relative;">
+          <!-- Blurred background (simulated previous screen) -->
+          <div style="position: absolute; inset: 0; background: var(--light-gray); display: flex; flex-direction: column; filter: blur(3px); opacity: 0.5;">
+            <div style="height: 52px; background: var(--white); border-bottom: 1px solid var(--border);"></div>
+            <div style="padding: 16px;"><div style="height: 60px; background: var(--border); border-radius: 12px; margin-bottom: 12px;"></div><div style="height: 60px; background: var(--border); border-radius: 12px;"></div></div>
+          </div>
+          <!-- Dark overlay -->
+          <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); z-index: 5;"></div>
+          <!-- Modal -->
+          <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 6; background: var(--white); border-radius: 20px; padding: 32px 24px; width: calc(100% - 48px); box-shadow: 0 16px 48px rgba(0,0,0,0.2); text-align: center;">
+            <div style="width: 64px; height: 64px; border-radius: 50%; background: var(--soft-orange-bg); display: flex; align-items: center; justify-content: center; margin: 0 auto 20px;">
+              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
+              </svg>
+            </div>
+            <div style="font-weight: 800; font-size: 20px; color: var(--navy); margin-bottom: 8px;">Sitzung abgelaufen</div>
+            <div style="font-size: 14px; color: var(--dark-gray); line-height: 1.55; font-weight: 500; margin-bottom: 24px;">Deine Sitzung ist aus Sicherheitsgr&uuml;nden abgelaufen. Bitte melde dich erneut an.</div>
+            <button class="btn-primary" style="width: 100%;">Zum Login</button>
+          </div>
+        </div>
+
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+    <!-- SCREEN 22 — Offline-Banner -->
+    <div id="screen-22">
+      <div class="screen-label">22 &middot; Offline-Modus</div>
+      <div class="phone" style="background: var(--white);">
+        <div class="status-bar"></div>
+
+        <!-- Offline banner -->
+        <div style="background: var(--navy); padding: 10px 20px; display: flex; align-items: center; gap: 10px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="1" y1="1" x2="23" y2="23"/><path d="M16.72 11.06A10.94 10.94 0 0119 12.55"/><path d="M5 12.55a10.94 10.94 0 015.17-2.39"/><path d="M10.71 5.05A16 16 0 0122.56 9"/><path d="M1.42 9a15.91 15.91 0 014.7-2.88"/><path d="M8.53 16.11a6 6 0 016.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/></svg>
+          <span style="font-size: 13px; font-weight: 600; color: white; flex: 1;">Offline &mdash; Daten werden synchronisiert, wenn Verbindung zur&uuml;ck</span>
+        </div>
+
+        <div class="app-header">
+          <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
+          <div class="header-settings"><svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
+        </div>
+
+        <div class="scroll-area" style="flex: 1; padding: 0;">
+          <!-- Dimmed photo grid (offline) -->
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; opacity: 0.5;">
+            <div style="aspect-ratio: 1; background: linear-gradient(135deg, #82B7D8, #5A9BC6);"></div>
+            <div style="aspect-ratio: 1; background: linear-gradient(135deg, #E8DDD1, #CFC0B0);"></div>
+            <div style="aspect-ratio: 1; background: linear-gradient(135deg, #FFA631, #E8951C);"></div>
+            <div style="aspect-ratio: 1; background: linear-gradient(135deg, #C7DDDA, #A5C8C5);"></div>
+            <div style="aspect-ratio: 1; background: linear-gradient(135deg, #1B2C43, #2D4560);"></div>
+            <div style="aspect-ratio: 1; background: linear-gradient(135deg, #D4E8F2, #B0D4E8);"></div>
+            <div style="aspect-ratio: 1; background: linear-gradient(135deg, #F5F6F8, #E2E6EB);"></div>
+            <div style="aspect-ratio: 1; background: linear-gradient(135deg, #B8E0E0, #8CC8C8);"></div>
+            <div style="aspect-ratio: 1; background: linear-gradient(135deg, #FFA631, #FFD6A5);"></div>
+          </div>
+        </div>
+
+        <div class="tab-bar">
+          <div class="tab-item active">
+            <div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <span class="tab-label">Fotos</span>
+          </div>
+          <div class="tab-fab-wrapper">
+            <div class="tab-fab" style="opacity: 0.4;"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="white" stroke-width="3" stroke-linecap="round"/></svg></div>
+            <span class="tab-fab-label" style="color: var(--mid-gray);">Foto</span>
+          </div>
+          <div class="tab-item">
+            <div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+            <span class="tab-label">Heft</span>
+          </div>
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+  </div>
+
   <p class="footer-note">Preview nutzt Inter als Stand-in f&uuml;r Helvetica Now Display.</p>
 
 </body>

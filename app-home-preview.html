@@ -2078,6 +2078,151 @@
 
   </div>
 
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- SCREEN 15–16 — Zusätzliche Aktionen                -->
+  <!-- ══════════════════════════════════════════════════ -->
+
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <h1 style="white-space: nowrap;">Weitere Aktionen</h1>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="preview-row">
+
+    <!-- SCREEN 15 — Kommentar löschen (Bottom Sheet) -->
+    <div id="screen-15">
+      <div class="screen-label">15 &middot; Kommentar l&ouml;schen</div>
+      <div class="phone" style="background: var(--white);">
+        <div class="status-bar"></div>
+
+        <div style="flex: 1; position: relative;">
+          <!-- Background: comments view (blurred) -->
+          <div style="position: absolute; inset: 0; background: var(--white); display: flex; flex-direction: column;">
+            <div style="height: 52px; background: var(--white); border-bottom: 1px solid var(--border); display: flex; align-items: center; padding: 0 16px;">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+              <span style="font-weight: 700; font-size: 16px; color: var(--navy); margin-left: 12px;">Kommentare</span>
+            </div>
+            <div style="padding: 16px 20px; opacity: 0.4;">
+              <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+                <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--blue-soft); flex-shrink: 0;"></div>
+                <div><div style="height: 12px; width: 60px; background: var(--border); border-radius: 4px; margin-bottom: 6px;"></div><div style="height: 10px; width: 180px; background: var(--border); border-radius: 4px;"></div></div>
+              </div>
+              <div style="display: flex; gap: 10px; margin-bottom: 16px;">
+                <div style="width: 32px; height: 32px; border-radius: 50%; background: var(--turquoise); flex-shrink: 0;"></div>
+                <div><div style="height: 12px; width: 50px; background: var(--border); border-radius: 4px; margin-bottom: 6px;"></div><div style="height: 10px; width: 140px; background: var(--border); border-radius: 4px;"></div></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Dark overlay -->
+          <div class="dark-overlay"></div>
+
+          <!-- Bottom sheet -->
+          <div class="bottom-sheet" style="padding: 24px 24px 20px;">
+            <div class="sheet-handle" style="margin-bottom: 24px;"></div>
+
+            <div style="display: flex; justify-content: center; margin-bottom: 16px;">
+              <div style="width: 48px; height: 48px; border-radius: 50%; background: var(--soft-red); display: flex; align-items: center; justify-content: center;">
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--red)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6m3 0V4a2 2 0 012-2h4a2 2 0 012 2v2"/>
+                </svg>
+              </div>
+            </div>
+
+            <div style="font-weight: 700; font-size: 20px; color: var(--navy); text-align: center; margin-bottom: 8px;">Kommentar l&ouml;schen?</div>
+
+            <div style="font-size: 14px; color: var(--dark-gray); text-align: center; line-height: 1.55; font-weight: 500; margin-bottom: 16px;">
+              Dein Kommentar wird unwiderruflich entfernt.
+            </div>
+
+            <!-- Preview of comment to delete -->
+            <div style="background: var(--light-gray); border-radius: 12px; padding: 14px 16px; margin-bottom: 20px; display: flex; align-items: flex-start; gap: 10px;">
+              <div style="width: 28px; height: 28px; border-radius: 50%; background: linear-gradient(135deg, var(--turquoise), var(--blue-soft)); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 11px; color: var(--navy); flex-shrink: 0;">J</div>
+              <div>
+                <div style="font-size: 12px; font-weight: 600; color: var(--navy);">Du &middot; <span style="font-weight: 400; color: var(--mid-gray);">vor 5 Min.</span></div>
+                <div style="font-size: 13px; color: var(--dark-gray); margin-top: 2px; line-height: 1.4;">Das ist so ein sch&ouml;nes Foto von Oma!</div>
+              </div>
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <button class="btn" style="background: var(--red); color: var(--white);">Kommentar l&ouml;schen</button>
+              <button class="btn btn-outline">Abbrechen</button>
+            </div>
+            <div style="height: 14px;"></div>
+          </div>
+        </div>
+
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+    <!-- SCREEN 16 — Foto-Zugriff verweigert -->
+    <div id="screen-16">
+      <div class="screen-label">16 &middot; Foto-Zugriff verweigert</div>
+      <div class="phone" style="background: var(--white);">
+        <div class="status-bar"></div>
+
+        <div class="app-header">
+          <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
+          <div class="header-settings"><svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
+        </div>
+
+        <div class="scroll-area">
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 48px 28px; text-align: center;">
+            <div style="width: 88px; height: 88px; border-radius: 50%; background: var(--soft-orange-bg); display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+              <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/>
+                <line x1="1" y1="1" x2="23" y2="23" stroke="var(--orange)" stroke-width="2"/>
+              </svg>
+            </div>
+            <div style="font-weight: 800; font-size: 22px; color: var(--navy); margin-bottom: 10px; line-height: 1.3;">Kein Zugriff auf Fotos</div>
+            <div style="font-size: 15px; color: var(--dark-gray); font-weight: 500; line-height: 1.55; max-width: 280px; margin-bottom: 24px;">
+              remoryo ben&ouml;tigt Zugriff auf deine Fotos, um Bilder f&uuml;r das Fotoheft hochladen zu k&ouml;nnen.
+            </div>
+
+            <div style="width: 100%; display: flex; flex-direction: column; gap: 8px; margin-bottom: 20px;">
+              <div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--light-gray); border-radius: 12px; text-align: left;">
+                <span style="font-size: 20px;">1.</span>
+                <span style="font-size: 14px; font-weight: 500; color: var(--navy);">&Ouml;ffne die <strong>Einstellungen</strong> deines Ger&auml;ts</span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--light-gray); border-radius: 12px; text-align: left;">
+                <span style="font-size: 20px;">2.</span>
+                <span style="font-size: 14px; font-weight: 500; color: var(--navy);">Tippe auf <strong>remoryo</strong> &rarr; <strong>Fotos</strong></span>
+              </div>
+              <div style="display: flex; align-items: center; gap: 12px; padding: 14px 16px; background: var(--light-gray); border-radius: 12px; text-align: left;">
+                <span style="font-size: 20px;">3.</span>
+                <span style="font-size: 14px; font-weight: 500; color: var(--navy);">W&auml;hle <strong>&bdquo;Alle Fotos&ldquo;</strong></span>
+              </div>
+            </div>
+
+            <button class="btn-primary" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+              Einstellungen &ouml;ffnen
+            </button>
+          </div>
+        </div>
+
+        <div class="tab-bar">
+          <div class="tab-item active">
+            <div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="M21 15l-5-5L5 21"/></svg></div>
+            <span class="tab-label">Fotos</span>
+          </div>
+          <div class="tab-fab-wrapper">
+            <div class="tab-fab" style="opacity: 0.4;"><svg viewBox="0 0 24 24" fill="none"><path d="M12 5v14M5 12h14" stroke="white" stroke-width="3" stroke-linecap="round"/></svg></div>
+            <span class="tab-fab-label" style="color: var(--mid-gray);">Foto</span>
+          </div>
+          <div class="tab-item">
+            <div class="tab-icon"><svg viewBox="0 0 24 24" fill="none" stroke="var(--mid-gray)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg></div>
+            <span class="tab-label">Heft</span>
+          </div>
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+  </div>
+
   <p class="footer-note">Preview nutzt Inter als Stand-in für Helvetica Now Display.</p>
 
 </body>

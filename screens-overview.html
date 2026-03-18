@@ -382,13 +382,13 @@
       <a href="#design-system" class="nav-item"><span class="nav-icon">&#x1f3a8;</span>Design System</a>
       <div class="nav-section">Screens</div>
       <a href="#onboarding" class="nav-item"><span class="nav-icon">&#x1f680;</span>Onboarding<span class="nav-badge">2</span></a>
-      <a href="#auth" class="nav-item"><span class="nav-icon">&#x1f510;</span>Authentifizierung<span class="nav-badge">9</span></a>
-      <a href="#home" class="nav-item"><span class="nav-icon">&#x1f4f7;</span>Home &amp; Fotos<span class="nav-badge">14</span></a>
+      <a href="#auth" class="nav-item"><span class="nav-icon">&#x1f510;</span>Authentifizierung<span class="nav-badge">11</span></a>
+      <a href="#home" class="nav-item"><span class="nav-icon">&#x1f4f7;</span>Home &amp; Fotos<span class="nav-badge">16</span></a>
       <a href="#magazine" class="nav-item"><span class="nav-icon">&#x1f4d6;</span>Magazin<span class="nav-badge">Prototyp</span></a>
       <a href="#settings" class="nav-item"><span class="nav-icon">&#x2699;&#xfe0f;</span>Settings &amp; Account<span class="nav-badge">18</span></a>
       <a href="#abo" class="nav-item"><span class="nav-icon">&#x1f4b3;</span>Abo &amp; Payment<span class="nav-badge">16</span></a>
       <a href="#groups" class="nav-item"><span class="nav-icon">&#x1f46a;</span>Gruppen &amp; Einladungen<span class="nav-badge">19</span></a>
-      <a href="#system" class="nav-item"><span class="nav-icon">&#x1f6e0;&#xfe0f;</span>System &amp; Support<span class="nav-badge">20</span></a>
+      <a href="#system" class="nav-item"><span class="nav-icon">&#x1f6e0;&#xfe0f;</span>System &amp; Support<span class="nav-badge">22</span></a>
     </nav>
   </aside>
 
@@ -396,7 +396,7 @@
   <main class="main">
     <div class="page-header">
       <h2>remoryo App &mdash; UI Preview</h2>
-      <p>98 Screens &middot; 7 Dateien + interaktiver Prototyp &middot; 6&times; UX-reviewed &middot; Stand M&auml;rz 2026<br>Klicke auf einen Screen um direkt dorthin zu springen, oder &laquo;Vollansicht&raquo; f&uuml;r die gesamte Preview.</p>
+      <p>104 Screens &middot; 7 Dateien + interaktiver Prototyp &middot; 6&times; UX-reviewed &middot; Stand M&auml;rz 2026<br>Klicke auf einen Screen um direkt dorthin zu springen, oder &laquo;Vollansicht&raquo; f&uuml;r die gesamte Preview.</p>
     </div>
 
     <!-- ═══ FUNNEL ═══ -->
@@ -508,10 +508,10 @@
       <div class="section-header">
         <div class="section-icon icon-auth">&#x1f510;</div>
         <h3>Authentifizierung</h3>
-        <span class="section-badge">9 Screens</span>
+        <span class="section-badge">11 Screens</span>
         <a href="auth-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
       </div>
-      <p class="section-desc">Login (blauer Gradient = bestehender User) und Registration (t&uuml;rkis = neuer User). Invite-Flow: Web Landing &rarr; App Download &rarr; In-App Welcome. E-Mail-Duplikat-Fehler. Neu: Social-Login Fehler, Account gesperrt.</p>
+      <p class="section-desc">Login (blauer Gradient = bestehender User) und Registration (t&uuml;rkis = neuer User). Invite-Flow: Web Landing &rarr; App Download &rarr; In-App Welcome. E-Mail-Duplikat-Fehler, Social-Login Fehler, Account gesperrt, Konto verkn&uuml;pfen, E-Mail verifiziert.</p>
       <button class="preview-toggle" onclick="togglePreview(this, 'auth-preview.html', 2100, 2080, 0.38)">&#x1f50d; Live Preview laden</button>
       <div class="live-preview"></div>
       <div class="phones-grid">
@@ -603,6 +603,26 @@
           <div class="phone-label">Account gesperrt<br><span style="color:var(--mid-gray);font-size:9px">Zu viele Versuche</span></div>
         </a>
 
+        <a href="auth-preview.html#screen-9" target="_blank" class="phone-card phone--blue">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f517;</div>
+            <div class="phone-screen-title">Konto verkn&uuml;pfen</div>
+            <div class="phone-screen-sub">Social Auth Conflict</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-rect" style="border-color:var(--blue)"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Konto verkn&uuml;pfen<br><span style="color:var(--mid-gray);font-size:9px">Social Auth</span></div>
+        </a>
+
+        <a href="auth-preview.html#screen-10" target="_blank" class="phone-card phone--turquoise">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x2705;</div>
+            <div class="phone-screen-title">E-Mail verifiziert</div>
+            <div class="phone-screen-sub">Erfolg</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-avatar"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">E-Mail verifiziert<br><span style="color:var(--mid-gray);font-size:9px">Erfolg</span></div>
+        </a>
+
       </div>
     </div>
 
@@ -611,10 +631,10 @@
       <div class="section-header">
         <div class="section-icon icon-home">&#x1f4f7;</div>
         <h3>Home / Fotos</h3>
-        <span class="section-badge">14 Screens</span>
+        <span class="section-badge">16 Screens</span>
         <a href="app-home-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
       </div>
-      <p class="section-desc">Fotos-Tab, Empty States, Magazine-Tab, Kommentare, Foto-Vollansicht, Kommentar schreiben, Upload-Best&auml;tigung, Foto-Zugriff, Foto l&ouml;schen, Foto-Aktionen (Action Sheet). Neu: Upload-Fortschritt, Multi-Select.</p>
+      <p class="section-desc">Fotos-Tab, Empty States, Magazine-Tab, Kommentare, Foto-Vollansicht, Kommentar schreiben, Upload-Best&auml;tigung, Foto-Zugriff, Foto l&ouml;schen, Foto-Aktionen, Upload-Fortschritt, Multi-Select, Kommentar l&ouml;schen, Foto-Zugriff verweigert.</p>
       <button class="preview-toggle" onclick="togglePreview(this, 'app-home-preview.html', 1510, 3000, 0.42)">&#x1f50d; Live Preview laden</button>
       <div class="live-preview"></div>
       <div class="phones-grid">
@@ -756,6 +776,26 @@
             <div class="wire"><div class="wire-bar" style="background:var(--navy);height:8px;border-radius:0"></div><div class="wire-spacer"></div><div class="wire-row"><div class="wire-rect" style="flex:1;height:28px"></div><div class="wire-rect" style="flex:1;height:28px"></div><div class="wire-rect" style="flex:1;height:28px"></div></div><div class="wire-row"><div class="wire-rect" style="flex:1;height:28px"></div><div class="wire-rect" style="flex:1;height:28px"></div><div class="wire-rect" style="flex:1;height:28px"></div></div></div>
           </div></div>
           <div class="phone-label">Fotos ausw&auml;hlen<br><span style="color:var(--mid-gray);font-size:9px">Multi-Select</span></div>
+        </a>
+
+        <a href="app-home-preview.html#screen-15" target="_blank" class="phone-card phone--red">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f5d1;&#xfe0f;</div>
+            <div class="phone-screen-title">Kommentar l&ouml;schen</div>
+            <div class="phone-screen-sub">Bottom Sheet</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-avatar" style="border-color:var(--red)"></div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange" style="background:var(--red)"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Kommentar l&ouml;schen<br><span style="color:var(--mid-gray);font-size:9px">Bottom Sheet</span></div>
+        </a>
+
+        <a href="app-home-preview.html#screen-16" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4f7;</div>
+            <div class="phone-screen-title">Foto-Zugriff verw.</div>
+            <div class="phone-screen-sub">Permission Denied</div>
+            <div class="wire"><div class="wire-spacer"></div><div style="font-size:24px;text-align:center">&#x1f6ab;</div><div class="wire-bar wire-bar--medium" style="margin:0 auto"></div><div class="wire-spacer"></div><div class="wire-rect"></div><div class="wire-rect"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--orange"></div></div>
+          </div></div>
+          <div class="phone-label">Foto-Zugriff verw.<br><span style="color:var(--mid-gray);font-size:9px">Permission Denied</span></div>
         </a>
 
       </div>
@@ -1415,10 +1455,10 @@
       <div class="section-header">
         <div class="section-icon icon-utility">&#x1f6e0;&#xfe0f;</div>
         <h3>System &amp; Support</h3>
-        <span class="section-badge">20 Screens</span>
+        <span class="section-badge">22 Screens</span>
         <a href="app-system-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
       </div>
-      <p class="section-desc">Passwort vergessen/zur&uuml;cksetzen, Netzwerk-Fehler, Logout, Hilfe &amp; Support, Push Notifications, In-App Messages, Loading/Fehler-States, Einladung ung&uuml;ltig. Neu: App bewerten, Was ist neu? (Changelog).</p>
+      <p class="section-desc">Passwort vergessen/zur&uuml;cksetzen, Netzwerk-Fehler, Logout, Hilfe &amp; Support, Push Notifications, In-App Messages, Loading/Fehler-States, Einladung ung&uuml;ltig, App bewerten, Was ist neu?, Session abgelaufen, Offline-Modus.</p>
       <button class="preview-toggle" onclick="togglePreview(this, 'app-system-preview.html', 1510, 3000, 0.42)">&#x1f50d; Live Preview laden</button>
       <div class="live-preview"></div>
       <div class="phones-grid">
@@ -1609,6 +1649,26 @@
             <div class="wire"><div class="wire-spacer"></div><div class="wire-row"><div style="width:8px;height:8px;border-radius:50%;background:var(--blue)"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="width:8px;height:8px;border-radius:50%;background:var(--orange)"></div><div class="wire-bar" style="flex:1"></div></div><div class="wire-row"><div style="width:8px;height:8px;border-radius:50%;background:var(--turquoise)"></div><div class="wire-bar" style="flex:1"></div></div></div>
           </div></div>
           <div class="phone-label">Was ist neu?<br><span style="color:var(--mid-gray);font-size:9px">Changelog</span></div>
+        </a>
+
+        <a href="app-system-preview.html#screen-21" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x23f0;</div>
+            <div class="phone-screen-title">Session abgelaufen</div>
+            <div class="phone-screen-sub">401 / Re-Login</div>
+            <div class="wire"><div class="wire-spacer"></div><div style="width:60%;margin:0 auto;padding:12px;border-radius:8px;border:1px solid var(--border)"><div class="wire-avatar" style="margin:0 auto"></div><div class="wire-bar wire-bar--medium" style="margin:4px auto 0"></div></div><div class="wire-spacer"></div></div>
+          </div></div>
+          <div class="phone-label">Session abgelaufen<br><span style="color:var(--mid-gray);font-size:9px">401 / Re-Login</span></div>
+        </a>
+
+        <a href="app-system-preview.html#screen-22" target="_blank" class="phone-card phone--gray">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4f6;</div>
+            <div class="phone-screen-title">Offline-Modus</div>
+            <div class="phone-screen-sub">Kein Internet</div>
+            <div class="wire"><div class="wire-bar" style="background:var(--navy);height:8px;border-radius:0"></div><div class="wire-spacer"></div><div class="wire-row"><div class="wire-rect" style="flex:1;height:28px;opacity:0.4"></div><div class="wire-rect" style="flex:1;height:28px;opacity:0.4"></div><div class="wire-rect" style="flex:1;height:28px;opacity:0.4"></div></div><div class="wire-row"><div class="wire-rect" style="flex:1;height:28px;opacity:0.4"></div><div class="wire-rect" style="flex:1;height:28px;opacity:0.4"></div><div class="wire-rect" style="flex:1;height:28px;opacity:0.4"></div></div></div>
+          </div></div>
+          <div class="phone-label">Offline-Modus<br><span style="color:var(--mid-gray);font-size:9px">Kein Internet</span></div>
         </a>
 
       </div>

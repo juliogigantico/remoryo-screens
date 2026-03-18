@@ -65,7 +65,7 @@
 </head>
 <body>
   <h1>remoryo Screens</h1>
-  <p class="subtitle">98 Screens &middot; 7 Dateien + Prototyp &middot; Stand M&auml;rz 2026</p>
+  <p class="subtitle">104 Screens &middot; 7 Dateien + Prototyp &middot; Stand M&auml;rz 2026</p>
   <a href="screens-overview.html" class="overview-link">Vollst&auml;ndige &Uuml;bersicht mit Design System &nearr;</a>
 
   <div class="section">
@@ -73,11 +73,11 @@
     <div class="grid" id="grid-onboarding"></div>
   </div>
   <div class="section">
-    <div class="section-title">Authentifizierung (9)</div>
+    <div class="section-title">Authentifizierung (11)</div>
     <div class="grid" id="grid-auth"></div>
   </div>
   <div class="section">
-    <div class="section-title">Home &amp; Fotos (14)</div>
+    <div class="section-title">Home &amp; Fotos (16)</div>
     <div class="grid" id="grid-home"></div>
   </div>
 
@@ -106,19 +106,19 @@
     <div class="grid" id="grid-groups"></div>
   </div>
   <div class="section">
-    <div class="section-title">System &amp; Support (20)</div>
+    <div class="section-title">System &amp; Support (22)</div>
     <div class="grid" id="grid-system"></div>
   </div>
 
 <script>
 const screens = {
   'grid-onboarding': { file: 'onboarding-preview.html', screens: ["So funktioniert's", 'Familie einladen'] },
-  'grid-auth': { file: 'auth-preview.html', screens: ['Login', 'Login Fehler', 'Registrierung', 'E-Mail vergeben', 'Web Landing', 'In-App Welcome', 'E-Mail Best\u00e4tigung', 'Social-Login Fehler', 'Account gesperrt'] },
-  'grid-home': { file: 'app-home-preview.html', screens: ['Fotos (mit Fotos)', 'Fotos (Empty)', 'Heft Tab', 'Heft (Empty)', 'Kommentare', 'Foto-Vollansicht', 'Kommentar schreiben', 'Upload Best\u00e4tigung', 'Foto-Zugriff', 'Foto l\u00f6schen', 'Foto-Aktionen', 'Keine Kommentare', 'Upload-Fortschritt', 'Fotos ausw\u00e4hlen'] },
+  'grid-auth': { file: 'auth-preview.html', screens: ['Login', 'Login Fehler', 'Registrierung', 'E-Mail vergeben', 'Web Landing', 'In-App Welcome', 'E-Mail Best\u00e4tigung', 'Social-Login Fehler', 'Account gesperrt', 'Konto verkn\u00fcpfen', 'E-Mail verifiziert'] },
+  'grid-home': { file: 'app-home-preview.html', screens: ['Fotos (mit Fotos)', 'Fotos (Empty)', 'Heft Tab', 'Heft (Empty)', 'Kommentare', 'Foto-Vollansicht', 'Kommentar schreiben', 'Upload Best\u00e4tigung', 'Foto-Zugriff', 'Foto l\u00f6schen', 'Foto-Aktionen', 'Keine Kommentare', 'Upload-Fortschritt', 'Fotos ausw\u00e4hlen', 'Kommentar l\u00f6schen', 'Foto-Zugriff verw.'] },
   'grid-settings': { file: 'app-settings-preview.html', screens: ['Einstellungen', 'Nutzerprofil', 'Profil bearbeiten', 'Passwort \u00e4ndern', 'Lieferadresse', 'Zahlung (Verwalter)', 'Zahlung (Mitglied)', 'Account l\u00f6schen', 'Fotoheft Einst.', 'Versandstatus', 'Adress-Verifikation', 'Keine Empf\u00e4nger', 'Profil gespeichert', 'Passwort ge\u00e4ndert', 'Benachrichtigungen', 'E-Mail \u00e4ndern', 'Profilfoto', 'Daten exportieren'] },
   'grid-abo': { file: 'app-abo-preview.html', screens: ['Abo ausw\u00e4hlen', 'Checkout 1: Plan', 'Checkout 2: Empf.', 'Checkout 3: Zahlung', 'Checkout 4: Fertig', 'Abo aktiviert!', 'Abo aktiv', 'Kein Abo', 'Abo k\u00fcndigen', 'Meine Abonnements', 'Processing', 'Zahlung fehlgeschl.', 'Abo gek\u00fcndigt', 'Plan wechseln', 'Zahlungsmethode', 'Rechnungen'] },
   'grid-groups': { file: 'app-groups-preview.html', screens: ['Gruppenmitglieder', 'Gruppe erstellen', 'Keine Mitglieder', 'Gruppe l\u00f6schen', 'Gruppe verwalten', 'Einladung versenden', 'Einladung annehmen', 'Mitglied entfernen', 'Einladung (Link)', 'Einladung (QR)', 'Gruppen wechseln', 'Mitglied (Profil)', 'Rolle \u00e4ndern', 'Admin \u00fcbertragen', 'Gruppe verlassen', 'Keine Gruppen', 'Ausstehende Einl.', 'Gruppeneinstellungen', 'Gruppe voll'] },
-  'grid-system': { file: 'app-system-preview.html', screens: ['PW vergessen', 'PW zur\u00fccksetzung', 'Netzwerk-Fehler', 'Logout', 'Hilfe & Support', 'Push Notifications', 'Push Einstell.', 'In-App Messages', 'App-Version', 'Wartungsmodus', 'Force Update', 'Fotos Loading', 'Heft Loading', 'Allg. Loading', 'Allg. Fehler', 'Laden fehlgeschl.', 'Keine Berechtigung', 'Einladung ung\u00fcltig', 'App bewerten', 'Was ist neu?'] }
+  'grid-system': { file: 'app-system-preview.html', screens: ['PW vergessen', 'PW zur\u00fccksetzung', 'Netzwerk-Fehler', 'Logout', 'Hilfe & Support', 'Push Notifications', 'Push Einstell.', 'In-App Messages', 'App-Version', 'Wartungsmodus', 'Force Update', 'Fotos Loading', 'Heft Loading', 'Allg. Loading', 'Allg. Fehler', 'Laden fehlgeschl.', 'Keine Berechtigung', 'Einladung ung\u00fcltig', 'App bewerten', 'Was ist neu?', 'Session abgelaufen', 'Offline-Modus'] }
 };
 
 Object.entries(screens).forEach(([gridId, data]) => {
