@@ -430,9 +430,6 @@ body{
 }
 .layout-opt:active{transform:scale(.97)}
 .layout-opt--sel{border-color:var(--orange)}
-.layout-preview{display:flex;flex-direction:column;gap:3px;min-height:70px}
-.layout-block{border-radius:3px;flex:1;display:flex;align-items:center;justify-content:center;font-size:9px;color:var(--mid-gray);font-weight:600}
-.layout-block--p{background:var(--blue-light)}
 .layout-label{font-size:11px;font-weight:600;color:var(--navy);margin-top:6px}
 
 /* Entertainment list */
@@ -1239,8 +1236,7 @@ function renderBackPage(){
   const pg=S.mag.pages[S.editor.pageIdx];
   const isEmotional=pg.variant==='emotional';
   const authors=S.members.filter(m=>m.isApp);
-  const allMembers=S.members;
-  const bdayMembers=allMembers.filter(m=>m.birthday);
+  const bdayMembers=S.members.filter(m=>m.birthday);
   function fmtBday(b){const[mm,dd]=b.split('-');return `${parseInt(dd)}. ${MONTHS_DE[parseInt(mm)-1]}`}
   const bgStyle=isEmotional?'background:linear-gradient(175deg,#FFFFFF 0%,#F8F6F4 50%,#EDE7DF 100%)':'background:var(--white)';
 
@@ -1297,7 +1293,7 @@ function renderBackPage(){
   // Footer
   contentHtml+=`<div class="back-footer"><img src="assets/logo_heart_blue.png" style="width:14px;height:auto;margin-bottom:4px"><div class="back-footer-url">www.remoryo.de</div></div>`;
 
-  return `${renderBlobsHtml(S.mag.pages[S.editor.pageIdx])}
+  return `${renderBlobsHtml(pg)}
   <div style="flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;${bgStyle};padding:17px;position:relative;z-index:1">
     <div style="display:flex;flex-direction:column;align-items:center;width:100%">
     ${contentHtml}
@@ -1403,13 +1399,6 @@ function renderSlot(slot,si,pageLayout){
    ═══════════════════════════════════════════════════════════ */
 function onEmptySlot(si){showElementTypePicker(si)}
 function onFilledSlot(si){showSlotActions(si)}
-function onSlotTap(si){
-  const pg=S.mag.pages[S.editor.pageIdx];
-  const slot=pg.slots[si];
-  if(!slot||!slot.content) onEmptySlot(si);
-  else onFilledSlot(si);
-}
-
 /* ═══════════════════════════════════════════════════════════
    S12 — ELEMENT TYPE PICKER (empty slots)
    ═══════════════════════════════════════════════════════════ */
