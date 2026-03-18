@@ -65,7 +65,7 @@
 </head>
 <body>
   <h1>remoryo Screens</h1>
-  <p class="subtitle">75 Screens &middot; 7 Dateien + Prototyp &middot; Stand M&auml;rz 2026</p>
+  <p class="subtitle">82 Screens &middot; 7 Dateien + Prototyp &middot; Stand M&auml;rz 2026</p>
   <a href="screens-overview.html" class="overview-link">Vollst&auml;ndige &Uuml;bersicht mit Design System &nearr;</a>
 
   <div class="section">
@@ -73,7 +73,7 @@
     <div class="grid" id="grid-onboarding"></div>
   </div>
   <div class="section">
-    <div class="section-title">Authentifizierung (6)</div>
+    <div class="section-title">Authentifizierung (7)</div>
     <div class="grid" id="grid-auth"></div>
   </div>
   <div class="section">
@@ -94,11 +94,11 @@
   </div>
 
   <div class="section">
-    <div class="section-title">Settings &amp; Account (12)</div>
+    <div class="section-title">Settings &amp; Account (14)</div>
     <div class="grid" id="grid-settings"></div>
   </div>
   <div class="section">
-    <div class="section-title">Abo &amp; Payment (10)</div>
+    <div class="section-title">Abo &amp; Payment (13)</div>
     <div class="grid" id="grid-abo"></div>
   </div>
   <div class="section">
@@ -106,19 +106,19 @@
     <div class="grid" id="grid-groups"></div>
   </div>
   <div class="section">
-    <div class="section-title">System &amp; Support (17)</div>
+    <div class="section-title">System &amp; Support (18)</div>
     <div class="grid" id="grid-system"></div>
   </div>
 
 <script>
 const screens = {
   'grid-onboarding': { file: 'onboarding-preview.html', screens: ["So funktioniert's", 'Familie einladen'] },
-  'grid-auth': { file: 'auth-preview.html', screens: ['Login', 'Login Fehler', 'Registrierung 1/2', 'Registrierung 2/2', 'Web Landing', 'In-App Welcome'] },
+  'grid-auth': { file: 'auth-preview.html', screens: ['Login', 'Login Fehler', 'Registrierung', 'E-Mail vergeben', 'Web Landing', 'In-App Welcome', 'E-Mail Best\u00e4tigung'] },
   'grid-home': { file: 'app-home-preview.html', screens: ['Fotos (mit Fotos)', 'Fotos (Empty)', 'Heft Tab', 'Heft (Empty)', 'Kommentare', 'Foto-Vollansicht', 'Kommentar schreiben', 'Upload Best\u00e4tigung', 'Foto-Zugriff', 'Foto l\u00f6schen', 'Foto-Aktionen', 'Keine Kommentare'] },
-  'grid-settings': { file: 'app-settings-preview.html', screens: ['Einstellungen', 'Nutzerprofil', 'Profil bearbeiten', 'Passwort \u00e4ndern', 'Lieferadresse', 'Zahlung (Verwalter)', 'Zahlung (Mitglied)', 'Account l\u00f6schen', 'Fotoheft Einst.', 'Versandstatus', 'Adress-Verifikation', 'Keine Empf\u00e4nger'] },
-  'grid-abo': { file: 'app-abo-preview.html', screens: ['Abo ausw\u00e4hlen', 'Checkout 1: Plan', 'Checkout 2: Empf.', 'Checkout 3: Zahlung', 'Checkout 4: Fertig', 'Abo aktiviert!', 'Abo aktiv', 'Kein Abo', 'Abo k\u00fcndigen', 'Meine Abonnements'] },
+  'grid-settings': { file: 'app-settings-preview.html', screens: ['Einstellungen', 'Nutzerprofil', 'Profil bearbeiten', 'Passwort \u00e4ndern', 'Lieferadresse', 'Zahlung (Verwalter)', 'Zahlung (Mitglied)', 'Account l\u00f6schen', 'Fotoheft Einst.', 'Versandstatus', 'Adress-Verifikation', 'Keine Empf\u00e4nger', 'Profil gespeichert', 'Passwort ge\u00e4ndert'] },
+  'grid-abo': { file: 'app-abo-preview.html', screens: ['Abo ausw\u00e4hlen', 'Checkout 1: Plan', 'Checkout 2: Empf.', 'Checkout 3: Zahlung', 'Checkout 4: Fertig', 'Abo aktiviert!', 'Abo aktiv', 'Kein Abo', 'Abo k\u00fcndigen', 'Meine Abonnements', 'Processing', 'Zahlung fehlgeschl.', 'Abo gek\u00fcndigt'] },
   'grid-groups': { file: 'app-groups-preview.html', screens: ['Gruppenmitglieder', 'Gruppe erstellen', 'Keine Mitglieder', 'Gruppe l\u00f6schen', 'Gruppe verwalten', 'Einladung versenden', 'Einladung annehmen', 'Mitglied entfernen', 'Einladung (Link)', 'Einladung (QR)', 'Gruppen wechseln', 'Mitglied (Profil)', 'Rolle \u00e4ndern', 'Admin \u00fcbertragen', 'Gruppe verlassen', 'Keine Gruppen'] },
-  'grid-system': { file: 'app-system-preview.html', screens: ['PW vergessen', 'PW zur\u00fccksetzung', 'Netzwerk-Fehler', 'Logout', 'Hilfe & Support', 'Push Notifications', 'Push Einstell.', 'In-App Messages', 'App-Version', 'Wartungsmodus', 'Force Update', 'Fotos Loading', 'Heft Loading', 'Allg. Loading', 'Allg. Fehler', 'Laden fehlgeschl.', 'Keine Berechtigung'] }
+  'grid-system': { file: 'app-system-preview.html', screens: ['PW vergessen', 'PW zur\u00fccksetzung', 'Netzwerk-Fehler', 'Logout', 'Hilfe & Support', 'Push Notifications', 'Push Einstell.', 'In-App Messages', 'App-Version', 'Wartungsmodus', 'Force Update', 'Fotos Loading', 'Heft Loading', 'Allg. Loading', 'Allg. Fehler', 'Laden fehlgeschl.', 'Keine Berechtigung', 'Einladung ung\u00fcltig'] }
 };
 
 Object.entries(screens).forEach(([gridId, data]) => {

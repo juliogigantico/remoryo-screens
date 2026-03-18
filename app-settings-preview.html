@@ -326,6 +326,23 @@
 
     /* ── Group Item Row ── */
     .group-row { display: flex; align-items: center; gap: 10px; }
+
+    /* ── Success Toast ── */
+    @keyframes toast-in { from { transform: translateY(-20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    .success-toast {
+      position: absolute; top: 56px; left: 20px; right: 20px; z-index: 20;
+      background: var(--soft-green); border: 1.5px solid rgba(29, 131, 72, 0.2);
+      border-radius: var(--input-radius); padding: 14px 16px;
+      display: flex; align-items: center; gap: 10px;
+      animation: toast-in 0.3s ease-out;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+    }
+    .success-toast-icon {
+      width: 28px; height: 28px; border-radius: 50%;
+      background: rgba(29, 131, 72, 0.15);
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .success-toast-text { font-size: 14px; font-weight: 600; color: var(--green-text); }
   </style>
 </head>
 <body>
@@ -1386,7 +1403,109 @@
     </div>
   </div>
 
-  <p class="footer-note">Preview nutzt Inter als Stand-in für Helvetica Now Display.</p>
+  <!-- ══════════════════════════════════════════════════ -->
+  <!-- SCREEN 13 — Profil gespeichert (Success Toast)     -->
+  <!-- ══════════════════════════════════════════════════ -->
+
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <h1 style="white-space: nowrap;">Feedback-States</h1>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="preview-row">
+    <div id="screen-13">
+      <div class="screen-label">13 &middot; Profil gespeichert</div>
+      <div class="phone" style="background: var(--white);">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow" aria-label="Zur&uuml;ck">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </div>
+          <span class="section-back-title">Profil bearbeiten</span>
+        </div>
+
+        <!-- Success Toast Overlay -->
+        <div class="success-toast">
+          <div class="success-toast-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green-text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <span class="success-toast-text">Profil erfolgreich gespeichert</span>
+        </div>
+
+        <div class="scroll-area">
+          <!-- Profile Header -->
+          <div class="profile-header">
+            <div class="profile-avatar">JB</div>
+            <div class="profile-name">Julius Bl&uuml;mel</div>
+            <div class="profile-email">julius@remoryo.de</div>
+          </div>
+
+          <!-- Form Fields (read-only view after save) -->
+          <div class="form-section">
+            <div class="form-label">Vorname</div>
+            <input class="form-input" type="text" value="Julius" style="color: var(--navy);" readonly>
+
+            <div class="form-label">Nachname</div>
+            <input class="form-input" type="text" value="Bl&uuml;mel" style="color: var(--navy);" readonly>
+
+            <div class="form-label">E-Mail</div>
+            <input class="form-input" type="email" value="julius@remoryo.de" style="color: var(--navy);" readonly>
+          </div>
+        </div>
+
+        <!-- Bottom Save Bar (disabled after success) -->
+        <div style="padding: 12px 20px; border-top: 1px solid var(--border); background: var(--white);">
+          <button class="btn-primary disabled" style="opacity: 0.45;">Gespeichert</button>
+        </div>
+
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+    <div id="screen-13b">
+      <div class="screen-label">13b &middot; Passwort ge&auml;ndert</div>
+      <div class="phone" style="background: var(--white);">
+        <div class="status-bar"></div>
+
+        <div class="section-back">
+          <div class="section-back-arrow" aria-label="Zur&uuml;ck">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+          </div>
+          <span class="section-back-title">Passwort &auml;ndern</span>
+        </div>
+
+        <!-- Success Toast Overlay -->
+        <div class="success-toast">
+          <div class="success-toast-icon">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="var(--green-text)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+          </div>
+          <span class="success-toast-text">Passwort erfolgreich ge&auml;ndert</span>
+        </div>
+
+        <div class="scroll-area">
+          <div style="flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 60px 28px; text-align: center;">
+            <div style="width: 72px; height: 72px; border-radius: 50%; background: var(--soft-green); display: flex; align-items: center; justify-content: center; margin-bottom: 24px;">
+              <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--green-text)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 6L9 17l-5-5"/>
+              </svg>
+            </div>
+            <div style="font-weight: 800; font-size: 22px; color: var(--navy); margin-bottom: 10px; line-height: 1.3;">Passwort ge&auml;ndert</div>
+            <div style="font-size: 15px; color: var(--dark-gray); font-weight: 500; line-height: 1.55; max-width: 280px;">Dein Passwort wurde erfolgreich aktualisiert. Du bleibst angemeldet.</div>
+          </div>
+        </div>
+
+        <div style="padding: 12px 20px; border-top: 1px solid var(--border); background: var(--white);">
+          <button class="btn-primary" style="width: 100%;">Zur&uuml;ck zu Einstellungen</button>
+        </div>
+
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+  </div>
+
+  <p class="footer-note">Preview nutzt Inter als Stand-in f&uuml;r Helvetica Now Display.</p>
 
 </body>
 </html>
