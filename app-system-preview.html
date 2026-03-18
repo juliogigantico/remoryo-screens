@@ -263,6 +263,17 @@
 
     /* ── Fake placeholder row ── */
     .fake-row { width: 100%; height: 52px; background: var(--border); border-radius: 14px; }
+
+    /* ── App Rating ── */
+    .rating-stars { display: flex; gap: 8px; margin: 16px 0; }
+    .rating-star { width: 36px; height: 36px; cursor: pointer; }
+
+    /* ── Changelog ── */
+    .changelog-item { display: flex; gap: 12px; padding: 14px 0; border-bottom: 1px solid var(--border); }
+    .changelog-item:last-child { border-bottom: none; }
+    .changelog-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--blue); margin-top: 6px; flex-shrink: 0; }
+    .changelog-text { font-size: 14px; font-weight: 500; color: var(--navy); line-height: 1.5; }
+    .changelog-tag { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; padding: 2px 8px; border-radius: 6px; }
   </style>
 </head>
 <body>
@@ -1200,6 +1211,99 @@
             <div style="font-size: 13px; font-weight: 500; color: var(--navy); line-height: 1.45;">Falls du eingeladen wurdest, pr&uuml;fe bitte deinen Einladungslink oder bitte den Verwalter um eine neue Einladung.</div>
           </div>
           <button class="btn-primary" style="width: 100%;">Zur&uuml;ck</button>
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- ══════════════════════════════════════════════════════ -->
+  <!-- Engagement & Updates                                   -->
+  <!-- ══════════════════════════════════════════════════════ -->
+
+  <div class="section-divider">
+    <div class="section-divider-line"></div>
+    <h1 style="white-space: nowrap;">Engagement &amp; Updates</h1>
+    <div class="section-divider-line"></div>
+  </div>
+
+  <div class="preview-row">
+
+    <!-- SCREEN 19 — App bewerten -->
+    <div id="screen-19">
+      <div class="screen-label">19 &middot; App bewerten</div>
+      <div class="phone" style="background: var(--white);">
+        <div class="status-bar"></div>
+        <div class="app-header">
+          <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
+          <div class="header-settings"><svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
+        </div>
+        <!-- Dark overlay -->
+        <div style="flex: 1; position: relative;">
+          <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); z-index: 5;"></div>
+          <!-- Bottom sheet modal -->
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; background: var(--white); border-radius: 24px 24px 0 0; z-index: 6; box-shadow: 0 -8px 30px rgba(0,0,0,0.12); padding: 24px 24px 16px;">
+            <div style="width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 20px;"></div>
+            <div style="text-align: center;">
+              <div style="font-weight: 800; font-size: 22px; color: var(--navy); margin-bottom: 8px;">Gef&auml;llt dir remoryo?</div>
+              <div style="font-size: 15px; color: var(--dark-gray); font-weight: 500; line-height: 1.5; margin-bottom: 20px;">Deine Bewertung hilft anderen Familien, remoryo zu entdecken.</div>
+              <div class="rating-stars">
+                <svg class="rating-star" viewBox="0 0 24 24" fill="var(--orange)" stroke="var(--orange)" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg class="rating-star" viewBox="0 0 24 24" fill="var(--orange)" stroke="var(--orange)" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg class="rating-star" viewBox="0 0 24 24" fill="var(--orange)" stroke="var(--orange)" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg class="rating-star" viewBox="0 0 24 24" fill="var(--orange)" stroke="var(--orange)" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                <svg class="rating-star" viewBox="0 0 24 24" fill="var(--border)" stroke="var(--border)" stroke-width="1"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+              </div>
+              <div style="display: flex; flex-direction: column; gap: 10px; margin-top: 8px;">
+                <button class="btn-primary" style="width: 100%;">Im App Store bewerten</button>
+                <button class="btn-text-gray" style="width: 100%;">Sp&auml;ter erinnern</button>
+                <button class="btn-text-gray" style="width: 100%; font-size: 13px;">Nicht mehr fragen</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="safe-bottom"></div>
+      </div>
+    </div>
+
+    <!-- SCREEN 20 — What's New -->
+    <div id="screen-20">
+      <div class="screen-label">20 &middot; Was ist neu?</div>
+      <div class="phone" style="background: var(--white);">
+        <div class="status-bar"></div>
+        <div class="app-header">
+          <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
+          <div class="header-settings"><svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg></div>
+        </div>
+        <!-- Dark overlay -->
+        <div style="flex: 1; position: relative;">
+          <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.4); z-index: 5;"></div>
+          <!-- Bottom sheet -->
+          <div style="position: absolute; bottom: 0; left: 0; right: 0; background: var(--white); border-radius: 24px 24px 0 0; z-index: 6; box-shadow: 0 -8px 30px rgba(0,0,0,0.12); padding: 24px 24px 16px; max-height: 75%;">
+            <div style="width: 36px; height: 4px; background: var(--border); border-radius: 2px; margin: 0 auto 16px;"></div>
+            <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px;">
+              <span class="changelog-tag" style="background: var(--soft-green); color: var(--green-text);">v2.4.0</span>
+              <span style="font-weight: 800; font-size: 20px; color: var(--navy);">Was ist neu?</span>
+            </div>
+            <div class="changelog-item">
+              <div class="changelog-dot" style="background: var(--orange);"></div>
+              <div class="changelog-text"><strong>Kommentare:</strong> Schreibe Kommentare zu Fotos und teile Erinnerungen mit deiner Familie.</div>
+            </div>
+            <div class="changelog-item">
+              <div class="changelog-dot" style="background: var(--blue);"></div>
+              <div class="changelog-text"><strong>Mehrere Gruppen:</strong> Erstelle verschiedene Gruppen f&uuml;r Familie, Freunde oder Vereine.</div>
+            </div>
+            <div class="changelog-item">
+              <div class="changelog-dot" style="background: var(--turquoise);"></div>
+              <div class="changelog-text"><strong>Schnellerer Upload:</strong> Fotos werden jetzt bis zu 3&times; schneller hochgeladen.</div>
+            </div>
+            <div class="changelog-item">
+              <div class="changelog-dot"></div>
+              <div class="changelog-text"><strong>Fehlerbehebungen:</strong> Diverse Stabilitäts-Verbesserungen und kleinere Fixes.</div>
+            </div>
+            <button class="btn-primary" style="width: 100%; margin-top: 16px;">Verstanden</button>
+          </div>
         </div>
         <div class="safe-bottom"></div>
       </div>
