@@ -383,7 +383,7 @@
       <div class="nav-section">Screens</div>
       <a href="#onboarding" class="nav-item"><span class="nav-icon">&#x1f680;</span>Onboarding<span class="nav-badge">2</span></a>
       <a href="#auth" class="nav-item"><span class="nav-icon">&#x1f510;</span>Authentifizierung<span class="nav-badge">11</span></a>
-      <a href="#home" class="nav-item"><span class="nav-icon">&#x1f4f7;</span>Home &amp; Fotos<span class="nav-badge">16</span></a>
+      <a href="#home" class="nav-item"><span class="nav-icon">&#x1f4f7;</span>Home &amp; Fotos<span class="nav-badge">19</span></a>
       <a href="#magazine" class="nav-item"><span class="nav-icon">&#x1f4d6;</span>Magazin<span class="nav-badge">Prototyp</span></a>
       <a href="#settings" class="nav-item"><span class="nav-icon">&#x2699;&#xfe0f;</span>Settings &amp; Account<span class="nav-badge">18</span></a>
       <a href="#abo" class="nav-item"><span class="nav-icon">&#x1f4b3;</span>Abo &amp; Payment<span class="nav-badge">16</span></a>
@@ -396,7 +396,7 @@
   <main class="main">
     <div class="page-header">
       <h2>remoryo App &mdash; UI Preview</h2>
-      <p>104 Screens &middot; 7 Dateien + interaktiver Prototyp &middot; 6&times; UX-reviewed &middot; Stand M&auml;rz 2026<br>Klicke auf einen Screen um direkt dorthin zu springen, oder &laquo;Vollansicht&raquo; f&uuml;r die gesamte Preview.</p>
+      <p>107 Screens &middot; 7 Dateien + interaktiver Prototyp &middot; 7&times; UX-reviewed &middot; Stand April 2026<br>Klicke auf einen Screen um direkt dorthin zu springen, oder &laquo;Vollansicht&raquo; f&uuml;r die gesamte Preview.</p>
     </div>
 
     <!-- ═══ FUNNEL ═══ -->
@@ -631,10 +631,10 @@
       <div class="section-header">
         <div class="section-icon icon-home">&#x1f4f7;</div>
         <h3>Home / Fotos</h3>
-        <span class="section-badge">16 Screens</span>
+        <span class="section-badge">19 Screens</span>
         <a href="app-home-preview.html" target="_blank" class="section-link">Vollansicht &nearr;</a>
       </div>
-      <p class="section-desc">Fotos-Tab, Empty States, Magazine-Tab, Kommentare, Foto-Vollansicht, Kommentar schreiben, Upload-Best&auml;tigung, Foto-Zugriff, Foto l&ouml;schen, Foto-Aktionen, Upload-Fortschritt, Multi-Select, Kommentar l&ouml;schen, Foto-Zugriff verweigert.</p>
+      <p class="section-desc">Fotos-Tab, Empty States, Magazine-Tab, Heft l&ouml;schen, Profil unvollst&auml;ndig, Kein Abonnement, Kommentare, Foto-Vollansicht, Kommentar schreiben, Upload-Best&auml;tigung, Foto-Zugriff, Foto l&ouml;schen, Foto-Aktionen, Upload-Fortschritt, Multi-Select, Kommentar l&ouml;schen, Foto-Zugriff verweigert.</p>
       <button class="preview-toggle" onclick="togglePreview(this, 'app-home-preview.html', 1510, 3000, 0.42)">&#x1f50d; Live Preview laden</button>
       <div class="live-preview"></div>
       <div class="phones-grid">
@@ -681,6 +681,33 @@
             <div class="wire-tabs"><div class="wire-tab">Fotos</div><div class="wire-tab wire-tab--active">Heft</div></div>
           </div></div>
           <div class="phone-label">Heft (Empty)</div>
+        </a>
+
+        <a href="app-home-preview.html#screen-3c" target="_blank" class="phone-card phone--red">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f5d1;&#xfe0f;</div>
+            <div class="phone-screen-title">Heft l&ouml;schen</div>
+            <div class="wire"><div class="wire-spacer"></div><div class="wire-img" style="height:40px;opacity:0.4"></div><div class="wire-spacer"></div><div class="wire-rect" style="width:80%;margin:0 auto;background:var(--soft-red)"></div><div class="wire-spacer"></div><div class="wire-btn wire-btn--red"></div><div class="wire-btn wire-btn--outline"></div></div>
+          </div></div>
+          <div class="phone-label">Heft l&ouml;schen<br><span style="color:var(--mid-gray);font-size:9px">Best&auml;tigung</span></div>
+        </a>
+
+        <a href="app-home-preview.html#screen-3d" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x26a0;&#xfe0f;</div>
+            <div class="phone-screen-title">Profil unvollst.</div>
+            <div class="wire"><div class="wire-spacer" style="flex:2"></div><div class="wire-rect" style="width:70%;margin:0 auto;border-radius:8px;height:60px"></div><div class="wire-spacer" style="flex:2"></div></div>
+          </div></div>
+          <div class="phone-label">Profil unvollst.<br><span style="color:var(--mid-gray);font-size:9px">Prerequisite Alert</span></div>
+        </a>
+
+        <a href="app-home-preview.html#screen-3e" target="_blank" class="phone-card phone--orange">
+          <div class="phone-body"><div class="phone-gradient"></div><div class="phone-screen">
+            <div class="phone-screen-icon">&#x1f4b3;</div>
+            <div class="phone-screen-title">Kein Abonnement</div>
+            <div class="wire"><div class="wire-spacer" style="flex:2"></div><div class="wire-rect" style="width:70%;margin:0 auto;border-radius:8px;height:60px"></div><div class="wire-spacer" style="flex:2"></div></div>
+          </div></div>
+          <div class="phone-label">Kein Abonnement<br><span style="color:var(--mid-gray);font-size:9px">Prerequisite Alert</span></div>
         </a>
 
         <a href="app-home-preview.html" target="_blank" class="phone-card phone--blue">

@@ -1100,19 +1100,8 @@
         </div>
 
         <div class="empty-state">
-          <div class="empty-illustration">
-            <svg viewBox="0 0 24 24" fill="none" width="80" height="80" stroke="var(--navy)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.5;">
-              <path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z"/>
-              <circle cx="12" cy="13" r="4"/>
-            </svg>
-          </div>
-          <div class="empty-title">Noch keine Fotos</div>
-          <div class="empty-text">Lade dein erstes Foto hoch und starte das Fotoheft für deine Liebsten</div>
-          <div class="empty-subtitle">Starte jetzt — 5 Fotos reichen für dein erstes Heft!</div>
-          <button class="btn btn-primary">
-            <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M23 19a2 2 0 01-2 2H3a2 2 0 01-2-2V8a2 2 0 012-2h4l2-3h6l2 3h4a2 2 0 012 2z" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="12" cy="13" r="4" stroke="white" stroke-width="2"/></svg>
-            Foto hochladen
-          </button>
+          <div class="empty-title">Willkommen bei Remoryo!</div>
+          <div class="empty-text" style="max-width: 260px;">Hier erscheinen die Fotos deiner Familie.<br>Tippe unten auf &bdquo;+&ldquo; um dein erstes Foto hochzuladen.</div>
         </div>
 
         <div class="tab-bar">
@@ -1277,19 +1266,8 @@
         </div>
 
         <div class="empty-state">
-          <div class="empty-illustration">
-            <svg viewBox="0 0 24 24" fill="none" width="80" height="80" stroke="var(--navy)" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" style="opacity: 0.5;">
-              <path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/>
-              <path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/>
-            </svg>
-          </div>
-          <div class="empty-title">Noch kein Fotoheft</div>
-          <div class="empty-text">Erstelle dein erstes Fotoheft — ab 5 Fotos kann es losgehen!</div>
-          <div class="empty-subtitle">Lade Fotos hoch, wähle deine Lieblingsbilder und wir erstellen daraus ein gedrucktes Heft.</div>
-          <button class="btn btn-primary" style="max-width: 280px;">
-            <svg viewBox="0 0 24 24" fill="none" width="20" height="20"><path d="M12 5v14M5 12h14" stroke="white" stroke-width="2.5" stroke-linecap="round"/></svg>
-            Erstes Fotoheft erstellen
-          </button>
+          <div class="empty-title">Du hast noch keine Magazine erstellt.</div>
+          <div class="empty-text" style="max-width: 260px;">Tippe oben auf &bdquo;Neues Heft&ldquo; um dein erstes Fotoheft zu erstellen.</div>
         </div>
 
         <div class="tab-bar">
@@ -1386,6 +1364,76 @@
           <div style="display: flex; flex-direction: column; gap: 10px;">
             <button class="btn-danger" style="width: 100%; padding: 14px; border-radius: var(--btn-radius); background: var(--red); color: var(--white); font-weight: 700; font-size: 16px; border: none; cursor: pointer; min-height: 48px;">Endgültig löschen</button>
             <button class="btn-text" style="background: none; border: none; font-weight: 600; font-size: 15px; color: var(--navy); cursor: pointer; padding: 12px; text-align: center; width: 100%; font-family: inherit; min-height: 48px;">Abbrechen</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 3d — Profil unvollständig (Alert)       -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div id="screen-3d">
+      <div class="screen-label">3d &middot; Magazin &mdash; Profil unvollst&auml;ndig</div>
+      <div class="phone">
+
+        <div class="status-bar"></div>
+
+        <div class="app-header">
+          <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
+          <div class="header-settings" aria-label="Einstellungen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </div>
+        </div>
+
+        <div style="flex: 1; background: var(--white);"></div>
+
+        <!-- Native Alert overlay -->
+        <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.35); z-index: 5; display: flex; align-items: center; justify-content: center; padding: 40px;">
+          <div style="background: #f2f2f7; border-radius: 14px; width: 100%; max-width: 270px; overflow: hidden; text-align: center;">
+            <div style="padding: 20px 16px 4px;">
+              <div style="font-weight: 700; font-size: 17px; color: #000; margin-bottom: 4px;">Profil unvollst&auml;ndig</div>
+              <div style="font-size: 13px; color: #000; line-height: 1.4; font-weight: 400;">Bitte vervollst&auml;ndige dein Profil (Vorname, Nachname und Geburtsdatum), bevor du ein Magazin erstellst.</div>
+            </div>
+            <div style="display: flex; flex-direction: column; border-top: 0.5px solid #c6c6c8; margin-top: 16px;">
+              <button style="padding: 11px; font-size: 17px; color: #007aff; background: none; border: none; font-family: inherit; cursor: pointer; font-weight: 400; border-bottom: 0.5px solid #c6c6c8;">Abbrechen</button>
+              <button style="padding: 11px; font-size: 17px; color: #007aff; background: none; border: none; font-family: inherit; cursor: pointer; font-weight: 600;">Zum Profil</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ══════════════════════════════════════════════ -->
+    <!-- SCREEN 3e — Kein aktives Abonnement (Alert)    -->
+    <!-- ══════════════════════════════════════════════ -->
+    <div id="screen-3e">
+      <div class="screen-label">3e &middot; Magazin &mdash; Kein aktives Abonnement</div>
+      <div class="phone">
+
+        <div class="status-bar"></div>
+
+        <div class="app-header">
+          <img class="app-header-logo" src="app-repo/assets/logos/logo-no-text-last.png" alt="remoryo" style="height: 26px;">
+          <div class="header-settings" aria-label="Einstellungen">
+            <svg viewBox="0 0 24 24" fill="none" stroke="var(--navy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 01-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09A1.65 1.65 0 009 19.4a1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 01-2.83-2.83l.06-.06A1.65 1.65 0 004.68 15a1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09A1.65 1.65 0 004.6 9a1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06A1.65 1.65 0 009 4.68a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51 1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06A1.65 1.65 0 0019.4 9a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>
+          </div>
+        </div>
+
+        <div style="flex: 1; background: var(--white);"></div>
+
+        <!-- Native Alert overlay -->
+        <div style="position: absolute; inset: 0; background: rgba(0,0,0,0.35); z-index: 5; display: flex; align-items: center; justify-content: center; padding: 40px;">
+          <div style="background: #f2f2f7; border-radius: 14px; width: 100%; max-width: 270px; overflow: hidden; text-align: center;">
+            <div style="padding: 20px 16px 4px;">
+              <div style="font-weight: 700; font-size: 17px; color: #000; margin-bottom: 4px;">Kein aktives Abonnement</div>
+              <div style="font-size: 13px; color: #000; line-height: 1.4; font-weight: 400;">Du ben&ouml;tigst ein aktives Abonnement, um ein Magazin zu erstellen.</div>
+            </div>
+            <div style="display: flex; flex-direction: column; border-top: 0.5px solid #c6c6c8; margin-top: 16px;">
+              <button style="padding: 11px; font-size: 17px; color: #007aff; background: none; border: none; font-family: inherit; cursor: pointer; font-weight: 400; border-bottom: 0.5px solid #c6c6c8;">Abbrechen</button>
+              <button style="padding: 11px; font-size: 17px; color: #007aff; background: none; border: none; font-family: inherit; cursor: pointer; font-weight: 600;">Zu den Einstellungen</button>
+            </div>
           </div>
         </div>
 
